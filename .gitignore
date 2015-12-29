@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.user
+*.suo
+/WLabs.Days/WLabs.Days.Web.Tests/obj
+/WLabs.Days/WLabs.Days.Web/obj
+/WLabs.Days/WLabs.Days.Web.Tests/App_Data/NuGetBackup/20151125-233741/CopyLogs
+/WLabs.Days/WLabs.Days.Web/App_Data/NuGetBackup/20151125-233555/CopyLogs

@@ -1,0 +1,9 @@
+Reservation Days
+1. selection Type Vehicule
+2. lieu de prise en charge
+3. lieu de destination
+4. date et heure depart
+5. radio aller-retour
+6. date et heure de retour
+7. si aeroport => numero de vol
+8. => formulaire confirmation

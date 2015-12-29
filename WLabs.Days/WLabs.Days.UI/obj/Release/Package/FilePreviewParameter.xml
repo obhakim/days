@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Days" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\W\\Projects\\Days\\WLabs\.Days\\WLabs\.Days\.UI\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\W\\Projects\\Days\\WLabs\.Days\\WLabs\.Days\.UI\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="Days/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\W\\Projects\\Days\\WLabs\.Days\\WLabs\.Days\.UI\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="umbracoDbDSN-Web.config Connection String" description="" value="Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\W\\Projects\\Days\\WLabs\.Days\\WLabs\.Days\.UI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='umbracoDbDSN']/@connectionString" />
+  </parameter>
+</parameters>

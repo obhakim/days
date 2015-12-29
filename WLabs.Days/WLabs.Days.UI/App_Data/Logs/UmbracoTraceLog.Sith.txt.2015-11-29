@@ -1,0 +1,3 @@
+﻿ 2015-11-29 18:36:27,496 [P519576/D2/T220] INFO  umbraco.BusinessLogic.Log - Log scrubbed.  Removed all items older than 2015-11-28 18:36:27
+ 2015-11-29 23:13:35,661 [P519576/D2/T320] INFO  Umbraco.Core.Security.BackOfficeSignInManager - Event Id: 0, state: Login attempt succeeded for username wick@ya.ru from IP address ::1
+ 2015-11-29 23:33:05,682 [P519576/D2/T44] INFO  Umbraco.Core.Logging.OwinLogger - Event Id: 0, state: User logged will be logged out due to timeout: wick@ya.ru, IP Address: ::1

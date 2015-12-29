@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <input id="text-start" class="controls pac-input" type="text"
+      placeholder="Enter start location" />
+    <input id="text-end" class="controls pac-input" type="text"
+      placeholder="Enter destination" />
+    <input type="button" id="btn-calculate" value="Calculate" class="controls" />
+    
+    <!--    
+    <div id="type-selector" class="controls">
+      
+      <input type="radio" name="type" id="changetype-all" checked="checked">
+      <label for="changetype-all">All</label>
+
+      <input type="radio" name="type" id="changetype-establishment">
+      <label for="changetype-establishment">Establishments</label>
+
+      <input type="radio" name="type" id="changetype-address">
+      <label for="changetype-address">Addresses</label>
+
+      <input type="radio" name="type" id="changetype-geocode">
+      <label for="changetype-geocode">Geocodes</label>
+    </div>
+    -->
+    
+    <!--
+    <div id="right-panel">
+        
+    </div>
+    -->
+    <div id="map"></div>
+    
+    <div id="popup-modal" class="white-popup mfp-hide">
+    	<h1>Your trip</h1>
+    	<p>From : <span></span></p>
+        <p>To : <span></span></p>
+        <input type="button" id="btn-order" value="Order" class="controls" />
+    	<!--
+            <p><a id="popup-modal-dismiss" class="popup-modal-dismiss" href="#">Dismiss</a></p>
+        -->
+    </div>
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApBhPfNo8j1lT0hLV5u_ONQ3mjD1Wl-U8&signed_in=true&libraries=places&callback=initMap"></script>
+  </body>
+</html>
