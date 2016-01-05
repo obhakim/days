@@ -2,40 +2,22 @@
 <html>
 
 <head>
-  <title>Place Autocomplete</title>
+  <title>Autocomplete</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css">
-  <!--<link rel="stylesheet" type="text/css" href="magnific-popup.css">-->
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
   <div id="directions-container">
-    <input id="text-start" class="controls direction-input" type="text" placeholder="Enter start location" />
-    <input id="text-end" class="controls direction-input" type="text" placeholder="Enter destination" />
-    <input type="button" id="btn-calculate" value="Calculate" class="controls directions-calculate" />
+    <input id="text-start" class="controls direction-input" type="text" placeholder="Depart" />
+    <input id="text-end" class="controls direction-input" type="text" placeholder="Destination" />
+    <input type="button" id="btn-calculate" value="Itineraire" class="controls directions-calculate" />
   </div>
-  <!--    
-    <div id="type-selector" class="controls">
-      
-      <input type="radio" name="type" id="changetype-all" checked="checked">
-      <label for="changetype-all">All</label>
 
-      <input type="radio" name="type" id="changetype-establishment">
-      <label for="changetype-establishment">Establishments</label>
-
-      <input type="radio" name="type" id="changetype-address">
-      <label for="changetype-address">Addresses</label>
-
-      <input type="radio" name="type" id="changetype-geocode">
-      <label for="changetype-geocode">Geocodes</label>
-    </div>
-    -->
-
-  <div id="order-container" class="">
-    <!--hidden-->
-    <h1>Your trip <span id="total-distance">0</span> km</h1>
+  <div id="order-container">
+    <h1>Votre voyage <span id="total-distance">0</span> km</h1>
     <p>From : <span id="label-from">X</span><br />
     On : <input type="text" id="datetime-from" />
     </p>
@@ -57,20 +39,7 @@
 
   <div id="map"></div>
 
-  <!--
-    <div id="popup-modal" class="white-popup mfp-hide">
-    	<h1>Your trip</h1>
-    	<p>From : <span></span></p>
-        <p>To : <span></span></p>
-        <input type="button" id="btn-order" value="Order" class="controls" />
-    	!--
-            <p><a id="popup-modal-dismiss" class="popup-modal-dismiss" href="#">Dismiss</a></p>
-        --
-    </div>
-    -->
-
   <script type="text/javascript" src="jquery.min.js"></script>
-  <!--<script type="text/javascript" src="jquery.magnific-popup.min.js"></script>-->
   <script type="text/javascript" src="jquery.datetimepicker.full.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApBhPfNo8j1lT0hLV5u_ONQ3mjD1Wl-U8&signed_in=true&libraries=places"></script>
   <script type="text/javascript" src="script.js"></script>

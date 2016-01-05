@@ -328,6 +328,7 @@
     <Content Include="Views\umbTextPage.cshtml" />
     <Content Include="Views\Partials\daysContacts.cshtml" />
     <Content Include="Views\daysReservationPage.cshtml" />
+    <Content Include="Views\Partials\daysReservation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

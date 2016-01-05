@@ -1,4 +1,14 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    Layout = "umbLayout.cshtml";
+	Layout = "umbLayout.cshtml";
 }
+
+<div id="main-wrapper">
+	<div id="main" class="container">
+		<div class="row">
+			<div class="12u">
+				@{ Html.RenderPartial("daysReservation"); }
+			</div>
+		</div>
+	</div>
+</div>
