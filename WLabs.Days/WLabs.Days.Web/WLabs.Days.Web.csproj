@@ -320,13 +320,14 @@
       <DependentUpon>days.css</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Partials\umbContacts.cshtml" />
     <Content Include="Views\Partials\umbSocial.cshtml" />
     <Content Include="Views\umbHomePage.cshtml" />
     <Content Include="Views\umbLayout.cshtml" />
     <Content Include="Views\umbNewsItem.cshtml" />
     <Content Include="Views\umbNewsOverview.cshtml" />
     <Content Include="Views\umbTextPage.cshtml" />
+    <Content Include="Views\Partials\daysContacts.cshtml" />
+    <Content Include="Views\daysReservationPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

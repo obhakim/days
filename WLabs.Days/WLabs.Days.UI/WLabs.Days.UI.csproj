@@ -477,7 +477,8 @@
     <Content Include="bin\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\LocalFolder.pubxml" />
-    <Content Include="Views\Partials\umbContacts.cshtml" />
+    <Content Include="Views\Partials\daysContacts.cshtml" />
+    <Content Include="Views\daysReservationPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
