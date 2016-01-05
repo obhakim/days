@@ -293,12 +293,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\days.css">
-      <DependentUpon>days.less</DependentUpon>
-    </Content>
-    <Content Include="css\days.min.css">
-      <DependentUpon>days.css</DependentUpon>
-    </Content>
+    <Content Include="bin\WLabs.Days.Web.dll" />
+    <Content Include="css\days.css" />
     <Content Include="media\1001\banner_big-thumb.jpg" />
     <Content Include="media\1001\banner_thumb.jpg" />
     <Content Include="media\1002\banner_big-thumb.jpg" />
@@ -479,10 +475,6 @@
     <Content Include="bin\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <Content Include="bin\WLabs.Days.UI.dll.config" />
     <Content Include="bin\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
-    <Content Include="css\days.less" />
-    <Content Include="css\days.css.map">
-      <DependentUpon>days.css</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\LocalFolder.pubxml" />
     <Content Include="Views\Partials\umbContacts.cshtml" />
@@ -3036,6 +3028,12 @@
   <ItemGroup>
     <Folder Include="App_Data\packages\created\" />
     <Folder Include="Views\MacroPartials\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WLabs.Days.Web\WLabs.Days.Web.csproj">
+      <Project>{f2c9d963-a303-433b-a648-6aa4f518a360}</Project>
+      <Name>WLabs.Days.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

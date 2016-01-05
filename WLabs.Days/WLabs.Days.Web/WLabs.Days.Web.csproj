@@ -291,7 +291,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\days.css">
+      <DependentUpon>days.less</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="css\days.min.css">
+      <DependentUpon>days.css</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="css\ie7.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="css\ie8.css" />
+    <Content Include="css\ie9.css" />
+    <Content Include="css\skel-noscript.css" />
+    <Content Include="css\style-1000px.css" />
+    <Content Include="css\style-desktop.css" />
+    <Content Include="css\style-mobile.css" />
+    <Content Include="css\style.css" />
+    <Content Include="js\config.js" />
+    <Content Include="js\html5shiv.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\skel-panels.min.js" />
+    <Content Include="js\skel.min.js" />
     <Content Include="packages.config" />
+    <Content Include="css\days.less" />
+    <Content Include="css\days.css.map">
+      <DependentUpon>days.css</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Partials\umbContacts.cshtml" />
+    <Content Include="Views\Partials\umbSocial.cshtml" />
+    <Content Include="Views\umbHomePage.cshtml" />
+    <Content Include="Views\umbLayout.cshtml" />
+    <Content Include="Views\umbNewsItem.cshtml" />
+    <Content Include="Views\umbNewsOverview.cshtml" />
+    <Content Include="Views\umbTextPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -308,7 +343,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -340,6 +374,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /s /y "$(ProjectDir)js\*.js" "$(SolutionDir)\WLabs.Days.UI\js\"
+xcopy /s /y "$(ProjectDir)css\*.css" "$(SolutionDir)\WLabs.Days.UI\css\"
+xcopy /s /y "$(ProjectDir)Views\*.cshtml" "$(SolutionDir)\WLabs.Days.UI\Views\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
