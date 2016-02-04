@@ -299,11 +299,13 @@
       <DependentUpon>days.css</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="css\forms.css" />
     <Content Include="css\ie7.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="css\ie8.css" />
     <Content Include="css\ie9.css" />
+    <Content Include="css\jquery.datetimepicker.css" />
     <Content Include="css\skel-noscript.css" />
     <Content Include="css\style-1000px.css" />
     <Content Include="css\style-desktop.css" />
@@ -311,7 +313,9 @@
     <Content Include="css\style.css" />
     <Content Include="js\config.js" />
     <Content Include="js\html5shiv.js" />
+    <Content Include="js\jquery.datetimepicker.full.min.js" />
     <Content Include="js\jquery.min.js" />
+    <Content Include="js\reservation.js" />
     <Content Include="js\skel-panels.min.js" />
     <Content Include="js\skel.min.js" />
     <Content Include="packages.config" />

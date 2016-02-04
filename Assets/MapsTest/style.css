@@ -79,7 +79,7 @@ html, body {
   padding-left: 10px;
 }
 
-#order-container select, #order-container input {
+/*#order-container select, #order-container input {
   font-size: 15px;
 }
 
@@ -89,7 +89,7 @@ html, body {
 
 #order-container i {
   font-size: 12px;
-}
+}*/
 
 @media print {
   #map {

@@ -1,26 +1,19 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
-<section>
-	<div id="directions-container">
-		<input id="text-start" class="controls direction-input" type="text" placeholder="Enter start location" />
-		<input id="text-end" class="controls direction-input" type="text" placeholder="Enter destination" />
-		<input type="button" id="btn-calculate" value="Calculate" class="controls directions-calculate" />
+<div class="row">
+	<div class="9u">
+		<div id="map"></div>
 	</div>
 
-	<div id="order-container" class="">
-		<h1>Votre voyage <span id="total-distance">0</span> km</h1>
-		<p>
-			De : <span id="label-from">X</span>
-		</p>
-		<p>
-			A : <span id="label-to">Y</span>
-		</p>
-		<p>
-			On : <input type="text" id="datetime-to" />
-		</p>
-		<p>
-			Car type : <br />
-			<select id="vehicle-type">
+	<div id="order-container" class="3u">
+		<form>
+			<h1>Votre voyage <span id="total-distance">0</span> km</h1>
+			<input id="text-start" type="text" placeholder="Depart" class="large" />
+			<input id="datetime-from" type="text" class="large" />
+			<input id="text-end" type="text" placeholder="Destination" class="large" />
+			<input id="datetime-to" type="text" class="large" />
+
+			<select id="vehicle-type" class="large">
 				<option>Audi A6</option>
 				<option>Audi A8</option>
 				<option>Mercedes Classe E</option>
@@ -28,14 +21,10 @@
 				<option>Caravelle Minibus</option>
 				<option>Mercedes Classe V Minibus</option>
 			</select>
-		</p>
-		<input type="button" id="btn-order" value="Order" class="controls" />
+
+			<div>
+				<button id="btn-order" type="submit" class="button">Réserver</button>
+			</div>
+		</form>
 	</div>
-
-	<div id="map"></div>
-
-	<script type="text/javascript" src="jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.datetimepicker.full.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApBhPfNo8j1lT0hLV5u_ONQ3mjD1Wl-U8&signed_in=true&libraries=places"></script>
-	<script type="text/javascript" src="script.js"></script>
-</section>
+</div>

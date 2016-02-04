@@ -1,7 +1,7 @@
 /* global google */
 "use strict";
 
-(function initMap() {
+(function reservation() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 48.8567, lng: 2.3508 },  // Paris
     zoom: 13

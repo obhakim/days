@@ -1,4 +1,18 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    Layout = "umbLayout.cshtml";
+	Layout = "umbLayout.cshtml";
+}
+
+<div id="main-wrapper">
+	<div id="main" class="container">
+		@{ Html.RenderPartial("daysReservation"); }
+	</div>
+</div>
+
+@section Includes
+{
+	<link href="~/css/jquery.datetimepicker.css" rel="stylesheet" />
+	<script src="~/js/jquery.datetimepicker.full.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApBhPfNo8j1lT0hLV5u_ONQ3mjD1Wl-U8&signed_in=true&libraries=places"></script>
+	<script src="~/js/reservation.js"></script>
 }

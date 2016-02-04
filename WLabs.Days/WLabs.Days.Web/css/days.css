@@ -1,4 +1,13 @@
-﻿/*# sourceMappingURL=days.css.map */
-.contacts {
+﻿.contacts {
   color: red;
 }
+.hidden {
+  display: none;
+}
+#map {
+  height: 500px;
+}
+#order-container {
+  padding-left: 10px;
+}
+/*# sourceMappingURL=days.css.map */

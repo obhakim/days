@@ -25,6 +25,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <NuGetPackageImportStamp>0a653e97</NuGetPackageImportStamp>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -295,6 +296,11 @@
   <ItemGroup>
     <Content Include="bin\WLabs.Days.Web.dll" />
     <Content Include="css\days.css" />
+    <Content Include="css\days.min.css" />
+    <Content Include="css\forms.css" />
+    <Content Include="css\jquery.datetimepicker.css" />
+    <Content Include="js\jquery.datetimepicker.full.min.js" />
+    <Content Include="js\reservation.js" />
     <Content Include="media\1001\banner_big-thumb.jpg" />
     <Content Include="media\1001\banner_thumb.jpg" />
     <Content Include="media\1002\banner_big-thumb.jpg" />
@@ -479,6 +485,7 @@
     <None Include="Properties\PublishProfiles\LocalFolder.pubxml" />
     <Content Include="Views\Partials\daysContacts.cshtml" />
     <Content Include="Views\daysReservationPage.cshtml" />
+    <Content Include="Views\Partials\daysReservation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
