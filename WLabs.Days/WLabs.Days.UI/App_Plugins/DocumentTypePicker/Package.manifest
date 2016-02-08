@@ -1,0 +1,15 @@
+﻿{
+  "propertyEditors": [
+    {
+      "name": "Document Type Picker",
+      "alias": "RB.DocumentTypePicker",
+      "editor": {
+        "view": "~/App_Plugins/DocumentTypePicker/DocumentTypePickerView.html",
+        "valueType": "JSON"
+      }
+	}
+  ],
+  "javascript": [
+    "~/App_Plugins/DocumentTypePicker/DocumentTypePickerController.js"
+  ]
+}

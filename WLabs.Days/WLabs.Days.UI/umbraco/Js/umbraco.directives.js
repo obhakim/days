@@ -1,6 +1,6 @@
 /*! umbraco
  * https://github.com/umbraco/umbraco-cms/
- * Copyright (c) 2015 Umbraco HQ;
+ * Copyright (c) 2016 Umbraco HQ;
  * Licensed MIT
  */
 
@@ -651,7 +651,7 @@ angular.module("umbraco.directives")
                         if(scope.configuration && scope.configuration.stylesheets){
                             angular.forEach(scope.configuration.stylesheets, function(stylesheet, key){
 
-                                    stylesheets.push("/css/" + stylesheet + ".css");
+                                    stylesheets.push(Umbraco.Sys.ServerVariables.umbracoSettings.cssPath + "/" + stylesheet + ".css");
                                     await.push(stylesheetResource.getRulesByName(stylesheet).then(function (rules) {
                                         angular.forEach(rules, function (rule) {
                                           var r = {};
@@ -701,6 +701,31 @@ angular.module("umbraco.directives")
 
 
                             if (tinyMceConfig.customConfig) {
+								
+								//if there is some custom config, we need to see if the string value of each item might actually be json and if so, we need to
+                                // convert it to json instead of having it as a string since this is what tinymce requires
+                                for (var i in tinyMceConfig.customConfig) {
+                                    var val = tinyMceConfig.customConfig[i];
+                                    if (val) {
+                                        val = val.toString().trim();
+                                        if (val.detectIsJson()) {
+                                            try {
+                                                tinyMceConfig.customConfig[i] = JSON.parse(val);
+                                                //now we need to check if this custom config key is defined in our baseline, if it is we don't want to
+                                                //overwrite the baseline config item if it is an array, we want to concat the items in the array, otherwise
+                                                //if it's an object it will overwrite the baseline
+                                                if (angular.isArray(baseLineConfigObj[i]) && angular.isArray(tinyMceConfig.customConfig[i])) {
+                                                    //concat it and below this concat'd array will overwrite the baseline in angular.extend
+                                                    tinyMceConfig.customConfig[i] = baseLineConfigObj[i].concat(tinyMceConfig.customConfig[i]);
+                                                }
+                                            }
+                                            catch (e) {
+                                                //cannot parse, we'll just leave it
+                                            }
+                                        }
+                                    }
+                                }
+ 
                                 angular.extend(baseLineConfigObj, tinyMceConfig.customConfig);
                             }
 
@@ -2477,14 +2502,24 @@ function sectionsDirective($timeout, $window, navigationService, treeService, se
 				navigationService.showHelpDialog();
 			};
 
-			scope.sectionClick = function (section) {
+			scope.sectionClick = function (event, section) {
+
+			    if (event.ctrlKey ||
+			        event.shiftKey ||
+			        event.metaKey || // apple
+			        (event.button && event.button === 1) // middle click, >IE9 + everyone else
+			    ) {
+			        return;
+			    }
+
+
 			    if (navigationService.userDialog) {
 			        navigationService.userDialog.close();
 			    }
 			    if (navigationService.helpDialog) {
 			        navigationService.helpDialog.close();
 			    }
-			    
+
 			    navigationService.hideSearch();
 			    navigationService.showTree(section.alias);
 			    $location.path("/" + section.alias);
@@ -2974,9 +3009,9 @@ angular.module("umbraco.directives")
             '<div ng-class="getNodeCssClass(node)" ng-swipe-right="options(node, $event)" >' +
             //NOTE: This ins element is used to display the search icon if the node is a container/listview and the tree is currently in dialog
             //'<ins ng-if="tree.enablelistviewsearch && node.metaData.isContainer" class="umb-tree-node-search icon-search" ng-click="searchNode(node, $event)" alt="searchAltText"></ins>' + 
-            '<ins ng-class="{\'icon-navigation-right\': !node.expanded, \'icon-navigation-down\': node.expanded}" ng-click="load(node)"></ins>' +
-            '<i class="icon umb-tree-icon sprTree"></i>' +
-            '<a ng-click="select(node, $event)"></a>' +
+            '<ins ng-class="{\'icon-navigation-right\': !node.expanded, \'icon-navigation-down\': node.expanded}" ng-click="load(node)">&nbsp;</ins>' +
+            '<i class="icon umb-tree-icon sprTree" ng-click="select(node, $event)"></i>' +
+            '<a href="#/{{node.routePath}}" ng-click="select(node, $event)"></a>' +
             //NOTE: These are the 'option' elipses
             '<a class="umb-options" ng-click="options(node, $event)"><i></i><i></i><i></i></a>' +
             '<div ng-show="node.loading" class="l"><div></div></div>' +
@@ -3084,8 +3119,17 @@ angular.module("umbraco.directives")
               and emits it as a treeNodeSelect element if there is a callback object
               defined on the tree
             */
-            scope.select = function(n, ev) {
+            scope.select = function (n, ev) {
+                if (ev.ctrlKey ||
+                    ev.shiftKey ||
+                    ev.metaKey || // apple
+                    (ev.button && ev.button === 1) // middle click, >IE9 + everyone else
+                ) {
+                    return;
+                }
+
                 emitEvent("treeNodeSelect", { element: element, tree: scope.tree, node: n, event: ev });
+                ev.preventDefault();
             };
 
             /**
@@ -3278,7 +3322,7 @@ function treeSearchResults() {
 }
 angular.module('umbraco.directives').directive("umbTreeSearchResults", treeSearchResults);
 /**
-* @description Utillity directives for key and field events
+* @description Utility directives for key and field events
 **/
 angular.module('umbraco.directives')
 
@@ -3653,7 +3697,9 @@ angular.module("umbraco.directives").directive('focusWhen', function ($timeout) 
         link: function (scope, elm, attrs, ctrl) {
             attrs.$observe("focusWhen", function (newValue) {
                 if (newValue === "true") {
-                    elm.focus();
+                    $timeout(function() {
+                        elm.focus();
+                    });
                 }
             });
         }
