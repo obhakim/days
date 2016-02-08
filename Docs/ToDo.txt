@@ -1,0 +1,10 @@
+
+Save reservation form
+Calculate price
+Client identification (nom, prenom, telephone, email)
+Send email to specified list of emails (drivers)
+Driver should be able to confirm
+Send driver's confirmation to the client
+
+
+Mobile App (same form)

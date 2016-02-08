@@ -4,17 +4,33 @@
 
 *.user
 *.suo
-/WLabs.Days/WLabs.Days.Web.Tests/obj
-/WLabs.Days/WLabs.Days.Web/obj
-/WLabs.Days/WLabs.Days.Web.Tests/App_Data/NuGetBackup
-/WLabs.Days/WLabs.Days.Web/App_Data/NuGetBackup
 /Assets/JS/Magnific-Popup-master
 /Assets/MapsTest/plunk-7gI24xHl7poKua0oKIm9.zip
-/WLabs.Days/WLabs.Days.Web.Tests/bin
-/WLabs.Days/WLabs.Days.Web/bin
+
 /WLabs.Days/packages
+
+/WLabs.Days/WLabs.Days.Web/bin
+/WLabs.Days/WLabs.Days.Web/obj
+/WLabs.Days/WLabs.Days.Web/App_Data/NuGetBackup
+
+/WLabs.Days/WLabs.Days.Web.Tests/bin
+/WLabs.Days/WLabs.Days.Web.Tests/obj
+/WLabs.Days/WLabs.Days.Web.Tests/App_Data/NuGetBackup
+
 /WLabs.Days/WLabs.Days.UI/App_Data/Logs
 /WLabs.Days/WLabs.Days.UI/App_Data/cache
 /WLabs.Days/WLabs.Days.UI/App_Data/TEMP
 /WLabs.Days/WLabs.Days.UI/App_Data/NuGetBackup
+/WLabs.Days/WLabs.Days.UI/App_Data/ClientDependency
+/WLabs.Days/WLabs.Days.UI/App_Data/ExamineIndexes
+/WLabs.Days/WLabs.Days.UI/App_Data/[Pp]review
 /WLabs.Days/WLabs.Days.UI/obj
+Cached/
+
+# Ignore Umbraco content cache file
+/WLabs.Days/WLabs.Days.UI/App_Data/umbraco.config
+
+# Don't ignore Umbraco packages (VisualStudio.gitignore mistakes this for a NuGet packages folder)
+# Make sure to include details from VisualStudio.gitignore BEFORE this
+!/WLabs.Days/WLabs.Days.UI/App_Data/[Pp]ackages/
+!/WLabs.Days/WLabs.Days.UI/[Uu]mbraco/developer/[Pp]ackages
