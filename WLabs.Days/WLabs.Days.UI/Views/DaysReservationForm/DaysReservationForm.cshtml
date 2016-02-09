@@ -1,0 +1,45 @@
+﻿@using WLabs.Days.UI.Controllers
+@using WLabs.Days.UI.Models
+@model DaysReservationFormViewModel
+
+@{
+	Html.EnableClientValidation(true);
+	Html.EnableUnobtrusiveJavaScript(true);
+}
+
+<div class="row">
+	@if (Convert.ToBoolean(TempData["IsSuccessful"]))
+	{
+		<h1>YAY!</h1>
+		<p>Thanks for sending your message, we will get back to you shortly.</p>
+	}
+	else
+	{
+		<div class="9u">
+			<div id="map"></div>
+		</div>
+		<div id="order-container" class="3u">
+			@using (Html.BeginUmbracoForm<DaysReservationFormController>("SaveForm"))
+			{
+				<h1>Votre voyage <span id="total-distance">0</span> km</h1>
+
+				@Html.ValidationSummary(true)
+				@Html.AntiForgeryToken()
+
+				@Html.TextBoxFor(model => model.Start, new { placeholder = "Départ" })
+				@Html.ValidationMessageFor(model => model.Start)
+
+				@Html.TextBoxFor(model => model.Destination, new { placeholder = "Déstination" })
+				@Html.ValidationMessageFor(model => model.Destination)
+
+				@Html.TextBoxFor(model => model.StartAt, new { placeholder = "Départ à" })
+				@Html.ValidationMessageFor(model => model.StartAt)
+				
+				@Html.TextBoxFor(model => model.VehicleType, new { placeholder = "Type de véhicule" })
+				@Html.ValidationMessageFor(model => model.VehicleType)
+
+				<input type="submit" value="Réserver" />
+			}
+		</div>
+	}
+</div>

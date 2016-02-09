@@ -316,6 +316,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\RB.DocumentTypePicker.dll" />
     <Content Include="bin\WLabs.Days.UI.dll" />
     <Content Include="bin\WLabs.Days.UI.pdb" />
     <Content Include="Config\grid.editors.config.js" />
@@ -526,7 +527,6 @@
     <None Include="Properties\PublishProfiles\LocalFolder.pubxml" />
     <Content Include="Views\Partials\daysContacts.cshtml" />
     <Content Include="Views\daysReservationPage.cshtml" />
-    <Content Include="Views\Partials\daysReservation.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
@@ -535,6 +535,11 @@
     <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Views\DaysReservationForm\DaysReservationForm.cshtml" />
+    <Content Include="Views\daysReservation.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Partials\daysReservationFormOld.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -554,105 +559,62 @@
     <Content Include="bin\amd64\sqlcese40.dll" />
     <Content Include="bin\AutoMapper.dll" />
     <Content Include="bin\AutoMapper.Net4.dll" />
-    <Content Include="bin\AutoMapper.xml" />
     <Content Include="bin\businesslogic.dll" />
-    <Content Include="bin\businesslogic.xml" />
     <Content Include="bin\ClientDependency.Core.dll" />
     <Content Include="bin\ClientDependency.Core.Mvc.dll" />
-    <Content Include="bin\ClientDependency.Core.Mvc.pdb" />
-    <Content Include="bin\ClientDependency.Core.pdb" />
     <Content Include="bin\cms.dll" />
-    <Content Include="bin\cms.xml" />
     <Content Include="bin\controls.dll" />
-    <Content Include="bin\controls.xml" />
     <Content Include="bin\CookComputing.XmlRpcV2.dll" />
     <Content Include="bin\Examine.dll" />
-    <Content Include="bin\Examine.pdb" />
     <Content Include="bin\HtmlAgilityPack.dll" />
-    <Content Include="bin\HtmlAgilityPack.pdb" />
-    <Content Include="bin\HtmlAgilityPack.xml" />
     <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
     <Content Include="bin\ImageProcessor.dll" />
     <Content Include="bin\ImageProcessor.Web.dll" />
     <Content Include="bin\interfaces.dll" />
-    <Content Include="bin\interfaces.xml" />
     <Content Include="bin\log4net.dll" />
     <Content Include="bin\Lucene.Net.dll" />
-    <Content Include="bin\Lucene.Net.xml" />
     <Content Include="bin\Microsoft.ApplicationBlocks.Data.dll" />
     <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
     <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
     <Content Include="bin\Microsoft.Owin.dll" />
     <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
     <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
     <Content Include="bin\Microsoft.Owin.Security.dll" />
     <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Microsoft.Owin.xml" />
     <Content Include="bin\Microsoft.Web.Helpers.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\MiniProfiler.dll" />
-    <Content Include="bin\MiniProfiler.pdb" />
-    <Content Include="bin\MiniProfiler.xml" />
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\Owin.dll" />
     <Content Include="bin\Semver.dll" />
     <Content Include="bin\SQLCE4Umbraco.dll" />
-    <Content Include="bin\SQLCE4Umbraco.xml" />
     <Content Include="bin\System.Data.SqlServerCe.dll" />
     <Content Include="bin\System.Data.SqlServerCe.Entity.dll" />
     <Content Include="bin\System.Net.Http.Extensions.dll" />
-    <Content Include="bin\System.Net.Http.Extensions.xml" />
     <Content Include="bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.xml" />
     <Content Include="bin\System.Net.Http.Primitives.dll" />
-    <Content Include="bin\System.Net.Http.Primitives.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Http.dll" />
     <Content Include="bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\System.Web.Http.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\TidyNet.dll" />
     <Content Include="bin\Txt.dll" />
     <Content Include="bin\Umbraco.Core.dll" />
-    <Content Include="bin\Umbraco.Core.xml" />
     <Content Include="bin\umbraco.DataLayer.dll" />
-    <Content Include="bin\umbraco.DataLayer.xml" />
     <Content Include="bin\umbraco.dll" />
     <Content Include="bin\umbraco.editorControls.dll" />
-    <Content Include="bin\umbraco.editorControls.xml" />
     <Content Include="bin\umbraco.MacroEngines.dll" />
-    <Content Include="bin\umbraco.MacroEngines.xml" />
     <Content Include="bin\umbraco.providers.dll" />
-    <Content Include="bin\umbraco.providers.xml" />
     <Content Include="bin\Umbraco.Web.UI.dll" />
-    <Content Include="bin\Umbraco.Web.UI.xml" />
-    <Content Include="bin\umbraco.xml" />
     <Content Include="bin\UmbracoExamine.dll" />
-    <Content Include="bin\UmbracoExamine.xml" />
     <Content Include="bin\UrlRewritingNet.UrlRewriter.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
-    <Content Include="bin\WebMatrix.Data.xml" />
     <Content Include="bin\WebMatrix.WebData.dll" />
-    <Content Include="bin\WebMatrix.WebData.xml" />
     <Content Include="bin\x86\Microsoft.VC90.CRT\msvcr90.dll" />
     <Content Include="bin\x86\Microsoft.VC90.CRT\README_ENU.txt" />
     <Content Include="bin\x86\sqlceca40.dll" />
@@ -3055,12 +3017,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DaysReservationFormController.cs" />
+    <Compile Include="Models\DaysReservationFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Plugins\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <PropertyGroup>

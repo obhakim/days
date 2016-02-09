@@ -2,13 +2,12 @@
 @{
 	Layout = "umbLayout.cshtml";
 }
-
 <div id="main-wrapper">
 	<div id="main" class="container">
-		@{ Html.RenderPartial("daysReservation"); }
+		@*{ Html.RenderPartial("daysReservation"); }*@
+		@Html.Action("Index", "DaysReservationForm")
 	</div>
 </div>
-
 @section Includes
 {
 	<link href="~/css/jquery.datetimepicker.css" rel="stylesheet" />
