@@ -19,5 +19,19 @@ namespace WLabs.Days.UI.Models
 
 		[Required]
 		public string VehicleType { get; set; }
+
+		public string Name { get; set; }
+
+		[Required]
+		public string Email { get; set; }
+
+		[Required]
+		public string Phone { get; set; }
+
+		public int Number1 { get { return (new Random()).Next(10); } }
+		public int Number2 { get { return (new Random()).Next(10); } }
+		
+		[Required]
+		public int Captcha { get; set; }
 	}
 }
