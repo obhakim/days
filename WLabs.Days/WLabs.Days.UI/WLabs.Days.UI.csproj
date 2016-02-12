@@ -345,6 +345,7 @@
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="js\jquery.datetimepicker.full.min.js" />
+    <Content Include="js\jquery.validate.min.js" />
     <Content Include="js\reservation.js" />
     <Content Include="media\1001\banner_big-thumb.jpg" />
     <Content Include="media\1001\banner_thumb.jpg" />
@@ -540,6 +541,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Partials\daysReservationFormOld.cshtml" />
+    <Content Include="Views\MacroPartials\daysReservationForm.cshtml" />
+    <Content Include="Views\daysReservationFormPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3023,7 +3026,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Plugins\" />
-    <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
