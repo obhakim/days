@@ -20,7 +20,7 @@
 	// get admin email from the root node
 	IPublishedContent root = CurrentPage.AncestorOrSelf(1);
 	string contactEmail = (string)root.GetPropertyValue("contactEmail");
-	if (string.IsNullOrEmpty(contactEmail)) { contactEmail = "chris.isnt@gmail.com"; }
+	if (string.IsNullOrEmpty(contactEmail)) { contactEmail = "wick@ya.ru"; }
 
 	// page properties
 	string title = Umbraco.Field("title", altFieldAlias: "pageName").ToString();
@@ -87,7 +87,7 @@
 
 					if (pt.Mandatory && string.IsNullOrEmpty(Request.Form[fieldName]))
 					{
-						<p>@pt.Name : a value is required</p>
+						<div class="error">@pt.Name : obligatoire</div>
 						bValid = false;
 					}
 					if (!string.IsNullOrEmpty(pt.ValidationRegExp))
@@ -96,7 +96,7 @@
 
 						if (!regex.IsMatch(Request.Form[fieldName].ToString()))
 						{
-							<p>@pt.Name : a correct value is required</p>
+							<div class="error">@pt.Name : valeur incorrecte</div>
 							bValid = false;
 						}
 					}
@@ -110,7 +110,7 @@
 			if (Request["sum"] == null || string.IsNullOrEmpty(Request["sum"].ToString()) || int.Parse(Request["sum"].ToString()) != (num1 + num2))
 			{
 				bValid = false;
-				<p>Sum : invalid answer</p>
+				<div class="error">Somme : réponse invalide</div>
 			}
 
 			// if all ok, show thank you message
@@ -172,7 +172,7 @@
 @* BUILD THE FORM *@
 @if (dt != null)
 {
-	<form class="form-horizontal" id="@("frm" + DateTime.Now.Millisecond)" method="POST">
+	<form class="form" id="@("frm" + DateTime.Now.Millisecond)" method="POST">
 		<fieldset>
 			@Html.AntiForgeryToken()
 			@Html.Hidden("num1", num1)
@@ -283,10 +283,10 @@
 
 			}
 			<div class=" form-group">
-				<label for="sum" class="control-label ">Sum :</label>
+				@*<label for="sum" class="control-label ">Sum :</label>*@
 				<div class="">
-					<span class="help-block">@Html.Encode("To help us avoid spam, please add " + num1 + " and " + num2 + " and enter the answer in the box")</span>
-					<input type="text" class="form-control" id="sum" name="sum" maxlength="2" placeholder="@(num1 + " plus " + num2 + " equals")" value="@Request.Form["sum"]" />
+					<span class="help-block">Pour éviter le spam, veuillez saisir la somme de @num1 et @num2 ci-dessous</span>
+					<input type="text" class="form-control" id="sum" name="sum" maxlength="2" placeholder="@(num1 + " plus " + num2 + " égale")" value="@Request.Form["sum"]" />
 				</div>
 			</div>
 			<div class=" form-group">
@@ -310,22 +310,22 @@
 
 }
 
-@* HELPER FUNCTIONS *@
-@helper TextBox(string propName, string fieldName, string fieldType)
+	@* HELPER FUNCTIONS *@
+	@helper TextBox(string propName, string fieldName, string fieldType)
 {
 	<input type="@fieldType" class="form-control" id="@fieldName" name="@fieldName" placeholder="@propName" value="@Request.Form[fieldName]" />
 }
-@helper TextArea(string propName, string fieldName)
+	@helper TextArea(string propName, string fieldName)
 {
 	<textarea rows="4" class="form-control" id="@fieldName" name="@fieldName" placeholder="@propName">@Request.Form[fieldName]</textarea>
 }
-@helper CheckBox(string propName, string fieldName)
+	@helper CheckBox(string propName, string fieldName)
 {
 	<div class="checkbox">
 		<label><input type="checkbox" name="@fieldName" value="1">@propName</label>
 	</div>
 }
-@helper CheckBoxList(int dataTypeId, string fieldName)
+	@helper CheckBoxList(int dataTypeId, string fieldName)
 {
 	XPathNodeIterator preValues = PreValues(dataTypeId);
 	while (preValues.MoveNext())
@@ -338,7 +338,7 @@
 		</div>
 	}
 }
-@helper RadioButtonList(int dataTypeId, string fieldName)
+	@helper RadioButtonList(int dataTypeId, string fieldName)
 {
 	XPathNodeIterator preValues = PreValues(dataTypeId);
 	while (preValues.MoveNext())
@@ -351,7 +351,7 @@
 		</div>
 	}
 }
-@helper DropDownList(int dataTypeId, string fieldName, string propType)
+	@helper DropDownList(int dataTypeId, string fieldName, string propType)
 {
 	<select id="@fieldName" name="@fieldName" @(propType == "Umbraco.DropDownMultiple" ? "multiple=true" : "")>
 		@{
@@ -366,7 +366,7 @@
 	</select>
 }
 
-@helper SaveContentItem(IContentService contentService, IEnumerable<PropertyType> properties, string doctype, int folderId, string title)
+	@helper SaveContentItem(IContentService contentService, IEnumerable<PropertyType> properties, string doctype, int folderId, string title)
 {
 	var ct = contentService.CreateContent(doctype + " : " + title + " : " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), folderId, doctype, 0);
 
@@ -382,7 +382,7 @@
 	contentService.Save(ct);
 }
 
-@helper SendEmail(string contactEmail, string doctype, string title, string formData)
+	@helper SendEmail(string contactEmail, string doctype, string title, string formData)
 {
 	string to = contactEmail;
 	string subj = "Form submission : " + doctype + " : " + title;
@@ -417,36 +417,36 @@
 
 }
 
-@functions 
+	@functions
 {
-	public XPathNodeIterator PreValues(int dataTypeId)
-	{
-		XPathNodeIterator iterator = umbraco.library.GetPreValues(dataTypeId);
-		iterator.MoveNext(); //move to first
-		return iterator.Current.SelectChildren("preValue", "");
-	}
-
-	public string FieldValue(string propertyEditorAlias, string fieldName)
-	{
-		string fieldValue = Request.Form[fieldName];
-
-		// get the values fro prevalue based fields
-		if (propertyEditorAlias == "Umbraco.RadioButtonList"
-						|| propertyEditorAlias == "Umbraco.DropDown"
-						|| propertyEditorAlias == "Umbraco.DropDownMultiple"
-						|| propertyEditorAlias == "Umbraco.CheckBoxList"
-				)
+		public XPathNodeIterator PreValues(int dataTypeId)
 		{
-			fieldValue = "";
-			string preValues = Request.Form[fieldName];
-			string[] preValueIds = preValues.Split(',');
-			foreach (string preValueId in preValueIds)
-			{
-				if (!string.IsNullOrEmpty(fieldValue)) { fieldValue += ", "; }
-				fieldValue += umbraco.library.GetPreValueAsString(Convert.ToInt32(preValueId.Trim()));
-			}
+			XPathNodeIterator iterator = umbraco.library.GetPreValues(dataTypeId);
+			iterator.MoveNext(); //move to first
+			return iterator.Current.SelectChildren("preValue", "");
 		}
 
-		return fieldValue;
+		public string FieldValue(string propertyEditorAlias, string fieldName)
+		{
+			string fieldValue = Request.Form[fieldName];
+
+			// get the values fro prevalue based fields
+			if (propertyEditorAlias == "Umbraco.RadioButtonList"
+							|| propertyEditorAlias == "Umbraco.DropDown"
+							|| propertyEditorAlias == "Umbraco.DropDownMultiple"
+							|| propertyEditorAlias == "Umbraco.CheckBoxList"
+					)
+			{
+				fieldValue = "";
+				string preValues = Request.Form[fieldName];
+				string[] preValueIds = preValues.Split(',');
+				foreach (string preValueId in preValueIds)
+				{
+					if (!string.IsNullOrEmpty(fieldValue)) { fieldValue += ", "; }
+					fieldValue += umbraco.library.GetPreValueAsString(Convert.ToInt32(preValueId.Trim()));
+				}
+			}
+
+			return fieldValue;
+		}
 	}
-}

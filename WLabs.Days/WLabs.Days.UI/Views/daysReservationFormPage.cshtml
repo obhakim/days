@@ -9,29 +9,19 @@
 <div id="main-wrapper">
 	<div id="main" class="container">
 		<div class="row">
-			<div class="4u">
+			<div class="12u">
 				<div class="content content-left">
 					<!-- Content -->
-					<article class="is-page-content">
-						<header>
-							<h2>@pageTitle</h2>
-						</header>
-						<section>
-							@if (string.IsNullOrWhiteSpace(CurrentPage.Image) == false)
-							{
-								<span class="image image-full"><img src="@CurrentPage.Image" alt="" /></span>
-							}
-							@CurrentPage.BodyText
-						</section>
-						<section>
+					<div class="row">
+						<div class="4u">
 							@Html.Partial("daysReservationForm")
-						</section>
-					</article>
+						</div>
+						<div class="8u">
+							<div id="map"></div>
+						</div>
+					</div>
 					<!-- /Content -->
 				</div>
-			</div>
-			<div class="8u">
-				<div id="map"></div>
 			</div>
 		</div>
 		@*

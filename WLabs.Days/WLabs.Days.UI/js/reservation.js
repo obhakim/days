@@ -11,39 +11,13 @@
   var directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(map);
 
-  // var directionsContainer = /** @type {!HTMLElement} */(
-  //   document.getElementById('directions-container'));
   var startInput = /** @type {!HTMLInputElement} */(
-    document.getElementById('text-start'));
+    document.getElementById('start80'));
   var endInput = /** @type {!HTMLInputElement} */(
-    document.getElementById('text-end'));
-  // var calculateButton = /** @type {!HTMLInputElement} */(
-  //   document.getElementById('btn-calculate'));
-  // var orderContainer = /** @type {!HTMLElement} */(
-  //   document.getElementById('order-container'));
-
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(directionsContainer);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(startInput);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(endInput);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(calculateButton);
-
-  // var startMarker = new google.maps.Marker({
-  //   map: map,
-  //   anchorPoint: new google.maps.Point(0, -29)
-  // });
-  // var endMarker = new google.maps.Marker({
-  //   map: map,
-  //   anchorPoint: new google.maps.Point(0, -29)
-  // });
+    document.getElementById('destination78'));
 
   var startAutocomplete = new google.maps.places.Autocomplete(startInput);
   startAutocomplete.bindTo('bounds', map);
-  // startAutocomplete.addListener('place_changed', function startPlaceChanged() {
-  //   //placeChanged(startMarker, startAutocomplete.getPlace());
-  //   if (endInput.value) {
-  //     calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
-  //   }    
-  // });
   startInput.addEventListener('blur', function () {
     if (endInput.value) {
       calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
@@ -52,55 +26,49 @@
 
   var endAutocomplete = new google.maps.places.Autocomplete(endInput);
   endAutocomplete.bindTo('bounds', map);
-  // endAutocomplete.addListener('place_changed', function endPlaceChanged() {
-  //   //placeChanged(endMarker, endAutocomplete.getPlace());
-  //   if (startInput.value) {
-  //     calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
-  //   }
-  // });
   endInput.addEventListener('blur', function () {
     if (startInput.value) {
       calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
     }
   });
 
-  // calculateButton.addEventListener('click', function () {
-  //   calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
-  //   endMarker.setVisible(false);
-  //   startMarker.setVisible(false);
-  // });
   $.datetimepicker.setLocale('fr');
-  $('#datetime-from').datetimepicker({ mask: true });
-  $('#datetime-to').datetimepicker({ mask: true });
-  directionsDisplay.addListener('directions_changed', function () {
-    var total = computeTotalDistance(directionsDisplay.getDirections());
-    // Update distance
-    var totalDistance = /** @type {!HTMLElement} */(
-      document.getElementById('total-distance'));
-    totalDistance.innerText = '' + total;
-    // Update start & end
-    var labelFrom = /** @type {!HTMLElement} */(
-      document.getElementById('label-from'));
-    labelFrom.innerText = startInput.value;
+  //$('#datetime-from').datetimepicker({ mask: true });
+	//$('#datetime-to').datetimepicker({ mask: true });
 
-    var labelTo = /** @type {!HTMLElement} */(
-      document.getElementById('label-to'));
-    labelTo.innerText = endInput.value;
+  $('#startat79').datetimepicker({ mask: true });
+  var now = new Date();
+  $('#startat79').val(now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes());
+
+  //directionsDisplay.addListener('directions_changed', function () {
+  //  var total = computeTotalDistance(directionsDisplay.getDirections());
+  //  // Update distance
+  //  var totalDistance = /** @type {!HTMLElement} */(
+  //    document.getElementById('total-distance'));
+  //  totalDistance.innerText = '' + total;
+  //  // Update start & end
+  //  var labelFrom = /** @type {!HTMLElement} */(
+  //    document.getElementById('label-from'));
+  //  labelFrom.innerText = startInput.value;
+
+  //  var labelTo = /** @type {!HTMLElement} */(
+  //    document.getElementById('label-to'));
+  //  labelTo.innerText = endInput.value;
     
-    // jQuery('#datetime-from').datetimepicker({
-    //   allowTimes:[
-    //     '12:00', '13:00', '15:00', 
-    //     '17:00', '17:05', '17:20', '19:00', '20:00'
-    //   ]
-    // });
-    // $('#datetime-from').datetimepicker({
-    //   inline:true,
-    // });
+  //  // jQuery('#datetime-from').datetimepicker({
+  //  //   allowTimes:[
+  //  //     '12:00', '13:00', '15:00', 
+  //  //     '17:00', '17:05', '17:20', '19:00', '20:00'
+  //  //   ]
+  //  // });
+  //  // $('#datetime-from').datetimepicker({
+  //  //   inline:true,
+  //  // });
 
-    // Show right panel
-    // directionsContainer.className = 'hidden';
-    // orderContainer.className = '';
-  });
+  //  // Show right panel
+  //  // directionsContainer.className = 'hidden';
+  //  // orderContainer.className = '';
+  //});
 
 //   function placeChanged(marker, place) {
 //     //infowindow.close();
@@ -129,17 +97,19 @@
 //   }
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination) {
-    directionsService.route({
-      origin: origin,
-      destination: destination,
-      travelMode: google.maps.TravelMode.DRIVING
-    }, function (response, status) {
-      if (status === google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
+  	if (origin && destination) {
+  		directionsService.route({
+  			origin: origin,
+  			destination: destination,
+  			travelMode: google.maps.TravelMode.DRIVING
+  		}, function (response, status) {
+  			if (status === google.maps.DirectionsStatus.OK) {
+  				directionsDisplay.setDirections(response);
+  			} else {
+  				window.alert('Directions request failed due to ' + status);
+  			}
+  		});
+  	}
   }
 
   function computeTotalDistance(result) {
