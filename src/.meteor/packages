@@ -1,0 +1,83 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+# Useful packages
+
+#underscore							# JS helpers
+#raix:handlebar-helpers
+#percolate:momentum
+#tap:i18n 							# Internationalization
+
+#dburles:collection-helpers			# Load relations
+#percolate:migrations
+#percolate:find-from-publication	# Pagination
+#tmeasday:publish-counts			# Total # of items for pagination
+#reywood:publish-composite 			# publich relational data
+
+#reactive-var 						# Store var in db
+#reactive-dict						# Store dictionary in db
+
+#simple:rest
+#nimble:restivus 
+
+#mdg:validated-method
+
+#SEO
+#dfischer:prerenderio 
+#mdg:seo
+#kadira:dochead 
+
+#peerlibrary:computed-field 		# Controlling re-rendering
+
+#useraccounts						# Customizable UI: useraccounts
+#aldeed:template-extension
+#useraccounts:unstyled
+#useraccounts:flow-routing
+
+#alanning:roles
+
+#service-configuration				# API keys for OAuth
+#force-ssl
+
+#okgrow:analytics 					# Google Analytics
+
+
+meteor-base             # Packages every Meteor app needs to have
+mobile-experience       # Packages for a great mobile UX
+mongo                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session                 # Client-side reactive dictionary for your app
+jquery                  # Helpful client-side library
+tracker                 # Meteor's client-side reactive programming library
+
+random
+logging
+reload
+
+audit-argument-checks
+browser-policy			# Define browser security policies
+
+standard-minifiers      # JS/CSS minifiers run for production mode
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+ecmascript              # Enable ECMAScript2015+ syntax in app code
+
+less					
+semantic:ui-css
+useraccounts:semantic-ui #Semantic-ui styling for accounts-ui
+
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+
+accounts-base			# Base db support for accounts
+accounts-ui				# Simple accounts
+accounts-password		
+accounts-facebook
+accounts-google
+
+aldeed:collection2
+
+fastclick				# Speed up touch clicks
