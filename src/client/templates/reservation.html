@@ -1,3 +1,52 @@
 <template name="reservation">
-    Reservation
+    <div class="ui stackable grid">
+        {{#unless currentUser}}
+        <h3>Veuillez vous connecter avant de faire une réservation</h3>
+        {{else}}
+        <div id="order-container" class="six wide column">
+            <form id="reservationForm" class="ui form">
+                <h1>Réservation</h1>
+
+                <div class="field">
+                    <label>Départ</label>
+                    <input id="start" type="text" placeholder="Depart" />
+                </div>
+
+                <div class="field">
+                    <label>Destination</label>
+                    <input id="end" type="text" placeholder="Destination" />
+                </div>
+
+                <div class="field">
+                    <label>Le</label>
+                    <input id="start-at" class="ui dropdown datetimepicker" type="text" />
+                </div>
+
+                <div class="field">
+                    <label>Véhicule</label>
+                    <select id="vehicle-type">
+                        <option>Audi A6</option>
+                        <option>Audi A8</option>
+                        <option>Mercedes Classe E</option>
+                        <option>Mercedes Classe S</option>
+                        <option>Caravelle Minibus</option>
+                        <option>Mercedes Classe V Minibus</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Votre voyage <span id="total-distance">0</span> km</label>
+                </div>
+
+                <div>
+                    <button type="submit" class="ui button">Réserver</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="ten wide column">
+            <div id="map"></div>
+        </div>
+        {{/unless}}
+    </div>
 </template>

@@ -17,9 +17,6 @@
 #tmeasday:publish-counts			# Total # of items for pagination
 #reywood:publish-composite 			# publich relational data
 
-#reactive-var 						# Store var in db
-#reactive-dict						# Store dictionary in db
-
 #simple:rest
 #nimble:restivus 
 
@@ -66,18 +63,25 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 less					
 semantic:ui-css
-useraccounts:semantic-ui #Semantic-ui styling for accounts-ui
+#useraccounts:semantic-ui #Semantic-ui styling for useraccounts
 
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
 
 accounts-base			# Base db support for accounts
-accounts-ui				# Simple accounts
+#accounts-ui				# Simple accounts
+#iandouglas:accounts-ui-semantic-ui
 accounts-password		
-accounts-facebook
-accounts-google
+#accounts-facebook
+#accounts-google
 
 aldeed:collection2
 
 fastclick				# Speed up touch clicks
+sarasate:semantic-ui-datetimepicker
+momentjs:moment
+
+reactive-var 						# Store var in db
+reactive-dict						# Store dictionary in db
+w-accounts-ui

@@ -4,12 +4,6 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route('/reservation', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'reservation' });
-  }
-});
-
 FlowRouter.route('/services', {
   action: function() {
     BlazeLayout.render('layout', { content: 'services' });
@@ -33,6 +27,20 @@ FlowRouter.route('/values', {
     BlazeLayout.render('layout', { content: 'values' });
   }
 });
+
+FlowRouter.route('/reservations', {
+  action: function() {
+    BlazeLayout.render('layout', { content: 'reservations' });
+  }
+});
+
+FlowRouter.route('/reservation', {
+  action: function() {
+    BlazeLayout.render('layout', { content: 'reservation' });
+  }
+});
+
+
 
 // FlowRouter.route('/post/:slug', {
 //   action: function() {
