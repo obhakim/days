@@ -13,9 +13,8 @@ Meteor.methods({
     // check(tweet, Boolean);
     // check(loc, Match.OneOf(Object, null));
     
-    // activity.userId = Meteor.userId();
-    // activity.userAvatar = Meteor.user().services.twitter.profile_image_url_https;
-    // activity.userName = Meteor.user().profile.name;
+    reservation.ownerId = Meteor.userId();
+    reservation.ownerName = Meteor.user().profile.name;
     reservation.createdAt = new Date;
     
     var id = Reservations.insert(reservation);

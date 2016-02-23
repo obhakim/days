@@ -85,3 +85,5 @@ momentjs:moment
 reactive-var 						# Store var in db
 reactive-dict						# Store dictionary in db
 w-accounts-ui
+zimme:active-route
+alanning:roles

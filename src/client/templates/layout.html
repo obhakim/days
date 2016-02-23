@@ -2,7 +2,7 @@
 
     <!-- Sidebar Menu -->
     <div class="ui vertical inverted sidebar menu">
-        {{> menu }} {{> auth }}
+        {{> sidemenu }} {{> auth }}
     </div>
 
     <!-- Page Contents -->
@@ -11,15 +11,17 @@
         <div class="ui large fixed inverted menu">
             <div class="ui container">
                 <a class="toc item"><i class="sidebar icon"></i></a>
-                <a href="/" class="header item">Days</a>
-                <a class="item hideable active" href="/reservation">Réserver</a>
+                <a href="{{pathFor 'home'}}" class="header item {{isActiveRoute 'home'}}">Days</a>
+                {{#if currentUser}}
+                <a class="item hideable  {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>
+                {{/if}}
                 <div class="ui item hideable simple dropdown">
                     A propos de nous <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a class="item" href="/drivers">Nos chauffeurs</a>
-                        <a class="item" href="/values">Nos valeurs</a>
-                        <a class="item" href="/services">Notre service</a>
-                        <a class="item" href="/vehicles">Nos véhicules</a>
+                        <a class="item {{isActiveRoute 'drivers'}}" href="{{pathFor 'drivers'}}">Nos chauffeurs</a>
+                        <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
+                        <a class="item {{isActiveRoute 'services'}}" href="{{pathFor 'services'}}">Notre service</a>
+                        <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
                     </div>
                 </div>
                 <div class="right menu item">

@@ -6,8 +6,26 @@ Reservations.schema = new SimpleSchema({
   startAt: {type: Date},
   vehicleType: {type: Number, defaultValue: 0},
   price: {type: Number, decimal: true, defaultValue: 0},
-  userId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  driverId: {type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
+  status: {type: Number, defaultValue: 0},
+  ownerId: {type: String, regEx: SimpleSchema.RegEx.Id, denyUpdate: true},
+  ownerName: {type: String, optional: true},
   createdAt: {type: Date, denyUpdate: true}
+});
+
+Reservations.allow({
+  insert: function (reservation) {
+    // the user must be logged in, and the document must be owned by the user
+    return (userId && doc.owner === userId);
+  },
+//   update: function (userId, doc, fields, modifier) {
+//     // can only change your own documents
+//     return doc.owner === userId;
+//   },
+//   remove: function (userId, doc) {
+//     // can only remove your own documents
+//     return doc.owner === userId;
+//   }
 });
 
 // // This Method encodes the form validation requirements.

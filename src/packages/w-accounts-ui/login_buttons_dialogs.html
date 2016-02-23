@@ -16,7 +16,7 @@
 
     <div class="accounts-dialog accounts-centered-dialog">
       <label id="reset-password-new-password-label" for="reset-password-new-password">
-        New password
+        Nouveau mot de passe
       </label>
 
       <div class="reset-password-new-password-wrapper">
@@ -26,7 +26,7 @@
       {{> _loginButtonsMessages}}
 
       <div class="login-button login-button-form-submit" id="login-buttons-reset-password-button">
-        Set password
+        Changer le mot de passe
       </div>
 
       <a class="accounts-close" id="login-buttons-cancel-reset-password">&times;</a>
@@ -37,9 +37,9 @@
 <template name="_justResetPasswordDialog">
   {{#if visible}}
     <div class="accounts-dialog accounts-centered-dialog">
-      Password reset.
-      You are now logged in as {{displayName}}.
-      <div class="login-button" id="just-verified-dismiss-button">Dismiss</div>
+      Mot de passe réinitialisé.
+      Vous êtes maintenant connecté en tant que {{displayName}}.
+      <div class="login-button" id="just-verified-dismiss-button">Annuler</div>
     </div>
   {{/if}}
 </template>
@@ -50,7 +50,7 @@
 
     <div class="accounts-dialog accounts-centered-dialog">
       <label id="enroll-account-password-label" for="enroll-account-password">
-        Choose a password
+        Mot de passe
       </label>
 
       <div class="enroll-account-password-wrapper">
@@ -60,7 +60,7 @@
       {{> _loginButtonsMessages}}
 
       <div class="login-button login-button-form-submit" id="login-buttons-enroll-account-button">
-        Create account
+        Créer un compte
       </div>
 
       <a class="accounts-close" id="login-buttons-cancel-enroll-account">&times;</a>
@@ -71,9 +71,9 @@
 <template name="_justVerifiedEmailDialog">
   {{#if visible}}
     <div class="accounts-dialog accounts-centered-dialog">
-      Email verified.
-      You are now logged in as {{displayName}}.
-      <div class="login-button" id="just-verified-dismiss-button">Dismiss</div>
+      Email verifié.
+      Vous êtes maintenant connecté en tant que {{displayName}}.
+      <div class="login-button" id="just-verified-dismiss-button">Masquer</div>
     </div>
   {{/if}}
 </template>
@@ -137,7 +137,7 @@
   {{#if visible}}
     <div class="accounts-dialog accounts-centered-dialog" id="login-buttons-message-dialog">
       {{> _loginButtonsMessages}}
-      <div class="login-button" id="messages-dialog-dismiss-button">Dismiss</div>
+      <div class="login-button" id="messages-dialog-dismiss-button">Masquer</div>
     </div>
   {{/if}}
 </template>

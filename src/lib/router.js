@@ -1,44 +1,73 @@
-FlowRouter.route('/', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'home' });
-  }
+FlowRouter.notFound = {
+    action: function () {
+        BlazeLayout.render('layout', { content: 'pageNotFound' });
+    }
+};
+
+var publicRoutes = FlowRouter.group({
+    name: 'public'
+});
+var securedRoutes = FlowRouter.group({
+    prefix: '/s',
+    name: 'secured',
+    triggersEnter: [function (context, redirect) {
+        //if(!Roles.userIsInRole(Meteor.user(), ['admin'])) {
+        if(!Meteor.user()) {            
+            FlowRouter.go(FlowRouter.path('notAuthorized'))
+        }
+    }]
 });
 
-FlowRouter.route('/services', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'services' });
-  }
+publicRoutes.route('/', {
+    name: "home",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'home' });
+    }
 });
 
-FlowRouter.route('/drivers', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'drivers' });
-  }
+publicRoutes.route('/services', {
+    name: "services",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'services' });
+    }
 });
 
-FlowRouter.route('/vehicles', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'vehicles' });
-  }
+publicRoutes.route('/drivers', {
+    name: "drivers",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'drivers' });
+    }
 });
 
-FlowRouter.route('/values', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'values' });
-  }
+publicRoutes.route('/vehicles', {
+    name: "vehicles",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'vehicles' });
+    }
 });
 
-FlowRouter.route('/reservations', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'reservations' });
-  }
+publicRoutes.route('/values', {
+    name: "values",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'values' });
+    }
 });
 
-FlowRouter.route('/reservation', {
-  action: function() {
-    BlazeLayout.render('layout', { content: 'reservation' });
-  }
+securedRoutes.route('/reservation', {
+    name: "reservation",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'reservation' });
+    }
 });
+
+securedRoutes.route('/reservations', {
+    name: "reservations",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'reservations' });
+    }
+});
+
+
 
 
 

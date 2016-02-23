@@ -1,8 +1,6 @@
 <template name="reservation">
     <div class="ui stackable grid">
-        {{#unless currentUser}}
-        <h3>Veuillez vous connecter avant de faire une réservation</h3>
-        {{else}}
+
         <div id="order-container" class="six wide column">
             <form id="reservationForm" class="ui form">
                 <h1>Réservation</h1>
@@ -47,6 +45,6 @@
         <div class="ten wide column">
             <div id="map"></div>
         </div>
-        {{/unless}}
+
     </div>
 </template>
