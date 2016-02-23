@@ -87,3 +87,4 @@ reactive-dict						# Store dictionary in db
 w-accounts-ui
 zimme:active-route
 alanning:roles
+force-ssl
