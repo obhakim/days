@@ -11,7 +11,7 @@ var securedRoutes = FlowRouter.group({
     prefix: '/s',
     name: 'secured',
     triggersEnter: [function (context, redirect) {
-        //if(!Roles.userIsInRole(Meteor.user(), ['admin'])) {
+        //if(!Roles.userIsInRole(Meteor.user(), ['driver'])) {
         if(!Meteor.user()) {            
             FlowRouter.go(FlowRouter.path('notAuthorized'))
         }

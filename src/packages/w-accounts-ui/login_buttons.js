@@ -79,7 +79,7 @@ validateUsername = function (username) {
   if (username.length >= 3) {
     return true;
   } else {
-    loginButtonsSession.errorMessage("Username must be at least 3 characters long");
+    loginButtonsSession.errorMessage("Nom d'utilisateur doit avoir au moins 3 caractères");
     return false;
   }
 };
@@ -90,7 +90,7 @@ validateEmail = function (email) {
   if (email.indexOf('@') !== -1) {
     return true;
   } else {
-    loginButtonsSession.errorMessage("Invalid email");
+    loginButtonsSession.errorMessage("Email invalide");
     return false;
   }
 };
@@ -98,7 +98,7 @@ validatePassword = function (password) {
   if (password.length >= 6) {
     return true;
   } else {
-    loginButtonsSession.errorMessage("Password must be at least 6 characters long");
+    loginButtonsSession.errorMessage("Mot de passe doit avoir au moins 6 caractères");
     return false;
   }
 };

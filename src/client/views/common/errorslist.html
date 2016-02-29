@@ -1,0 +1,15 @@
+<template name="errorslist">
+  {{#if errors}}
+    <div class="ui error message">
+      {{!--<i class="close icon" onclick="this.parentElement.style.display = 'none';"></i>--}}
+      <div class="header">
+        {{errorMessage}}
+      </div>
+      <ul class="list">
+        {{#each errors}}
+          <li class="errors {{../contextName}}">{{message}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</template>

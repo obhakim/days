@@ -9,7 +9,6 @@
 #underscore							# JS helpers
 #raix:handlebar-helpers
 #percolate:momentum
-#tap:i18n 							# Internationalization
 
 #dburles:collection-helpers			# Load relations
 #percolate:migrations
@@ -34,10 +33,7 @@
 #useraccounts:unstyled
 #useraccounts:flow-routing
 
-#alanning:roles
-
 #service-configuration				# API keys for OAuth
-#force-ssl
 
 #okgrow:analytics 					# Google Analytics
 
@@ -54,7 +50,7 @@ random
 logging
 reload
 
-audit-argument-checks
+#audit-argument-checks
 browser-policy			# Define browser security policies
 
 standard-minifiers      # JS/CSS minifiers run for production mode
@@ -63,28 +59,34 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 less					
 semantic:ui-css
-#useraccounts:semantic-ui #Semantic-ui styling for useraccounts
+#useraccounts:semantic-ui	# Semantic-ui styling for useraccounts
 
 kadira:flow-router
 kadira:blaze-layout
-arillo:flow-router-helpers
+arillo:flow-router-helpers	# get urls by route name
 
-accounts-base			# Base db support for accounts
-#accounts-ui				# Simple accounts
+accounts-base				# Base db support for accounts
+#accounts-ui				# Simple accounts UI
 #iandouglas:accounts-ui-semantic-ui
 accounts-password		
 #accounts-facebook
 #accounts-google
 
-aldeed:collection2
+aldeed:collection2			# attach validation schema
+matb33:collection-hooks		# collection.before.insert etc
 
-fastclick				# Speed up touch clicks
+#tap:i18n 							# Internationalization
+#gwendall:simple-schema-i18n
+
+fastclick					# Speed up touch clicks
 sarasate:semantic-ui-datetimepicker
-momentjs:moment
+momentjs:moment				# Date format helpers for datetimespicker
 
-reactive-var 						# Store var in db
-reactive-dict						# Store dictionary in db
-w-accounts-ui
-zimme:active-route
+reactive-var 				# Store var in db
+reactive-dict				# Store dictionary in db
+w-accounts-ui				# Customized accounts UI with french translation
+zimme:active-route			# adds "active" classe for the active route item
 alanning:roles
 force-ssl
+email
+
