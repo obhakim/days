@@ -60,6 +60,11 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 less					
 semantic:ui-css
 #useraccounts:semantic-ui	# Semantic-ui styling for useraccounts
+#sacha:spin
+
+#Testing
+#sanjo:jasmine
+#velocity:html-reporter
 
 kadira:flow-router
 kadira:blaze-layout

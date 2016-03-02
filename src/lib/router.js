@@ -1,9 +1,3 @@
-FlowRouter.notFound = {
-    action: function () {
-        BlazeLayout.render('layout', { content: 'pageNotFound' });
-    }
-};
-
 var publicRoutes = FlowRouter.group({
     name: 'public'
 });
@@ -67,9 +61,18 @@ securedRoutes.route('/reservations', {
     }
 });
 
+securedRoutes.route('/test', {
+    name: "test",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'test' });
+    }
+});
 
-
-
+FlowRouter.notFound = {
+    action: function () {
+        BlazeLayout.render('layout', { content: 'pageNotFound' });
+    }
+};
 
 // FlowRouter.route('/post/:slug', {
 //   action: function() {

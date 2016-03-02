@@ -1,5 +1,5 @@
-Meteor.subscribe("reservations");
 Meteor.subscribe("vehicletypes");
+Meteor.subscribe("reservations");
 
 // Template.reservation.onCreated(function () {
 //     this.errors = new ReactiveDict();
@@ -32,7 +32,7 @@ Template.reservation.events({
         const data = {
             start: event.target.start.value,
             end: event.target.end.value,
-            startAt: event.target.startat.value,
+            startAt: moment(event.target.startat.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
             vehicleType: event.target.vehicletype.value,
             //price: event.target.price.value
             //ownerId: Meteor.userId,
@@ -63,16 +63,16 @@ Template.reservation.events({
 
 Template.reservation.onRendered(function () {
     this.$('.datetimepicker').datetimepicker({
-        format: Meteor.App.DEFAULT_DATETIME_FORMAT,
+        format: CONST.DEFAULT_DATETIME_FORMAT,
         useCurrent: true,
-        locale: Meteor.App.DEFAULT_LOCALE,
+        locale: CONST.DEFAULT_LOCALE,
         stepping: 5,
         showTodayButton: true
         //,inline: true
         //sideBySide: true,
     });
 
-    $('#startat').val(moment().format(Meteor.App.DEFAULT_DATETIME_FORMAT));
+    $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT));
 
     var map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 48.8567, lng: 2.3508 },  // Paris

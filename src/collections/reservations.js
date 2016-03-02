@@ -1,5 +1,3 @@
-Reservations = new Mongo.Collection('reservations');
-
 //http://docs.meteor.com/#/full/allow
 Reservations.allow({
     insert: function (userId, doc) {
@@ -24,15 +22,15 @@ Reservations.attachSchema(new SimpleSchema({
     startAt: {label: "Le", type: Date},
     //vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
     vehicleType: {label: "Type de véhicule", type: String, allowedValues: getVehicleTypes()},
-    price: {label: "Prix", type: Number, decimal: true, defaultValue: 0},
+    price: {label: "Prix", type: Number, decimal: true, defaultValue: 0.00},
     driverId: {label: "Chauffeur", type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-    status: {label: "Statut", type: Number, defaultValue: 0},
-    ownerId: {label: "Client", type: String, denyUpdate: true,
+    status: {label: "Statut", type: String, defaultValue: CONST.RESERVATION_STATUS.CREATED},
+    ownerId: {label: "Id Client", type: String, denyUpdate: true,
         autoValue: function() {
             if ( this.isInsert ) {
-                return Meteor.userId;
+                return Meteor.userId();
             } else if (this.isUpsert) {
-                return {$setOnInsert: Meteor.userId};
+                return {$setOnInsert: Meteor.userId()};
             } else {
                 this.unset();
             }
@@ -60,9 +58,18 @@ Reservations.attachSchema(new SimpleSchema({
 }));
 
 function getVehicleTypes () {
-  return VehicleTypes.find().map(function (doc) {
-    return doc.name;
-  })
+    // console.log(VehicleTypes.find().map(function (doc) {
+    //     return doc.name;
+    // }));    
+    return VehicleTypes.find().fetch().map(function (doc) {
+        return doc.name;
+    });
+}
+
+if(Meteor.isClient) {
+    Tracker.autorun(function () {
+        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes ();
+    });
 }
 
 //console.log('lib\\collections\\reservation Reservations=');

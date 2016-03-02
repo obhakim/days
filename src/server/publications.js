@@ -1,3 +1,7 @@
+Meteor.publish('vehicletypes', function () {
+    return VehicleTypes.find();
+});
+
 Meteor.publish('reservations', function () {
     //console.log('publish reservations() this.userId='+this.userId);
     //console.log('publish reservations() Roles.userIsInRole(this.userId, [driver])='+Roles.userIsInRole(this.userId, ['driver']));
@@ -9,10 +13,6 @@ Meteor.publish('reservations', function () {
         return Reservations.find({ ownerId: this.userId },
             { sort: { createdAt: -1 } });
     }
-});
-
-Meteor.publish('vehicletypes', function () {
-    return VehicleTypes.find();
 });
 
 // search example

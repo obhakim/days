@@ -13,15 +13,8 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each r in reservations}}
-                <tr>
-                    <td>{{createdAt}}</td>
-                    <td>{{start}}</td>
-                    <td>{{end}}</td>
-                    <td>{{startAt}}</td>
-                    <td>{{price}}</td>
-                    <td>{{status}}</td>
-                </tr>
+                {{#each reservations}}
+                    {{> reservationItem}}
                 {{/each}}
             </tbody>
             <!--<tfoot>

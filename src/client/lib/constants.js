@@ -6,8 +6,5 @@ if (Meteor.App) {
 
 Meteor.App = {
   NAME: 'Days',
-  DESCRIPTION: 'Drivers At Your Service (Days) VTC application officielle',
-  DEFAULT_LOCALE: 'fr',
-  DEFAULT_DATETIME_FORMAT: 'DD/MM/YYYY HH:mm',
-  VERSION: 'V0.0.1'
+  DESCRIPTION: 'Drivers At Your Service (Days) VTC application officielle'
 };
