@@ -57,7 +57,7 @@ Reservations.attachSchema(new SimpleSchema({
         }}
 }));
 
-function getVehicleTypes () {
+function getVehicleTypes() {
     // console.log(VehicleTypes.find().map(function (doc) {
     //     return doc.name;
     // }));    
@@ -68,9 +68,16 @@ function getVehicleTypes () {
 
 if(Meteor.isClient) {
     Tracker.autorun(function () {
-        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes ();
+        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes();
     });
 }
+
+if(Meteor.isServer) {
+    Reservations.after.insert(function (userId, doc) {
+        var drivers = VehicleTypes.find();
+    });
+}
+
 
 //console.log('lib\\collections\\reservation Reservations=');
 //console.log(Reservations);
