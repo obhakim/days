@@ -46,7 +46,7 @@ session                 # Client-side reactive dictionary for your app
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
-random
+#random
 logging
 reload
 
@@ -95,3 +95,7 @@ alanning:roles
 force-ssl
 email
 
+check
+tmeasday:html5-history-api	# flow-router ie9 support
+mdg:validated-method		# methods validation bootstrapper
+mdg:geolocation

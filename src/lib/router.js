@@ -7,7 +7,7 @@ var securedRoutes = FlowRouter.group({
     triggersEnter: [function (context, redirect) {
         //if(!Roles.userIsInRole(Meteor.user(), ['driver'])) {
         if(!(Meteor.loggingIn() || Meteor.user())) {            
-            FlowRouter.go(FlowRouter.path('notAuthorized'))
+            FlowRouter.go(FlowRouter.path('/notAuthorized'))
         }
     }]
 });
@@ -47,10 +47,17 @@ publicRoutes.route('/values', {
     }
 });
 
-securedRoutes.route('/reservation', {
+publicRoutes.route('/reservation', {
     name: "reservation",
     action(pathParams, queryParams) {
         BlazeLayout.render('layout', { content: 'reservation' });
+    }
+});
+
+publicRoutes.route('/notAuthorized', {
+    name: "notAuthorized",
+    action(pathParams, queryParams) {
+        BlazeLayout.render('layout', { content: 'notAuthorized' });
     }
 });
 

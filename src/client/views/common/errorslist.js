@@ -9,7 +9,7 @@ Template.errorslist.helpers({
         //     return context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
         // }
         // return;
-        return Session.get("errors");
+        return Session.get(SESSION.ERRORS);
     }
 });
 

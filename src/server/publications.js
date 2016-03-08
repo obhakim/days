@@ -5,7 +5,7 @@ Meteor.publish('vehicletypes', function () {
 Meteor.publish('reservations', function () {
     //console.log('publish reservations() this.userId='+this.userId);
     //console.log('publish reservations() Roles.userIsInRole(this.userId, [driver])='+Roles.userIsInRole(this.userId, ['driver']));
-    if (Herlpers.isDriver()) {
+    if (Helpers.isDriver()) {
         return Reservations.find({},
             { sort: { createdAt: -1 } });
     }

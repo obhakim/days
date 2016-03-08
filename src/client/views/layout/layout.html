@@ -12,8 +12,9 @@
             <div class="ui container">
                 <a class="toc item"><i class="sidebar icon"></i></a>
                 <a href="{{pathFor 'home'}}" class="header item {{isActiveRoute 'home'}}">Days</a>
+                <a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>
                 {{#if currentUser}}
-                <a class="item hideable  {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>
+                <a class="item hideable {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>
                 {{/if}}
                 <div class="ui item hideable simple dropdown">
                     A propos de nous <i class="dropdown icon"></i>
@@ -25,6 +26,7 @@
                     </div>
                 </div>
                 <div class="right menu item">
+                    {{!--> spinner--}}
                     {{!--> auth --}}
                     {{> loginButtons}}
                 </div>

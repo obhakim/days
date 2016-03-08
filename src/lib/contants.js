@@ -11,3 +11,7 @@ CONST = {
       CANCELLED: 'Annulé'
   }  
 };
+
+if (Meteor.isServer) {
+    CONST.MAIL_FROM = 'no-reply@days.fr';
+}

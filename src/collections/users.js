@@ -28,10 +28,10 @@ Schema.UserProfile = new SimpleSchema({
         allowedValues: ['M', 'Mme', 'Mlle'],
         optional: true
     },
-    // organization : {
-    //     type: String,
-    //     optional: true
-    // },
+    phone : {
+        type: String,
+        optional: true
+    },
     // website: {
     //     type: String,
     //     regEx: SimpleSchema.RegEx.Url,

@@ -8,3 +8,7 @@ Meteor.App = {
   NAME: 'Days',
   DESCRIPTION: 'Drivers At Your Service (Days) VTC application officielle'
 };
+
+SESSION = {
+    ERRORS: 'SESSION_ERRORS'
+}

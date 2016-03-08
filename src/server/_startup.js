@@ -1,3 +1,8 @@
+BrowserPolicy.content.allowOriginForAll("*.google.com");
+BrowserPolicy.content.allowOriginForAll("*.googleapis.com");
+BrowserPolicy.content.allowOriginForAll("*.gstatic.com");
+BrowserPolicy.content.allowFontDataUrl();
+
 Meteor.startup(function () {
     // code to run on server at startup
     smtp = {
@@ -13,16 +18,7 @@ Meteor.startup(function () {
         sendVerificationEmail: true
     });
     
-    // PrePopulate data
-    //console.log(VehicleTypes.find().fetch());
-    if (!VehicleTypes.findOne()) {
-        VehicleTypes.insert({name: "Audi A6"});
-        VehicleTypes.insert({name: "Audi A8"});
-        VehicleTypes.insert({name: "Mercedes Classe E"});
-        VehicleTypes.insert({name: "Mercedes Classe S"});
-        VehicleTypes.insert({name: "Caravelle Minibus"});
-        VehicleTypes.insert({name: "Mercedes Classe V Minibus"});
-    };
+    
     
     // try {
     //     Email.send({
@@ -34,5 +30,5 @@ Meteor.startup(function () {
     // } catch (error) {
     //     console.log(error);
     // }
-         
+    //Helpers.notifyNewReservation('wkurtsev@gmail.com');
 });

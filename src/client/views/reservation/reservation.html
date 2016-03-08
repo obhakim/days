@@ -2,40 +2,69 @@
     <h1>Réservation</h1>
     <div class="ui stackable grid">
         <div id="order-container" class="six wide column">
-            {{> errorslist}}
+            {{!--> errorslist--}}
             <form id="reservationForm" class="ui form">
-                <div class="field">
-                    <label>Départ</label>
-                    <input id="start" type="text" placeholder="Depart" />
+                <div class="required field">
+                    <input id="lastname" type="text" placeholder="Nom" required />
                 </div>
+                {{#each error in errors "lastname"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
 
                 <div class="field">
-                    <label>Destination</label>
-                    <input id="end" type="text" placeholder="Destination" />
+                    <input id="firstname" type="text" placeholder="Prenom" />
                 </div>
+                {{#each error in errors "firstname"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
+                
+                <div class="required field">
+                    <input id="phone" type="text" placeholder="Téléphone" required />
+                </div>
+                {{#each error in errors "phone"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
 
-                <div class="field">
+                <div class="required field">
+                    <input id="email" type="text" placeholder="Email" required />
+                </div>
+                {{#each error in errors "email"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
+                
+                <div class="required field">
+                    <input id="start" type="text" placeholder="Depart" required />
+                </div>
+                {{#each error in errors "start"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
+
+                <div class="required field">
+                    <input id="end" type="text" placeholder="Destination" required />
+                </div>
+                {{#each error in errors "end"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
+
+                <div class="required inline field">
                     <label>Le</label>
-                    <input id="startat" class="ui dropdown datetimepicker" type="text" />
+                    <input id="startat" class="ui dropdown datetimepicker" type="text" required />
                 </div>
+                {{#each error in errors "startat"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
 
-                <div class="field">
-                    <label>Type de véhicule</label>
+                <div class="required field">
                     <select id="vehicletype">
+                        <option>Type de véhicule</option>
                         {{#each vehicletypeslist}}
                         <option>{{name}}</option>
                         {{/each}}
-                        {{!--
-                        <option {{#if selected}}selected{{/if}} value="{{value}}">{{value}}</option>
-                        <option>Audi A6</option>
-                        <option>Audi A8</option>
-                        <option>Mercedes Classe E</option>
-                        <option>Mercedes Classe S</option>
-                        <option>Caravelle Minibus</option>
-                        <option>Mercedes Classe V Minibus</option>
-                        --}}
                     </select>
                 </div>
+                {{#each error in errors "vehicletype"}}
+                    <div class="form-error">{{error}}</div>
+                {{/each}}
 
                 <div class="field">
                     <label>Votre voyage <span id="totaldistance">0</span> km, <span id="price">0.00</span> €</label>
