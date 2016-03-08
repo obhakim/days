@@ -63,14 +63,17 @@ Template.reservation.events({
                         end: [],
                         startAt: [],
                         vehicleType: [],
-                        price: [],
-                        status: [],
+                        other: []
                     };
 
                     // Go through validation errors returned from Method
                     error.details.forEach((fieldError) => {
                         // XXX i18n
-                        errors[fieldError.name].push(fieldError.type);
+                        if (errors[fieldError.name]) {
+                            errors[fieldError.name].push(fieldError.type);
+                        } else {
+                            errors['other'].push(fieldError.name + ':' + fieldError.type);
+                        }
                     });
 
                     // Update ReactiveDict, errors will show up in the UI
