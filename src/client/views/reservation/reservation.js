@@ -1,19 +1,19 @@
 Meteor.subscribe("vehicletypes");
 Meteor.subscribe("reservations");
-var instance;
+//var instance;
 
-Template.reservation.onCreated(function() {
-    instance = Template.instance();
-    instance.errors = new ReactiveDict();
-});
+// Template.reservation.onCreated(function() {
+//     instance = Template.instance();
+//     instance.errors = new ReactiveDict();
+// });
 
 Template.reservation.helpers({
     vehicletypeslist: function() {
         return VehicleTypes.find().fetch();
     },
-    errors: function(fieldName) {
-        return instance.errors.get(fieldName);
-    }
+    // errors: function(fieldName) {
+    //     return instance.errors.get(fieldName);
+    // }
 });
 
 Template.reservation.events({
@@ -52,36 +52,36 @@ Template.reservation.events({
         // Call the Method
         Reservations.methods.insert.call(data, function(error, result) {
             if (error) {
-                if (error.error === 'validation-error') {
-                    // Initialize error object
-                    const errors = {
-                        lastname: [],
-                        firstname: [],
-                        phone: [],
-                        email: [],
-                        start: [],
-                        end: [],
-                        startAt: [],
-                        vehicleType: [],
-                        other: []
-                    };
+                // if (error.error === 'validation-error') {
+                //     // Initialize error object
+                //     const errors = {
+                //         lastname: [],
+                //         firstname: [],
+                //         phone: [],
+                //         email: [],
+                //         start: [],
+                //         end: [],
+                //         startAt: [],
+                //         vehicleType: [],
+                //         other: []
+                //     };
 
-                    // Go through validation errors returned from Method
-                    error.details.forEach((fieldError) => {
-                        // XXX i18n
-                        if (errors[fieldError.name]) {
-                            errors[fieldError.name].push(fieldError.type);
-                        } else {
-                            errors['other'].push(fieldError.name + ':' + fieldError.type);
-                        }
-                    });
+                //     // Go through validation errors returned from Method
+                //     error.details.forEach((fieldError) => {
+                //         // XXX i18n
+                //         if (errors[fieldError.name]) {
+                //             errors[fieldError.name].push(fieldError.type);
+                //         } else {
+                //             errors['other'].push(fieldError.name + ':' + fieldError.type);
+                //         }
+                //     });
 
-                    // Update ReactiveDict, errors will show up in the UI
-                    instance.errors.set(errors);
-                }
-                // var context = Reservations.simpleSchema().namedContext();
-                // var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
-                // Session.set(SESSION.ERRORS, errors);
+                //     // Update ReactiveDict, errors will show up in the UI
+                //     instance.errors.set(errors);
+                // }
+                var context = Reservations.simpleSchema().namedContext();
+                var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
+                Session.set(SESSION.ERRORS, errors);
             }
             else {
                 FlowRouter.go('/s/reservations');

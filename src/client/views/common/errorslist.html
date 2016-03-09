@@ -1,13 +1,13 @@
 <template name="errorslist">
-  {{#if ../errors other}}
+  {{#if errors}}
     <div class="ui error message">
-      {{!--<i class="close icon" onclick="this.parentElement.style.display = 'none';"></i>
+      {{!--<i class="close icon" onclick="this.parentElement.style.display = 'none';"></i>--}}
       <div class="header">
         {{errorMessage}}
-      </div>--}}
+      </div>
       <ul class="list">
-        {{#each error in ../errors "other"}}
-          <li class="errors">{{error}}</li>
+        {{#each errors}}
+          <li class="errors {{../contextName}}">{{message}}</li>
         {{/each}}
       </ul>
     </div>
