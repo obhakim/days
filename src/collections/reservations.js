@@ -34,7 +34,7 @@ function getVehicleTypes() {
     });
 }
 
-var reservationsSchema = new SimpleSchema({
+Reservations.schema = new SimpleSchema({
     lastname: {label: "Nom", type: String},
     firstname: {label: "Prénom", type: String, optional: true},
     phone: {label: "Téléphone", type: String},
@@ -44,7 +44,7 @@ var reservationsSchema = new SimpleSchema({
     startAt: {label: "Le", type: Date},
     //vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
     vehicleType: {label: "Type de véhicule", type: String, allowedValues: getVehicleTypes()},
-    price: {label: "Prix", type: Number, decimal: true, defaultValue: 0.00},
+    price: {label: "Prix", type: Number, decimal: true, defaultValue: 0.00, min: 0},
     driverId: {label: "Chauffeur", type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
     status: {label: "Statut", type: String, defaultValue: CONST.RESERVATION_STATUS.CREATED},
     ownerId: {label: "Id Client", type: String, denyUpdate: true,
@@ -59,8 +59,8 @@ var reservationsSchema = new SimpleSchema({
         }},
     ownerName: {label: "Client", type: String, denyUpdate: true,
         autoValue: function() {
-            console.log('{SimpleSchema ownerName} username = '+Meteor.user().username);
-            console.log('{SimpleSchema ownerName} lastname = '+ this.field('lastname').value);
+            //console.log('{SimpleSchema ownerName} username = '+Meteor.user().username);
+            //console.log('{SimpleSchema ownerName} lastname = '+ this.field('lastname').value);
             if ( this.isInsert ) {
                 return Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value;
             } else if (this.isUpsert) {
@@ -81,14 +81,14 @@ var reservationsSchema = new SimpleSchema({
         }}
 });
 
-Reservations.attachSchema(reservationsSchema);
+//Reservations.attachSchema(reservationsSchema);
 
-if(Meteor.isClient) {
-    // Update allowed values on client when VehicleTypes gets loaded
-    Tracker.autorun(function () {
-        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes();
-    });
-}
+// if(Meteor.isClient) {
+//     // Update allowed values on client when VehicleTypes gets loaded
+//     Tracker.autorun(function () {
+//         Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes();
+//     });
+// }
 
 
 if(Meteor.isServer) {
@@ -98,21 +98,47 @@ if(Meteor.isServer) {
     });
 }
 
-
-// Define a namespace for Methods related to the Reservations collection
-// Allows overriding for tests by replacing the implementation (2)
-Reservations.methods = {};
-
-Reservations.methods.insert = new ValidatedMethod({
-  name: 'Reservations.methods.insert',
-  // Factor out validation so that it can be run independently (1)
-  validate: reservationsSchema.validator(),
-  // Factor out Method body so that it can be called independently (3)
-  run(newReservation) {
-    var id = Reservations.insert(newReservation);
+Meteor.methods({
+  createReservation: function(reservation) {  
+    reservation.ownerId = Meteor.userId();
+    reservation.ownerName = Meteor.user().profile.name;
+    reservation.createdAt = new Date;
+    
+    var id = Reservations.insert(reservation, {validationContext: 'createReservation'});
+    
     return id;
   }
 });
+
+
+
+// // Define a namespace for Methods related to the Reservations collection
+// // Allows overriding for tests by replacing the implementation (2)
+// Reservations.methods = {};
+
+// Reservations.methods.insert = new ValidatedMethod({
+//   name: 'Reservations.methods.insert',
+//   // Factor out validation so that it can be run independently (1)
+//   validate: Reservations.schema.validator(),
+//   // Factor out Method body so that it can be called independently (3)
+//   run(newReservation) {
+//       newReservation.price = -11;
+//     var id = Reservations.insert(newReservation, {validationContext: 'Reservations.methods.insert'});
+//     return id;
+//   }
+// });
+
+// Reservations.methods.confirm = new ValidatedMethod({
+//   name: 'Reservations.methods.confirm',
+//   // Factor out validation so that it can be run independently (1)
+//   validate: Reservations.schema.validator(),
+//   // Factor out Method body so that it can be called independently (3)
+//   run(newReservation) {
+//       newReservation.price = -11;
+//     var id = Reservations.insert(newReservation, {validationContext: 'Reservations.methods.insert'});
+//     return id;
+//   }
+// });
 
 // // This Method encodes the form validation requirements.
 // // By defining them in the Method, we do client and server-side

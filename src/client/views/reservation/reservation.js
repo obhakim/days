@@ -63,7 +63,7 @@ Template.reservation.events({
                 //         end: [],
                 //         startAt: [],
                 //         vehicleType: [],
-                //         other: []
+                //         global: []
                 //     };
 
                 //     // Go through validation errors returned from Method
@@ -72,15 +72,20 @@ Template.reservation.events({
                 //         if (errors[fieldError.name]) {
                 //             errors[fieldError.name].push(fieldError.type);
                 //         } else {
-                //             errors['other'].push(fieldError.name + ':' + fieldError.type);
+                //             errors['global'].push(fieldError.name + ':' + fieldError.type);
                 //         }
                 //     });
 
                 //     // Update ReactiveDict, errors will show up in the UI
                 //     instance.errors.set(errors);
                 // }
-                var context = Reservations.simpleSchema().namedContext();
-                var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
+                //var context = Reservations.simpleSchema().namedContext('Reservations.methods.insert');
+                //var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
+                var errors = error.details.map(function (fieldError) { 
+                    return { 
+                        message: Reservations.simpleSchema().messageForError(fieldError.type, fieldError.name, null, fieldError.value)
+                    } 
+                });
                 Session.set(SESSION.ERRORS, errors);
             }
             else {

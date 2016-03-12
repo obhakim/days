@@ -1,7 +1,7 @@
 Meteor.startup(function () {
     // common client / server startup
 
-
+    // TODO: replace with i18n
     // Translate validation messages
     SimpleSchema.messages({
         required: "[label] est obligatoire",
