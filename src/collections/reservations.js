@@ -81,34 +81,68 @@ Reservations.schema = new SimpleSchema({
         }}
 });
 
-//Reservations.attachSchema(reservationsSchema);
+Reservations.attachSchema(Reservations.schema);
 
-// if(Meteor.isClient) {
-//     // Update allowed values on client when VehicleTypes gets loaded
-//     Tracker.autorun(function () {
-//         Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes();
-//     });
-// }
-
-
-if(Meteor.isServer) {
-    // Send emails to drivers
-    Reservations.after.insert(function (userId, doc) {
-        _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function (user) { Helpers.notifyNewReservation(user.emails[0].address); });
+if(Meteor.isClient) {
+    // Update allowed values on client when VehicleTypes gets loaded
+    Tracker.autorun(function () {
+        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes();
     });
 }
+
+
+// if(Meteor.isServer) {
+//     // Send emails to drivers
+//     Reservations.after.insert(function (userId, doc) {
+//         _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function (user) { Helpers.notifyNewReservation(user.emails[0].address); });
+//     });
+// }
 
 Meteor.methods({
   createReservation: function(reservation) {  
     reservation.ownerId = Meteor.userId();
-    reservation.ownerName = Meteor.user().profile.name;
+    reservation.ownerName = Meteor.user().profile ? Meteor.user().profile.name : '';
     reservation.createdAt = new Date;
     
     var id = Reservations.insert(reservation, {validationContext: 'createReservation'});
     
+    if(Meteor.isServer) {
+      // Send notification
+      _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function (user) { Helpers.notifyNewReservation(user.emails[0].address); });
+    }
+    
     return id;
-  }
+  },
+  acceptReservation: function(reservationId, userId) {
+    if (userId !== Meteor.userId()) throw new Meteor.Error(704, 'not-authorized');  
+    var r = Reservations.find(reservationId);
+    if (!r) throw new Meteor.Error(404, 'not-found');
+    
+    var id = Reservations.update(reservationId, {
+        $set: {
+          status: CONST.RESERVATION_STATUS.CONFIRMED,
+          driverId: userId  // Preparing "assign to driver"
+        }
+      }, {
+        validationContext: 'acceptReservation'
+      });
+    
+    if(Meteor.isServer) {
+      // Send notification
+      Helpers.notifyReservationAcceptance(r.email);
+    }
+    
+    return id;
+  },
+  //confirmReservation: function(reservationId) { 
+    
+  //},
+  //cancelReservation: function(reservationId) { 
+    
+  //},
 });
+
+
 
 
 

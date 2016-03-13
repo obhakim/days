@@ -48,3 +48,4 @@ email
 check
 tmeasday:html5-history-api	# flow-router ie9 support
 mdg:geolocation
+sacha:spin

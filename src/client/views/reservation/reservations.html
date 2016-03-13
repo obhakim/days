@@ -1,5 +1,8 @@
 <template name="reservations">
     <h1>Réservations</h1>
+    {{#unless Template.subscriptionsReady}}
+      {{> spinner}}
+    {{/unless}}
     <div class="ui stackable grid">
         <form id="reservationForm" class="ui form">
         <table class="ui celled table">

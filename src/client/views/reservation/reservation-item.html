@@ -1,14 +1,15 @@
 <template name="reservationItem">
-    <tr>
-        <td>{{formatDate createdAt}}</td>
-        <td>{{start}}</td>
-        <td>{{end}}</td>
-        <td>{{formatDate startAt}}</td>
-        <td>{{price}}</td>
-        <td>{{status}}</td>
-        <td>
-            <button id="accept" type="button" class="ui button">Accepter</button>
-            <button id="cancel" type="button" class="ui button">Annuler</button>
-        </td>
-    </tr>
+  <tr>
+    <td>{{formatDate createdAt}}</td>
+    <td>{{start}}</td>
+    <td>{{end}}</td>
+    <td>{{formatDate startAt}}</td>
+    <td>{{price}}</td>
+    <td>{{status}}</td>
+    <td class="collapsing">
+      <button type="button" class="acceptReservation ui icon button primary"><i class="checkmark icon"></i></button>
+      <button type="button" class="confirmReservation ui icon button secondary"><i class="payment icon"></i></button>
+      <button type="button" class="cancelReservation ui icon button"><i class="remove icon"></i></button>
+    </td>
+  </tr>
 </template>

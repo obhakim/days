@@ -34,7 +34,16 @@ if (Meteor.isServer) {
         check(email, String);
         
         var subject = 'Nouvelle reservation';
-        var text = 'Bonjour, une nouvelle reservation est disponible.';
+        var text = 'Bonjour,/r/nune nouvelle reservation est disponible.';
+        
+        Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+    }
+    
+    Helpers.notifyReservationConfirmation = function(email){
+        check(email, String);
+        
+        var subject = 'Reservation confirmée';
+        var text = 'Bonjour,/r/nVotre reservation est confirmée./r/n/r/nDays';
         
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }
