@@ -3,8 +3,8 @@ if (typeof Helpers === 'undefined' || Helpers === null) {
 }
 
 Helpers.isDriver = function () {
-    //return Roles.userIsInRole(Meteor.user(), ['driver']);
-    return Roles.userIsInRole(this.userId, ['driver']);
+    //return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER]);
+    return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);
 }
 
 if (Meteor.isServer) {
@@ -39,11 +39,29 @@ if (Meteor.isServer) {
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }
     
-    Helpers.notifyReservationConfirmation = function(email){
+    Helpers.notifyReservationAcceptance = function(email){
         check(email, String);
         
         var subject = 'Reservation confirmée';
         var text = 'Bonjour,/r/nVotre reservation est confirmée./r/n/r/nDays';
+        
+        Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+    }
+    
+    Helpers.notifyReservationConfirmation = function(email){
+        check(email, String);
+        
+        var subject = 'Reservation effectuée';
+        var text = 'Bonjour,/r/nVotre reservation est effectuée./r/n/r/nDays';
+        
+        Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+    }
+    
+    Helpers.notifyReservationCancellation = function(email){
+        check(email, String);
+        
+        var subject = 'Reservation annulée';
+        var text = 'Bonjour,/r/nVotre reservation est annulée./r/n/r/nDays';
         
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }

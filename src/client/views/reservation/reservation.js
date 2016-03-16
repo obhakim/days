@@ -22,7 +22,7 @@ Template.reservation.events({
     event.preventDefault();
 
     // Hide errors
-    //Session.set(SESSION.ERRORS, null);
+    //Session.set(SESSION.VALIDATION_ERRORS, null);
 
     // Loading
     $('ui form').addClass('loading');
@@ -42,7 +42,7 @@ Template.reservation.events({
     //     if (error) {
     //         var context = Reservations.simpleSchema().namedContext('form');
     //         var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
-    //         Session.set(SESSION.ERRORS, errors);
+    //         Session.set(SESSION.VALIDATION_ERRORS, errors);
     //     }
     //     else {
     //         FlowRouter.go('/s/reservations');
@@ -86,7 +86,7 @@ Template.reservation.events({
     //                 message: Reservations.simpleSchema().messageForError(fieldError.type, fieldError.name, null, fieldError.value)
     //             } 
     //         });
-    //         Session.set(SESSION.ERRORS, errors);
+    //         Session.set(SESSION.VALIDATION_ERRORS, errors);
     //     }
     //     else {
     //         FlowRouter.go('/s/reservations');
@@ -116,7 +116,7 @@ Template.reservation.events({
       if (error) {
         var context = Reservations.simpleSchema().namedContext('createReservation');
         var errors = context.invalidKeys().map(function(data) { return { message: context.keyErrorMessage(data.name) } });
-        Session.set(SESSION.ERRORS, errors);
+        Session.set(SESSION.VALIDATION_ERRORS, errors);
       }
       else {
         FlowRouter.go('/s/reservations');
@@ -126,10 +126,6 @@ Template.reservation.events({
     $('ui form').removeClass('loading');
 
     return false;
-
-    // Set the checked property to the opposite of its current value
-    //Meteor.call("createReservation", this._id, data);
-    //Meteor.call("createReservation", data);
   }
 });
 

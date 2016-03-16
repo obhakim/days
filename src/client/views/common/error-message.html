@@ -1,0 +1,11 @@
+<template name="errormessage">
+  {{#if meteorerror}}
+  <div class="ui visible error message">
+    {{!--<i class="close icon" onclick="this.parentElement.style.display = 'none';"></i>--}}
+    <div class="header">
+      {{meteorerror.error}}
+    </div>
+    <p>{{meteorerror.reason}}</p>
+  </div>
+  {{/if}}
+</template>

@@ -9,7 +9,7 @@
 //     },
 //     // update: function (userId, doc, fieldNames, modifier) {
 //     //     // can only change your own documents
-//     //     return (reservation.ownerId === userId || Roles.userIsInRole(Meteor.user(), ['driver', 'admin']));
+//     //     return (reservation.ownerId === userId || Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER, CONST.USER_ROLES.ADMIN]));
 //     // },
 // //   remove: function (userId, doc) {
 // //     // can only remove your own documents
@@ -46,7 +46,7 @@ Reservations.schema = new SimpleSchema({
     vehicleType: {label: "Type de véhicule", type: String, allowedValues: getVehicleTypes()},
     price: {label: "Prix", type: Number, decimal: true, defaultValue: 0.00, min: 0},
     driverId: {label: "Chauffeur", type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-    status: {label: "Statut", type: String, defaultValue: CONST.RESERVATION_STATUS.CREATED},
+    status: {label: "Statut", type: Number, defaultValue: CONST.RESERVATION_STATUSES.CREATED},
     ownerId: {label: "Id Client", type: String, denyUpdate: true,
         autoValue: function() {
             if ( this.isInsert ) {
@@ -114,13 +114,18 @@ Meteor.methods({
     return id;
   },
   acceptReservation: function(reservationId, userId) {
-    if (userId !== Meteor.userId()) throw new Meteor.Error(704, 'not-authorized');  
-    var r = Reservations.find(reservationId);
-    if (!r) throw new Meteor.Error(404, 'not-found');
+    // Logged user    
+    if (userId !== Meteor.userId()) throw new Meteor.Error('not-authorized', 'Vous n\'etes pas authorizes d\'effectuer cette action');
+    // Driver or Admin only  
+    // Get reservation
+    var r = Reservations.findOne(reservationId);
+    if (!r) throw new Meteor.Error('not-found', 'Le document n\'a pas été trouvé');
+    // Only created may be accepted
+    if (r.status > CONST.RESERVATION_STATUSES.CREATED) throw new Meteor.Error('not-applicable', 'N\'est pas applicable');
     
     var id = Reservations.update(reservationId, {
         $set: {
-          status: CONST.RESERVATION_STATUS.CONFIRMED,
+          status: CONST.RESERVATION_STATUSES.ACCEPTED,
           driverId: userId  // Preparing "assign to driver"
         }
       }, {
@@ -129,17 +134,74 @@ Meteor.methods({
     
     if(Meteor.isServer) {
       // Send notification
-      Helpers.notifyReservationAcceptance(r.email);
+      try {
+        Helpers.notifyReservationAcceptance(r.email);
+      } catch (error) {
+        //throw error;
+        console.log(error);
+      }
     }
     
     return id;
   },
-  //confirmReservation: function(reservationId) { 
+  confirmReservation: function(reservationId, userId) {
+    // Logged user    
+    if (userId !== Meteor.userId()) throw new Meteor.Error('not-authorized', 'Vous n\'etes pas authorizes d\'effectuer cette action');
+    // Driver or Admin only  
+    // Get reservation
+    var r = Reservations.findOne(reservationId);
+    if (!r) throw new Meteor.Error('not-found', 'Le document n\'a pas été trouvé');
+    // Only accepted may be confirmed
+    if (r.status > CONST.RESERVATION_STATUSES.ACCEPTED) throw new Meteor.Error('not-applicable', 'N\'est pas applicable');
     
-  //},
-  //cancelReservation: function(reservationId) { 
+    var id = Reservations.update(reservationId, {
+        $set: {
+          status: CONST.RESERVATION_STATUSES.CONFIRMED
+        }
+      }, {
+        validationContext: 'confirmReservation'
+      });
     
-  //},
+    if(Meteor.isServer) {
+      // Send notification
+      try {
+        Helpers.notifyReservationConfirmation(r.email);
+      } catch (error) {
+        //throw error;
+        console.log(error);
+      }
+    }
+    
+    return id;
+  },
+  cancelReservation: function(reservationId, userId) {
+    // Logged user    
+    if (userId !== Meteor.userId()) throw new Meteor.Error('not-authorized', 'Vous n\'etes pas authorizes d\'effectuer cette action');
+    // Driver or Admin only  
+    // Get reservation
+    var r = Reservations.findOne(reservationId);
+    if (!r) throw new Meteor.Error('not-found', 'Le document n\'a pas été trouvé');
+
+    var id = Reservations.update(reservationId, {
+        $set: {
+          status: CONST.RESERVATION_STATUSES.CANCELLED
+        }
+      }, {
+        validationContext: 'cancelReservation'
+      });
+    
+    if(Meteor.isServer) {
+      // Send notification
+      try {
+        Helpers.notifyReservationCancellation(r.email);
+      } catch (error) {
+        //throw error;
+        console.log(error);
+      }
+    }
+    
+    return id;
+  },
 });
 
 

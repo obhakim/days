@@ -4,12 +4,18 @@ CONST = {
   DEFAULT_LOCALE: 'fr',
   DEFAULT_DATETIME_FORMAT: 'DD/MM/YYYY HH:mm',
   
-  RESERVATION_STATUS: {
-      CREATED: 'Créé',
-      CONFIRMED: 'Confirmé',
-      CLOSED: 'Clôturé',
-      CANCELLED: 'Annulé'
-  }  
+  RESERVATION_STATUSES: {
+      CANCELLED: -10,
+      CREATED: 0,
+      ACCEPTED: 10,
+      CONFIRMED: 20,   
+  },
+  
+  USER_ROLES: {
+      CLIENT: 'client',
+      DRIVER: 'driver',
+      ADMIN:  'admin'   
+  },
 };
 
 if (Meteor.isServer) {

@@ -1,28 +1,24 @@
 <template name="reservations">
-    <h1>Réservations</h1>
-    {{#unless Template.subscriptionsReady}}
-      {{> spinner}}
-    {{/unless}}
-    <div class="ui stackable grid">
-        <form id="reservationForm" class="ui form">
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th>Réservé le</th>
-                    <th>Départ</th>
-                    <th>Destination</th>
-                    <th>Le</th>
-                    <th>Prix</th>
-                    <th>Statut</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each reservations}}
-                    {{> reservationItem}}
-                {{/each}}
-            </tbody>
-            <!--<tfoot>
+  <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
+  <div class="ui stackable grid">
+    <form id="reservationForm" class="ui form">
+      {{> errormessage}}
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Réservé le</th>
+            <th>Départ</th>
+            <th>Destination</th>
+            <th>Le</th>
+            <th>Prix</th>
+            <th>Statut</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each reservations}} {{> reservationItem}} {{/each}}
+        </tbody>
+        {{!--<tfoot>
                 <tr>
                     <th colspan="3">
                         <div class="ui right floated pagination menu">
@@ -39,8 +35,8 @@
                         </div>
                     </th>
                 </tr>
-            </tfoot>-->
-        </table>
-        </form>
-    </div>
+            </tfoot>--}}
+      </table>
+    </form>
+  </div>
 </template>

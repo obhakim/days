@@ -1,13 +1,15 @@
 <template name="reservation">
     <h1>Réservation</h1>
+    {{#unless Template.subscriptionsReady}}
+      {{> spinner}}
+    {{/unless}}
     <div class="ui stackable grid">
         <div id="order-container" class="six wide column">
-            {{> errorslist}}
-            {{!--> errorslist field="other"--}} 
-            {{!--#each error in errors "other"} }
-            <div class="form-error">{ {error} }</div>
-            { {/each--}}
             <form id="reservationForm" class="ui form">
+                {{> validationerrors}} 
+                {{!--#each error in errors "other"} }
+                <div class="form-error">{ {error} }</div>
+                { {/each--}}
                 <div class="required field">
                     <input id="lastname" type="text" placeholder="Nom" required />
                 </div>
