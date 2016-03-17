@@ -32,6 +32,7 @@
 #aldeed:template-extension
 #useraccounts:unstyled
 #useraccounts:flow-routing
+useraccounts:semantic-ui
 
 #service-configuration				# API keys for OAuth
 

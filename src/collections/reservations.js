@@ -3,7 +3,7 @@ Reservations.attachSchema(Schema.Reservation);
 if(Meteor.isClient) {
     // Update allowed values on client when VehicleTypes gets loaded
     Tracker.autorun(function () {
-        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = getVehicleTypes();
+        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes();
     });
 }
 

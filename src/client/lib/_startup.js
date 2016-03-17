@@ -3,7 +3,7 @@ Meteor.startup(function () {
     // on in order to have the most accurate location by the time the user shares
     //Geolocation.currentLocation();
   
-    Accounts.ui.config({
-        passwordSignupFields: 'USERNAME_AND_EMAIL'
-    });
+    // Accounts.ui.config({
+    //     passwordSignupFields: 'USERNAME_AND_EMAIL'
+    // });
 });

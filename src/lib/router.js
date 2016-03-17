@@ -4,12 +4,13 @@ var publicRoutes = FlowRouter.group({
 var securedRoutes = FlowRouter.group({
     prefix: '/s',
     name: 'secured',
-    triggersEnter: [function (context, redirect) {
-        //if(!Roles.userIsInRole(Meteor.user(), ['driver'])) {
-        if(!(Meteor.loggingIn() || Meteor.user())) {            
-            FlowRouter.go(FlowRouter.path('/notAuthorized'))
-        }
-    }]
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    // triggersEnter: [function (context, redirect) {
+    //     //if(!Roles.userIsInRole(Meteor.user(), ['driver'])) {
+    //     if(!(Meteor.loggingIn() || Meteor.user())) {            
+    //         FlowRouter.go(FlowRouter.path('/notAuthorized'))
+    //     }
+    // }]
 });
 
 publicRoutes.route('/', {
@@ -80,6 +81,14 @@ FlowRouter.notFound = {
         BlazeLayout.render('layout', { content: 'pageNotFound' });
     }
 };
+
+//Routes
+AccountsTemplates.configureRoute('changePwd');
+AccountsTemplates.configureRoute('forgotPwd');
+AccountsTemplates.configureRoute('resetPwd');
+AccountsTemplates.configureRoute('signIn');
+AccountsTemplates.configureRoute('signUp');
+AccountsTemplates.configureRoute('verifyEmail');
 
 // FlowRouter.route('/post/:slug', {
 //   action: function() {

@@ -25,10 +25,11 @@
                         <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
                     </div>
                 </div>
-                <div class="right menu item">
+                <div class="right menu">
                     {{!--> spinner--}}
                     {{!--> auth --}}
-                    {{> loginButtons}}
+                    {{!--> loginButtons--}}
+                    {{> atNavButton}}
                 </div>
             </div>
         </div>

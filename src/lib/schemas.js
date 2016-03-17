@@ -1,5 +1,11 @@
 Schema = {};
 
+Schema.getVehicleTypes = function getVehicleTypes() {
+    return VehicleTypes.find().fetch().map(function (doc) {
+        return doc.name;
+    });
+}
+
 Schema.VehicleType = new SimpleSchema({
     name: { label: "Type de véhicule", type: String },
     rate: { label: "Tarif", type: Number, decimal: true }
@@ -17,7 +23,7 @@ Schema.VehicleType = new SimpleSchema({
 
 Schema.Vehicle = new SimpleSchema({
     license: { type: String, allowedValues: ['M', 'Mme', 'Mlle'] }, //,optional: true
-    vehicleType: {label: "Type de véhicule", type: String, allowedValues: getVehicleTypes()},
+    vehicleType: {label: "Type de véhicule", type: String, allowedValues: Schema.getVehicleTypes()},
     color: { type: String },
     "photos.$": { type: String }
 });
@@ -139,7 +145,7 @@ Schema.Reservation = new SimpleSchema({
     end: {label: "Destination", type: String},
     startAt: {label: "Le", type: Date},
     //vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
-    vehicleType: {label: "Type de véhicule", type: String, allowedValues: getVehicleTypes()},
+    vehicleType: {label: "Type de véhicule", type: String, allowedValues: Schema.getVehicleTypes()},
     price: {label: "Prix", type: Number, decimal: true, defaultValue: 0.00, min: 0},
     driverId: {label: "Chauffeur", type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
     status: {label: "Statut", type: Number, defaultValue: CONST.RESERVATION_STATUSES.CREATED},
@@ -176,9 +182,3 @@ Schema.Reservation = new SimpleSchema({
             } 
         }}
 });
-
-function getVehicleTypes() {
-    return VehicleTypes.find().fetch().map(function (doc) {
-        return doc.name;
-    });
-}

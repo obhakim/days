@@ -6,6 +6,7 @@ aldeed:collection2-core@1.0.0
 aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
+aldeed:template-extension@4.0.0
 arillo:flow-router-helpers@0.5.1
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
@@ -84,6 +85,7 @@ semantic:ui-css@2.1.2
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
+softwarerero:accounts-t9n@1.1.7
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
@@ -95,7 +97,9 @@ tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
-w-accounts-ui@1.1.8
+useraccounts:core@1.13.1
+useraccounts:flow-routing@1.13.1
+useraccounts:semantic-ui@1.13.1
 webapp@1.2.3
 webapp-hashing@1.0.5
 zimme:active-route@2.3.2

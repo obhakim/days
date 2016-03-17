@@ -39,7 +39,6 @@ momentjs:moment				# Date format helpers for datetimespicker
 
 reactive-var 				# Store var in db
 reactive-dict				# Store dictionary in db
-w-accounts-ui				# Customized accounts UI with french translation
 zimme:active-route			# adds "active" classe for the active route item
 alanning:roles
 force-ssl
@@ -49,3 +48,6 @@ check
 tmeasday:html5-history-api	# flow-router ie9 support
 mdg:geolocation
 sacha:spin
+useraccounts:semantic-ui
+useraccounts:flow-routing
+aldeed:template-extension
