@@ -1,7 +1,4 @@
-VehicleTypes.attachSchema(new SimpleSchema({
-    name: { label: "Type de véhicule", type: String },
-    rate: { label: "Tarif", type: Number, decimal: true }
-}));
+VehicleTypes.attachSchema(Schema.VehicleType);
 
 // PrePopulate data
 //if (Meteor.isServer && VehicleTypes.find().count() === 0) {
