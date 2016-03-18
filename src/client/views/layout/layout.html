@@ -1,64 +1,59 @@
 <template name="layout">
+  <div class="pusher pushable">
+    <div class="ui large fixed inverted menu">
+      <div class="ui container">
+        <a class="toc item"><i class="sidebar icon"></i></a>
+        <a href="{{pathFor 'home'}}" class="header item {{isActiveRoute 'home'}}">Days</a>
+        <a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a> {{#if currentUser}}
+        <a class="item hideable {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>        {{/if}}
+        <div class="ui item hideable simple dropdown">
+          A propos de nous <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item {{isActiveRoute 'drivers'}}" href="{{pathFor 'drivers'}}">Nos chauffeurs</a>
+            <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
+            <a class="item {{isActiveRoute 'services'}}" href="{{pathFor 'services'}}">Notre service</a>
+            <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
+          </div>
+        </div>
+        <div class="right menu">
+          {{!--> spinner--}} {{!--> auth --}} {{!--> loginButtons--}} {{> atNavButton}}
+        </div>
+      </div>
+    </div>
 
-    <!-- Sidebar Menu -->
     <div class="ui vertical inverted sidebar menu">
-        {{> sidemenu }} {{!--> auth --}}
+      <!-- Sidebar Menu -->
+      {{> sidemenu }} {{!--> auth --}}
     </div>
 
-    <!-- Page Contents -->
     <div class="pusher">
+      <!-- Page Contents -->
+      <div class="ui main container">
+        {{> Template.dynamic template=content}}
+      </div>
 
-        <div class="ui large fixed inverted menu">
-            <div class="ui container">
-                <a class="toc item"><i class="sidebar icon"></i></a>
-                <a href="{{pathFor 'home'}}" class="header item {{isActiveRoute 'home'}}">Days</a>
-                <a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>
-                {{#if currentUser}}
-                <a class="item hideable {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>
-                {{/if}}
-                <div class="ui item hideable simple dropdown">
-                    A propos de nous <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <a class="item {{isActiveRoute 'drivers'}}" href="{{pathFor 'drivers'}}">Nos chauffeurs</a>
-                        <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
-                        <a class="item {{isActiveRoute 'services'}}" href="{{pathFor 'services'}}">Notre service</a>
-                        <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
-                    </div>
-                </div>
-                <div class="right menu">
-                    {{!--> spinner--}}
-                    {{!--> auth --}}
-                    {{!--> loginButtons--}}
-                    {{> atNavButton}}
-                </div>
+      <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+          <div class="ui inverted divided equal height stackable grid">
+            <div class="eight wide column">
+              <h4 class="ui inverted header">Qui sommes nous</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Nous contacter</a>
+              </div>
             </div>
-        </div>
-
-        <div class="ui main container">
-            {{> Template.dynamic template=content}}
-        </div>
-
-        <div class="ui inverted vertical footer segment">
-            <div class="ui container">
-                <div class="ui inverted divided equal height stackable grid">
-                    <div class="eight wide column">
-                        <h4 class="ui inverted header">Qui sommes nous</h4>
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">Nous contacter</a>
-                        </div>
-                    </div>
-                    <div class="eight wide column">
-                        <h4 class="ui inverted header">Restez en contact</h4>
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">Facebook</a>
-                            <a href="#" class="item">Twitter</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="eight wide column">
+              <h4 class="ui inverted header">Restez en contact</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Facebook</a>
+                <a href="#" class="item">Twitter</a>
+              </div>
             </div>
-            <div class="ui inverted center aligned segment">
-                <span class="ui inverted">Drivers At Your Service&copy; 2016&nbsp;&nbsp;&nbsp;{{version}}</span>
-            </div>
+          </div>
         </div>
+        <div class="ui inverted center aligned segment">
+          <span class="ui inverted">Drivers At Your Service&copy; 2016&nbsp;&nbsp;&nbsp;{{version}}</span>
+        </div>
+      </div>
     </div>
+  </div>
 </template>

@@ -1,4 +1,5 @@
 <template name="sidemenu">
+  <div class="sidemenu-wrapper">
     {{!--<a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>--}}
     {{#if currentUser}}
         <a class="item {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>
@@ -7,4 +8,5 @@
     <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
     <a class="item {{isActiveRoute 'services'}}" href="{{pathFor 'services'}}">Notre service</a>
     <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
+   </div>
 </template>
