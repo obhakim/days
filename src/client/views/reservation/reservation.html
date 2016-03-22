@@ -1,90 +1,93 @@
 <template name="reservation">
-    <h1>Réservation</h1>
-    {{#unless Template.subscriptionsReady}}
-      {{> spinner}}
-    {{/unless}}
-    <div class="ui stackable grid">
-        <div id="order-container" class="six wide column">
-            <form id="reservationForm" class="ui form">
-                {{> validationerrors}} 
-                {{!--#each error in errors "other"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
-                <div class="required field">
-                    <input id="lastname" type="text" placeholder="Nom" required />
-                </div>
-                {{!--#each error in errors "lastname"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+  <h1>Réservation</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
+  <div class="ui stackable grid">
+    <div id="order-container" class="six wide column">
+      <form id="reservationForm" class="ui form" novalidate>
+        {{> validationerrors}} {{!--#each error in errors "other"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
+        <div class="required field">
+          <label>Nom</label>
+          <input id="lastname" type="text" placeholder="Nom" required />
+        </div>
+        {{!--#each error in errors "lastname"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="field">
-                    <input id="firstname" type="text" placeholder="Prenom" />
-                </div>
-                {{!--#each error in errors "firstname"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="field">
+          <label>Prenom</label>
+          <input id="firstname" type="text" placeholder="Prenom" />
+        </div>
+        {{!--#each error in errors "firstname"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="required field">
-                    <input id="phone" type="text" placeholder="Téléphone" required />
-                </div>
-                {{!--#each error in errors "phone"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="required field">
+          <label>Téléphone</label>
+          <input id="phone" type="text" placeholder="Téléphone" required />
+        </div>
+        {{!--#each error in errors "phone"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="required field">
-                    <input id="email" type="text" placeholder="Email" required />
-                </div>
-                {{!--#each error in errors "email"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="required field">
+          <label>Email</label>
+          <input id="email" type="text" placeholder="Email" required />
+        </div>
+        {{!--#each error in errors "email"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="required field">
-                    <input id="start" type="text" placeholder="Depart" required />
-                </div>
-                {{!--#each error in errors "start"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="required field">
+          <label>Depart</label>
+          <input id="start" type="text" placeholder="Depart" required />
+        </div>
+        {{!--#each error in errors "start"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="required field">
-                    <input id="end" type="text" placeholder="Destination" required />
-                </div>
-                {{!--#each error in errors "end"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="required field">
+          <label>Destination</label>
+          <input id="end" type="text" placeholder="Destination" required />
+        </div>
+        {{!--#each error in errors "end"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="required inline field">
-                    <label>Le</label>
-                    <input id="startat" class="ui dropdown datetimepicker" type="text" required />
-                </div>
-                {{!--#each error in errors "startat"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="required inline field">
+          <label>Le</label>
+          <input id="startat" class="ui dropdown datetimepicker" type="text" required />
+        </div>
+        {{!--#each error in errors "startat"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="required field">
-                    <select id="vehicletype">
-                        <option>Type de véhicule</option>
-                        {{#each vehicletypeslist}}
-                        <option>{{name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                {{!--#each error in errors "vehicletype"} }
-                <div class="form-error">{ {error} }</div>
-                { {/each--}}
+        <div class="required field">
+          <label>Type de véhicule</label>
+          <select id="vehicletype">
+            <option>Type de véhicule</option>
+            {{#each vehicletypeslist}}
+            <option>{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        {{!--#each error in errors "vehicletype"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 
-                <div class="field">
-                    <label>Votre voyage <span id="totaldistance">0</span> km, <span id="price">0.00</span> €</label>
-                </div>
-
-                <div>
-                    <button type="submit" class="ui button">Réserver</button>
-                </div>
-            </form>
+        <div class="field">
+          <label>Votre voyage <span id="totaldistance">0</span> km, <span id="price">0.00</span> €</label>
         </div>
 
-        <div class="ten wide column">
-            <div id="map"></div>
+        <div>
+          <button type="submit" class="ui button">Réserver</button>
         </div>
-
+      </form>
     </div>
+
+    <div class="ten wide column">
+      <div id="map"></div>
+    </div>
+
+  </div>
 </template>

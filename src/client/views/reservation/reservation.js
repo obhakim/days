@@ -209,3 +209,9 @@ function computeTotalDistance(result) {
   total = total / 1000;
   return total;
 }
+
+function computeTotalPrice(result) {
+  var total = computeTotalDistance(result);
+  var price = total * 2.2;
+  return price;
+}

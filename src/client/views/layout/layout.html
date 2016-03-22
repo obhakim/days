@@ -1,29 +1,30 @@
 <template name="layout">
-  <div class="pusher pushable">
-    <div class="ui large fixed inverted menu">
-      <div class="ui container">
-        <a class="toc item"><i class="sidebar icon"></i></a>
-        <a href="{{pathFor 'home'}}" class="header item {{isActiveRoute 'home'}}">Days</a>
-        <a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a> {{#if currentUser}}
-        <a class="item hideable {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>        {{/if}}
-        <div class="ui item hideable simple dropdown">
-          A propos de nous <i class="dropdown icon"></i>
-          <div class="menu">
-            <a class="item {{isActiveRoute 'drivers'}}" href="{{pathFor 'drivers'}}">Nos chauffeurs</a>
-            <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
-            <a class="item {{isActiveRoute 'services'}}" href="{{pathFor 'services'}}">Notre service</a>
-            <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
-          </div>
-        </div>
-        <div class="right menu">
-          {{!--> spinner--}} {{!--> auth --}} {{!--> loginButtons--}} {{> atNavButton}}
+  <div class="ui large top fixed inverted menu">
+    <div class="ui container">
+      <a class="toc item"><i class="sidebar icon"></i></a>
+      <a href="{{pathFor 'home'}}" class="header item {{isActiveRoute 'home'}}">Days</a>
+      <a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a> {{#if currentUser}}
+      <a class="item hideable {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a> {{/if}}
+      <div class="ui item hideable simple dropdown">
+        A propos de nous <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item {{isActiveRoute 'drivers'}}" href="{{pathFor 'drivers'}}">Nos chauffeurs</a>
+          <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
+          <a class="item {{isActiveRoute 'services'}}" href="{{pathFor 'services'}}">Notre service</a>
+          <a class="item {{isActiveRoute 'vehicles'}}" href="{{pathFor 'vehicles'}}">Nos véhicules</a>
         </div>
       </div>
+      <div class="right menu">
+        {{!--> spinner--}} {{> atNavButton}}
+      </div>
     </div>
-
-    <div class="ui vertical inverted sidebar menu">
+  </div>
+  
+  <div class="content-wrapper">
+  <div id="body">
+    <div class="ui inverted vertical left sidebar menu">
       <!-- Sidebar Menu -->
-      {{> sidemenu }} {{!--> auth --}}
+      {{> sidemenu }}
     </div>
 
     <div class="pusher">
@@ -55,5 +56,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>

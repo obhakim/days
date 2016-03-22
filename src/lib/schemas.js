@@ -22,18 +22,25 @@ Schema.VehicleType = new SimpleSchema({
 // });
 
 Schema.Vehicle = new SimpleSchema({
-    license: { type: String, allowedValues: ['M', 'Mme', 'Mlle'] }, //,optional: true
+    license: { type: String },
     vehicleType: {label: "Type de véhicule", type: String, allowedValues: Schema.getVehicleTypes()},
     color: { type: String },
     "photos.$": { type: String }
 });
 
+Schema.CreditCard = new SimpleSchema({
+    num: { type: String },
+    validThru: { type: String },
+    cvv: { type: String },
+    name: { type: String }
+});
+
 Schema.Profile = new SimpleSchema({
-    gender: {
-        type: String,
-        allowedValues: ['M', 'Mme', 'Mlle']
-        //,optional: true
-    },
+    // gender: {
+    //     type: String,
+    //     allowedValues: ['M', 'Mme', 'Mlle']
+    //     //,optional: true
+    // },
     firstName: {
         type: String
         //,optional: true
@@ -54,6 +61,10 @@ Schema.Profile = new SimpleSchema({
         type: Schema.Vehicle
         ,optional: true
     },
+    creditCard: {
+      type: Schema.CreditCard
+      ,optional: true
+    }
     // website: {
     //     type: String,
     //     regEx: SimpleSchema.RegEx.Url,
@@ -66,13 +77,13 @@ Schema.Profile = new SimpleSchema({
 });
 
 Schema.User = new SimpleSchema({
-    username: {
-        type: String,
-        // For accounts-password, either emails or username is required, but not both. It is OK to make this
-        // optional here because the accounts-password package does its own validation.
-        // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
-        optional: true
-    },
+    // username: {
+    //     type: String,
+    //     // For accounts-password, either emails or username is required, but not both. It is OK to make this
+    //     // optional here because the accounts-password package does its own validation.
+    //     // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
+    //     optional: true
+    // },
     emails: {
         type: Array,
         // For accounts-password, either emails or username is required, but not both. It is OK to make this
