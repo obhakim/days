@@ -1,10 +1,10 @@
 Reservations.attachSchema(Schema.Reservation);
 
-if(Meteor.isClient) {
-    // Update allowed values on client when VehicleTypes gets loaded
-    Tracker.autorun(function () {
-        Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes();
-    });
+if (Meteor.isClient) {
+  // Update allowed values on client when VehicleTypes gets loaded
+  Tracker.autorun(function() {
+    Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes();
+  });
 }
 
 
@@ -16,18 +16,24 @@ if(Meteor.isClient) {
 // }
 
 Meteor.methods({
-  createReservation: function(reservation) {  
+  createReservation: function(reservation) {
     reservation.ownerId = Meteor.userId();
     reservation.ownerName = Meteor.user().profile ? Meteor.user().profile.name : '';
     reservation.createdAt = new Date;
-    
-    var id = Reservations.insert(reservation, {validationContext: 'createReservation'});
-    
-    if(Meteor.isServer) {
+
+    var id = Reservations.insert(reservation, { validationContext: 'createReservation' });
+
+    if (Meteor.isServer) {
+      this.unblock();
       // Send notification
-      _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function (user) { Helpers.notifyNewReservation(user.emails[0].address); });
+      try {
+        _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function(user) { Helpers.notifyNewReservation(user.emails[0].address); });
+      } catch (error) {
+        //throw error;
+        console.log(error);
+      }
     }
-    
+
     return id;
   },
   acceptReservation: function(reservationId, userId) {
@@ -39,17 +45,18 @@ Meteor.methods({
     if (!r) throw new Meteor.Error('not-found', 'Le document n\'a pas été trouvé');
     // Only created may be accepted
     if (r.status > CONST.RESERVATION_STATUSES.CREATED) throw new Meteor.Error('not-applicable', 'N\'est pas applicable');
-    
+
     var id = Reservations.update(reservationId, {
-        $set: {
-          status: CONST.RESERVATION_STATUSES.ACCEPTED,
-          driverId: userId  // Preparing "assign to driver"
-        }
-      }, {
+      $set: {
+        status: CONST.RESERVATION_STATUSES.ACCEPTED,
+        driverId: userId  // Preparing "assign to driver"
+      }
+    }, {
         validationContext: 'acceptReservation'
       });
-    
-    if(Meteor.isServer) {
+
+    if (Meteor.isServer) {
+      this.unblock();
       // Send notification
       try {
         Helpers.notifyReservationAcceptance(r.email);
@@ -58,7 +65,7 @@ Meteor.methods({
         console.log(error);
       }
     }
-    
+
     return id;
   },
   confirmReservation: function(reservationId, userId) {
@@ -70,16 +77,17 @@ Meteor.methods({
     if (!r) throw new Meteor.Error('not-found', 'Le document n\'a pas été trouvé');
     // Only accepted may be confirmed
     if (r.status > CONST.RESERVATION_STATUSES.ACCEPTED) throw new Meteor.Error('not-applicable', 'N\'est pas applicable');
-    
+
     var id = Reservations.update(reservationId, {
-        $set: {
-          status: CONST.RESERVATION_STATUSES.CONFIRMED
-        }
-      }, {
+      $set: {
+        status: CONST.RESERVATION_STATUSES.CONFIRMED
+      }
+    }, {
         validationContext: 'confirmReservation'
       });
-    
-    if(Meteor.isServer) {
+
+    if (Meteor.isServer) {
+      this.unblock();
       // Send notification
       try {
         Helpers.notifyReservationConfirmation(r.email);
@@ -88,7 +96,7 @@ Meteor.methods({
         console.log(error);
       }
     }
-    
+
     return id;
   },
   cancelReservation: function(reservationId, userId) {
@@ -100,14 +108,15 @@ Meteor.methods({
     if (!r) throw new Meteor.Error('not-found', 'Le document n\'a pas été trouvé');
 
     var id = Reservations.update(reservationId, {
-        $set: {
-          status: CONST.RESERVATION_STATUSES.CANCELLED
-        }
-      }, {
+      $set: {
+        status: CONST.RESERVATION_STATUSES.CANCELLED
+      }
+    }, {
         validationContext: 'cancelReservation'
       });
-    
-    if(Meteor.isServer) {
+
+    if (Meteor.isServer) {
+      this.unblock();
       // Send notification
       try {
         Helpers.notifyReservationCancellation(r.email);
@@ -116,7 +125,7 @@ Meteor.methods({
         console.log(error);
       }
     }
-    
+
     return id;
   },
 });

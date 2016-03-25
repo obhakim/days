@@ -1,28 +1,57 @@
-Meteor.subscribe("vehicletypes");
-Meteor.subscribe("reservations");
+// Meteor.subscribe("vehicletypes");
+// Meteor.subscribe("reservations");
 //var instance;
+const currentPositionText = 'Position actuelle';
 
-// Template.reservation.onCreated(function() {
-//     instance = Template.instance();
-//     instance.errors = new ReactiveDict();
-// });
+Template.reservation.onCreated(function() {
+  // instance = Template.instance();
+  // instance.errors = new ReactiveDict();
+  var self = this;
+
+  self.autorun(function() {
+    self.subscribe('vehicletypes');
+    self.subscribe('reservations');
+    Session.set(SESSION.VALIDATION_ERRORS, null);
+    self.myPosition = Geolocation.latLng();
+  });
+});
 
 Template.reservation.helpers({
+  // currentPosition: function(){
+  //   return (instance.$('#start').val);
+  // },
   vehicletypeslist: function() {
     return VehicleTypes.find().fetch();
   },
+  // errors: function () {
+  //       return Session.get(SESSION.VALIDATION_ERRORS);
+  //   }
   // errors: function(fieldName) {
   //     return instance.errors.get(fieldName);
   // }
 });
 
 Template.reservation.events({
+  "click #startMyPosition": function(event) {
+    event.preventDefault();
+    const instance = Template.instance();
+    if (instance.myPosition)
+      instance.$('#start').val(currentPositionText);
+  },
+  
+  "click #endMyPosition": function(event) {
+    event.preventDefault();
+    const instance = Template.instance();
+    if (instance.myPosition)
+      instance.$('#end').val(currentPositionText);
+  },
+
   "submit #reservationForm": function(event) {
     // Prevent default browser form submit
     event.preventDefault();
 
     // Hide errors
-    //Session.set(SESSION.VALIDATION_ERRORS, null);
+    Session.set(SESSION.VALIDATION_ERRORS, null);
 
     // Loading
     $('ui form').addClass('loading');
@@ -37,17 +66,6 @@ Template.reservation.events({
       startAt: moment(event.target.startat.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
       vehicleType: event.target.vehicletype.value,
     };
-
-    // Reservations.insert(data, { validationContext: 'form' }, function (error, result) {
-    //     if (error) {
-    //         var context = Reservations.simpleSchema().namedContext('form');
-    //         var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } });
-    //         Session.set(SESSION.VALIDATION_ERRORS, errors);
-    //     }
-    //     else {
-    //         FlowRouter.go('/s/reservations');
-    //     }
-    // });
 
     // Call the Method
     // Reservations.methods.insert.call(data, function(error, result) {
@@ -92,25 +110,6 @@ Template.reservation.events({
     //         FlowRouter.go('/s/reservations');
     //     }
     // });
-    //         Todos.methods.updateText.call({
-    //         todoId: '12345',
-    //         newText: 'This is a todo item.'
-    //         }, (err, res) => {
-    //         if (err) {
-    //             alert(err);
-    //         } else {
-    //             // success!
-    //         }
-    //         });
-    // 
-    //         // Call the validation only
-    //         Todos.methods.updateText.validate({ wrong: 'args'});
-    // 
-    //         // Call the Method with custom userId in a test
-    //         Todos.methods.updateText.run.call({ userId: 'abcd' }, {
-    //         todoId: '12345',
-    //         newText: 'This is a todo item.'
-    //         });
 
     Meteor.call("createReservation", data, function(error, result) {
       if (error) {
@@ -130,6 +129,8 @@ Template.reservation.events({
 });
 
 Template.reservation.onRendered(function() {
+  var self = this;
+  
   $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT));
 
   this.$('.datetimepicker').datetimepicker({
@@ -157,12 +158,19 @@ Template.reservation.onRendered(function() {
     document.getElementById('end'));
   var totalDistance = /** @type {!HTMLElement} */(
     document.getElementById('totaldistance'));
+  var totalPrice = /** @type {!HTMLElement} */(
+    document.getElementById('price'));
+
 
   var startAutocomplete = new google.maps.places.Autocomplete(startInput);
   startAutocomplete.bindTo('bounds', map);
   startInput.addEventListener('blur', function() {
     if (endInput.value) {
-      calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
+      Meteor.setTimeout(function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay, 
+          (startInput.value == currentPositionText) ? self.myPosition : startInput.value, 
+          (endInput.value == currentPositionText) ? self.myPosition : endInput.value);
+      }, 100);
     }
   });
 
@@ -170,21 +178,27 @@ Template.reservation.onRendered(function() {
   endAutocomplete.bindTo('bounds', map);
   endInput.addEventListener('blur', function() {
     if (startInput.value) {
-      calculateAndDisplayRoute(directionsService, directionsDisplay, startInput.value, endInput.value);
+      Meteor.setTimeout(function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay, 
+          (startInput.value == currentPositionText) ? self.myPosition : startInput.value, 
+          (endInput.value == currentPositionText) ? self.myPosition : endInput.value);
+      }, 100);
     }
   });
 
   directionsDisplay.addListener('directions_changed', function() {
     var total = computeTotalDistance(directionsDisplay.getDirections());
+    var price = computeTotalPrice(total, 2.2);
     // Update distance
-    totalDistance.innerText = '' + total;
+    totalDistance.innerText = '' + total.toFixed(2);
+    totalPrice.innerText = '' + price.toFixed(2);
   });
 
 });
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination) {
-  console.log('{calculateAndDisplayRoute} origin=' + origin);
-  console.log('{calculateAndDisplayRoute} destination=' + destination);
+  //console.log('{calculateAndDisplayRoute} origin=' + origin);
+  //console.log('{calculateAndDisplayRoute} destination=' + destination);
   if (origin && destination) {
     directionsService.route({
       origin: origin,
@@ -210,8 +224,7 @@ function computeTotalDistance(result) {
   return total;
 }
 
-function computeTotalPrice(result) {
-  var total = computeTotalDistance(result);
-  var price = total * 2.2;
+function computeTotalPrice(totalDistance, rate) {
+  var price = totalDistance * rate;
   return price;
 }

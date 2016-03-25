@@ -3,7 +3,7 @@
   <div class="ui stackable grid">
     <div id="order-container" class="six wide column">
       <form id="reservationForm" class="ui form" novalidate>
-        {{> validationerrors}} {{!--#each error in errors "other"} }
+        {{> validationerrors }} {{!--#each error in errors "other"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
         <div class="required field">
@@ -40,7 +40,10 @@
 
         <div class="required field">
           <label>Depart</label>
-          <input id="start" type="text" placeholder="Depart" required />
+          <div class="ui action input">
+            <input id="start" type="text" placeholder="Depart" required />
+            <button id="startMyPosition" class="ui button"><i class="marker icon"></i></button>
+          </div>
         </div>
         {{!--#each error in errors "start"} }
         <div class="form-error">{ {error} }</div>
@@ -48,7 +51,10 @@
 
         <div class="required field">
           <label>Destination</label>
-          <input id="end" type="text" placeholder="Destination" required />
+          <div class="ui action input">
+            <input id="end" type="text" placeholder="Destination" required />
+            <button id="endMyPosition" class="ui button"><i class="marker icon"></i></button>
+          </div>
         </div>
         {{!--#each error in errors "end"} }
         <div class="form-error">{ {error} }</div>

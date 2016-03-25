@@ -34,7 +34,7 @@ if (Meteor.isServer) {
         check(email, String);
         
         var subject = 'Nouvelle reservation';
-        var text = 'Bonjour,/r/nune nouvelle reservation est disponible.';
+        var text = 'Bonjour,\r\n\r\nune nouvelle reservation est disponible.';
         
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }
@@ -43,7 +43,7 @@ if (Meteor.isServer) {
         check(email, String);
         
         var subject = 'Reservation confirmée';
-        var text = 'Bonjour,/r/nVotre reservation est confirmée./r/n/r/nDays';
+        var text = 'Bonjour,\r\n\r\nVotre reservation est confirmée.\r\n\r\nDays';
         
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
         check(email, String);
         
         var subject = 'Reservation effectuée';
-        var text = 'Bonjour,/r/nVotre reservation est effectuée./r/n/r/nDays';
+        var text = 'Bonjour,\r\n\r\nVotre reservation est effectuée.\r\n\r\nDays';
         
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }
@@ -61,7 +61,7 @@ if (Meteor.isServer) {
         check(email, String);
         
         var subject = 'Reservation annulée';
-        var text = 'Bonjour,/r/nVotre reservation est annulée./r/n/r/nDays';
+        var text = 'Bonjour,\r\n\r\nVotre reservation est annulée.\r\n\r\nDays';
         
         Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
     }
