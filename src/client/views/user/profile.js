@@ -1,4 +1,15 @@
+// function pad(n) {
+//     return (n < 10) ? ("0" + n) : n;
+// }
+
 Template.profile.helpers({
+    validThruM: function() {
+        var monthsList = [];
+        for (var i = 1; i <= 12; i++) {
+            monthsList.push({ value: i });
+        }
+        return monthsList;
+    },
     validThruY: function() {
         var thisYear = new Date().getFullYear();
         var yearsList = [];
@@ -18,11 +29,11 @@ Template.profile.events({
         event.preventDefault();
 
         const data = {
-            lastname: event.target.lastname.value,
-            firstname: event.target.firstname.value,
+            lastName: event.target.lastname.value,
+            firstName: event.target.firstname.value,
             phone: event.target.phone.value,
-            email: event.target.email.value,
-            birthday: event.target.birthday.value,
+            //email: event.target.email.value,
+            birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
             creditCard: {
                 num: event.target.num.value,
                 validThruM: event.target.validThruM.value,
@@ -34,7 +45,7 @@ Template.profile.events({
 
         Meteor.call("updateUserProfile", data, function(error, result) {
             if (error) {
-                var context = Reservations.simpleSchema().namedContext('updateUserProfile');
+                var context = Users.simpleSchema().namedContext('updateUserProfile');
                 var errors = context.invalidKeys().map(function(data) { return { message: context.keyErrorMessage(data.name) } });
                 Session.set(SESSION.VALIDATION_ERRORS, errors);
             }
@@ -48,15 +59,13 @@ Template.profile.events({
 });
 
 Template.profile.onRendered(function() {
-    var self = this;
-
     this.$('.datetimepicker').datetimepicker({
         //format: CONST.DEFAULT_DATETIME_FORMAT,
         format: CONST.DEFAULT_DATE_FORMAT,
-        useCurrent: true,
+        //useCurrent: true,
         locale: CONST.DEFAULT_LOCALE,
         //stepping: 5,
-        showTodayButton: true,
+        //showTodayButton: true,
         //inline: true,
         //sideBySide: true,
     });

@@ -12,24 +12,24 @@
                             <input id="lastname" type="text" placeholder="Nom" value="{{profile.lastName}}" required />
                         </div>
 
-                        <div class="field">
+                        <div class="required field">
                             <label>Prenom</label>
-                            <input id="firstname" type="text" placeholder="Prenom" value="{{profile.firstName}}" />
+                            <input id="firstname" type="text" placeholder="Prenom" value="{{profile.firstName}}" required />
                         </div>
 
-                        <div class="required field">
+                        <!--<div class="required field">
                             <label>Email</label>
                             <input id="email" type="text" placeholder="Email" value="{{profile.email}}" required />
-                        </div>
+                        </div>-->
 
-                        <div class="field">
+                        <div class="required field">
                             <label>Téléphone</label>
-                            <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" />
+                            <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" required/>
                         </div>
 
                         <div class="field">
                             <label>Date de naissance</label>
-                            <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" value="{{profile.birthday}}"
+                            <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" value="{{formatDate profile.birthday}}"
                             />
                         </div>
 
@@ -45,25 +45,16 @@
                                     <div class="four wide field">
                                         <select id="validThruM">
                                             <option> </option>
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
+                                            {{#each validThruM}}
+                                            <option selected="{{equals profile.creditCard.validThruM value}}">{{value}}</option>
+                                            {{/each}}
                                         </select>
                                     </div>
                                     <div class="five wide field">
                                         <select id="validThruY">
                                             <option> </option>
                                             {{#each validThruY}}
-                                            <option>{{value}}</option>
+                                            <option selected="{{equals profile.creditCard.validThruY value}}">{{value}}</option>
                                             {{/each}}
                                         </select>
                                     </div>
@@ -76,7 +67,7 @@
                         </div>
                         <div class="field">
                             <label>Nom</label>
-                            <input id="name" type="text" placeholder="Nom" value="{{profile.creditCard.nom}}" />
+                            <input id="name" type="text" placeholder="Nom" value="{{profile.creditCard.name}}" />
                         </div>
                         <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>

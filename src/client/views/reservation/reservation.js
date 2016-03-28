@@ -135,9 +135,8 @@ Template.reservation.events({
 
 Template.reservation.onRendered(function() {
   //Session.set(SESSION.ISLOADING, true);
-  var self = this;
 
-  $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT));
+  //$('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT));
 
   this.$('.datetimepicker').datetimepicker({
     format: CONST.DEFAULT_DATETIME_FORMAT,
@@ -174,8 +173,8 @@ Template.reservation.onRendered(function() {
     if (endInput.value) {
       Meteor.setTimeout(function() {
         calculateAndDisplayRoute(directionsService, directionsDisplay,
-          (startInput.value == currentPositionText) ? self.myPosition : startInput.value,
-          (endInput.value == currentPositionText) ? self.myPosition : endInput.value);
+          (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
+          (endInput.value == currentPositionText) ? this.myPosition : endInput.value);
       }, 100);
     }
   });
@@ -186,8 +185,8 @@ Template.reservation.onRendered(function() {
     if (startInput.value) {
       Meteor.setTimeout(function() {
         calculateAndDisplayRoute(directionsService, directionsDisplay,
-          (startInput.value == currentPositionText) ? self.myPosition : startInput.value,
-          (endInput.value == currentPositionText) ? self.myPosition : endInput.value);
+          (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
+          (endInput.value == currentPositionText) ? this.myPosition : endInput.value);
       }, 100);
     }
   });
