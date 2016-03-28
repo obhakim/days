@@ -1,0 +1,87 @@
+<template name="profile">
+    <div class="ui middle aligned centered grid">
+        <div class="at-column column">
+            <h1 class="ui center aligned header">Votre profile</h1>
+            <div class="ui stackable segment">
+                <div class="six wide column">
+                    <form id="form" class="ui form" novalidate>
+                        {{> validationerrors }}
+                        <h4 class="ui dividing header">Information personnelle</h4>
+                        <div class="required field">
+                            <label>Nom</label>
+                            <input id="lastname" type="text" placeholder="Nom" value="{{profile.lastName}}" required />
+                        </div>
+
+                        <div class="field">
+                            <label>Prenom</label>
+                            <input id="firstname" type="text" placeholder="Prenom" value="{{profile.firstName}}" />
+                        </div>
+
+                        <div class="required field">
+                            <label>Email</label>
+                            <input id="email" type="text" placeholder="Email" value="{{profile.email}}" required />
+                        </div>
+
+                        <div class="field">
+                            <label>Téléphone</label>
+                            <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" />
+                        </div>
+
+                        <div class="field">
+                            <label>Date de naissance</label>
+                            <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" value="{{profile.birthday}}"
+                            />
+                        </div>
+
+                        <h4 class="ui dividing header">Information de paiement</h4>
+                        <div class="field">
+                            <label>Numéro</label>
+                            <input id="num" type="text" placeholder="Numéro" maxlength="16" value="{{profile.creditCard.num}}" />
+                        </div>
+                        <div class="two fields">
+                            <div class="twelve wide field">
+                                <label>Date de validité</label>
+                                <div class="two fields">
+                                    <div class="four wide field">
+                                        <select id="validThruM">
+                                            <option> </option>
+                                            <option>01</option>
+                                            <option>02</option>
+                                            <option>03</option>
+                                            <option>04</option>
+                                            <option>05</option>
+                                            <option>06</option>
+                                            <option>07</option>
+                                            <option>08</option>
+                                            <option>09</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
+                                    </div>
+                                    <div class="five wide field">
+                                        <select id="validThruY">
+                                            <option> </option>
+                                            {{#each validThruY}}
+                                            <option>{{value}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="four wide field">
+                                <label>CVV</label>
+                                <input id="cvv" type="text" placeholder="CVV" maxlength="3" value="{{profile.creditCard.cvv}}" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Nom</label>
+                            <input id="name" type="text" placeholder="Nom" value="{{profile.creditCard.nom}}" />
+                        </div>
+                        <input type="submit" value="Enregistrer" class="ui fluid large primary button">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

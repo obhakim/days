@@ -69,10 +69,10 @@ securedRoutes.route('/reservations', {
     }
 });
 
-securedRoutes.route('/test', {
-    name: "test",
+securedRoutes.route('/profile', {
+    name: "profile",
     action(pathParams, queryParams) {
-        BlazeLayout.render('layout', { content: 'test' });
+        BlazeLayout.render('layout', { content: 'profile' });
     }
 });
 

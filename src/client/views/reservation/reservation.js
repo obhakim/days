@@ -23,6 +23,9 @@ Template.reservation.helpers({
   vehicletypeslist: function() {
     return VehicleTypes.find().fetch();
   },
+  profile: function() {
+    return Meteor.user().profile;
+  },
   // errors: function () {
   //       return Session.get(SESSION.VALIDATION_ERRORS);
   //   }
@@ -38,7 +41,7 @@ Template.reservation.events({
     if (instance.myPosition)
       instance.$('#start').val(currentPositionText);
   },
-  
+
   "click #endMyPosition": function(event) {
     event.preventDefault();
     const instance = Template.instance();
@@ -55,6 +58,7 @@ Template.reservation.events({
 
     // Loading
     $('ui form').addClass('loading');
+    //Session.set(SESSION.ISLOADING, true);
 
     const data = {
       lastname: event.target.lastname.value,
@@ -123,14 +127,16 @@ Template.reservation.events({
     });
 
     $('ui form').removeClass('loading');
+    //Session.set(SESSION.ISLOADING, false);
 
     return false;
   }
 });
 
 Template.reservation.onRendered(function() {
+  //Session.set(SESSION.ISLOADING, true);
   var self = this;
-  
+
   $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT));
 
   this.$('.datetimepicker').datetimepicker({
@@ -167,8 +173,8 @@ Template.reservation.onRendered(function() {
   startInput.addEventListener('blur', function() {
     if (endInput.value) {
       Meteor.setTimeout(function() {
-        calculateAndDisplayRoute(directionsService, directionsDisplay, 
-          (startInput.value == currentPositionText) ? self.myPosition : startInput.value, 
+        calculateAndDisplayRoute(directionsService, directionsDisplay,
+          (startInput.value == currentPositionText) ? self.myPosition : startInput.value,
           (endInput.value == currentPositionText) ? self.myPosition : endInput.value);
       }, 100);
     }
@@ -179,8 +185,8 @@ Template.reservation.onRendered(function() {
   endInput.addEventListener('blur', function() {
     if (startInput.value) {
       Meteor.setTimeout(function() {
-        calculateAndDisplayRoute(directionsService, directionsDisplay, 
-          (startInput.value == currentPositionText) ? self.myPosition : startInput.value, 
+        calculateAndDisplayRoute(directionsService, directionsDisplay,
+          (startInput.value == currentPositionText) ? self.myPosition : startInput.value,
           (endInput.value == currentPositionText) ? self.myPosition : endInput.value);
       }, 100);
     }
@@ -194,6 +200,7 @@ Template.reservation.onRendered(function() {
     totalPrice.innerText = '' + price.toFixed(2);
   });
 
+  //Session.set(SESSION.ISLOADING, false);
 });
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination) {

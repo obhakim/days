@@ -30,7 +30,8 @@ Schema.Vehicle = new SimpleSchema({
 
 Schema.CreditCard = new SimpleSchema({
     num: { type: String },
-    validThru: { type: String },
+    validThruM: { type: Number, min: 1, max: 12 },
+    validThruY: { type: Number },
     cvv: { type: String },
     name: { type: String }
 });
