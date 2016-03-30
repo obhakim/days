@@ -17,7 +17,6 @@ reload
 
 browser-policy			# Define browser security policies
 
-standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
@@ -41,7 +40,6 @@ reactive-var 				# Store var in db
 reactive-dict				# Store dictionary in db
 zimme:active-route			# adds "active" classe for the active route item
 alanning:roles
-force-ssl
 email
 
 check
@@ -51,3 +49,5 @@ sacha:spin
 useraccounts:semantic-ui
 useraccounts:flow-routing
 aldeed:template-extension
+standard-minifier-css
+standard-minifier-js
