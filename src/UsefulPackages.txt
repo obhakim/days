@@ -102,3 +102,4 @@ mdg:validated-method		# methods validation bootstrapper
 mdg:geolocation
 tap:i18n
 gwendall:simple-schema-i18n
+chrismbeckett:toastr

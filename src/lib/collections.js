@@ -1,2 +1,2 @@
-VehicleTypes = new Mongo.Collection('vehicletypes');
-Reservations = new Mongo.Collection('reservations');
+VehicleTypes = new Mongo.Collection('vehicletypes')
+Reservations = new Mongo.Collection('reservations')

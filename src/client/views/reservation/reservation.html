@@ -32,7 +32,7 @@
 
         <div class="required field">
           <label>Email</label>
-          <input id="email" type="text" placeholder="Email" value="{{profile.email}}" required />
+          <input id="email" type="text" placeholder="Email" value="{{currentUserEmail}}" required />
         </div>
         {{!--#each error in errors "email"} }
         <div class="form-error">{ {error} }</div>
@@ -42,7 +42,7 @@
           <label>Depart</label>
           <div class="ui action input">
             <input id="start" type="text" placeholder="Depart" required />
-            <button id="startMyPosition" class="ui button"><i class="marker icon"></i></button>
+            <button id="startMyPosition" class="ui button" disabled="{{currentPositionNotDefined}}"><i class="marker icon"></i></button>
           </div>
         </div>
         {{!--#each error in errors "start"} }
@@ -53,7 +53,7 @@
           <label>Destination</label>
           <div class="ui action input">
             <input id="end" type="text" placeholder="Destination" required />
-            <button id="endMyPosition" class="ui button"><i class="marker icon"></i></button>
+            <button id="endMyPosition" class="ui button" disabled="{{currentPositionNotDefined}}"><i class="marker icon"></i></button>
           </div>
         </div>
         {{!--#each error in errors "end"} }
@@ -72,7 +72,7 @@
           <label>Type de véhicule</label>
           <select id="vehicletype">
             <option>Type de véhicule</option>
-            {{#each vehicletypeslist}}
+            {{#each vehicleTypesList}}
             <option>{{name}}</option>
             {{/each}}
           </select>

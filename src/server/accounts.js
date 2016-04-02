@@ -1,5 +1,5 @@
 // Set up login services
-Meteor.startup(function() {
+Meteor.startup(function () {
   // Add Facebook configuration entry
   /*
   ServiceConfiguration.configurations.update(
@@ -10,7 +10,7 @@ Meteor.startup(function() {
       }
     },
     { upsert: true }
-  );
+  )
   */
 
   // Add GitHub configuration entry
@@ -23,7 +23,7 @@ Meteor.startup(function() {
       }
     },
     { upsert: true }
-  );
+  )
   */
 
   // Add Google configuration entry
@@ -37,7 +37,7 @@ Meteor.startup(function() {
       }
     },
     { upsert: true }
-  );
+  )
   */
 
   // Add Linkedin configuration entry
@@ -50,6 +50,6 @@ Meteor.startup(function() {
       }
     },
     { upsert: true }
-  );
+  )
   */
-});
+})
