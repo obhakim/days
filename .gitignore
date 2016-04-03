@@ -19,4 +19,6 @@
 /WLabs.Days/WLabs.Days.UI/App_Data/NuGetBackup
 /WLabs.Days/WLabs.Days.UI/obj
 /WLabs.Days/.vs/config
+/build/bundle/iisnode
+/demeteorized/bundle/iisnode
 temp
