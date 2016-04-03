@@ -1,0 +1,12 @@
+Application has thrown an uncaught exception and is terminated:
+SyntaxError: Error parsing C:\inetpub\Days\build\bundle\programs\server\npm\node_modules\meteor\babel-compiler\node_modules\meteor-babel\package.json: Unexpected token /
+    at Object.parse (native)
+    at readPackage (module.js:113:52)
+    at tryPackage (module.js:123:13)
+    at Function.Module._findPath (module.js:190:18)
+    at Function.Module._resolveFilename (module.js:336:25)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.Npm.require (C:\inetpub\Days\build\bundle\programs\server\boot.js:182:18)
+    at BabelCompiler.extraFeatures (packages\babel-compiler.js:21:23)
