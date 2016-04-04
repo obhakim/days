@@ -7,16 +7,16 @@ var meteorEnv = Package.meteor.meteorEnv;
 var RateLimiter = Package['rate-limit'].RateLimiter;
 
 /* Package-scope variables */
-var DDPRateLimiter, RATE_LIMIT_NUM_CALLS, RATE_LIMIT_INTERVAL_TIME_MS;
+var DDPRateLimiter;
 
 (function(){
 
-/////////////////////////////////////////////////////////////////////////////////////
-//                                                                                 //
-// packages/ddp-rate-limiter/ddp-rate-limiter.js                                   //
-//                                                                                 //
-/////////////////////////////////////////////////////////////////////////////////////
-                                                                                   //
+//////////////////////////////////////////////////////////////////////////////////
+//                                                                              //
+// packages/ddp-rate-limiter/ddp-rate-limiter.js                                //
+//                                                                              //
+//////////////////////////////////////////////////////////////////////////////////
+                                                                                //
 // Rate Limiter built into DDP with a default error message. See README or
 // online documentation for more details.
 DDPRateLimiter = {};
@@ -114,7 +114,7 @@ DDPRateLimiter._check = function (input) {
   return rateLimiter.check(input);
 };
 
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 

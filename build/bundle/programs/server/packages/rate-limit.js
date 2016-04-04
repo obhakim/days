@@ -8,7 +8,7 @@ var _ = Package.underscore._;
 var Random = Package.random.Random;
 
 /* Package-scope variables */
-var RateLimiter, r;
+var RateLimiter;
 
 (function(){
 

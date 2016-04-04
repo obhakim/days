@@ -11,9 +11,6 @@ var Handlebars = Package.blaze.Handlebars;
 var Spacebars = Package.spacebars.Spacebars;
 var HTML = Package.htmljs.HTML;
 
-/* Package-scope variables */
-var Template;
-
 
 
 /* Exports */

@@ -20,12 +20,12 @@ var Autoupdate, ClientVersions;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                              //
-// packages/autoupdate/autoupdate_server.js                                                     //
-//                                                                                              //
-//////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                //
+//////////////////////////////////////////////////////////////////////////////////
+//                                                                              //
+// packages/autoupdate/autoupdate_server.js                                     //
+//                                                                              //
+//////////////////////////////////////////////////////////////////////////////////
+                                                                                //
 // Publish the current client versions to the client.  When a client
 // sees the subscription change and that there is a new version of the
 // client available on the server, it can reload.
@@ -225,7 +225,7 @@ process.on('SIGHUP', Meteor.bindEnvironment(function () {
 }, "handling SIGHUP signal for refresh"));
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 

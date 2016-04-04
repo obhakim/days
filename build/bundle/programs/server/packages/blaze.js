@@ -14,7 +14,7 @@ var ObserveSequence = Package['observe-sequence'].ObserveSequence;
 var ReactiveVar = Package['reactive-var'].ReactiveVar;
 
 /* Package-scope variables */
-var Blaze, UI, Handlebars, AttributeHandler, makeAttributeHandler, ElementAttributesUpdater;
+var Blaze, UI, Handlebars;
 
 (function(){
 
