@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"BIDSLICENSEE-3916-stderr-1459710815854.txt","computername":"BIDSLICENSEE","pid":3916,"type":"stderr","created":1459710815854},{"file":"BIDSLICENSEE-3936-stderr-1459704842546.txt","computername":"BIDSLICENSEE","pid":3936,"type":"stderr","created":1459704842546},{"file":"BIDSLICENSEE-3948-stderr-1459704838293.txt","computername":"BIDSLICENSEE","pid":3948,"type":"stderr","created":1459704838293},{"file":"BIDSLICENSEE-4320-stderr-1459722973540.txt","computername":"BIDSLICENSEE","pid":4320,"type":"stderr","created":1459722973540},{"file":"BIDSLICENSEE-4320-stdout-1459722973447.txt","computername":"BIDSLICENSEE","pid":4320,"type":"stdout","created":1459722973447},{"file":"BIDSLICENSEE-4408-stderr-1459724982239.txt","computername":"BIDSLICENSEE","pid":4408,"type":"stderr","created":1459724982239},{"file":"BIDSLICENSEE-4408-stdout-1459724982239.txt","computername":"BIDSLICENSEE","pid":4408,"type":"stdout","created":1459724982239},{"file":"BIDSLICENSEE-4432-stderr-1459627532866.txt","computername":"BIDSLICENSEE","pid":4432,"type":"stderr","created":1459627532866},{"file":"BIDSLICENSEE-4460-stderr-1459710196079.txt","computername":"BIDSLICENSEE","pid":4460,"type":"stderr","created":1459710196079},{"file":"BIDSLICENSEE-4620-stderr-1459713229025.txt","computername":"BIDSLICENSEE","pid":4620,"type":"stderr","created":1459713229025},{"file":"BIDSLICENSEE-5676-stderr-1459701732693.txt","computername":"BIDSLICENSEE","pid":5676,"type":"stderr","created":1459701732693},{"file":"BIDSLICENSEE-912-stderr-1459710811999.txt","computername":"BIDSLICENSEE","pid":912,"type":"stderr","created":1459710811999}];
+        var lastUpdated = 1459724983802;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>
