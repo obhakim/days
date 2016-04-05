@@ -12,13 +12,15 @@ Template.reservation.onCreated(function () {
     self.subscribe('vehicletypes')
     self.subscribe('reservations')
     Session.set(SESSION.VALIDATION_ERRORS, null)
-    self.myPosition = Geolocation.latLng()
+    Session.set(SESSION.GEO_POSITION, Geolocation.latLng())
+  // self.myPosition = Geolocation.latLng()
   })
 })
 
 Template.reservation.helpers({
   currentPositionNotDefined: function () {
-    return !Template.instance().myPosition
+    // return !Template.instance().myPosition
+    return !Session.get(SESSION.GEO_POSITION)
   },
   vehicleTypesList: function () {
     return VehicleTypes.find().fetch()
@@ -38,16 +40,20 @@ Template.reservation.helpers({
 Template.reservation.events({
   'click #startMyPosition': function (event) {
     event.preventDefault()
-    const instance = Template.instance()
-    if (instance.myPosition)
-      instance.$('#start').val(currentPositionText)
+    // const instance = Template.instance()
+    // if (instance.myPosition)
+    if (Session.get(SESSION.GEO_POSITION))
+      // instance.$('#start').val(currentPositionText)
+      $('#start').val(currentPositionText)
   },
 
   'click #endMyPosition': function (event) {
     event.preventDefault()
-    const instance = Template.instance()
-    if (instance.myPosition)
-      instance.$('#end').val(currentPositionText)
+    // const instance = Template.instance()
+    // if (instance.myPosition)
+    if (Session.get(SESSION.GEO_POSITION))
+      // instance.$('#end').val(currentPositionText)
+      $('#end').val(currentPositionText)
   },
 
   'submit #reservationForm': function (event) {
@@ -58,7 +64,7 @@ Template.reservation.events({
     Session.set(SESSION.VALIDATION_ERRORS, null)
 
     // Loading
-    $('ui form').addClass('loading')
+    $('#reservationForm').addClass('loading')
     // Session.set(SESSION.ISLOADING, true)
 
     const data = {
@@ -73,21 +79,21 @@ Template.reservation.events({
     }
 
     Meteor.call('createReservation', data, function (err, res) {
+			$('#reservationForm').removeClass('loading')
+    	// Session.set(SESSION.ISLOADING, false)
+		
       if (err) {
         if (err.error === 'validation-error') {
           var context = Reservations.simpleSchema().namedContext('createReservation')
           var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } })
           Session.set(SESSION.VALIDATION_ERRORS, errors)
         } else {
-          Session.set(SESSION.VALIDATION_ERRORS, [{message: err.reason}])
+          Session.set(SESSION.VALIDATION_ERRORS, [{ message: err.reason }])
         }
       } else {
         FlowRouter.go('/s/reservations')
       }
     })
-
-    $('ui form').removeClass('loading')
-    // Session.set(SESSION.ISLOADING, false)
 
     return false
   }
@@ -125,27 +131,29 @@ Template.reservation.onRendered(function () {
   var startAutocomplete = new google.maps.places.Autocomplete(startInput)
   startAutocomplete.bindTo('bounds', map)
   startInput.addEventListener('blur', function () {
-    if (endInput.value) {
-      Meteor.setTimeout(function () {
-				var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
-        calculateAndDisplayRoute(directionsService, directionsDisplay,
-          (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
-          (endInput.value == currentPositionText) ? this.myPosition : endInput.value)
-      }, 100)
-    }
+    updateRoute(directionsService, directionsDisplay)
+  // if (endInput.value) {
+  //   Meteor.setTimeout(function () {
+  // 		var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
+  //     calculateAndDisplayRoute(directionsService, directionsDisplay,
+  //       (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
+  //       (endInput.value == currentPositionText) ? this.myPosition : endInput.value)
+  //   }, 100)
+  // }
   })
 
   var endAutocomplete = new google.maps.places.Autocomplete(endInput)
   endAutocomplete.bindTo('bounds', map)
   endInput.addEventListener('blur', function () {
-    if (startInput.value) {
-      Meteor.setTimeout(function () {
-				var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
-        calculateAndDisplayRoute(directionsService, directionsDisplay,
-          (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
-          (endInput.value == currentPositionText) ? this.myPosition : endInput.value)
-      }, 100)
-    }
+    updateRoute(directionsService, directionsDisplay)
+  // if (startInput.value) {
+  //   Meteor.setTimeout(function () {
+  // 		var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
+  //     calculateAndDisplayRoute(directionsService, directionsDisplay,
+  //       (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
+  //       (endInput.value == currentPositionText) ? this.myPosition : endInput.value)
+  //   }, 100)
+  // }
   })
 
   directionsDisplay.addListener('directions_changed', function () {
@@ -155,6 +163,19 @@ Template.reservation.onRendered(function () {
     totalDistance.innerText = '' + total.toFixed(2)
     totalPrice.innerText = '' + price.toFixed(2)
   })
+
+  function updateRoute () {
+    var startInput = /** @type {!HTMLInputElement} */ (document.getElementById('start'))
+    var endInput = /** @type {!HTMLInputElement} */ (document.getElementById('end'))
+    if (startInput.value && endInput.value) {
+      Meteor.setTimeout(function () {
+        var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
+        calculateAndDisplayRoute(directionsService, directionsDisplay,
+          (startInput.value == currentPositionText) ? Session.get(SESSION.GEO_POSITION) : startInput.value,
+          (endInput.value == currentPositionText) ? Session.get(SESSION.GEO_POSITION) : endInput.value)
+      }, 100)
+    }
+  }
 
 // Session.set(SESSION.ISLOADING, false)
 })
@@ -167,11 +188,11 @@ function calculateAndDisplayRoute (directionsService, directionsDisplay, origin,
       origin: origin,
       destination: destination,
       travelMode: google.maps.TravelMode.DRIVING,
-      // drivingOptions: {
-      //   departureTime: departureTime,
-      //   //trafficModel: google.maps.TrafficModel.PESSIMISTIC
-      // },
-      //unitSystem: UnitSystem.METRIC
+    // drivingOptions: {
+    //   departureTime: departureTime,
+    //   //trafficModel: google.maps.TrafficModel.PESSIMISTIC
+    // },
+    // unitSystem: UnitSystem.METRIC
     }, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response)
