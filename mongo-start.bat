@@ -1,0 +1,1 @@
+"C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" --port 3001 --dbpath "C:\inetpub\Days\src\.meteor\local\db"
