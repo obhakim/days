@@ -167,10 +167,10 @@ function calculateAndDisplayRoute (directionsService, directionsDisplay, origin,
       origin: origin,
       destination: destination,
       travelMode: google.maps.TravelMode.DRIVING,
-      drivingOptions: {
-        departureTime: departureTime,
-        //trafficModel: google.maps.TrafficModel.PESSIMISTIC
-      },
+      // drivingOptions: {
+      //   departureTime: departureTime,
+      //   //trafficModel: google.maps.TrafficModel.PESSIMISTIC
+      // },
       //unitSystem: UnitSystem.METRIC
     }, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
