@@ -172,7 +172,8 @@ Template.reservation.onRendered(function () {
         var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
         calculateAndDisplayRoute(directionsService, directionsDisplay,
           (startInput.value == currentPositionText) ? Session.get(SESSION.GEO_POSITION) : startInput.value,
-          (endInput.value == currentPositionText) ? Session.get(SESSION.GEO_POSITION) : endInput.value)
+          (endInput.value == currentPositionText) ? Session.get(SESSION.GEO_POSITION) : endInput.value,
+					departureTime)
       }, 100)
     }
   }
@@ -183,15 +184,16 @@ Template.reservation.onRendered(function () {
 function calculateAndDisplayRoute (directionsService, directionsDisplay, origin, destination, departureTime) {
   // console.log('{calculateAndDisplayRoute} origin=' + origin)
   // console.log('{calculateAndDisplayRoute} destination=' + destination)
+	// console.log('{calculateAndDisplayRoute} departureTime=' + departureTime)
   if (origin && destination) {
     directionsService.route({
       origin: origin,
       destination: destination,
       travelMode: google.maps.TravelMode.DRIVING,
-    // drivingOptions: {
-    //   departureTime: departureTime,
-    //   //trafficModel: google.maps.TrafficModel.PESSIMISTIC
-    // },
+			drivingOptions: {
+				departureTime: departureTime,
+				//trafficModel: google.maps.TrafficModel.PESSIMISTIC
+			},
     // unitSystem: UnitSystem.METRIC
     }, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {

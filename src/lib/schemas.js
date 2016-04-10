@@ -8,7 +8,10 @@ Schema.getVehicleTypes = function getVehicleTypes () {
 
 Schema.VehicleType = new SimpleSchema({
   name: { label: 'Type de véhicule', type: String },
-  rate: { label: 'Tarif', type: Number, decimal: true }
+  ratePerKm: { label: 'Tarif par km', type: Number, decimal: true },
+	ratePerHour: { label: 'Tarif par h', type: Number, decimal: true },
+	rateMin: { label: 'Tarif Min', type: Number, decimal: true },
+	rateMultiplier: { label: 'Mulitplicateur de Tarif', type: Number, decimal: true }
 })
 
 // Schema.UserCountry = new SimpleSchema({

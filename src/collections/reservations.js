@@ -2,7 +2,7 @@ Reservations.attachSchema(Schema.Reservation)
 
 if (Meteor.isClient) {
   // Update allowed values on client when VehicleTypes gets loaded
-  Tracker.autorun(function () {
+  Tracker.autorun(function() {
     Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes()
   })
 }
@@ -15,7 +15,7 @@ if (Meteor.isClient) {
 // }
 
 Meteor.methods({
-  createReservation: function (reservation) {
+  createReservation: function(reservation) {
     if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
     //if (!Meteor.user().profile.creditCard) throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
     // throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
@@ -30,7 +30,7 @@ Meteor.methods({
       this.unblock()
       // Send notification
       try {
-        _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function (user) { Helpers.notifyNewReservation(user.emails[0].address); })
+        _.each(Meteor.users.find({}, { fields: { 'emails': 1 } }).fetch(), function(user) { Helpers.notifyNewReservation(user.emails[0].address); })
       } catch (error) {
         // throw error
         console.log(error)
@@ -39,7 +39,7 @@ Meteor.methods({
 
     return id
   },
-  acceptReservation: function (reservationId, userId) {
+  acceptReservation: function(reservationId, userId) {
     // Logged user    
     if (userId !== Meteor.userId()) throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action")
 
@@ -56,8 +56,8 @@ Meteor.methods({
         driverId: userId // Preparing "assign to driver"
       }
     }, {
-      validationContext: 'acceptReservation'
-    })
+				validationContext: 'acceptReservation'
+			})
 
     if (Meteor.isServer) {
       this.unblock()
@@ -72,7 +72,7 @@ Meteor.methods({
 
     return id
   },
-  confirmReservation: function (reservationId, userId) {
+  confirmReservation: function(reservationId, userId) {
     // Logged user    
     if (userId !== Meteor.userId()) throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action")
     // Driver or Admin only  
@@ -87,8 +87,8 @@ Meteor.methods({
         status: CONST.RESERVATION_STATUSES.CONFIRMED
       }
     }, {
-      validationContext: 'confirmReservation'
-    })
+				validationContext: 'confirmReservation'
+			})
 
     if (Meteor.isServer) {
       this.unblock()
@@ -103,7 +103,7 @@ Meteor.methods({
 
     return id
   },
-  cancelReservation: function (reservationId, userId) {
+  cancelReservation: function(reservationId, userId) {
     // Logged user    
     if (userId !== Meteor.userId()) throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action")
     // Driver or Admin only  
@@ -116,8 +116,8 @@ Meteor.methods({
         status: CONST.RESERVATION_STATUSES.CANCELLED
       }
     }, {
-      validationContext: 'cancelReservation'
-    })
+				validationContext: 'cancelReservation'
+			})
 
     if (Meteor.isServer) {
       this.unblock()
@@ -133,6 +133,18 @@ Meteor.methods({
     return id
   },
 })
+
+function calculatePrice(vehicleType, distance, startAt) {
+	var price = vehicleType.ratePerKm * distance
+	// if in rush hour
+	if ((6 < startAt && startAt < 9.5) || (17 < startAt && startAt < 19.5))
+		price = price * vehicleType.rateMultiplier
+
+	if (price < vehicleType.rateMin)
+		return vehicleType.rateMin
+	else
+		return price
+}
 
 // // Define a namespace for Methods related to the Reservations collection
 // // Allows overriding for tests by replacing the implementation (2)
