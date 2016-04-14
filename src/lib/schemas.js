@@ -1,17 +1,17 @@
 Schema = {}
 
-Schema.getVehicleTypes = function getVehicleTypes () {
-  return VehicleTypes.find().fetch().map(function (doc) {
-    return doc.name
-  })
-}
+// Schema.getVehicleTypes = function getVehicleTypes () {
+//   return VehicleTypes.find().fetch().map(function (doc) {
+//     return doc.name
+//   })
+// }
 
 Schema.VehicleType = new SimpleSchema({
   name: { label: 'Type de véhicule', type: String },
   ratePerKm: { label: 'Tarif par km', type: Number, decimal: true },
-	ratePerHour: { label: 'Tarif par h', type: Number, decimal: true },
-	rateMin: { label: 'Tarif Min', type: Number, decimal: true },
-	rateMultiplier: { label: 'Mulitplicateur de Tarif', type: Number, decimal: true }
+  ratePerHour: { label: 'Tarif par h', type: Number, decimal: true },
+  rateMin: { label: 'Tarif Min', type: Number, decimal: true },
+  rateMultiplier: { label: 'Mulitplicateur de Tarif', type: Number, decimal: true }
 })
 
 // Schema.UserCountry = new SimpleSchema({
@@ -26,7 +26,8 @@ Schema.VehicleType = new SimpleSchema({
 
 Schema.Vehicle = new SimpleSchema({
   license: { type: String },
-  vehicleType: { label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes() },
+  //vehicleType: { label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes() },
+	vehicleTypeId: {label: 'Type de véhicule', type: String, regEx: SimpleSchema.RegEx.Id },
   color: { type: String },
   'photos.$': { type: String }
 })
@@ -54,17 +55,20 @@ Schema.Profile = new SimpleSchema({
   // ,optional: true
   },
   birthday: {
-    type: Date,        optional: true
+    type: Date,
+    optional: true
   },
   phone: {
     type: String
   // ,optional: true
   },
   vehicle: {
-    type: Schema.Vehicle,        optional: true
+    type: Schema.Vehicle,
+    optional: true
   },
   creditCard: {
-    type: Schema.CreditCard,      optional: true
+    type: Schema.CreditCard,
+    optional: true
   }
 // website: {
 //     type: String,
@@ -148,16 +152,30 @@ Schema.User = new SimpleSchema({
   }
 })
 
-Schema.Reservation = new SimpleSchema({
+Schema.Contact = new SimpleSchema({
   lastname: {label: 'Nom', type: String},
   firstname: {label: 'Prénom', type: String, optional: true},
   phone: {label: 'Téléphone', type: String},
   email: {label: 'Email', type: String, regEx: SimpleSchema.RegEx.Email},
+})
+
+Schema.Ride = new SimpleSchema({
   start: {label: 'Départ', type: String},
   end: {label: 'Destination', type: String},
   startAt: {label: 'Le', type: Date},
+  distance: {label: 'Distance', type: Date},
+})
+
+Schema.Reservation = new SimpleSchema({
+  contact: {
+    type: Schema.Contact
+  },
+  ride: {
+    type: Schema.Ride
+  },
   // vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
-  vehicleType: {label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes()},
+  //vehicleType: {label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes()},
+	vehicleTypeId: {label: 'Type de véhicule', type: String, regEx: SimpleSchema.RegEx.Id },
   price: {label: 'Prix', type: Number, decimal: true, defaultValue: 0.00, min: 0},
   driverId: {label: 'Chauffeur', type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
   status: {label: 'Statut', type: Number, defaultValue: CONST.RESERVATION_STATUSES.CREATED},

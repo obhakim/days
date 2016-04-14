@@ -26,8 +26,7 @@ Template.reservation.helpers({
     return VehicleTypes.find().fetch()
   },
   profile: function () {
-    var profile = Meteor.user().profile
-    return profile ? profile : {}
+    return (Meteor.user() && Meteor.user().profile) ? Meteor.user().profile : {}
   },
 // errors: function () {
 //       return Session.get(SESSION.VALIDATION_ERRORS)
@@ -67,18 +66,23 @@ Template.reservation.events({
     $('#reservationForm').addClass('loading')
     // Session.set(SESSION.ISLOADING, true)
 
-    const data = {
-      lastname: event.target.lastname.value,
-      firstname: event.target.firstname.value,
-      phone: event.target.phone.value,
-      email: event.target.email.value,
-      start: event.target.start.value,
-      end: event.target.end.value,
-      startAt: moment(event.target.startat.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
-      vehicleType: event.target.vehicletype.value,
+    const r = {
+			contact: {
+				lastname: event.target.lastname.value,
+				firstname: event.target.firstname.value,
+				phone: event.target.phone.value,
+				email: event.target.email.value,
+			},
+      ride: {
+				start: event.target.start.value,
+      	end: event.target.end.value,
+				startAt: moment(event.target.startat.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
+				distance: event.target.distance.value
+			},
+      vehicleTypeId: event.target.vehicletype.value,
     }
 
-    Meteor.call('createReservation', data, function (err, res) {
+    Meteor.call('createReservation', r, function (err, res) {
 			$('#reservationForm').removeClass('loading')
     	// Session.set(SESSION.ISLOADING, false)
 		
@@ -102,7 +106,7 @@ Template.reservation.events({
 Template.reservation.onRendered(function () {
   // Session.set(SESSION.ISLOADING, true)
 
-  $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
+  //$('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
 
   this.$('.datetimepicker').datetimepicker({
     format: CONST.DEFAULT_DATETIME_FORMAT,
@@ -125,46 +129,60 @@ Template.reservation.onRendered(function () {
 
   var startInput = /** @type {!HTMLInputElement} */ (document.getElementById('start'))
   var endInput = /** @type {!HTMLInputElement} */ (document.getElementById('end'))
+	var startAt = /** @type {!HTMLInputElement} */ (document.getElementById('startat'))
+	var vehicleType = /** @type {!HTMLInputElement} */ (document.getElementById('vehicletype'))
+	var distance = /** @type {!HTMLInputElement} */ (document.getElementById('distance'))
   var totalDistance = /** @type {!HTMLElement} */ (document.getElementById('totaldistance'))
+  var totalDuration = /** @type {!HTMLElement} */ (document.getElementById('totalduration'))
   var totalPrice = /** @type {!HTMLElement} */ (document.getElementById('price'))
+
+	startAt.value = moment().format(CONST.DEFAULT_DATETIME_FORMAT)
 
   var startAutocomplete = new google.maps.places.Autocomplete(startInput)
   startAutocomplete.bindTo('bounds', map)
   startInput.addEventListener('blur', function () {
-    updateRoute(directionsService, directionsDisplay)
-  // if (endInput.value) {
-  //   Meteor.setTimeout(function () {
-  // 		var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
-  //     calculateAndDisplayRoute(directionsService, directionsDisplay,
-  //       (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
-  //       (endInput.value == currentPositionText) ? this.myPosition : endInput.value)
-  //   }, 100)
-  // }
+    calculateRoute()
   })
 
   var endAutocomplete = new google.maps.places.Autocomplete(endInput)
   endAutocomplete.bindTo('bounds', map)
   endInput.addEventListener('blur', function () {
-    updateRoute(directionsService, directionsDisplay)
-  // if (startInput.value) {
-  //   Meteor.setTimeout(function () {
-  // 		var departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate()
-  //     calculateAndDisplayRoute(directionsService, directionsDisplay,
-  //       (startInput.value == currentPositionText) ? this.myPosition : startInput.value,
-  //       (endInput.value == currentPositionText) ? this.myPosition : endInput.value)
-  //   }, 100)
-  // }
+    calculateRoute()
+  })
+	
+	vehicleType.addEventListener('change', function () {
+    updatePrice()
   })
 
   directionsDisplay.addListener('directions_changed', function () {
-    var total = computeTotalDistance(directionsDisplay.getDirections())
-    var price = computeTotalPrice(total, 2.2)
-    // Update distance
-    totalDistance.innerText = '' + total.toFixed(2)
-    totalPrice.innerText = '' + price.toFixed(2)
+    updateRoute()
+		updatePrice()
   })
-
+  
   function updateRoute () {
+    var selectedRoute = getRoute(directionsDisplay.getDirections())    
+    // Update distance
+		distance.value = selectedRoute.distance.toFixed(2)
+    totalDistance.innerText = '' + distance.value
+    
+    totalDuration.innerText = '' + selectedRoute.duration.toFixed(2)    
+  }
+	
+	function updatePrice () {
+		//var price = 0.00 //= distance.value * 2.2		
+		Meteor.call('getPrice', vehicleType.value, startAt.value, distance.value, function (err, res) {
+      if (res) {
+				totalPrice.innerText = '' + res.toFixed(2)
+      }
+			else {
+				totalPrice.innerText = '0.00'
+			}
+    })
+		
+		//totalPrice.innerText = '' + price.toFixed(2)
+	}
+
+  function calculateRoute () {
     var startInput = /** @type {!HTMLInputElement} */ (document.getElementById('start'))
     var endInput = /** @type {!HTMLInputElement} */ (document.getElementById('end'))
     if (startInput.value && endInput.value) {
@@ -197,27 +215,29 @@ function calculateAndDisplayRoute (directionsService, directionsDisplay, origin,
     // unitSystem: UnitSystem.METRIC
     }, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
+        Session.set(SESSION.ERROR, null)
         directionsDisplay.setDirections(response)
       } else {
-        window.alert('Directions request failed due to ' + status)
+        //window.alert('Directions request failed due to ' + status)
+        Session.set(SESSION.ERROR, { error: 'Erreur', reason: 'Aucun itineraire n\'as pas été trouvé' })
       }
     })
   }
 }
 
-function computeTotalDistance (result) {
-  var total = 0
-  var myroute = result.routes[0]
-  for (var i = 0; i < myroute.legs.length; i++) {
-    total += myroute.legs[i].distance.value
-  }
-  total = total / 1000
-  return total
-}
+function getRoute (directionsResult) {
+  var distance = 0
+  var duration = 0
+  var myroute = directionsResult.routes[0]
 
-function computeTotalPrice (totalDistance, rate) {
-  var price = totalDistance * rate
-  return price
+  for (var i = 0; i < myroute.legs.length; i++) {
+    distance += myroute.legs[i].distance.value
+    duration += (myroute.legs[i].duration_in_traffic || myroute.legs[i].duration).value
+  }
+  distance = distance / 1000
+  duration = duration / 60  // in minutes
+  
+  return { distance, duration } 
 }
 
 // Call the Method

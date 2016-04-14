@@ -1,11 +1,11 @@
 Reservations.attachSchema(Schema.Reservation)
 
-if (Meteor.isClient) {
-  // Update allowed values on client when VehicleTypes gets loaded
-  Tracker.autorun(function() {
-    Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes()
-  })
-}
+// if (Meteor.isClient) {
+//   // Update allowed values on client when VehicleTypes gets loaded
+//   Tracker.autorun(function() {
+//     Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes()
+//   })
+// }
 
 // if(Meteor.isServer) {
 //     // Send emails to drivers
@@ -15,6 +15,17 @@ if (Meteor.isClient) {
 // }
 
 Meteor.methods({
+	getPrice: function(vehicleTypeId, startAt, distance) {
+		console.log('getPrice(' + vehicleTypeId + ', ' + startAt + ', ' + distance +')')
+    //if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
+		try{
+			var vehicleType = VehicleTypes.findOne(vehicleTypeId)
+			return calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance)
+		} catch(ex) {
+			//log
+			throw new Meteor.Error('cannot-get-price', "Impossible d'obtenir le prix")
+		}
+  },
   createReservation: function(reservation) {
     if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
     //if (!Meteor.user().profile.creditCard) throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
@@ -23,6 +34,7 @@ Meteor.methods({
     reservation.ownerId = Meteor.userId()
     reservation.ownerName = Helpers.getFullName(Meteor.user().profile.firstName, Meteor.user().profile.lastName)
     reservation.createdAt = new Date
+		reservation.price = Meteor.methods.getPrice(reservation.startAt)
 
     var id = Reservations.insert(reservation, { validationContext: 'createReservation' })
 
@@ -134,14 +146,14 @@ Meteor.methods({
   },
 })
 
-function calculatePrice(vehicleType, distance, startAt) {
-	var price = vehicleType.ratePerKm * distance
+function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
+	var price = ratePerKm * distance
 	// if in rush hour
 	if ((6 < startAt && startAt < 9.5) || (17 < startAt && startAt < 19.5))
-		price = price * vehicleType.rateMultiplier
+		price = price * rateMultiplier
 
-	if (price < vehicleType.rateMin)
-		return vehicleType.rateMin
+	if (price < rateMin)
+		return rateMin
 	else
 		return price
 }

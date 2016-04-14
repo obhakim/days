@@ -3,6 +3,7 @@
   <div class="ui stackable grid">
     <div id="order-container" class="six wide column">
       <form id="reservationForm" class="ui form" novalidate>
+        {{> errormessage }}
         {{> validationerrors }} {{!--#each error in errors "other"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
@@ -71,9 +72,9 @@
         <div class="required field">
           <label>Type de véhicule</label>
           <select id="vehicletype">
-            <option>Type de véhicule</option>
+            <option value="">Type de véhicule</option>
             {{#each vehicleTypesList}}
-            <option>{{name}}</option>
+            <option value="{{_id}}">{{name}}</option>
             {{/each}}
           </select>
         </div>
@@ -81,8 +82,10 @@
         <div class="form-error">{ {error} }</div>
         { {/each--}}
 
+				<input type="hidden" id="distance" value="0" />
+				
         <div class="field">
-          <label>Votre voyage <span id="totaldistance">0</span> km, <span id="price">0.00</span> €</label>
+          <label>Votre voyage <span id="totaldistance">0</span> km, environ <span id="totalduration">0</span> minutes, <span id="price">0.00</span> €</label>
         </div>
 
         <div>
