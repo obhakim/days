@@ -1,5 +1,5 @@
 /* globals */
-
+/*
 describe('Email', function() {
 
   beforeEach(function() {
@@ -45,3 +45,4 @@ describe('Email', function() {
     expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
   });
 });
+*/

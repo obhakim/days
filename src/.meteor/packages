@@ -52,3 +52,4 @@ aldeed:template-extension
 standard-minifier-css
 standard-minifier-js
 chrismbeckett:toastr
+practicalmeteor:mocha
