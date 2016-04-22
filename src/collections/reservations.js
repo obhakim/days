@@ -20,7 +20,7 @@ Meteor.methods({
     //if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
     try {
       var vehicleType = VehicleTypes.findOne(vehicleTypeId)
-      return Reservations.calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance)
+      return calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance)
     } catch (ex) {
       //log
       throw new Meteor.Error('cannot-get-price', "Impossible d'obtenir le prix")
@@ -147,7 +147,7 @@ Meteor.methods({
 })
 
 //function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
-Reservations.calculatePrice = function (ratePerKm, rateMin, rateMultiplier, startAt, distance) {
+function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
   var price = ratePerKm * distance
   // if in rush hour
   if ((6 < startAt && startAt < 9.5) || (17 < startAt && startAt < 19.5))
@@ -158,6 +158,8 @@ Reservations.calculatePrice = function (ratePerKm, rateMin, rateMultiplier, star
   else
     return price
 }
+
+export default calculatePrice
 
 // // Define a namespace for Methods related to the Reservations collection
 // // Allows overriding for tests by replacing the implementation (2)
