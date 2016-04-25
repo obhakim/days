@@ -1,14 +1,14 @@
-VehicleTypes = new Mongo.Collection('vehicletypes')
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Mongo } from 'meteor/mongo';
 
-// PrePopulate data
-// if (Meteor.isServer && VehicleTypes.find().count() === 0) {
-if (Meteor.isServer && !VehicleTypes.findOne()) {
-  Meteor.startup(function () {
-    VehicleTypes.insert({ name: 'Berline', ratePerKm: 2.50, ratePerHour: 25, rateMin: 10, rateMultiplier: 1.2 })
-    VehicleTypes.insert({ name: 'Luxe', ratePerKm: 3.20, ratePerHour: 35, rateMin: 15, rateMultiplier: 1.2 })
-    VehicleTypes.insert({ name: 'Premium', ratePerKm: 5.00, ratePerHour: 50, rateMin: 20, rateMultiplier: 1.2 })
-    VehicleTypes.insert({ name: 'Van', ratePerKm: 4.50, ratePerHour: 50, rateMin: 15, rateMultiplier: 1.2 })
-  })
-}
+export const VehicleTypes = new Mongo.Collection('vehicletypes')
 
-VehicleTypes.attachSchema(Schema.VehicleType)
+VehicleTypes.schema = new SimpleSchema({
+  name: { label: 'Type de véhicule', type: String },
+  ratePerKm: { label: 'Tarif par km', type: Number, decimal: true },
+  ratePerHour: { label: 'Tarif par h', type: Number, decimal: true },
+  rateMin: { label: 'Tarif Min', type: Number, decimal: true },
+  rateMultiplier: { label: 'Mulitplicateur de Tarif', type: Number, decimal: true }
+})
+
+VehicleTypes.attachSchema(VehicleType.Schema)

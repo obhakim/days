@@ -1,18 +1,5 @@
 Schema = {}
 
-// Schema.getVehicleTypes = function getVehicleTypes () {
-//   return VehicleTypes.find().fetch().map(function (doc) {
-//     return doc.name
-//   })
-// }
-
-Schema.VehicleType = new SimpleSchema({
-  name: { label: 'Type de véhicule', type: String },
-  ratePerKm: { label: 'Tarif par km', type: Number, decimal: true },
-  ratePerHour: { label: 'Tarif par h', type: Number, decimal: true },
-  rateMin: { label: 'Tarif Min', type: Number, decimal: true },
-  rateMultiplier: { label: 'Mulitplicateur de Tarif', type: Number, decimal: true }
-})
 
 // Schema.UserCountry = new SimpleSchema({
 //     name: {
@@ -166,49 +153,3 @@ Schema.Ride = new SimpleSchema({
   distance: {label: 'Distance', type: Date},
 })
 
-Schema.Reservation = new SimpleSchema({
-  contact: {
-    type: Schema.Contact
-  },
-  ride: {
-    type: Schema.Ride
-  },
-  // vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
-  //vehicleType: {label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes()},
-	vehicleTypeId: {label: 'Type de véhicule', type: String, regEx: SimpleSchema.RegEx.Id },
-  price: {label: 'Prix', type: Number, decimal: true, defaultValue: 0.00, min: 0},
-  driverId: {label: 'Chauffeur', type: String, regEx: SimpleSchema.RegEx.Id, optional: true},
-  status: {label: 'Statut', type: Number, defaultValue: CONST.RESERVATION_STATUSES.CREATED},
-  ownerId: {label: 'Id Client', type: String, denyUpdate: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        return Meteor.userId() || 0
-      } else if (this.isUpsert) {
-        return {$setOnInsert: Meteor.userId() || 0}
-      } else {
-        this.unset()
-      }
-  }},
-  ownerName: {label: 'Client', type: String, denyUpdate: true,
-    autoValue: function () {
-      // console.log('{SimpleSchema ownerName} username = '+Meteor.user().username)
-      // console.log('{SimpleSchema ownerName} lastname = '+ this.field('lastname').value)
-      if (this.isInsert) {
-        return Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value
-      } else if (this.isUpsert) {
-        return {$setOnInsert: Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value}
-      } else {
-        this.unset()
-      }
-  }},
-  createdAt: {label: 'Réservé le', type: Date, denyUpdate: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date()
-      } else if (this.isUpsert) {
-        return {$setOnInsert: new Date()}
-      } else {
-        this.unset()
-      }
-  }}
-})
