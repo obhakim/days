@@ -1,10 +1,11 @@
-import { chai, assert } from 'meteor/practicalmeteor:chai'
-import { calculatePrice } from './reservations.js'
+import { chai, assert } from 'meteor/practicalmeteor:chai';
+import { calculatePrice } from './reservations.js';
+
 describe('Reservations', function () {
   describe('.calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance)', function () {
     it('should return price', function () {
-      var price = calculatePrice(2.2, 5.0, 1.2, new Date('01/01/2016 12:00', 100))
-      assert.equal(15, price)
+      const price = calculatePrice(2.2, 5.0, 1.2, new Date('01/01/2016 12:00', 100));
+      assert.equal(15, price);
     })
   })
 })
