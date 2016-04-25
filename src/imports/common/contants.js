@@ -1,4 +1,6 @@
-CONST = {
+import { Meteor } from 'meteor/meteor';
+
+export const CONST = {
   VERSION: 'V0.0.1',
 
   DEFAULT_LOCALE: 'fr',
@@ -15,10 +17,10 @@ CONST = {
   USER_ROLES: {
     CLIENT: 'client',
     DRIVER: 'driver',
-    ADMIN: 'admin'
+    ADMIN: 'admin',
   },
-}
+};
 
 if (Meteor.isServer) {
-  CONST.MAIL_FROM = 'no-reply@days.fr'
+  CONST.MAIL_FROM = 'no-reply@days.fr';
 }

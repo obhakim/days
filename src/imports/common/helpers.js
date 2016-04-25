@@ -1,28 +1,29 @@
-if (typeof Helpers === 'undefined' || Helpers === null) {
-  Helpers = {}
-}
+import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/meteor';
+import { check } from 'meteor/check';
+import { Roles } from 'meteor/alanning:roles';
+import { CONST } from './constants.js';
+
+export const Helpers = {};
 
 Helpers.isAdmin = function () {
-  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.ADMIN])
-}
+  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.ADMIN]);
+};
 
 Helpers.isDriver = function () {
   // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])
-  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER])
-}
+  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);
+};
 
 Helpers.getFullName = function (firstName, lastName) {
-  return firstName + ' ' + lastName
-}
+  return firstName + ' ' + lastName;
+};
 
 if (Meteor.isServer) {
   // Server side helpers
-  if (typeof Helpers === 'undefined' || Helpers === null) {
-    Helpers = {}
-  }
 
   Helpers.sendEmail = function (to, from, subject, text) {
-    check([to, from, subject, text], [String])
+    check([to, from, subject, text], [String]);
 
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
@@ -34,43 +35,43 @@ if (Meteor.isServer) {
       to: to,
       from: from,
       subject: subject,
-      text: text
-    })
-  }
+      text: text,
+    });
+  };
 
   Helpers.notifyNewReservation = function (email) {
-    check(email, String)
+    check(email, String);
 
-    var subject = 'Nouvelle reservation'
-    var text = 'Bonjour,\r\n\r\nune nouvelle reservation est disponible.'
+    const subject = 'Nouvelle reservation';
+    const text = 'Bonjour,\r\n\r\nune nouvelle reservation est disponible.';
 
-    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text)
-  }
+    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+  };
 
   Helpers.notifyReservationAcceptance = function (email) {
-    check(email, String)
+    check(email, String);
 
-    var subject = 'Reservation confirmée'
-    var text = 'Bonjour,\r\n\r\nVotre reservation est confirmée.\r\n\r\nDays'
+    const subject = 'Reservation confirmée';
+    const text = 'Bonjour,\r\n\r\nVotre reservation est confirmée.\r\n\r\nDays';
 
-    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text)
-  }
+    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+  };
 
   Helpers.notifyReservationConfirmation = function (email) {
-    check(email, String)
+    check(email, String);
 
-    var subject = 'Reservation effectuée'
-    var text = 'Bonjour,\r\n\r\nVotre reservation est effectuée.\r\n\r\nDays'
+    const subject = 'Reservation effectuée';
+    const text = 'Bonjour,\r\n\r\nVotre reservation est effectuée.\r\n\r\nDays';
 
-    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text)
-  }
+    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+  };
 
   Helpers.notifyReservationCancellation = function (email) {
-    check(email, String)
+    check(email, String);
 
-    var subject = 'Reservation annulée'
-    var text = 'Bonjour,\r\n\r\nVotre reservation est annulée.\r\n\r\nDays'
+    const subject = 'Reservation annulée';
+    const text = 'Bonjour,\r\n\r\nVotre reservation est annulée.\r\n\r\nDays';
 
-    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text)
-  }
+    Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
+  };
 }

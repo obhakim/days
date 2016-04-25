@@ -1,20 +1,59 @@
-import {
-  SimpleSchema,
-} from 'meteor/aldeed:simple-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { CONST } from '../common/constants.js';
 
 export const Reservations = new Mongo.Collection('reservations');
 
+Reservations.ContactSchema = new SimpleSchema({
+  lastname: {
+    label: 'Nom',
+    type: String,
+  },
+  firstname: {
+    label: 'Prénom',
+    type: String,
+    optional: true,
+  },
+  phone: {
+    label: 'Téléphone',
+    type: String,
+  },
+  email: {
+    label: 'Email',
+    type: String,
+    regEx: SimpleSchema.RegEx.Email,
+  },
+});
+
+Reservations.RideSchema = new SimpleSchema({
+  start: {
+    label: 'Départ',
+    type: String,
+  },
+  end: {
+    label: 'Destination',
+    type: String,
+  },
+  startAt: {
+    label: 'Le',
+    type: Date,
+  },
+  distance: {
+    label: 'Distance',
+    type: Date,
+  },
+});
+
 Reservations.Schema = new SimpleSchema({
   contact: {
-    type: Schema.Contact,
+    type: Reservations.ContactSchema,
   },
   ride: {
-    type: Schema.Ride,
+    type: Reservations.RideSchema,
   },
   // vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
-  //vehicleType: {label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes()},
+  // vehicleType: {label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes()},
   vehicleTypeId: {
     label: 'Type de véhicule',
     type: String,
@@ -58,7 +97,7 @@ Reservations.Schema = new SimpleSchema({
     label: 'Client',
     type: String,
     denyUpdate: true,
-    autoValue: function() {
+    autoValue: function autoValue() {
       // console.log('{SimpleSchema ownerName} username = '+Meteor.user().username)
       // console.log('{SimpleSchema ownerName} lastname = '+ this.field('lastname').value)
       if (this.isInsert) {
@@ -76,12 +115,12 @@ Reservations.Schema = new SimpleSchema({
     label: 'Réservé le',
     type: Date,
     denyUpdate: true,
-    autoValue: function() {
+    autoValue: function autoValue() {
       if (this.isInsert) {
         return new Date();
       } else if (this.isUpsert) {
         return {
-          $setOnInsert: new Date()
+          $setOnInsert: new Date(),
         };
       } else {
         this.unset();
@@ -93,9 +132,9 @@ Reservations.Schema = new SimpleSchema({
 Reservations.attachSchema(Reservations.Schema);
 
 // function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
-function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
+Reservations.calculatePrice = function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
   let price = ratePerKm * distance;
-    // if in rush hour
+  // if in rush hour
   if ((6 < startAt && startAt < 9.5) || (17 < startAt && startAt < 19.5)) {
     price = price * rateMultiplier;
   }
@@ -105,4 +144,4 @@ function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
   } else {
     return price;
   }
-}
+};
