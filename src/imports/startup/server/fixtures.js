@@ -1,12 +1,7 @@
-import {
-  Meteor
-} from 'meteor/meteor';
-import {
-  Lists
-} from '../../api/lists/lists.js';
-import {
-  Todos
-} from '../../api/todos/todos.js';
+import { Meteor } from 'meteor/meteor';
+import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
+// import { Lists } from '../../api/lists/lists.js';
+// import { Todos } from '../../api/todos/todos.js';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -18,30 +13,30 @@ Meteor.startup(() => {
       ratePerKm: 2.50,
       ratePerHour: 25,
       rateMin: 10,
-      rateMultiplier: 1.2
+      rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
       name: 'Luxe',
       ratePerKm: 3.20,
       ratePerHour: 35,
       rateMin: 15,
-      rateMultiplier: 1.2
+      rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
       name: 'Premium',
       ratePerKm: 5.00,
       ratePerHour: 50,
       rateMin: 20,
-      rateMultiplier: 1.2
+      rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
       name: 'Van',
       ratePerKm: 4.50,
       ratePerHour: 50,
       rateMin: 15,
-      rateMultiplier: 1.2
+      rateMultiplier: 1.2,
     });
-  };
+  }
   // if (Lists.find().count() === 0) {
   //   const data = [
   //     {
@@ -98,8 +93,8 @@ Meteor.startup(() => {
   //         createdAt: new Date(timestamp),
   //       });
 
-  //       timestamp += 1; // ensure unique timestamp.
-  //     });
-  //   });
-  // }
+//       timestamp += 1; // ensure unique timestamp.
+//     });
+//   });
+// }
 });

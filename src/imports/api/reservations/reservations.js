@@ -1,7 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { CONST } from '../common/constants.js';
+import { CONST } from '../../common/constants.js';
 
 export const Reservations = new Mongo.Collection('reservations');
 

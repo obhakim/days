@@ -1,5 +1,6 @@
 import { AccountsTemplates } from 'meteor/useraccounts:core';
-// import { TAPi18n } from 'meteor/tap:i18n';
+import { T9n } from 'meteor/softwarerero:accounts-t9n';
+//import { TAPi18n } from 'meteor/tap:i18n';
 
 // AccountsTemplates.configure({
 //   showForgotPasswordLink: true,
@@ -19,23 +20,23 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 //   defaultLayoutRegions: {},
 // });
 
-T9n.setLanguage('fr')
+T9n.setLanguage('fr');
 
-  T9n.map('fr', {
-    'Required Field': 'Champ obligatoire',
-    'Invalid email': 'Email non-valide',
-    'Minimum required length: 6': 'Au moins 6 caractères',
-    'Minimum required length: 5': 'Au moins 5 caractères',
-    error: {
-      accounts: {
-        'Login forbidden': 'Connexion interdite'
-      }
-    }
-  })
+T9n.map('fr', {
+  'Required Field': 'Champ obligatoire',
+  'Invalid email': 'Email non-valide',
+  'Minimum required length: 6': 'Au moins 6 caractères',
+  'Minimum required length: 5': 'Au moins 5 caractères',
+  error: {
+    accounts: {
+      'Login forbidden': 'Connexion interdite',
+    },
+  },
+});
 
-Accounts.config({
-  sendVerificationEmail: true
-})
+// Accounts.config({
+//   sendVerificationEmail: true,
+// });
 
 // Options
 AccountsTemplates.configure({
@@ -49,7 +50,7 @@ AccountsTemplates.configure({
   overrideLoginErrors: true,
   enablePasswordChange: true,
 
-  // sendVerificationEmail: true,
+  sendVerificationEmail: true,
   // enforceEmailVerification: true,
   // confirmPassword: true,
   // continuousValidation: false,
@@ -68,7 +69,7 @@ AccountsTemplates.configure({
 // Privacy Policy and Terms of Use
 // privacyUrl: 'privacy',
 // termsUrl: 'terms-of-use',
-})
+});
 
 AccountsTemplates.addFields([
   {
@@ -76,14 +77,14 @@ AccountsTemplates.addFields([
     type: 'text',
     displayName: 'Prénom',
     placeholder: 'Prénom',
-    required: true
+    required: true,
   },
   {
     _id: 'lastName',
     type: 'text',
     displayName: 'Nom',
     placeholder: 'Nom',
-    required: true
+    required: true,
   },
   // {
   //   _id: 'birthday',
@@ -100,7 +101,7 @@ AccountsTemplates.addFields([
     minLength: 6,
     // re: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g,
     re: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-    errStr: 'Téléphone non-valide'
+    errStr: 'Téléphone non-valide',
   },
 // {
 //   _id: 'role',
@@ -169,4 +170,4 @@ AccountsTemplates.addFields([
 //   displayName: 'Nom',
 //   //required: true,
 // },
-])
+]);

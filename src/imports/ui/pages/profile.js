@@ -1,32 +1,42 @@
+import './profile.html';
+
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { APP, SESSION } from '../../startup/client/constants.js';
+
 // function pad(n) {
 //     return (n < 10) ? ("0" + n) : n
 // }
 
 Template.profile.helpers({
   validThruM: function () {
-    var monthsList = []
-    for (var i = 1; i <= 12; i++) {
-      monthsList.push({ value: i })
+    const monthsList = [];
+    for (let i = 1; i <= 12; i++) {
+      monthsList.push({
+        value: i,
+      });
     }
-    return monthsList
+    return monthsList;
   },
   validThruY: function () {
-    var thisYear = new Date().getFullYear()
-    var yearsList = []
-    for (var i = 0; i < 5; i++) {
-      yearsList.push({ value: thisYear + i })
+    const thisYear = new Date().getFullYear();
+    const yearsList = [];
+    for (let i = 0; i < 5; i++) {
+      yearsList.push({
+        value: thisYear + i,
+      });
     }
-    return yearsList
+    return yearsList;
   },
   profile: function () {
-    return Meteor.user().profile
+    return Meteor.user().profile;
   },
-})
+});
 
 Template.profile.events({
   'submit #form': function (event) {
     // Prevent default browser form submit
-    event.preventDefault()
+    event.preventDefault();
 
     const data = {
       lastName: event.target.lastname.value,
@@ -40,22 +50,26 @@ Template.profile.events({
         validThruY: event.target.validThruY.value,
         cvv: event.target.cvv.value,
         name: event.target.name.value,
-      }
-    }
+      },
+    };
 
     Meteor.call('updateUserProfile', data, function (error, result) {
       if (error) {
-        var context = Meteor.users.simpleSchema().namedContext('updateUserProfile')
-        var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } })
-        Session.set(SESSION.VALIDATION_ERRORS, errors)
+        let context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
+        let errors = context.invalidKeys().map(function (data) {
+          return {
+            message: context.keyErrorMessage(data.name),
+          };
+        });
+        Session.set(SESSION.VALIDATION_ERRORS, errors);
       } else {
-        FlowRouter.go('/')
+        FlowRouter.go('/');
       }
-    })
+    });
 
-    return false
-  }
-})
+    return false;
+  },
+});
 
 Template.profile.onRendered(function () {
   this.$('.datetimepicker').datetimepicker({
@@ -67,5 +81,5 @@ Template.profile.onRendered(function () {
   // showTodayButton: true,
   // inline: true,
   // sideBySide: true,
-  })
-})
+  });
+});

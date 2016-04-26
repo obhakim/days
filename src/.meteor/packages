@@ -4,52 +4,92 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-# Useful packages
-meteor-base             # Packages every Meteor app needs to have
-mobile-experience       # Packages for a great mobile UX
-mongo                   # The database Meteor supports right now
-blaze-html-templates    # Compile .html files into Meteor Blaze views
-session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
-tracker                 # Meteor's client-side reactive programming library
+# Meteor packages used by this project one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you
+# but you can also edit it by hand.
+
+# meteor libraries
+meteor-base
+ecmascript
+es5-shim
+check
+tracker
 logging
 reload
-
-browser-policy			# Define browser security policies
-
-es5-shim                # ECMAScript 5 compatibility for older browsers.
-ecmascript              # Enable ECMAScript2015+ syntax in app code
-
-less					
-semantic:ui-css
-
-kadira:flow-router
-kadira:blaze-layout
-arillo:flow-router-helpers	# get urls by route name
-
-accounts-base				# Base db support for accounts
-accounts-password		
-
-aldeed:collection2			# attach validation schema
-
-fastclick					# Speed up touch clicks
-sarasate:semantic-ui-datetimepicker
-momentjs:moment				# Date format helpers for datetimespicker
-
-reactive-var 				# Store var in db
-reactive-dict				# Store dictionary in db
-zimme:active-route			# adds "active" classe for the active route item
-alanning:roles
 email
 
-check
-tmeasday:html5-history-api	# flow-router ie9 support
+# standard libraries
+jquery
+underscore
+less
+momentjs:moment				# Date format helpers for datetimespicker
 mdg:geolocation
+
+# ui
+blaze-html-templates
+session
+reactive-dict
+reactive-var
+aldeed:template-extension
+percolate:momentum
+semantic:ui-css
+sarasate:semantic-ui-datetimepicker
 sacha:spin
+chrismbeckett:toastr
+
+# data
+mongo
+aldeed:simple-schema
+aldeed:collection2
+dburles:collection-helpers
+reywood:publish-composite
+mdg:validated-method
+mdg:validation-error
+
+# routing
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+zimme:active-route
+tmeasday:html5-history-api	# flow-router ie9 support
+
+# i18n
+tap:i18n
+
+# accounts
+accounts-base
+accounts-password
+#useraccounts:unstyled
 useraccounts:semantic-ui
 useraccounts:flow-routing
-aldeed:template-extension
+softwarerero:accounts-t9n
+alanning:roles
+
+# mobile
+crosswalk 
+mobile-experience
+chriswessels:hammer
+fastclick					# Speed up touch clicks
+
+# production
+#juliancwirko:postcss@1.0.0-beta.11
 standard-minifier-css
 standard-minifier-js
-chrismbeckett:toastr
+ddp-rate-limiter
+#app-prod-security
+browser-policy			# Define browser security policies
+
+# rest apis
+#simple:rest-accounts-password
+#simple:rest
+
+# testing
+dburles:factory
+#publication-collector
+#stub-collections
+xolvio:cleaner
+dispatch:mocha-phantomjs
 practicalmeteor:mocha
+

@@ -1,29 +1,41 @@
+import './driver-join.html';
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Session } from 'meteor/session';
+import { SESSION } from '../../startup/client/constants.js';
+import { CONST } from '../../common/constants.js';
+import { moment } from 'meteor/momentjs:moment';
 
 Template.driverJoin.helpers({
   validThruM: function () {
-    var monthsList = []
-    for (var i = 1; i <= 12; i++) {
-      monthsList.push({ value: i })
+    const monthsList = [];
+    for (let i = 1; i <= 12; i++) {
+      monthsList.push({
+        value: i,
+      });
     }
-    return monthsList
+    return monthsList;
   },
   validThruY: function () {
-    var thisYear = new Date().getFullYear()
-    var yearsList = []
-    for (var i = 0; i < 5; i++) {
-      yearsList.push({ value: thisYear + i })
+    const thisYear = new Date().getFullYear();
+    const yearsList = [];
+    for (let i = 0; i < 5; i++) {
+      yearsList.push({
+        value: thisYear + i,
+      });
     }
-    return yearsList
+    return yearsList;
   },
   profile: function () {
-    return Meteor.user().profile
+    return Meteor.user().profile;
   },
-})
+});
 
 Template.driverJoin.events({
   'submit #form': function (event) {
     // Prevent default browser form submit
-    event.preventDefault()
+    event.preventDefault();
 
     const data = {
       lastName: event.target.lastname.value,
@@ -37,22 +49,26 @@ Template.driverJoin.events({
         validThruY: event.target.validThruY.value,
         cvv: event.target.cvv.value,
         name: event.target.name.value,
-      }
-    }
+      },
+    };
 
     Meteor.call('updateUserProfile', data, function (error, result) {
       if (error) {
-        var context = Meteor.users.simpleSchema().namedContext('updateUserProfile')
-        var errors = context.invalidKeys().map(function (data) { return { message: context.keyErrorMessage(data.name) } })
-        Session.set(SESSION.VALIDATION_ERRORS, errors)
+        const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
+        const errors = context.invalidKeys().map(function (data) {
+          return {
+            message: context.keyErrorMessage(data.name),
+          };
+        });
+        Session.set(SESSION.VALIDATION_ERRORS, errors);
       } else {
-        FlowRouter.go('/')
+        FlowRouter.go('/');
       }
-    })
+    });
 
-    return false
-  }
-})
+    return false;
+  },
+});
 
 Template.driverJoin.onRendered(function () {
   this.$('.datetimepicker').datetimepicker({
@@ -64,5 +80,5 @@ Template.driverJoin.onRendered(function () {
   // showTodayButton: true,
   // inline: true,
   // sideBySide: true,
-  })
-})
+  });
+});

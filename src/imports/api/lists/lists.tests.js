@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable func-names, prefer-arrow-callback */
 
-import { Factory } from 'meteor/factory';
+import { Factory } from 'meteor/dburles:factory';
 import { Lists } from './lists.js';
 import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
 import { Todos } from '../todos/todos.js';

@@ -2,6 +2,11 @@
 	"color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
 	"ignored_packages":
 	[
+		"ESLint-Formatter",
+		"JsFormat",
 		"Vintage"
-	]
+	],
+	"margin": 2,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true
 }
