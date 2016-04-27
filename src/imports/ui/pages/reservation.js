@@ -3,11 +3,11 @@ import { $ } from 'meteor/jquery';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
-import { SESSION } from '../../startup/client/constants.js';
-import { CONST } from '../../common/constants.js';
+import { CONST, SESSION } from '../../common/constants.js';
 import { Geolocation } from 'meteor/mdg:geolocation';
 import { Reservations } from '../../api/reservations/methods.js';
 import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
+import { moment } from 'meteor/momentjs:moment';
 
 import '../components/error-message.js';
 import '../components/validation-errors.js';

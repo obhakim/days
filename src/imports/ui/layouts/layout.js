@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
-import { APP, SESSION } from '../../startup/client/constants.js';
+import { APP, SESSION } from '../../common/constants.js';
 
 import '../lib/moment-locales.js';
 import '../components/loading.js';

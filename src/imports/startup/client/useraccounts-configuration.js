@@ -47,7 +47,7 @@ AccountsTemplates.configure({
   // },
   defaultContentRegion: 'content',
   showForgotPasswordLink: true,
-  overrideLoginErrors: true,
+  //overrideLoginErrors: true,
   enablePasswordChange: true,
 
   sendVerificationEmail: true,

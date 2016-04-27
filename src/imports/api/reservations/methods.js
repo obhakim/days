@@ -24,28 +24,31 @@ import { Helpers } from '../../common/helpers.js';
 //     })
 // }
 
+function getPrice(vehicleTypeId, startAt, distance) {
+  // if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
+  try {
+    const vehicleType = VehicleTypes.findOne(vehicleTypeId);
+    return Reservations.calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance);
+  } catch (ex) {
+    // log
+    throw new Meteor.Error('cannot-get-price', "Impossible d'obtenir le prix");
+  }
+}
+
 Meteor.methods({
-  getPrice: function getPrice(vehicleTypeId, startAt, distance) {
-    // if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
-    try {
-      const vehicleType = VehicleTypes.findOne(vehicleTypeId);
-      return Reservations.calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance);
-    } catch (ex) {
-      // log
-      throw new Meteor.Error('cannot-get-price', "Impossible d'obtenir le prix");
-    }
-  },
+  getPrice: getPrice,
   createReservation: function createReservation(reservation) {
     if (!Meteor.user() || !Meteor.user().profile) {
       throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action");
     }
-      // if (!Meteor.user().profile.creditCard) throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
-      // throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
+    // if (!Meteor.user().profile.creditCard) throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
+    // throw new Meteor.Error('no-card-info', "Vous devez ajouter l'information sur votre carte de paiement dans votre profile avant d'effectuer cette action")
 
     reservation.ownerId = Meteor.userId();
     reservation.ownerName = Helpers.getFullName(Meteor.user().profile.firstName, Meteor.user().profile.lastName);
     reservation.createdAt = new Date;
-    reservation.price = Meteor.methods.getPrice(reservation.startAt);
+    // console.out(getPrice);
+    reservation.price = getPrice(reservation.vehicleTypeId, reservation.ride.startAt, reservation.ride.distance);
 
     const id = Reservations.insert(reservation, {
       validationContext: 'createReservation',
@@ -59,18 +62,18 @@ Meteor.methods({
           fields: {
             emails: 1,
           },
-        }).fetch(), function (user) {
+        }).fetch(), function(user) {
           Helpers.notifyNewReservation(user.emails[0].address);
         });
       } catch (error) {
         throw error;
-        // console.log(error);
+      // console.log(error);
       }
     }
 
     return id;
   },
-  acceptReservation: function (reservationId, userId) {
+  acceptReservation: function(reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -103,13 +106,13 @@ Meteor.methods({
         Helpers.notifyReservationAcceptance(r.email);
       } catch (error) {
         throw error;
-        // console.log(error);
+      // console.log(error);
       }
     }
 
     return id;
   },
-  confirmReservation: function (reservationId, userId) {
+  confirmReservation: function(reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -140,13 +143,13 @@ Meteor.methods({
         Helpers.notifyReservationConfirmation(r.email);
       } catch (error) {
         throw error;
-        // console.log(error);
+      // console.log(error);
       }
     }
 
     return id;
   },
-  cancelReservation: function (reservationId, userId) {
+  cancelReservation: function(reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -173,7 +176,7 @@ Meteor.methods({
         Helpers.notifyReservationCancellation(r.email);
       } catch (error) {
         throw error;
-        // console.log(error);
+      // console.log(error);
       }
     }
 

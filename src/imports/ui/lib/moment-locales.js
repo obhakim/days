@@ -1,5 +1,5 @@
 import { moment } from 'meteor/momentjs:moment';
-import { APP } from '../../startup/client/constants.js';
+import { APP } from '../../common/constants.js';
 
 // (function (global, factory) {
 //    typeof exports === 'object' && typeof module !== 'undefined'

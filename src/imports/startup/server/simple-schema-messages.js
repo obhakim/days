@@ -32,10 +32,10 @@ Meteor.startup(function () {
       { exp: SimpleSchema.RegEx.IPv4, msg: '[label] doit être une adresse IPv4 valide' },
       { exp: SimpleSchema.RegEx.IPv6, msg: '[label] doit être une adresse IPv6 valide' },
       { exp: SimpleSchema.RegEx.Url, msg: '[label] doit être une URL valide' },
-      { exp: SimpleSchema.RegEx.Id, msg: '[label] doit être un ID alphanumérique valide' }
+      { exp: SimpleSchema.RegEx.Id, msg: '[label] doit être un ID alphanumérique valide' },
     ],
-    keyNotInSchema: "[key] n'est pas autorisé par le schéma"
-  })
+    keyNotInSchema: "[key] n'est pas autorisé par le schéma",
+  });
 // Defaults
 // SimpleSchema.messages({
 //     required: "[label] is required",

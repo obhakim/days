@@ -112,7 +112,7 @@ securedRoutes.route('/profile', {
   name: 'profile',
   action(pathParams, queryParams) {
     BlazeLayout.render('layout', {
-      content: 'profile',
+      content: 'Profile',
     });
   },
 });

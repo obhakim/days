@@ -2,7 +2,7 @@ import './error-message.html';
 
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
-import { SESSION } from '../../startup/client/constants.js';
+import { SESSION } from '../../common/constants.js';
 
 Template.errormessage.helpers({
   meteorerror: function () {

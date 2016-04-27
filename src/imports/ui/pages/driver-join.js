@@ -3,8 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
-import { SESSION } from '../../startup/client/constants.js';
-import { CONST } from '../../common/constants.js';
+import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
 Template.driverJoin.helpers({

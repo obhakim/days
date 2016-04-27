@@ -3,9 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const Users = Meteor.users;
 
-Users.attachSchema(Users.Schema);
-
-Users.VehicleSchema = new SimpleSchema({
+Users.vehicleSchema = new SimpleSchema({
   license: { type: String },
   // vehicleType: { label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes() },
   vehicleTypeId: { label: 'Type de véhicule', type: String, regEx: SimpleSchema.RegEx.Id },
@@ -13,7 +11,7 @@ Users.VehicleSchema = new SimpleSchema({
   'photos.$': { type: String },
 });
 
-Users.CreditCardSchema = new SimpleSchema({
+Users.creditCardSchema = new SimpleSchema({
   num: { type: String },
   validThruM: { type: Number, min: 1, max: 12 },
   validThruY: { type: Number },
@@ -21,7 +19,7 @@ Users.CreditCardSchema = new SimpleSchema({
   name: { type: String },
 });
 
-Users.ProfileSchema = new SimpleSchema({
+Users.profileSchema = new SimpleSchema({
   // gender: {
   //     type: String,
   //     allowedValues: ['M', 'Mme', 'Mlle']
@@ -44,11 +42,11 @@ Users.ProfileSchema = new SimpleSchema({
   // ,optional: true
   },
   vehicle: {
-    type: Users.VehicleSchema,
+    type: Users.vehicleSchema,
     optional: true,
   },
   creditCard: {
-    type: Users.CreditCardSchema,
+    type: Users.creditCardSchema,
     optional: true,
   },
 // website: {
@@ -62,7 +60,7 @@ Users.ProfileSchema = new SimpleSchema({
 // }
 });
 
-Users.Schema = new SimpleSchema({
+Users.schema = new SimpleSchema({
   // username: {
   //     type: String,
   //     // For accounts-password, either emails or username is required, but not both. It is OK to make this
@@ -97,7 +95,7 @@ Users.Schema = new SimpleSchema({
     type: Date,
   },
   profile: {
-    type: Users.ProfileSchema,
+    type: Users.profileSchema,
     optional: true,
   },
   // Make sure this services field is in your schema if you're using any of the accounts packages
@@ -132,6 +130,8 @@ Users.Schema = new SimpleSchema({
     optional: true,
   },
 });
+
+Meteor.users.attachSchema(Users.schema);
 
 // Schema.UserCountry = new SimpleSchema({
 //     name: {

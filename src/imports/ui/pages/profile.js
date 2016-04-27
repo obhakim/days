@@ -2,13 +2,19 @@ import './profile.html';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { APP, SESSION } from '../../startup/client/constants.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Session } from 'meteor/session';
+import { CONST, SESSION } from '../../common/constants.js';
+import { moment } from 'meteor/momentjs:moment';
 
-// function pad(n) {
-//     return (n < 10) ? ("0" + n) : n
-// }
+// import {
+//   updateProfile,
+// } from '../../api/users/methods.js';
 
-Template.profile.helpers({
+import '../lib/helpers.js';
+import '../components/validation-errors.js';
+
+Template.Profile.helpers({
   validThruM: function () {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
@@ -33,7 +39,7 @@ Template.profile.helpers({
   },
 });
 
-Template.profile.events({
+Template.Profile.events({
   'submit #form': function (event) {
     // Prevent default browser form submit
     event.preventDefault();
@@ -53,6 +59,20 @@ Template.profile.events({
       },
     };
 
+    // updateProfile.call(data, (error) => {
+    //   if (error) {
+    //     const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
+    //     const errors = context.invalidKeys().map(function (d) {
+    //       return {
+    //         message: context.keyErrorMessage(d.name),
+    //       };
+    //     });
+    //     Session.set(SESSION.VALIDATION_ERRORS, errors);
+    //   } else {
+    //     FlowRouter.go('/');
+    //   }
+    // });
+
     Meteor.call('updateUserProfile', data, function (error, result) {
       if (error) {
         let context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
@@ -71,7 +91,7 @@ Template.profile.events({
   },
 });
 
-Template.profile.onRendered(function () {
+Template.Profile.onRendered(function () {
   this.$('.datetimepicker').datetimepicker({
     // format: CONST.DEFAULT_DATETIME_FORMAT,
     format: CONST.DEFAULT_DATE_FORMAT,

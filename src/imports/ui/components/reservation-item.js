@@ -3,8 +3,7 @@ import './reservation-item.html';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
-import { CONST } from '../../common/constants.js';
-import { SESSION } from '../../startup/client/constants.js';
+import { CONST, SESSION } from '../../common/constants.js';
 import { Roles } from 'meteor/alanning:roles';
 
 Template.reservationItem.helpers({

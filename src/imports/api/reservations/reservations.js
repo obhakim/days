@@ -41,7 +41,10 @@ Reservations.RideSchema = new SimpleSchema({
   },
   distance: {
     label: 'Distance',
-    type: Date,
+    type: Number,
+    decimal: true,
+    defaultValue: 0.00,
+    min: 0,
   },
 });
 
