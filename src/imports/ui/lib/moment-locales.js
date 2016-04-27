@@ -1,4 +1,5 @@
 import { moment } from 'meteor/momentjs:moment';
+import { APP } from '../../startup/client/constants.js';
 
 // (function (global, factory) {
 //    typeof exports === 'object' && typeof module !== 'undefined'
@@ -7512,33 +7513,33 @@ var zh_tw = moment.defineLocale('zh-tw', {
     l: 'YYYY年MMMD日',
     ll: 'YYYY年MMMD日',
     lll: 'YYYY年MMMD日Ah點mm分',
-    llll: 'YYYY年MMMD日ddddAh點mm分'
+    llll: 'YYYY年MMMD日ddddAh點mm分',
   },
   meridiemParse: /早上|上午|中午|下午|晚上/,
   meridiemHour: function (hour, meridiem) {
     if (hour === 12) {
-      hour = 0
+      hour = 0;
     }
     if (meridiem === '早上' || meridiem === '上午') {
-      return hour
+      return hour;
     } else if (meridiem === '中午') {
-      return hour >= 11 ? hour : hour + 12
+      return hour >= 11 ? hour : hour + 12;
     } else if (meridiem === '下午' || meridiem === '晚上') {
-      return hour + 12
+      return hour + 12;
     }
   },
   meridiem: function (hour, minute, isLower) {
-    var hm = hour * 100 + minute
+    var hm = hour * 100 + minute;
     if (hm < 900) {
-      return '早上'
+      return '早上';
     } else if (hm < 1130) {
-      return '上午'
+      return '上午';
     } else if (hm < 1230) {
-      return '中午'
+      return '中午';
     } else if (hm < 1800) {
-      return '下午'
+      return '下午';
     } else {
-      return '晚上'
+      return '晚上';
     }
   },
   calendar: {
@@ -7547,7 +7548,7 @@ var zh_tw = moment.defineLocale('zh-tw', {
     nextWeek: '[下]ddddLT',
     lastDay: '[昨天]LT',
     lastWeek: '[上]ddddLT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   ordinalParse: /\d{1,2}(日|月|週)/,
   ordinal: function (number, period) {
@@ -7555,14 +7556,14 @@ var zh_tw = moment.defineLocale('zh-tw', {
       case 'd':
       case 'D':
       case 'DDD':
-        return number + '日'
+        return number + '日';
       case 'M':
-        return number + '月'
+        return number + '月';
       case 'w':
       case 'W':
-        return number + '週'
+        return number + '週';
       default:
-        return number
+        return number;
     }
   },
   relativeTime: {
@@ -7578,11 +7579,11 @@ var zh_tw = moment.defineLocale('zh-tw', {
     M: '一個月',
     MM: '%d個月',
     y: '一年',
-    yy: '%d年'
-  }
-})
+    yy: '%d年',
+  },
+});
 
 // moment.locale('en')
-moment.locale(Meteor.App.DEFAULT_LOCALE)
+moment.locale(APP.DEFAULT_LOCALE);
 
 // }))

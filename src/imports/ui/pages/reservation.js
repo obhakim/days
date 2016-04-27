@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 import { SESSION } from '../../startup/client/constants.js';
 import { CONST } from '../../common/constants.js';
 import { Geolocation } from 'meteor/mdg:geolocation';
-import { Reservations } from '../../api/reservations/reservations.js';
+import { Reservations } from '../../api/reservations/methods.js';
 import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 
 import '../components/error-message.js';
@@ -123,7 +123,7 @@ Template.reservation.events({
   },
 });
 
-Template.reservation.rendered(function () {
+Template.reservation.onRendered(function () {
   // Session.set(SESSION.ISLOADING, true)
 
   // $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))

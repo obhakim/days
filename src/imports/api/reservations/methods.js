@@ -7,7 +7,7 @@ import { _ } from 'meteor/underscore';
 import { Reservations } from './reservations.js';
 import { VehicleTypes } from '../vehicle-types/vehicle-types.js';
 import { CONST } from '../../common/constants.js';
-import { Helpers } from '../common/helpers.js';
+import { Helpers } from '../../common/helpers.js';
 
 
 // if (Meteor.isClient) {
