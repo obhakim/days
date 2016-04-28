@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Email } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { CONST } from './constants.js';

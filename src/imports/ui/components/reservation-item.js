@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 import { CONST, SESSION } from '../../common/constants.js';
 import { Roles } from 'meteor/alanning:roles';
 
-Template.reservationItem.helpers({
+Template.ReservationItem.helpers({
   // reservations: function () {
   //     return Reservations.find()
   // }
@@ -21,7 +21,7 @@ Template.reservationItem.helpers({
   },
 });
 
-Template.reservationItem.events({
+Template.ReservationItem.events({
   'click .acceptReservation': function () {
     Meteor.call('acceptReservation', this._id, Meteor.userId(), function (error, result) {
       if (error) {

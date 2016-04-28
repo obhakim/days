@@ -103,7 +103,7 @@ securedRoutes.route('/reservations', {
   name: 'reservations',
   action(pathParams, queryParams) {
     BlazeLayout.render('layout', {
-      content: 'reservations',
+      content: 'Reservations',
     });
   },
 });

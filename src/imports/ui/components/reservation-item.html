@@ -1,11 +1,11 @@
-<template name="reservationItem">
+<template name="ReservationItem">
   <tr>
     <td>{{formatDate createdAt}}</td>
-    <td>{{start}}</td>
-    <td>{{end}}</td>
-    <td>{{formatDate startAt}}</td>
-    <td>{{price}}</td>
-    <td>{{status}}</td>
+    <td>{{route.start}}</td>
+    <td>{{route.end}}</td>
+    <td>{{formatDate route.startAt}}</td>
+    <td>{{formatDecimal price}}</td>
+    <td>{{formatReservationStatus status}}</td>
     <td class="collapsing">
       {{#if isAcceptable}}
       <button type="button" class="acceptReservation ui icon button primary"><i class="checkmark icon"></i></button>

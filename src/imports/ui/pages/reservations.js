@@ -1,11 +1,17 @@
 import './reservations.html';
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Reservations } from '../../api/reservations/reservations.js';
 
-Meteor.subscribe('reservations');
+import '../components/reservation-item.js';
 
-Template.reservations.helpers({
+
+Template.Reservations.onCreated(function reservationsPageOnCreated() {
+  this.autorun(() => {
+    this.subscribe('reservations');
+  });
+});
+
+Template.Reservations.helpers({
   reservations: function () {
     return Reservations.find();
   },

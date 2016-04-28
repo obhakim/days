@@ -1,4 +1,4 @@
-<template name="reservations">
+<template name="Reservations">
   <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
   <div class="ui stackable grid">
     <form id="reservationForm" class="ui form">
@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          {{#each reservations}} {{> reservationItem}} {{/each}}
+          {{#each reservations}} {{> ReservationItem}} {{/each}}
         </tbody>
         {{!--<tfoot>
                 <tr>
