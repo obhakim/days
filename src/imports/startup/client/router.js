@@ -143,7 +143,7 @@ AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');
 
 // FlowRouter.route('/post/:slug', {
-//   action: function() {
+//   action: function () {
 //     BlazeLayout.render('layout', { content: 'post' })
 //   }
 // })

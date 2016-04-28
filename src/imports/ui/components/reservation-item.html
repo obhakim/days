@@ -1,9 +1,9 @@
 <template name="ReservationItem">
   <tr>
     <td>{{formatDate createdAt}}</td>
-    <td>{{route.start}}</td>
-    <td>{{route.end}}</td>
-    <td>{{formatDate route.startAt}}</td>
+    <td>{{ride.start}}</td>
+    <td>{{ride.end}}</td>
+    <td>{{formatDate ride.startAt}}</td>
     <td>{{formatDecimal price}}</td>
     <td>{{formatReservationStatus status}}</td>
     <td class="collapsing">

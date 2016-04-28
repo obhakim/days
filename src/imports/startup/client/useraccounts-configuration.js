@@ -128,7 +128,7 @@ AccountsTemplates.addFields([
 //   type: 'select',
 //   displayName: 'Type de véhicule',
 //   //required: true,
-//   // select: function() {
+//   // select: function () {
 //   //   return VehicleTypes.find().fetch().map(function (doc) {
 //   //     return doc.name
 //   //   })

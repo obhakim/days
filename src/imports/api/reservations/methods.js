@@ -12,7 +12,7 @@ import { Helpers } from '../../common/helpers.js';
 
 // if (Meteor.isClient) {
 //   // Update allowed values on client when VehicleTypes gets loaded
-//   Tracker.autorun(function() {
+//   Tracker.autorun(function () {
 //     Reservations._c2._simpleSchema._schema.vehicleType.allowedValues = Schema.getVehicleTypes()
 //   })
 // }
@@ -62,18 +62,18 @@ Meteor.methods({
           fields: {
             emails: 1,
           },
-        }).fetch(), function(user) {
+        }).fetch(), function (user) {
           Helpers.notifyNewReservation(user.emails[0].address);
         });
       } catch (error) {
-        throw error;
-      // console.log(error);
+        // throw error;
+        console.log(error);
       }
     }
 
     return id;
   },
-  acceptReservation: function(reservationId, userId) {
+  acceptReservation: function (reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -105,14 +105,14 @@ Meteor.methods({
       try {
         Helpers.notifyReservationAcceptance(r.email);
       } catch (error) {
-        throw error;
-      // console.log(error);
+        // throw error;
+        console.log(error);
       }
     }
 
     return id;
   },
-  confirmReservation: function(reservationId, userId) {
+  confirmReservation: function (reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -142,14 +142,14 @@ Meteor.methods({
       try {
         Helpers.notifyReservationConfirmation(r.email);
       } catch (error) {
-        throw error;
-      // console.log(error);
+        // throw error;
+        console.log(error);
       }
     }
 
     return id;
   },
-  cancelReservation: function(reservationId, userId) {
+  cancelReservation: function (reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -175,8 +175,8 @@ Meteor.methods({
       try {
         Helpers.notifyReservationCancellation(r.email);
       } catch (error) {
-        throw error;
-      // console.log(error);
+        // throw error;
+        console.log(error);
       }
     }
 
@@ -257,7 +257,7 @@ Meteor.methods({
 // })
 
 // Meteor.methods({
-//   createReservation: function(reservation) {
+//   createReservation: function (reservation) {
 //     // check(Meteor.userId(), String)
 //     // check(activity, {
 //     //   recipeName: String,

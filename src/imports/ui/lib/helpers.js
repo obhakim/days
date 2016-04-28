@@ -45,12 +45,12 @@ Template.registerHelper('formatReservationStatus', function (statusCode) {
 
   return displayName;
 });
-// Template.registerHelper('isChecked', function(key, value) {
+// Template.registerHelper('isChecked', function (key, value) {
 //     return key == value ? { selected: 'checked' } : ''
 // })
-// Template.registerHelper('isSelected', function(key, value) {
+// Template.registerHelper('isSelected', function (key, value) {
 //     return key == value ? { selected: 'selected' } : ''
 // })
-Template.registerHelper('equals', function(v1, v2) {
+Template.registerHelper('equals', function (v1, v2) {
   return v1 === v2;
 });

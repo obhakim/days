@@ -21,13 +21,13 @@ var af = moment.defineLocale('af', {
   weekdaysMin: 'So_Ma_Di_Wo_Do_Vr_Sa'.split('_'),
   meridiemParse: /vm|nm/i,
   isPM: function (input) {
-    return /^nm$/i.test(input)
+    return /^nm$/i.test(input);
   },
   meridiem: function (hours, minutes, isLower) {
     if (hours < 12) {
-      return isLower ? 'vm' : 'VM'
+      return isLower ? 'vm' : 'VM';
     } else {
-      return isLower ? 'nm' : 'NM'
+      return isLower ? 'nm' : 'NM';
     }
   },
   longDateFormat: {
@@ -36,7 +36,7 @@ var af = moment.defineLocale('af', {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd, D MMMM YYYY HH:mm'
+    LLLL: 'dddd, D MMMM YYYY HH:mm',
   },
   calendar: {
     sameDay: '[Vandag om] LT',
@@ -44,7 +44,7 @@ var af = moment.defineLocale('af', {
     nextWeek: 'dddd [om] LT',
     lastDay: '[Gister om] LT',
     lastWeek: '[Laas] dddd [om] LT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: 'oor %s',
@@ -59,7 +59,7 @@ var af = moment.defineLocale('af', {
     M: "'n maand",
     MM: '%d maande',
     y: "'n jaar",
-    yy: '%d jaar'
+    yy: '%d jaar',
   },
   ordinalParse: /\d{1,2}(ste|de)/,
   ordinal: function (number) {
@@ -67,9 +67,9 @@ var af = moment.defineLocale('af', {
   },
   week: {
     dow: 1, // Maandag is die eerste dag van die week.
-    doy: 4 // Die week wat die 4de Januarie bevat is die eerste week van die jaar.
-  }
-})
+    doy: 4, // Die week wat die 4de Januarie bevat is die eerste week van die jaar.
+  },
+});
 
 // ! moment.js locale configuration
 // ! locale : Moroccan Arabic (ar-ma)
@@ -88,7 +88,7 @@ var ar_ma = moment.defineLocale('ar-ma', {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D MMMM YYYY HH:mm'
+    LLLL: 'dddd D MMMM YYYY HH:mm',
   },
   calendar: {
     sameDay: '[اليوم على الساعة] LT',
@@ -96,7 +96,7 @@ var ar_ma = moment.defineLocale('ar-ma', {
     nextWeek: 'dddd [على الساعة] LT',
     lastDay: '[أمس على الساعة] LT',
     lastWeek: 'dddd [على الساعة] LT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: 'في %s',
@@ -111,13 +111,13 @@ var ar_ma = moment.defineLocale('ar-ma', {
     M: 'شهر',
     MM: '%d أشهر',
     y: 'سنة',
-    yy: '%d سنوات'
+    yy: '%d سنوات',
   },
   week: {
     dow: 6, // Saturday is the first day of the week.
-    doy: 12 // The week that contains Jan 1st is the first week of the year.
-  }
-})
+    doy: 12, // The week that contains Jan 1st is the first week of the year.
+  },
+});
 
 // ! moment.js locale configuration
 // ! locale : Arabic Saudi Arabia (ar-sa)
@@ -133,7 +133,7 @@ var ar_sa__symbolMap = {
     '7': '٧',
     '8': '٨',
     '9': '٩',
-    '0': '٠'
+    '0': '٠',
   }, ar_sa__numberMap = {
     '١': '1',
     '٢': '2',
@@ -144,8 +144,8 @@ var ar_sa__symbolMap = {
     '٧': '7',
     '٨': '8',
     '٩': '9',
-    '٠': '0'
-}
+    '٠': '0',
+};
 
 var ar_sa = moment.defineLocale('ar-sa', {
   months: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_'),
@@ -159,17 +159,17 @@ var ar_sa = moment.defineLocale('ar-sa', {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D MMMM YYYY HH:mm'
+    LLLL: 'dddd D MMMM YYYY HH:mm',
   },
   meridiemParse: /ص|م/,
   isPM: function (input) {
-    return 'م' === input
+    return 'م' === input;
   },
   meridiem: function (hour, minute, isLower) {
     if (hour < 12) {
-      return 'ص'
+      return 'ص';
     } else {
-      return 'م'
+      return 'م';
     }
   },
   calendar: {
@@ -178,7 +178,7 @@ var ar_sa = moment.defineLocale('ar-sa', {
     nextWeek: 'dddd [على الساعة] LT',
     lastDay: '[أمس على الساعة] LT',
     lastWeek: 'dddd [على الساعة] LT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: 'في %s',
@@ -193,23 +193,23 @@ var ar_sa = moment.defineLocale('ar-sa', {
     M: 'شهر',
     MM: '%d أشهر',
     y: 'سنة',
-    yy: '%d سنوات'
+    yy: '%d سنوات',
   },
   preparse: function (string) {
     return string.replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
-      return ar_sa__numberMap[match]
-    }).replace(/،/g, ',')
+      return ar_sa__numberMap[match];
+    }).replace(/،/g, ',');
   },
   postformat: function (string) {
     return string.replace(/\d/g, function (match) {
-      return ar_sa__symbolMap[match]
-    }).replace(/,/g, '،')
+      return ar_sa__symbolMap[match];
+    }).replace(/,/g, '،');
   },
   week: {
     dow: 6, // Saturday is the first day of the week.
-    doy: 12 // The week that contains Jan 1st is the first week of the year.
-  }
-})
+    doy: 12, // The week that contains Jan 1st is the first week of the year.
+  },
+});
 
 // ! moment.js locale configuration
 // ! locale  : Tunisian Arabic (ar-tn)
@@ -226,7 +226,7 @@ var ar_tn = moment.defineLocale('ar-tn', {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D MMMM YYYY HH:mm'
+    LLLL: 'dddd D MMMM YYYY HH:mm',
   },
   calendar: {
     sameDay: '[اليوم على الساعة] LT',
@@ -234,7 +234,7 @@ var ar_tn = moment.defineLocale('ar-tn', {
     nextWeek: 'dddd [على الساعة] LT',
     lastDay: '[أمس على الساعة] LT',
     lastWeek: 'dddd [على الساعة] LT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: 'في %s',
@@ -249,13 +249,13 @@ var ar_tn = moment.defineLocale('ar-tn', {
     M: 'شهر',
     MM: '%d أشهر',
     y: 'سنة',
-    yy: '%d سنوات'
+    yy: '%d سنوات',
   },
   week: {
     dow: 1, // Monday is the first day of the week.
-    doy: 4 // The week that contains Jan 4th is the first week of the year.
-  }
-})
+    doy: 4, // The week that contains Jan 4th is the first week of the year.
+  },
+});
 
 // ! moment.js locale configuration
 // ! Locale: Arabic (ar)
@@ -273,7 +273,7 @@ var ar__symbolMap = {
     '7': '٧',
     '8': '٨',
     '9': '٩',
-    '0': '٠'
+    '0': '٠',
   }, ar__numberMap = {
     '١': '1',
     '٢': '2',
@@ -284,7 +284,7 @@ var ar__symbolMap = {
     '٧': '7',
     '٨': '8',
     '٩': '9',
-    '٠': '0'
+    '٠': '0',
   }, pluralForm = function (n) {
     return n === 0 ? 0 : n === 1 ? 1 : n === 2 ? 2 : n % 100 >= 3 && n % 100 <= 10 ? 3 : n % 100 >= 11 ? 4 : 5
   }, plurals = {
@@ -293,16 +293,16 @@ var ar__symbolMap = {
     h: ['أقل من ساعة', 'ساعة واحدة', ['ساعتان', 'ساعتين'], '%d ساعات', '%d ساعة', '%d ساعة'],
     d: ['أقل من يوم', 'يوم واحد', ['يومان', 'يومين'], '%d أيام', '%d يومًا', '%d يوم'],
     M: ['أقل من شهر', 'شهر واحد', ['شهران', 'شهرين'], '%d أشهر', '%d شهرا', '%d شهر'],
-    y: ['أقل من عام', 'عام واحد', ['عامان', 'عامين'], '%d أعوام', '%d عامًا', '%d عام']
+    y: ['أقل من عام', 'عام واحد', ['عامان', 'عامين'], '%d أعوام', '%d عامًا', '%d عام'],
   }, pluralize = function (u) {
     return function (number, withoutSuffix, string, isFuture) {
       var f = pluralForm(number),
-        str = plurals[u][pluralForm(number)]
+        str = plurals[u][pluralForm(number)];
       if (f === 2) {
-        str = str[withoutSuffix ? 0 : 1]
+        str = str[withoutSuffix ? 0 : 1];
       }
-      return str.replace(/%d/i, number)
-    }
+      return str.replace(/%d/i, number);
+    };
   }, ar__months = [
     'كانون الثاني يناير',
     'شباط فبراير',
@@ -315,8 +315,8 @@ var ar__symbolMap = {
     'أيلول سبتمبر',
     'تشرين الأول أكتوبر',
     'تشرين الثاني نوفمبر',
-    'كانون الأول ديسمبر'
-]
+    'كانون الأول ديسمبر',
+];
 
 var ar = moment.defineLocale('ar', {
   months: ar__months,
@@ -330,17 +330,17 @@ var ar = moment.defineLocale('ar', {
     L: 'D/\u200FM/\u200FYYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D MMMM YYYY HH:mm'
+    LLLL: 'dddd D MMMM YYYY HH:mm',
   },
   meridiemParse: /ص|م/,
   isPM: function (input) {
-    return 'م' === input
+    return 'م' === input;
   },
   meridiem: function (hour, minute, isLower) {
     if (hour < 12) {
-      return 'ص'
+      return 'ص';
     } else {
-      return 'م'
+      return 'م';
     }
   },
   calendar: {
@@ -349,7 +349,7 @@ var ar = moment.defineLocale('ar', {
     nextWeek: 'dddd [عند الساعة] LT',
     lastDay: '[أمس عند الساعة] LT',
     lastWeek: 'dddd [عند الساعة] LT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: 'بعد %s',
@@ -364,23 +364,23 @@ var ar = moment.defineLocale('ar', {
     M: pluralize('M'),
     MM: pluralize('M'),
     y: pluralize('y'),
-    yy: pluralize('y')
+    yy: pluralize('y'),
   },
   preparse: function (string) {
     return string.replace(/\u200f/g, '').replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
-      return ar__numberMap[match]
-    }).replace(/،/g, ',')
+      return ar__numberMap[match];
+    }).replace(/،/g, ',');
   },
   postformat: function (string) {
     return string.replace(/\d/g, function (match) {
-      return ar__symbolMap[match]
-    }).replace(/,/g, '،')
+      return ar__symbolMap[match];
+    }).replace(/,/g, '،');
   },
   week: {
     dow: 6, // Saturday is the first day of the week.
-    doy: 12 // The week that contains Jan 1st is the first week of the year.
-  }
-})
+    doy: 12, // The week that contains Jan 1st is the first week of the year.
+  },
+});
 
 // ! moment.js locale configuration
 // ! locale : azerbaijani (az)
@@ -404,8 +404,8 @@ var az__suffixes = {
   10: '-uncu',
   30: '-uncu',
   60: '-ıncı',
-  90: '-ıncı'
-}
+  90: '-ıncı',
+};
 
 var az = moment.defineLocale('az', {
   months: 'yanvar_fevral_mart_aprel_may_iyun_iyul_avqust_sentyabr_oktyabr_noyabr_dekabr'.split('_'),
@@ -419,7 +419,7 @@ var az = moment.defineLocale('az', {
     L: 'DD.MM.YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd, D MMMM YYYY HH:mm'
+    LLLL: 'dddd, D MMMM YYYY HH:mm',
   },
   calendar: {
     sameDay: '[bugün saat] LT',
@@ -427,7 +427,7 @@ var az = moment.defineLocale('az', {
     nextWeek: '[gələn həftə] dddd [saat] LT',
     lastDay: '[dünən] LT',
     lastWeek: '[keçən həftə] dddd [saat] LT',
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: '%s sonra',
@@ -442,38 +442,38 @@ var az = moment.defineLocale('az', {
     M: 'bir ay',
     MM: '%d ay',
     y: 'bir il',
-    yy: '%d il'
+    yy: '%d il',
   },
   meridiemParse: /gecə|səhər|gündüz|axşam/,
   isPM: function (input) {
-    return /^(gündüz|axşam)$/.test(input)
+    return /^(gündüz|axşam)$/.test(input);
   },
   meridiem: function (hour, minute, isLower) {
     if (hour < 4) {
-      return 'gecə'
+      return 'gecə';
     } else if (hour < 12) {
-      return 'səhər'
+      return 'səhər';
     } else if (hour < 17) {
-      return 'gündüz'
+      return 'gündüz';
     } else {
-      return 'axşam'
+      return 'axşam';
     }
   },
   ordinalParse: /\d{1,2}-(ıncı|inci|nci|üncü|ncı|uncu)/,
   ordinal: function (number) {
     if (number === 0) { // special case for zero
-      return number + '-ıncı'
+      return number + '-ıncı';
     }
     var a = number % 10,
       b = number % 100 - a,
-      c = number >= 100 ? 100 : null
-    return number + (az__suffixes[a] || az__suffixes[b] || az__suffixes[c])
+      c = number >= 100 ? 100 : null;
+    return number + (az__suffixes[a] || az__suffixes[b] || az__suffixes[c]);
   },
   week: {
     dow: 1, // Monday is the first day of the week.
-    doy: 7 // The week that contains Jan 1st is the first week of the year.
-  }
-})
+    doy: 7, // The week that contains Jan 1st is the first week of the year.
+  },
+});
 
 // ! moment.js locale configuration
 // ! locale : belarusian (be)
@@ -482,7 +482,7 @@ var az = moment.defineLocale('az', {
 // ! Author : Menelion Elensúle : https://github.com/Oire
 
 function be__plural (word, num) {
-  var forms = word.split('_')
+  var forms = word.split('_');
   return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2])
 }
 function be__relativeTimeWithPlural (number, withoutSuffix, key) {
@@ -491,15 +491,15 @@ function be__relativeTimeWithPlural (number, withoutSuffix, key) {
     'hh': withoutSuffix ? 'гадзіна_гадзіны_гадзін' : 'гадзіну_гадзіны_гадзін',
     'dd': 'дзень_дні_дзён',
     'MM': 'месяц_месяцы_месяцаў',
-    'yy': 'год_гады_гадоў'
+    'yy': 'год_гады_гадоў',
   }
   if (key === 'm') {
-    return withoutSuffix ? 'хвіліна' : 'хвіліну'
+    return withoutSuffix ? 'хвіліна' : 'хвіліну';
   }
   else if (key === 'h') {
-    return withoutSuffix ? 'гадзіна' : 'гадзіну'
+    return withoutSuffix ? 'гадзіна' : 'гадзіну';
   } else {
-    return number + ' ' + be__plural(format[key], +number)
+    return number + ' ' + be__plural(format[key], +number);
   }
 }
 
@@ -512,7 +512,7 @@ var be = moment.defineLocale('be', {
   weekdays: {
     format: 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split('_'),
     standalone: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
-    isFormat: /\[ ?[Вв] ?(?:мінулую|наступную)? ?\] ?dddd/
+    isFormat: /\[ ?[Вв] ?(?:мінулую|наступную)? ?\] ?dddd/,
   },
   weekdaysShort: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
   weekdaysMin: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
@@ -522,14 +522,14 @@ var be = moment.defineLocale('be', {
     L: 'DD.MM.YYYY',
     LL: 'D MMMM YYYY г.',
     LLL: 'D MMMM YYYY г., HH:mm',
-    LLLL: 'dddd, D MMMM YYYY г., HH:mm'
+    LLLL: 'dddd, D MMMM YYYY г., HH:mm',
   },
   calendar: {
     sameDay: '[Сёння ў] LT',
     nextDay: '[Заўтра ў] LT',
     lastDay: '[Учора ў] LT',
     nextWeek: function () {
-      return '[У] dddd [ў] LT'
+      return '[У] dddd [ў] LT';
     },
     lastWeek: function () {
       switch (this.day()) {
@@ -537,14 +537,14 @@ var be = moment.defineLocale('be', {
         case 3:
         case 5:
         case 6:
-          return '[У мінулую] dddd [ў] LT'
+          return '[У мінулую] dddd [ў] LT';
         case 1:
         case 2:
         case 4:
-          return '[У мінулы] dddd [ў] LT'
+          return '[У мінулы] dddd [ў] LT';
       }
     },
-    sameElse: 'L'
+    sameElse: 'L',
   },
   relativeTime: {
     future: 'праз %s',
@@ -559,21 +559,21 @@ var be = moment.defineLocale('be', {
     M: 'месяц',
     MM: be__relativeTimeWithPlural,
     y: 'год',
-    yy: be__relativeTimeWithPlural
+    yy: be__relativeTimeWithPlural,
   },
   meridiemParse: /ночы|раніцы|дня|вечара/,
   isPM: function (input) {
-    return /^(дня|вечара)$/.test(input)
+    return /^(дня|вечара)$/.test(input);
   },
   meridiem: function (hour, minute, isLower) {
     if (hour < 4) {
-      return 'ночы'
+      return 'ночы';
     } else if (hour < 12) {
-      return 'раніцы'
+      return 'раніцы';
     } else if (hour < 17) {
-      return 'дня'
+      return 'дня';
     } else {
-      return 'вечара'
+      return 'вечара';
     }
   },
   ordinalParse: /\d{1,2}-(і|ы|га)/,
@@ -584,18 +584,18 @@ var be = moment.defineLocale('be', {
       case 'DDD':
       case 'w':
       case 'W':
-        return (number % 10 === 2 || number % 10 === 3) && (number % 100 !== 12 && number % 100 !== 13) ? number + '-і' : number + '-ы'
+        return (number % 10 === 2 || number % 10 === 3) && (number % 100 !== 12 && number % 100 !== 13) ? number + '-і' : number + '-ы';
       case 'D':
-        return number + '-га'
+        return number + '-га';
       default:
-        return number
+        return number;
     }
   },
   week: {
     dow: 1, // Monday is the first day of the week.
-    doy: 7 // The week that contains Jan 1st is the first week of the year.
-  }
-})
+    doy: 7, // The week that contains Jan 1st is the first week of the year.
+  },
+});
 
 // ! moment.js locale configuration
 // ! locale : bulgarian (bg)
@@ -1777,7 +1777,7 @@ var el = moment.defineLocale('el', {
   calendar: function (key, mom) {
     var output = this._calendarEl[key],
       hours = mom && mom.hours()
-    if (isFunction(output)) {
+    if (isfunction (output)) {
       output = output.apply(mom)
     }
     return output.replace('{}', (hours % 12 === 1 ? 'στη' : 'στις'))
@@ -7204,21 +7204,21 @@ var uk = moment.defineLocale('uk', {
     LLLL: 'dddd, D MMMM YYYY р., HH:mm'
   },
   calendar: {
-    sameDay: processHoursFunction('[Сьогодні '),
-    nextDay: processHoursFunction('[Завтра '),
-    lastDay: processHoursFunction('[Вчора '),
-    nextWeek: processHoursFunction('[У] dddd ['),
+    sameDay: processHoursfunction ('[Сьогодні '),
+    nextDay: processHoursfunction ('[Завтра '),
+    lastDay: processHoursfunction ('[Вчора '),
+    nextWeek: processHoursfunction ('[У] dddd ['),
     lastWeek: function () {
       switch (this.day()) {
         case 0:
         case 3:
         case 5:
         case 6:
-          return processHoursFunction('[Минулої] dddd [').call(this)
+          return processHoursfunction ('[Минулої] dddd [').call(this)
         case 1:
         case 2:
         case 4:
-          return processHoursFunction('[Минулого] dddd [').call(this)
+          return processHoursfunction ('[Минулого] dddd [').call(this)
       }
     },
     sameElse: 'L'
