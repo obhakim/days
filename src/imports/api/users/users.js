@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { CONST } from '../../common/constants.js';
 
 export const Users = Meteor.users;
 
@@ -123,6 +124,8 @@ Users.schema = new SimpleSchema({
   roles: {
     type: [String],
     optional: true,
+    allowedValues: [CONST.USER_ROLES.CLIENT, CONST.USER_ROLES.DRIVER, CONST.USER_ROLES.ADMIN],
+    defaultValue: CONST.USER_ROLES.CLIENT,
   },
   // In order to avoid an 'Exception in setInterval callback' from Meteor
   heartbeat: {

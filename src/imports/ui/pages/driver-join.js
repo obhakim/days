@@ -32,36 +32,37 @@ Template.driverJoin.helpers({
 });
 
 Template.driverJoin.events({
-  'submit #form': function (event) {
+  'submit #form': function driverJoinSubmitForm(event) {
     // Prevent default browser form submit
     event.preventDefault();
 
     const data = {
-      lastName: event.target.lastname.value,
-      firstName: event.target.firstname.value,
-      phone: event.target.phone.value,
-      // email: event.target.email.value,
-      birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
-      creditCard: {
-        num: event.target.num.value,
-        validThruM: event.target.validThruM.value,
-        validThruY: event.target.validThruY.value,
-        cvv: event.target.cvv.value,
-        name: event.target.name.value,
+      username: event.target.email.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+      profile: {
+        lastName: event.target.lastname.value,
+        firstName: event.target.firstname.value,
+        phone: event.target.phone.value,
+        // email: event.target.email.value,
+        birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
+        creditCard: {
+          num: event.target.num.value,
+          validThruM: event.target.validThruM.value,
+          validThruY: event.target.validThruY.value,
+          cvv: event.target.cvv.value,
+          name: event.target.name.value,
+        },
       },
     };
 
-    Meteor.call('updateUserProfile', data, function (error, result) {
+    // TODO: Add validation
+
+    Meteor.call('createDriver', data, (error) => {
       if (error) {
-        const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
-        const errors = context.invalidKeys().map(function (data) {
-          return {
-            message: context.keyErrorMessage(data.name),
-          };
-        });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+        Session.set(SESSION.ERROR, error);
       } else {
-        FlowRouter.go('/');
+        FlowRouter.go('/driver/cars');
       }
     });
 
@@ -69,7 +70,7 @@ Template.driverJoin.events({
   },
 });
 
-Template.driverJoin.onRendered(function () {
+Template.driverJoin.onRendered(function driverJoinOnRendered() {
   this.$('.datetimepicker').datetimepicker({
     // format: CONST.DEFAULT_DATETIME_FORMAT,
     format: CONST.DEFAULT_DATE_FORMAT,

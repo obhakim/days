@@ -1,13 +1,15 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+import { CONST } from '../../common/constants.js';
 
 // new validated-method style
 
-//import { ValidatedMethod } from 'meteor/mdg:validated-method';
-//import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-//import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
-//import { _ } from 'meteor/underscore';
+// import { ValidatedMethod } from 'meteor/mdg:validated-method';
+// import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+// import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
+// import { _ } from 'meteor/underscore';
 
-//import { Users } from './users.js';
+// import { Users } from './users.js';
 
 // export const updateProfile = new ValidatedMethod({
 //   name: 'users.updateProfile',
@@ -44,7 +46,7 @@ import { Meteor } from 'meteor/meteor';
 
 // old style
 Meteor.methods({
-  updateUserProfile: function (newProfile) {
+  updateUserProfile: (newProfile) => {
     const userId = Meteor.userId();
     // var isEmailChanged = currentProfile ?
     //     newProfile.email != currentProfile.email :
@@ -71,5 +73,15 @@ Meteor.methods({
     // }
 
   // return id
+  },
+  // Need this to force Driver role
+  createDriver: (newUser) => {
+    Accounts.createUser({
+      username: newUser.username,
+      email: newUser.email,
+      password: newUser.password,
+      profile: newUser.profile,
+      roles: CONST.USER_ROLES.DRIVER,
+    });
   },
 });
