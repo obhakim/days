@@ -5,6 +5,7 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 // Import to load these templates
 import '../../ui/layouts/layout.js';
 import '../../ui/pages/driver-join.js';
+import '../../ui/pages/driver-vehicles.js';
 import '../../ui/pages/drivers.js';
 import '../../ui/pages/home.js';
 import '../../ui/pages/not-authorized.js';
@@ -122,6 +123,15 @@ driverRoutes.route('/join', {
   action(pathParams, queryParams) {
     BlazeLayout.render('layout', {
       content: 'driverJoin',
+    });
+  },
+});
+
+driverRoutes.route('/vehicles', {
+  name: 'driverVehicles',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('layout', {
+      content: 'DriverVehicles',
     });
   },
 });

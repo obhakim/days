@@ -4,14 +4,6 @@ import { CONST } from '../../common/constants.js';
 
 export const Users = Meteor.users;
 
-Users.vehicleSchema = new SimpleSchema({
-  license: { type: String },
-  // vehicleType: { label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes() },
-  vehicleTypeId: { label: 'Type de véhicule', type: String, regEx: SimpleSchema.RegEx.Id },
-  color: { type: String },
-  'photos.$': { type: String },
-});
-
 Users.creditCardSchema = new SimpleSchema({
   num: { type: String },
   validThruM: { type: Number, min: 1, max: 12 },
@@ -41,10 +33,6 @@ Users.profileSchema = new SimpleSchema({
   phone: {
     type: String,
   // ,optional: true
-  },
-  vehicle: {
-    type: Users.vehicleSchema,
-    optional: true,
   },
   creditCard: {
     type: Users.creditCardSchema,
