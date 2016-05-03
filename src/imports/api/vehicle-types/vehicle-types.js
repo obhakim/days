@@ -11,4 +11,4 @@ VehicleTypes.schema = new SimpleSchema({
   rateMultiplier: { label: 'Mulitplicateur de Tarif', type: Number, decimal: true },
 });
 
-VehicleTypes.attachSchema(VehicleTypes.Schema);
+VehicleTypes.attachSchema(VehicleTypes.schema);

@@ -12,4 +12,4 @@ import './security.js';
 import './register-api.js';
 
 
-import './browser-policy.js'
+import './browser-policy.js';

@@ -2,8 +2,8 @@
 
 import { Meteor } from 'meteor/meteor';
 
-import { VehicleTypes } from '../vehicle-types.js';
+import { Vehicles } from '../vehicles.js';
 
-Meteor.publish('vehicletypes', function vehicletypes() {
-  return VehicleTypes.find()
-})
+Meteor.publish('vehicles', function publishVehicles() {
+  return Vehicles.find(); // Todo filter by current user
+});

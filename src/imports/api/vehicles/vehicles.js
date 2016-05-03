@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 
 export const Vehicles = new Mongo.Collection('vehicles');
 
-Vehicles.vehicleSchema = new SimpleSchema({
+Vehicles.schema = new SimpleSchema({
   ownerId: { label: 'Proprietaire', type: String, regEx: SimpleSchema.RegEx.Id },
   license: { type: String },
   // vehicleType: { label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes() },
@@ -12,4 +12,4 @@ Vehicles.vehicleSchema = new SimpleSchema({
   'photos.$': { type: String },
 });
 
-Vehicles.attachSchema(Vehicles.Schema);
+Vehicles.attachSchema(Vehicles.schema);
