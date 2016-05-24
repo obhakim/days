@@ -1,6 +1,7 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { Helpers } from '../../common/helpers.js';
 
 // Import to load these templates
 import '../../ui/layouts/layout.js';
@@ -21,20 +22,30 @@ import '../../ui/pages/vehicles.js';
 const publicRoutes = FlowRouter.group({
   name: 'public',
 });
-const driverRoutes = FlowRouter.group({
-  prefix: '/driver',
-  name: 'driver',
-});
+
 const securedRoutes = FlowRouter.group({
   prefix: '/s',
   name: 'secured',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
+
 // triggersEnter: [function (context, redirect) {
 //     //if(!Roles.userIsInRole(Meteor.user(), ['driver'])) {
 //     if(!(Meteor.loggingIn() || Meteor.user())) {
 //         FlowRouter.go(FlowRouter.path('/notAuthorized'))
 //     }
 // }]
+});
+
+const driverRoutes = securedRoutes.group({
+  prefix: '/driver',
+  name: 'driver',
+  triggersEnter: [(context, redirect) => {
+    console.log('trigger isDriver=' + Helpers.isDriver());
+    if (!Helpers.isDriver()) {
+      redirect('/notAuthorized');
+    }
+  },
+  ],
 });
 
 publicRoutes.route('/', {
@@ -100,6 +111,15 @@ publicRoutes.route('/notAuthorized', {
   },
 });
 
+publicRoutes.route('/driver/join', {
+  name: 'driverJoin',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('layout', {
+      content: 'driverJoin',
+    });
+  },
+});
+
 securedRoutes.route('/reservations', {
   name: 'reservations',
   action(pathParams, queryParams) {
@@ -114,15 +134,6 @@ securedRoutes.route('/profile', {
   action(pathParams, queryParams) {
     BlazeLayout.render('layout', {
       content: 'Profile',
-    });
-  },
-});
-
-driverRoutes.route('/join', {
-  name: 'driverJoin',
-  action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'driverJoin',
     });
   },
 });
