@@ -8,8 +8,11 @@ Vehicles.schema = new SimpleSchema({
   license: { type: String },
   // vehicleType: { label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes() },
   vehicleTypeId: { label: 'Type de véhicule', type: String, regEx: SimpleSchema.RegEx.Id },
+  // brand
+  // model
+  // year
   color: { type: String },
-  'photos.$': { type: String },
+  'photos.$': { type: String }, // 6 champs : devant avec immat, arrier avec immat, cote gauche, cote droit, interieur devant, interier arrier
 });
 
 Vehicles.attachSchema(Vehicles.schema);
