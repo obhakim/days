@@ -46,6 +46,8 @@ Reservations.RideSchema = new SimpleSchema({
     defaultValue: 0.00,
     min: 0,
   },
+
+  
 });
 
 Reservations.Schema = new SimpleSchema({
@@ -61,6 +63,10 @@ Reservations.Schema = new SimpleSchema({
     label: 'Type de véhicule',
     type: String,
     regEx: SimpleSchema.RegEx.Id,
+  },
+   Commentaire: {
+    label: 'Commentaire',
+    type: String
   },
   price: {
     label: 'Prix',
@@ -130,6 +136,7 @@ Reservations.Schema = new SimpleSchema({
       }
     },
   },
+
 });
 
 Reservations.attachSchema(Reservations.Schema);
