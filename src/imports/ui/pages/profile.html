@@ -33,6 +33,20 @@
                             />
                         </div>
 
+                         <fieldset >         
+                        <legend> Adresse</legend>
+                        <div class="required field">
+                            <p><span><label>Rue</label>
+                            <input style="width:50%;" id="street" type="text" placeholder="Rue" value="{{profile.street}}" required /></span>
+                       <span ><label>Code postal</label>
+                              <input style="width:20%;" id="zipcode" type="number" placeholder="Code postal" value="{{profile.zipcode}}" required /></span></p>
+
+                       <label>Ville</label>
+                            <input id="city" type="text" placeholder="city" value=" {{profile.city}}" required />
+                        
+                        </div>
+                        </fieldset>
+
                         <h4 class="ui dividing header">Information de paiement</h4>
                         <div class="field">
                             <label>Numéro</label>
