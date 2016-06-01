@@ -33,19 +33,23 @@
                             />
                         </div>
                          <h4 class="ui dividing header">Adresse</h4>
-                         <fieldset >         
+                         <div class="two fields">         
                         <div class="required field">
-                            <p><span><label>Rue</label>
-                            <input style="width:50%;" id="street" type="text" placeholder="Rue" value="{{profile.street}}" required /></span>
-                       <span ><label>Code postal</label>
-                              <input style="width:20%;" id="zipcode" type="number" placeholder="Code postal" value="{{profile.zipcode}}" required /></span></p>
-
-                       <label>Ville</label>
+                            
+                             <div  class="field">
+                             <label>Rue</label>
+                             <input id="street" type="text" placeholder="Rue" value="{{profile.street}}" required />
+                             </div>
+                            <div class="field">
+                            <label>Code postal</label>
+                            <input  id="zipcode" type="number" placeholder="Code postal" value="{{profile.zipcode}}" required />
+                            </div>
+                            </div>
+                           <div class="require field">
+                           <label>Ville</label>
                             <input id="city" type="text" placeholder="city" value=" {{profile.city}}" required />
-                        
-                        </div>
-                        </fieldset>
-
+                            </div>
+                         </div>
                         <h4 class="ui dividing header">Information de paiement</h4>
                         <div class="field">
                             <label>Numéro</label>

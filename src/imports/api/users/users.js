@@ -99,6 +99,10 @@ Users.schema = new SimpleSchema({
     type: Users.profileSchema,
     optional: true,
   },
+   driver: {
+    type: Users.profileSchema,
+    optional: true,
+  },
   // Make sure this services field is in your schema if you're using any of the accounts packages
   services: {
     type: Object,
