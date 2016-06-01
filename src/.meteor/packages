@@ -90,6 +90,6 @@ dburles:factory
 #publication-collector
 #stub-collections
 xolvio:cleaner
-dispatch:mocha-phantomjs
+#dispatch:mocha-phantomjs
 practicalmeteor:mocha
 

@@ -11,10 +11,9 @@ Helpers.isAdmin = function () {
 };
 
 Helpers.isDriver = function () {
-  return Roles.addUsersToRoles(this.userId,[CONST.USER_ROLES.DRIVER] ); 
   // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])
   // console.log('isDriver : ' + Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]));
-  //return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);
+  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);
 };
 
 Helpers.getFullName = function (firstName, lastName) {

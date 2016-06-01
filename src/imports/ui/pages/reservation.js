@@ -42,7 +42,6 @@ Template.reservation.helpers({
   profile: function () {
     return (Meteor.user() && Meteor.user().profile) ? Meteor.user().profile : {};
   },
-  
 // errors: function () {
 //       return Session.get(SESSION.VALIDATION_ERRORS)
 //   }
@@ -95,7 +94,6 @@ Template.reservation.events({
         distance: event.target.distance.value,
       },
       vehicleTypeId: event.target.vehicletype.value,
-      Commentaire: event.target.commentaire.value,
     };
 
     Meteor.call('createReservation', r, function (err, res) {
@@ -111,8 +109,7 @@ Template.reservation.events({
             };
           });
           Session.set(SESSION.VALIDATION_ERRORS, errors);
-        } 
-        else {
+        } else {
           Session.set(SESSION.VALIDATION_ERRORS, [{
             message: err.reason,
           }]);
@@ -158,7 +155,6 @@ Template.reservation.onRendered(function () {
   const startAt = /** @type {!HTMLInputElement} */ (document.getElementById('startat'));
   const vehicleType = /** @type {!HTMLInputElement} */ (document.getElementById('vehicletype'));
   const distance = /** @type {!HTMLInputElement} */ (document.getElementById('distance'));
-  const CommentaiRe = /** @type {!HTMLInputElement} */ (document.getElementById('commentaire'));
   const totalDistance = /** @type {!HTMLElement} */ (document.getElementById('totaldistance'));
   const totalDuration = /** @type {!HTMLElement} */ (document.getElementById('totalduration'));
   const totalPrice = /** @type {!HTMLElement} */ (document.getElementById('price'));

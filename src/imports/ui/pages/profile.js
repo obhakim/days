@@ -48,9 +48,6 @@ Template.Profile.events({
       lastName: event.target.lastname.value,
       firstName: event.target.firstname.value,
       phone: event.target.phone.value,
-      street: event.target.street.value,
-      city: event.target.city.value,
-      zipcode: event.target.zipcode.value,
       // email: event.target.email.value,
       birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
       creditCard: {

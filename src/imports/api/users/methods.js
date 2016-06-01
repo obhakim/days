@@ -83,6 +83,5 @@ Meteor.methods({
       profile: newUser.profile,
       roles: CONST.USER_ROLES.DRIVER,
     });
-
   },
 });
