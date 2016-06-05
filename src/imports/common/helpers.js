@@ -7,13 +7,16 @@ import { CONST } from './constants.js';
 export const Helpers = {};
 
 Helpers.isAdmin = function () {
-  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.ADMIN]);
+  return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.ADMIN);
 };
 
 Helpers.isDriver = function () {
-  // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])
-  // console.log('isDriver : ' + Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]));
-  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);
+  // console.log(Meteor.userId());
+  // console.log(CONST.USER_ROLES.DRIVER);
+  // console.log('isDriver : ' + Roles.userIsInRole(Meteor.userId(), 'driver'));
+  // console.log(this.userId);
+  // console.log('isDriver : ' + Roles.userIsInRole(this.userId, CONST.USER_ROLES.DRIVER));
+  return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.DRIVER);
 };
 
 Helpers.getFullName = function (firstName, lastName) {

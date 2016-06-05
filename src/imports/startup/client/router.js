@@ -40,7 +40,7 @@ const driverRoutes = securedRoutes.group({
   prefix: '/driver',
   name: 'driver',
   triggersEnter: [(context, redirect) => {
-    console.log('trigger isDriver=' + Helpers.isDriver());
+    // console.log('trigger isDriver=' + Helpers.isDriver());
     if (!Helpers.isDriver()) {
       redirect('/notAuthorized');
     }

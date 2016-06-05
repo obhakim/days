@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
 import { CONST } from '../../common/constants.js';
 
 // new validated-method style
@@ -76,12 +77,13 @@ Meteor.methods({
   },
   // Need this to force Driver role
   createDriver: (newUser) => {
-    Accounts.createUser({
+    const userId = Accounts.createUser({
       username: newUser.username,
       email: newUser.email,
       password: newUser.password,
       profile: newUser.profile,
-      roles: CONST.USER_ROLES.DRIVER,
     });
+
+    Roles.addUsersToRoles(userId, CONST.USER_ROLES.DRIVER);
   },
 });
