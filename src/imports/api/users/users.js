@@ -55,6 +55,7 @@ Users.profileSchema = new SimpleSchema({
   // ,optional: true
   },
   zipcode: {
+    type: String,
   // ,optional: true
   },
   creditCard: {
