@@ -37,6 +37,24 @@
                             <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" />
                         </div>
 
+                        <h4 class="ui dividing header">Addresse</h4>
+                        <div class="required field">
+                            <label>Rue</label>
+                            <input id="street" type="text" placeholder="Rue" value="{{profile.street}}" required />
+                        </div>
+
+                        <div class="two fields">
+                            <div class="four wide required field">
+                                <label>Code postal</label>
+                                <input id="zipcode" type="number" placeholder="00000" maxlength="10" value="{{profile.zipcode}}" required />
+                            </div>
+
+                            <div class="twelve wide required field">
+                                <label>Ville</label>
+                                <input id="city" type="text" placeholder="Ville" value="{{profile.city}}" required />
+                            </div>
+                        </div>
+
                         <h4 class="ui dividing header">Information de paiement</h4>
                         <div class="field">
                             <label>Numéro</label>

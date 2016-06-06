@@ -25,32 +25,32 @@
 
                         <div class="required field">
                             <label>Téléphone</label>
-                            <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" required/>
+                            <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" required />
                         </div>
 
                         <div class="field">
                             <label>Date de naissance</label>
-                            <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" value="{{formatDate profile.birthday}}"
-                            />
+                            <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" value="{{formatDate profile.birthday}}" />
                         </div>
-                         <h4 class="ui dividing header">Adresse</h4>
-                         <div class="two fields">         
+
+                        <h4 class="ui dividing header">Addresse</h4>
                         <div class="required field">
-                            
-                             <div  class="field">
-                             <label>Rue</label>
-                             <input id="street" type="text" placeholder="Rue" value="{{profile.street}}" required />
-                             </div>
-                            <div class="field">
-                            <label>Code postal</label>
-                            <input  id="zipcode" type="number" placeholder="Code postal" value="{{profile.zipcode}}" required />
+                            <label>Rue</label>
+                            <input id="street" type="text" placeholder="Rue" value="{{profile.street}}" required />
+                        </div>
+
+                        <div class="two fields">
+                            <div class="four wide required field">
+                                <label>Code postal</label>
+                                <input id="zipcode" type="number" placeholder="00000" maxlength="10" value="{{profile.zipcode}}" required />
                             </div>
+
+                            <div class="twelve wide required field">
+                                <label>Ville</label>
+                                <input id="city" type="text" placeholder="Ville" value="{{profile.city}}" required />
                             </div>
-                           <div class="require field">
-                           <label>Ville</label>
-                            <input id="city" type="text" placeholder="city" value=" {{profile.city}}" required />
-                            </div>
-                         </div>
+                        </div>
+                        
                         <h4 class="ui dividing header">Information de paiement</h4>
                         <div class="field">
                             <label>Numéro</label>

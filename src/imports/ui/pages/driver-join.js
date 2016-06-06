@@ -7,7 +7,7 @@ import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
 Template.driverJoin.helpers({
-  validThruM: function () {
+  validThruM: function() {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
@@ -16,7 +16,7 @@ Template.driverJoin.helpers({
     }
     return monthsList;
   },
-  validThruY: function () {
+  validThruY: function() {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
@@ -26,7 +26,7 @@ Template.driverJoin.helpers({
     }
     return yearsList;
   },
-  profile: function () {
+  profile: function() {
     return Meteor.user().profile;
   },
 });
@@ -46,6 +46,9 @@ Template.driverJoin.events({
         phone: event.target.phone.value,
         // email: event.target.email.value,
         birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
+        street: event.target.street.value,
+        city: event.target.city.value,
+        zipcode: event.target.zipcode.value,
         creditCard: {
           num: event.target.num.value,
           validThruM: event.target.validThruM.value,
@@ -64,7 +67,7 @@ Template.driverJoin.events({
       } else {
     //         let userId = Meteor.userId();
     // Roles.addUsersToRoles( userId, [ 'driver'] );
-        FlowRouter.go('/s/driver/vehicles');  // TODO : replace with redirection by root name
+        FlowRouter.go('/s/driver/vehicles'); // TODO : replace with redirection by root name
       }
     });
 
