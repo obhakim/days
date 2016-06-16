@@ -138,6 +138,15 @@ securedRoutes.route('/profile', {
   },
 });
 
+driverRoutes.route('/company', {
+  name: 'driverCompany',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'DriverCompany',
+    });
+  },
+});
+
 driverRoutes.route('/vehicles', {
   name: 'driverVehicles',
   action(pathParams, queryParams) {

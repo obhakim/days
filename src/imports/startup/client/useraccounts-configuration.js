@@ -40,7 +40,7 @@ T9n.map('fr', {
 
 // Options
 AccountsTemplates.configure({
-  defaultLayout: 'layout',
+  defaultLayout: 'Layout',
   // defaultLayoutRegions: {
   //   nav: 'nav',
   //   footer: 'footer',

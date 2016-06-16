@@ -65,7 +65,7 @@ Template.DriverJoin.events({
       if (error) {
         Session.set(SESSION.ERROR, error);
       } else {
-        FlowRouter.go('/s/driver/vehicles'); // TODO : replace with redirection by root name
+        FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
       }
     });
 

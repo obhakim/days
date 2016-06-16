@@ -6,11 +6,11 @@ import { CONST } from './constants.js';
 
 export const Helpers = {};
 
-Helpers.isAdmin = function () {
+Helpers.isAdmin = function() {
   return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.ADMIN);
 };
 
-Helpers.isDriver = function () {
+Helpers.isDriver = function() {
   // console.log(Meteor.userId());
   // console.log(CONST.USER_ROLES.DRIVER);
   // console.log('isDriver : ' + Roles.userIsInRole(Meteor.userId(), 'driver'));
@@ -19,14 +19,14 @@ Helpers.isDriver = function () {
   return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.DRIVER);
 };
 
-Helpers.getFullName = function (firstName, lastName) {
+Helpers.getFullName = function(firstName, lastName) {
   return firstName + ' ' + lastName;
 };
 
 if (Meteor.isServer) {
   // Server side helpers
 
-  Helpers.sendEmail = function (to, from, subject, text) {
+  Helpers.sendEmail = function(to, from, subject, text) {
     check([to, from, subject, text], [String]);
 
     // Let other method calls from the same client start running,
@@ -43,7 +43,7 @@ if (Meteor.isServer) {
     });
   };
 
-  Helpers.notifyNewReservation = function (email) {
+  Helpers.notifyNewReservation = function(email) {
     check(email, String);
 
     const subject = 'Nouvelle reservation';
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
     Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
   };
 
-  Helpers.notifyReservationAcceptance = function (email) {
+  Helpers.notifyReservationAcceptance = function(email) {
     check(email, String);
 
     const subject = 'Reservation confirmée';
@@ -61,7 +61,7 @@ if (Meteor.isServer) {
     Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
   };
 
-  Helpers.notifyReservationConfirmation = function (email) {
+  Helpers.notifyReservationConfirmation = function(email) {
     check(email, String);
 
     const subject = 'Reservation effectuée';
@@ -70,7 +70,7 @@ if (Meteor.isServer) {
     Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
   };
 
-  Helpers.notifyReservationCancellation = function (email) {
+  Helpers.notifyReservationCancellation = function(email) {
     check(email, String);
 
     const subject = 'Reservation annulée';

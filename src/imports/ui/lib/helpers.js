@@ -1,11 +1,28 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { CONST } from '../../common/constants.js';
+import { Helpers } from '../../common/helpers.js';
 import { moment } from 'meteor/momentjs:moment';
 
 
 Template.registerHelper('isLoggedIn', function () {
   return !!Meteor.user();
+});
+
+Template.registerHelper('isClient', function () {
+  return !(Helpers.isDriver() || Helpers.isAdmin());
+});
+
+Template.registerHelper('isDriver', function () {
+  return Helpers.isDriver();
+});
+
+Template.registerHelper('isAdmin', function () {
+  return Helpers.isAdmin();
+});
+
+Template.registerHelper('isDriverOrAdmin', function () {
+  return Helpers.isDriver() || Helpers.isAdmin();
 });
 
 Template.registerHelper('currentUserEmail', function () {
@@ -14,6 +31,7 @@ Template.registerHelper('currentUserEmail', function () {
   }
   return '';
 });
+
 
 Template.registerHelper('formatDate', function (date) {
   return moment(date).format(CONST.DEFAULT_DATETIME_FORMAT);
