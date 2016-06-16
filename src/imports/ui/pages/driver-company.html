@@ -1,0 +1,21 @@
+<template name="DriverCompany">
+    <div class="ui middle aligned centered grid">
+        <div class="at-column column">
+            <h1 class="ui center aligned header">Société</h1>
+            <div class="ui stackable segment">
+                <div class="six wide column">
+                    <form id="form" class="ui form" novalidate>
+                        {{> errormessage }}
+                        <h4 class="ui dividing header">Information</h4>
+                        <div class="required field">
+                            <label>Field</label>
+                            <input id="field" type="text" placeholder="Field" required />
+                        </div>
+
+                        <input type="submit" value="Enregistrer" class="ui fluid large primary button">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
