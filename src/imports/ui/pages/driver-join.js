@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
-Template.driverJoin.helpers({
+Template.DriverJoin.helpers({
   validThruM: function() {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
@@ -31,7 +31,7 @@ Template.driverJoin.helpers({
   },
 });
 
-Template.driverJoin.events({
+Template.DriverJoin.events({
   'submit #form': function driverJoinSubmitForm(event) {
     // Prevent default browser form submit
     event.preventDefault();
@@ -73,7 +73,7 @@ Template.driverJoin.events({
   },
 });
 
-Template.driverJoin.onRendered(function driverJoinOnRendered() {
+Template.DriverJoin.onRendered(function driverJoinOnRendered() {
   this.$('.datetimepicker').datetimepicker({
     // format: CONST.DEFAULT_DATETIME_FORMAT,
     format: CONST.DEFAULT_DATE_FORMAT,
