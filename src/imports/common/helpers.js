@@ -19,6 +19,8 @@ Helpers.isDriver = function() {
   return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.DRIVER);
 };
 
+Helpers.isDriverOrAdmin = () => Helpers.isAdmin() || Helpers.isDriver();
+
 Helpers.getFullName = function(firstName, lastName) {
   return firstName + ' ' + lastName;
 };

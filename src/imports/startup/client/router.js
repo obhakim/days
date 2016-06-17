@@ -6,6 +6,7 @@ import { Helpers } from '../../common/helpers.js';
 // Import to load these templates
 import '../../ui/layouts/layout.js';
 import '../../ui/pages/driver-join.js';
+import '../../ui/pages/driver-company.js';
 import '../../ui/pages/driver-vehicles.js';
 import '../../ui/pages/drivers.js';
 import '../../ui/pages/home.js';

@@ -9,10 +9,6 @@ Template.registerHelper('isLoggedIn', function () {
   return !!Meteor.user();
 });
 
-Template.registerHelper('isClient', function () {
-  return !(Helpers.isDriver() || Helpers.isAdmin());
-});
-
 Template.registerHelper('isDriver', function () {
   return Helpers.isDriver();
 });
@@ -22,7 +18,7 @@ Template.registerHelper('isAdmin', function () {
 });
 
 Template.registerHelper('isDriverOrAdmin', function () {
-  return Helpers.isDriver() || Helpers.isAdmin();
+  return Helpers.isDriverOrAdmin();
 });
 
 Template.registerHelper('currentUserEmail', function () {
