@@ -31,5 +31,5 @@ Template.DriverCompany.events({
   },
 });
 
-Template.DriverCompany.onRendered(function driverCompanyOnRendered() {
+Template.DriverCompany.onRendered(() => {
 });
