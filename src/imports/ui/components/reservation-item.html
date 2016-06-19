@@ -9,13 +9,13 @@
     <td>{{formatReservationStatus status}}</td>
     <td class="collapsing">
       {{#if isAcceptable}}
-      <button type="button" class="acceptReservation ui icon button primary"><i class="checkmark icon"></i></button>
+      <button type="button" class="acceptReservation ui icon button primary" title="Accepter"><i class="checkmark icon"></i></button>
       {{/if}}
       {{#if isConfirmable}}
-      <button type="button" class="confirmReservation ui icon button secondary"><i class="payment icon"></i></button>
+      <button type="button" class="confirmReservation ui icon button secondary" title="Confirmer"><i class="payment icon"></i></button>
       {{/if}}
       {{#if isCancelable}}
-      <button type="button" class="cancelReservation ui icon button"><i class="remove icon"></i></button>
+      <button type="button" class="cancelReservation ui icon button" title="Annuler"><i class="remove icon"></i></button>
       {{/if}}
     </td>
   </tr>

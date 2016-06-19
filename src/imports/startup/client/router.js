@@ -178,6 +178,7 @@ import { Helpers } from '../../common/helpers.js';
 // Import to load these templates
 import '../../ui/layouts/layout.js';
 import '../../ui/pages/driver-join.js';
+import '../../ui/pages/driver-company.js';
 import '../../ui/pages/driver-vehicles.js';
 import '../../ui/pages/drivers.js';
 import '../../ui/pages/home.js';
@@ -223,8 +224,8 @@ const driverRoutes = securedRoutes.group({
 publicRoutes.route('/', {
   name: 'home',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'home',
+    BlazeLayout.render('Layout', {
+      content: 'Home',
     });
   },
 });
@@ -232,8 +233,8 @@ publicRoutes.route('/', {
 publicRoutes.route('/services', {
   name: 'services',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'services',
+    BlazeLayout.render('Layout', {
+      content: 'Services',
     });
   },
 });
@@ -241,8 +242,8 @@ publicRoutes.route('/services', {
 publicRoutes.route('/drivers', {
   name: 'drivers',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'drivers',
+    BlazeLayout.render('Layout', {
+      content: 'Drivers',
     });
   },
 });
@@ -250,8 +251,8 @@ publicRoutes.route('/drivers', {
 publicRoutes.route('/vehicles', {
   name: 'vehicles',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'vehicles',
+    BlazeLayout.render('Layout', {
+      content: 'Vehicles',
     });
   },
 });
@@ -259,8 +260,8 @@ publicRoutes.route('/vehicles', {
 publicRoutes.route('/values', {
   name: 'values',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'values',
+    BlazeLayout.render('Layout', {
+      content: 'Values',
     });
   },
 });
@@ -268,8 +269,8 @@ publicRoutes.route('/values', {
 publicRoutes.route('/reservation', {
   name: 'reservation',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'reservation',
+    BlazeLayout.render('Layout', {
+      content: 'Reservation',
     });
   },
 });
@@ -277,8 +278,8 @@ publicRoutes.route('/reservation', {
 publicRoutes.route('/notAuthorized', {
   name: 'notAuthorized',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'notAuthorized',
+    BlazeLayout.render('Layout', {
+      content: 'NotAuthorized',
     });
   },
 });
@@ -286,8 +287,8 @@ publicRoutes.route('/notAuthorized', {
 publicRoutes.route('/driver/join', {
   name: 'driverJoin',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
-      content: 'driverJoin',
+    BlazeLayout.render('Layout', {
+      content: 'DriverJoin',
     });
   },
 });
@@ -295,7 +296,7 @@ publicRoutes.route('/driver/join', {
 securedRoutes.route('/reservations', {
   name: 'reservations',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
+    BlazeLayout.render('Layout', {
       content: 'Reservations',
     });
   },
@@ -304,8 +305,17 @@ securedRoutes.route('/reservations', {
 securedRoutes.route('/profile', {
   name: 'profile',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
+    BlazeLayout.render('Layout', {
       content: 'Profile',
+    });
+  },
+});
+
+driverRoutes.route('/company', {
+  name: 'driverCompany',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'DriverCompany',
     });
   },
 });
@@ -313,7 +323,7 @@ securedRoutes.route('/profile', {
 driverRoutes.route('/vehicles', {
   name: 'driverVehicles',
   action(pathParams, queryParams) {
-    BlazeLayout.render('layout', {
+    BlazeLayout.render('Layout', {
       content: 'DriverVehicles',
     });
   },
@@ -321,8 +331,8 @@ driverRoutes.route('/vehicles', {
 
 FlowRouter.notFound = {
   action: function () {
-    BlazeLayout.render('layout', {
-      content: 'pageNotFound',
+    BlazeLayout.render('Layout', {
+      content: 'PageNotFound',
     });
   },
 };
@@ -337,7 +347,7 @@ AccountsTemplates.configureRoute('verifyEmail');
 
 // FlowRouter.route('/post/:slug', {
 //   action: function () {
-//     BlazeLayout.render('layout', { content: 'post' })
+//     BlazeLayout.render('Layout', { content: 'post' })
 //   }
 // })
 >>>>>>> refs/remotes/origin/master

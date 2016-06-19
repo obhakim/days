@@ -1,5 +1,6 @@
 import './layout.html';
-import './sidemenu.html';
+import './side-menu.html';
+import './top-menu.html';
 
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
@@ -10,7 +11,7 @@ import { APP, SESSION } from '../../common/constants.js';
 import '../lib/moment-locales.js';
 import '../components/loading.js';
 
-Template.layout.helpers({
+Template.Layout.helpers({
   version: function () {
     return APP.VERSION;
   },
@@ -21,7 +22,7 @@ Template.layout.helpers({
   loading: Session.equals(SESSION.ISLOADING, true),
 });
 
-Template.layout.onRendered = function () {
+Template.Layout.onRendered = function () {
   // create sidebar and attach to menu open
   $('.ui.sidebar').sidebar({ context: $('#body') }).sidebar('attach events', '.toc.item');
 };
