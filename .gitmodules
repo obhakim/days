@@ -1,4 +1,4 @@
-[submodule "/src/packages/adminMongo"]
-    path = /src/packages/adminMongo
-    url = git:
-    ignore = dirty
+#[submodule "/src/packages/adminMongo"]
+#    path = /src/packages/adminMongo
+#    url = git:
+#    ignore = dirty
