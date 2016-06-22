@@ -86,3 +86,5 @@ xolvio:cleaner
 #dispatch:mocha-phantomjs
 practicalmeteor:mocha
 dburles:factory
+tomi:upload-server
+tomi:upload-jquery
