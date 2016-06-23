@@ -95,7 +95,7 @@ Template.Reservation.events({
         distance: event.target.distance.value,
       },
       vehicleTypeId: event.target.vehicletype.value,
-      Commentaire: event.target.commentaire.value,
+      Comment: event.target.comment.value,
     };
 
     Meteor.call('createReservation', r, function (err, res) {
@@ -158,7 +158,7 @@ Template.Reservation.onRendered(function () {
   const startAt = /** @type {!HTMLInputElement} */ (document.getElementById('startat'));
   const vehicleType = /** @type {!HTMLInputElement} */ (document.getElementById('vehicletype'));
   const distance = /** @type {!HTMLInputElement} */ (document.getElementById('distance'));
-  const CommentaiRe = /** @type {!HTMLInputElement} */ (document.getElementById('commentaire'));
+  const CommenT = /** @type {!HTMLInputElement} */ (document.getElementById('comment'));
   const totalDistance = /** @type {!HTMLElement} */ (document.getElementById('totaldistance'));
   const totalDuration = /** @type {!HTMLElement} */ (document.getElementById('totalduration'));
   const totalPrice = /** @type {!HTMLElement} */ (document.getElementById('price'));
