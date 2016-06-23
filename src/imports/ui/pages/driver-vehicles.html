@@ -7,8 +7,36 @@
                     <form id="form" class="ui form" novalidate>
                         {{> errormessage }}
                         <h4 class="ui dividing header">Voitures</h4>
+                        <div class="five wide field">
                         
-                        <input type="submit" value="Enregistrer" class="ui fluid large primary button">
+
+                        <label>Marque</label>
+                            <select id="brand">
+                                <option value=""> La marque</option>
+                                {{#each modelsList}}
+                                <option value="{{_id}}">{{brand}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="five wide field">
+                        <label>Modèle</label>
+                            <select id="model">
+                                <option value="">Model</option>
+                                {{#each modelsList}}
+                                <option value="{{_id}}">{{model}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="five wide field">
+                        <label>Type de véhicule</label>
+                            <select id="type">
+                                <option value="">Type de véhicule</option>
+                            {{#each vehicleTypesList}}
+                            <option value="{{_id}}">{{name}}</option>
+                            {{/each}}>
+                            </select>
+                        </div>
+                    <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>
                 </div>
             </div>
