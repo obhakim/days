@@ -22,7 +22,13 @@ Template.DriverVehicles.helpers({
 
 Template.DriverVehicles.helpers({
   modelsList: function () {
-    return Models.find().fetch();
+    // return Models.find().fetch();
+
+    return _.uniq(Models.find({},{sort: {
+      brand: 1}
+    }).fetch(), true, doc => {
+      return doc.brand;
+    });
   },
 });
 
