@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 Meteor.startup(function () {
   // common client / server startup
 
@@ -70,4 +73,4 @@ Meteor.startup(function () {
 //     ],
 //     keyNotInSchema: "[key] is not allowed by the schema"
 // })
-})
+});
