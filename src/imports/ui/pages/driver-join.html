@@ -1,10 +1,10 @@
 <template name="DriverJoin">
     <div class="ui middle aligned centered grid">
         <div class="at-column column">
-            <h1 class="ui center aligned header">Votre profil</h1>
+            <h1 class="ui center aligned header">Votre profil Chauffeur</h1>
             <div class="ui stackable segment">
                 <div class="six wide column">
-                    <form id="form" class="ui form" novalidate>
+                    <form id="form" class="ui form">
                         {{> errormessage }}
                         <h4 class="ui dividing header">Information personnelle</h4>
                         <div class="required field">
@@ -58,14 +58,14 @@
                         <h4 class="ui dividing header">Information de paiement</h4>
                         <div class="field">
                             <label>Numéro</label>
-                            <input id="num" type="text" placeholder="Numéro" maxlength="16" />
+                            <input id="num" type="text" placeholder="Numéro" maxlength="16" required/>
                         </div>
                         <div class="two fields">
                             <div class="twelve wide field">
                                 <label>Date de validité</label>
                                 <div class="two fields">
                                     <div class="four wide field">
-                                        <select id="validThruM">
+                                        <select id="validThruM" required>
                                             <option> </option>
                                             {{#each validThruM}}
                                             <option>{{value}}</option>
@@ -73,7 +73,7 @@
                                         </select>
                                     </div>
                                     <div class="five wide field">
-                                        <select id="validThruY">
+                                        <select id="validThruY" required>
                                             <option> </option>
                                             {{#each validThruY}}
                                             <option>{{value}}</option>
@@ -84,12 +84,12 @@
                             </div>
                             <div class="four wide field">
                                 <label>CVV</label>
-                                <input id="cvv" type="text" placeholder="CVV" maxlength="3" />
+                                <input id="cvv" type="text" placeholder="CVV" maxlength="3" required />
                             </div>
                         </div>
                         <div class="field">
                             <label>Nom</label>
-                            <input id="name" type="text" placeholder="Nom" />
+                            <input id="name" type="text" placeholder="Nom" required />
                         </div>
                         <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>

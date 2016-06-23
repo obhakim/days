@@ -16,3 +16,4 @@ Vehicles.schema = new SimpleSchema({
 });
 
 Vehicles.attachSchema(Vehicles.schema);
+
