@@ -9,14 +9,8 @@ Meteor.startup(() => {
   // PrePopulate data
   // if (Meteor.isServer && VehicleTypes.find().count() === 0) {
   if (Meteor.isServer && !VehicleTypes.findOne()) {
-<<<<<<< HEAD
     VehicleTypes.insert({
-      _id: 'B',
-=======
-  v
-    
-    VehicleTypes.insert({
->>>>>>> DevTest
+
       name: 'Berline',
       ratePerKm: 2.50,
       ratePerHour: 25,
@@ -24,10 +18,7 @@ Meteor.startup(() => {
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-<<<<<<< HEAD
-      _id: 'L',
-=======
->>>>>>> DevTest
+
       name: 'Luxe',
       ratePerKm: 3.20,
       ratePerHour: 35,
@@ -35,10 +26,7 @@ Meteor.startup(() => {
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-<<<<<<< HEAD
-      _id: 'P',
-=======
->>>>>>> DevTest
+
       name: 'Premium',
       ratePerKm: 5.00,
       ratePerHour: 50,
@@ -46,10 +34,7 @@ Meteor.startup(() => {
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-<<<<<<< HEAD
-      _id: 'V',
-=======
->>>>>>> DevTest
+
       name: 'Van',
       ratePerKm: 4.50,
       ratePerHour: 50,
