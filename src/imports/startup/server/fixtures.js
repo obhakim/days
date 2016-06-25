@@ -9,6 +9,7 @@ Meteor.startup(() => {
   // PrePopulate data
   // if (Meteor.isServer && VehicleTypes.find().count() === 0) {
   if (Meteor.isServer && !VehicleTypes.findOne()) {
+ 
     VehicleTypes.insert({
 
       name: 'Berline',
@@ -17,6 +18,7 @@ Meteor.startup(() => {
       rateMin: 10,
       rateMultiplier: 1.2,
     });
+
     VehicleTypes.insert({
 
       name: 'Luxe',
@@ -25,6 +27,7 @@ Meteor.startup(() => {
       rateMin: 15,
       rateMultiplier: 1.2,
     });
+
     VehicleTypes.insert({
 
       name: 'Premium',
@@ -33,6 +36,7 @@ Meteor.startup(() => {
       rateMin: 20,
       rateMultiplier: 1.2,
     });
+
     VehicleTypes.insert({
 
       name: 'Van',
@@ -43,6 +47,7 @@ Meteor.startup(() => {
     });
     
   }
+
   if (Meteor.isServer && !Models.findOne()) {
   var idB = VehicleTypes.findOne({name:'Berline'}, {limit: 1});
   var idL = VehicleTypes.findOne({name:'Luxe'}, {limit: 1});
@@ -100,6 +105,7 @@ Meteor.startup(() => {
             vehicleTypeId: idP._id,
           });
     }
+
   // if (Lists.find().count() === 0) {
   //   const data = [
   //     {

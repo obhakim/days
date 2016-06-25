@@ -12,3 +12,4 @@ VehicleTypes.schema = new SimpleSchema({
 });
 
 VehicleTypes.attachSchema(VehicleTypes.schema);
+
