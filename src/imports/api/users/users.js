@@ -5,23 +5,11 @@ import { CONST } from '../../common/constants.js';
 export const Users = Meteor.users;
 
 Users.creditCardSchema = new SimpleSchema({
-  num: {
-    type: String,
-  },
-  validThruM: {
-    type: Number,
-    min: 1,
-    max: 12,
-  },
-  validThruY: {
-    type: Number,
-  },
-  cvv: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
+  num: { type: String },
+  validThruM: { type: Number, min: 1, max: 12 },
+  validThruY: { type: Number },
+  cvv: { type: String },
+  name: { type: String },
 });
 
 Users.profileSchema = new SimpleSchema({
@@ -44,30 +32,6 @@ Users.profileSchema = new SimpleSchema({
   },
   phone: {
     type: String,
-  // ,optional: true
-  },
-  street: {
-    type: String,
-  // ,optional: true
-  },
-  city: {
-    type: String,
-  // ,optional: true
-  },
-  zipcode: {
-    type: String,
-  // ,optional: true
-  },
-  street: {
-    type: String,
-  // ,optional: true
-  },
-   city: {
-    type: String,
-  // ,optional: true
-  },
-   zipcode: {
-    type: Number,
   // ,optional: true
   },
   creditCard: {
@@ -120,10 +84,6 @@ Users.schema = new SimpleSchema({
     type: Date,
   },
   profile: {
-    type: Users.profileSchema,
-    optional: true,
-  },
-   driver: {
     type: Users.profileSchema,
     optional: true,
   },

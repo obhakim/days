@@ -1,4 +1,4 @@
-<template name="Reservation">
+<template name="reservation">
   <h1>Réservation</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
   <div class="ui stackable grid">
     <div id="order-container" class="six wide column">
@@ -79,18 +79,6 @@
           </select>
         </div>
         {{!--#each error in errors "vehicletype"} }
-        <div class="form-error">{ {error} }</div>
-        { {/each--}}
-                  
-
-                  <!--   Modifier ici -->
-
-
-        <div class="field">
-          <label>Commentaire</label>
-          <input id="comment" type="text" placeholder="Commentaire" value="{{comment}}" />
-        </div>
-        {{!--#each error in errors "comment"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
 

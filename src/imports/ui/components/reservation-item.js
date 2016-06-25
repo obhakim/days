@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { CONST, SESSION } from '../../common/constants.js';
-import { Helpers } from '../../common/helpers.js';
 import { Roles } from 'meteor/alanning:roles';
 
 Template.ReservationItem.helpers({
@@ -12,13 +11,13 @@ Template.ReservationItem.helpers({
   //     return Reservations.find()
   // }
   isAcceptable: function () {
-    return this.status < CONST.RESERVATION_STATUSES.ACCEPTED && Helpers.isDriverOrAdmin();
+    return this.status < CONST.RESERVATION_STATUSES.ACCEPTED;
   },
   isConfirmable: function () {
-    return this.status < CONST.RESERVATION_STATUSES.CONFIRMED && Helpers.isDriverOrAdmin();
+    return this.status < CONST.RESERVATION_STATUSES.CONFIRMED;
   },
   isCancelable: function () {
-    return this.ownerId === Meteor.userId() && Helpers.isAdmin();
+    return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.ADMIN]);
   },
 });
 

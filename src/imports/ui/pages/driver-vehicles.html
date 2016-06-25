@@ -4,39 +4,66 @@
             <h1 class="ui center aligned header">Vos voitures</h1>
             <div class="ui stackable segment">
                 <div class="six wide column">
+
+                  <h4 class="ui dividing header">Liste de vos Voitures</h4>
+
+{{#each setAuthor}}
+        
+        <strong>Constructeur :</strong> {{brand}}    <button  id="delete" > supprimer</button><br>
+         <strong>Model :</strong>  {{model}} <br>
+           <strong>Type :</strong>  {{vehicleTypeId}} <br>
+            <strong>Immatriculation :</strong>  {{license}} <br>
+<br>
+    {{/each}}
+
                     <form id="form" class="ui form" novalidate>
                         {{> errormessage }}
-                        <h4 class="ui dividing header">Voitures</h4>
-                        <div class="five wide field">
-                        
+                      
+    <h4 class="ui dividing header">Ajouter une nouvelle Voitures</h4>
+                        <div class="required field">
+                            <label>Immatriculation</label>
+                            <input id="licence" type="text" placeholder="Immatriculation" required />
+                        </div>
 
-                        <label>Marque</label>
-                            <select class="brand">
-                                <option value=""> La marque</option>
-                                {{#each modelsList}}
-                                <option value="{{_id}}">{{brand}}</option>
-                                {{/each}}
-                            </select>
+                        <div class="required field">
+                            <label>Carte grise</label>
+                            <input id="registrationCard" type="text" placeholder="Carte grise" required />
                         </div>
-                        <div class="five wide field">
-                        <label>Modèle</label>
-                            <select class="model">
-                                <option value="">Model</option>
-                                {{#each modelsList}}
-                                <option value="{{_id}}">{{model}}</option>
-                                {{/each}}
-                            </select>
+
+                       
+
+                        <label>Constructeur</label>
+                         <select id="brandId">
+                        {{#each setbrand}}
+                        <option>{{this}}</option> 
+                        {{/each}}
+                        </select><br>
+
+                         <label>Model</label>
+                        <select id="modelId">
+                        {{#each setmodel}}
+                        <option>{{this}}</option>
+                        {{/each}}
+                        </select><br> 
+
+                         <label>Type</label>
+                        <select  id="VehicleTypeId">
+                        {{#each setVehicleTypeId}}
+                        <option>{{this}}</option>
+                        {{/each}}
+                         </select><br> 
+
+                         <div class="field">
+                            <label>Année de l'immatriculation</label>
+                            <input id="regYear" class="ui dropdown datetimepicker" type="text" placeholder="Année de l'immatriculation" />
+                         </div>
+                        
+                         <div class="required field">
+                            <label>Couleur</label>
+                            <input id="color" type="text" placeholder="Couleur" required />
                         </div>
-                        <div class="five wide field">
-                        <label>Type de véhicule</label>
-                            <select id="type">
-                                <option value="">Type de véhicule</option>
-                            {{#each vehicleTypesList}}
-                            <option value="{{_id}}">{{name}}</option>
-                            {{/each}}>
-                            </select>
-                        </div>
-                    <input type="submit" value="Enregistrer" class="ui fluid large primary button">
+
+                        <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>
                 </div>
             </div>

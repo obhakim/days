@@ -6,8 +6,8 @@ import { Session } from 'meteor/session';
 import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
-Template.DriverJoin.helpers({
-  validThruM: function() {
+Template.driverJoin.helpers({
+  validThruM: function () {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
@@ -16,7 +16,7 @@ Template.DriverJoin.helpers({
     }
     return monthsList;
   },
-  validThruY: function() {
+  validThruY: function () {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
@@ -26,12 +26,12 @@ Template.DriverJoin.helpers({
     }
     return yearsList;
   },
-  profile: function() {
+  profile: function () {
     return Meteor.user().profile;
   },
 });
 
-Template.DriverJoin.events({
+Template.driverJoin.events({
   'submit #form': function driverJoinSubmitForm(event) {
     // Prevent default browser form submit
     event.preventDefault();
@@ -46,9 +46,6 @@ Template.DriverJoin.events({
         phone: event.target.phone.value,
         // email: event.target.email.value,
         birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
-        street: event.target.street.value,
-        city: event.target.city.value,
-        zipcode: event.target.zipcode.value,
         creditCard: {
           num: event.target.num.value,
           validThruM: event.target.validThruM.value,
@@ -65,7 +62,7 @@ Template.DriverJoin.events({
       if (error) {
         Session.set(SESSION.ERROR, error);
       } else {
-        FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
+        FlowRouter.go('/s/driver/vehicles');  // TODO : replace with redirection by root name
       }
     });
 
@@ -73,7 +70,7 @@ Template.DriverJoin.events({
   },
 });
 
-Template.DriverJoin.onRendered(function driverJoinOnRendered() {
+Template.driverJoin.onRendered(function driverJoinOnRendered() {
   this.$('.datetimepicker').datetimepicker({
     // format: CONST.DEFAULT_DATETIME_FORMAT,
     format: CONST.DEFAULT_DATE_FORMAT,

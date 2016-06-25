@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { Roles } from 'meteor/alanning:roles';
 import { CONST } from '../../common/constants.js';
-
+import { Roles } from 'meteor/alanning:roles';
 // new validated-method style
 
 // import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -51,7 +50,7 @@ Meteor.methods({
     const userId = Meteor.userId();
     // var isEmailChanged = currentProfile ?
     //     newProfile.email != currentProfile.email :
-
+ 
     Meteor.users.update(userId, {
       $set: {
         profile: newProfile,
@@ -77,13 +76,15 @@ Meteor.methods({
   },
   // Need this to force Driver role
   createDriver: (newUser) => {
-    const userId = Accounts.createUser({
+    var id =Accounts.createUser({
       username: newUser.username,
       email: newUser.email,
       password: newUser.password,
       profile: newUser.profile,
+      roles: CONST.USER_ROLES.DRIVER,
     });
-
-    Roles.addUsersToRoles(userId, CONST.USER_ROLES.DRIVER);
+    //console.log(Meteor.userId());
+    // Roles.addUsersToRoles(z, 'Driver');
   },
+  
 });

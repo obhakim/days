@@ -1,4 +1,3 @@
-
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
@@ -7,7 +6,6 @@ import { Helpers } from '../../common/helpers.js';
 // Import to load these templates
 import '../../ui/layouts/layout.js';
 import '../../ui/pages/driver-join.js';
-import '../../ui/pages/driver-company.js';
 import '../../ui/pages/driver-vehicles.js';
 import '../../ui/pages/drivers.js';
 import '../../ui/pages/home.js';
@@ -19,7 +17,7 @@ import '../../ui/pages/reservations.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
-
+import '../../ui/pages/infos-ssociete.js';
 
 const publicRoutes = FlowRouter.group({
   name: 'public',
@@ -42,19 +40,29 @@ const driverRoutes = securedRoutes.group({
   prefix: '/driver',
   name: 'driver',
   triggersEnter: [(context, redirect) => {
-    // console.log('trigger isDriver=' + Helpers.isDriver());
-    if (!Helpers.isDriver()) {
+    console.log('trigger isDriver=' + Helpers.isDriver());
+    if (Helpers.isDriver()) {
       redirect('/notAuthorized');
-    }
+          }
   },
   ],
+});
+
+// ajouter router pour la page information société infos-ssociete
+driverRoutes.route('/infossociete', {
+  name: 'infossociete',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('layout', {
+      content: 'infossociete',
+    });
+  },
 });
 
 publicRoutes.route('/', {
   name: 'home',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Home',
+    BlazeLayout.render('layout', {
+      content: 'home',
     });
   },
 });
@@ -62,8 +70,8 @@ publicRoutes.route('/', {
 publicRoutes.route('/services', {
   name: 'services',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Services',
+    BlazeLayout.render('layout', {
+      content: 'services',
     });
   },
 });
@@ -71,8 +79,8 @@ publicRoutes.route('/services', {
 publicRoutes.route('/drivers', {
   name: 'drivers',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Drivers',
+    BlazeLayout.render('layout', {
+      content: 'drivers',
     });
   },
 });
@@ -80,8 +88,8 @@ publicRoutes.route('/drivers', {
 publicRoutes.route('/vehicles', {
   name: 'vehicles',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Vehicles',
+    BlazeLayout.render('layout', {
+      content: 'vehicles',
     });
   },
 });
@@ -89,8 +97,8 @@ publicRoutes.route('/vehicles', {
 publicRoutes.route('/values', {
   name: 'values',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Values',
+    BlazeLayout.render('layout', {
+      content: 'values',
     });
   },
 });
@@ -98,8 +106,8 @@ publicRoutes.route('/values', {
 publicRoutes.route('/reservation', {
   name: 'reservation',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Reservation',
+    BlazeLayout.render('layout', {
+      content: 'reservation',
     });
   },
 });
@@ -107,8 +115,8 @@ publicRoutes.route('/reservation', {
 publicRoutes.route('/notAuthorized', {
   name: 'notAuthorized',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'NotAuthorized',
+    BlazeLayout.render('layout', {
+      content: 'notAuthorized',
     });
   },
 });
@@ -116,8 +124,8 @@ publicRoutes.route('/notAuthorized', {
 publicRoutes.route('/driver/join', {
   name: 'driverJoin',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'DriverJoin',
+    BlazeLayout.render('layout', {
+      content: 'driverJoin',
     });
   },
 });
@@ -125,7 +133,7 @@ publicRoutes.route('/driver/join', {
 securedRoutes.route('/reservations', {
   name: 'reservations',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
+    BlazeLayout.render('layout', {
       content: 'Reservations',
     });
   },
@@ -134,17 +142,8 @@ securedRoutes.route('/reservations', {
 securedRoutes.route('/profile', {
   name: 'profile',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
+    BlazeLayout.render('layout', {
       content: 'Profile',
-    });
-  },
-});
-
-driverRoutes.route('/company', {
-  name: 'driverCompany',
-  action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'DriverCompany',
     });
   },
 });
@@ -152,7 +151,7 @@ driverRoutes.route('/company', {
 driverRoutes.route('/vehicles', {
   name: 'driverVehicles',
   action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
+    BlazeLayout.render('layout', {
       content: 'DriverVehicles',
     });
   },
@@ -160,8 +159,8 @@ driverRoutes.route('/vehicles', {
 
 FlowRouter.notFound = {
   action: function () {
-    BlazeLayout.render('Layout', {
-      content: 'PageNotFound',
+    BlazeLayout.render('layout', {
+      content: 'pageNotFound',
     });
   },
 };
@@ -176,6 +175,6 @@ AccountsTemplates.configureRoute('verifyEmail');
 
 // FlowRouter.route('/post/:slug', {
 //   action: function () {
-//     BlazeLayout.render('Layout', { content: 'post' })
+//     BlazeLayout.render('layout', { content: 'post' })
 //   }
 // })

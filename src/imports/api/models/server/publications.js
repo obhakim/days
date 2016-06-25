@@ -1,13 +1,12 @@
-/* eslint-disable prefer-arrow-callback */
-
 import { Meteor } from 'meteor/meteor';
 
 import { Models } from '../models.js';
+import { Vehicles } from '../../vehicles/vehicles.js';
 
-Meteor.publish('models', function models() {
+Meteor.publish('brand', function brand() {
+	//console.log(Models.find().count()); 
   return Models.find();
- });
-
-//   return Models.find({ brand:$brand },{ _id: 0, brand: 0 }); 
-
-// });
+})
+Meteor.publish('myVehicles', function publishVehicles() {
+ return Vehicles.find(); 
+})

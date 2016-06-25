@@ -4,6 +4,9 @@ import { Meteor } from 'meteor/meteor';
 
 import { VehicleTypes } from '../vehicle-types.js';
 
-Meteor.publish('vehicletypes', function vehicletypes() {
+
+Meteor.publish('vehicleTypes', function vehicleTypes() {
+	
   return VehicleTypes.find()
 })
+
