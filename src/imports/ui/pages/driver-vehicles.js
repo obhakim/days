@@ -37,7 +37,7 @@ Template.DriverVehicles.helpers({
 	});
 	},
 
-	vehicleTypesList: function () {
+	idVehicle: function () {
 			
 	return _.uniq(Models.find({brand:Session.get("selected_brand"),model:Session.get("selected_model")},
 	{ sort:
@@ -46,6 +46,10 @@ Template.DriverVehicles.helpers({
 	return doc.vehicleTypeId;
 	});
 			},
+			
+	vehicleTypesList: function () {
+	return VehicleTypes.find({_id:Session.get("input_id")},{limit: 1}).fetch();		
+				},
 	});
 
 
@@ -99,6 +103,14 @@ Template.DriverVehicles.events({
 		
 		 	//var selected_brand = event.target.value;
  			Session.set("selected_model",event.target.value);
+ 			
+ 				//Meteor.call('showModels',selected_brand);
+
+	},
+	'input #idV'(event,template) {
+		
+		 	//var selected_brand = event.target.value;
+ 			Session.set("input_id",event.target.value);
  			//console.log(Session.set(selected_model));
  				//Meteor.call('showModels',selected_brand);
 

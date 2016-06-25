@@ -45,6 +45,7 @@
                         <div class="five wide field">
                         <label>Modèle</label>
                             <select id="model">
+                            <option value="rien">model</option>
                                 {{#each modelsList}}
                                 <option value="{{model}}">{{model}}</option>
                                 {{/each}}
@@ -52,11 +53,14 @@
                         </div>
                         <div class="five wide field">
                         <label>Type de véhicule</label>
-                            <select id="type">
+                            {{#each idVehicle}}
+                            <input id="idV" type="text" value="{{vehicleTypeId}}">
+                            {{/each}}
+                            <!-- <select id="type"> -->
                             {{#each vehicleTypesList}}
-                            <option value="{{vehicleTypeId}}">{{vehicleTypeId}}</option>
-                            {{/each}}>
-                            </select>
+                            <input id="type" type="text" value="{{name}}">
+                            {{/each}}
+                           <!--  </select> -->
                         </div>
                     <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>
