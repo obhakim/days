@@ -17,23 +17,30 @@ Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
 });
 
 Template.DriverVehicles.helpers({
-  vehicles: () => Vehicles.find(),
-  });
-
-Template.DriverVehicles.helpers({
-  modelsList: function () {
-    // return Models.find().fetch();
-
-    return _.uniq(Models.find({},{sort: {
-      brand: 1}
-    }).fetch(), true, doc => {
-      return doc.brand;
-    });
-  },
+vehicles: () => Vehicles.find(),
+brandsList: function () {
+		// return Models.find().fetch();
+		return _.uniq(Models.find({},{sort: {
+		brand: 1}
+		}).fetch(), true, doc => {
+		return doc.brand;
+		});
+		},
+modelsList: function (brand) {
+		// return Models.find().fetch();
+		return _.uniq(Models.find({},{sort: {
+		brand: 1}
+		}).fetch(), true, doc => {
+		return doc.brand;
+		});
+		},
+vehicleTypesList: function () {
+		return VehicleTypes.find().fetch();
+},
 });
+Template.DriverVehicles.events({
 
-Template.DriverVehicles.helpers({
-   vehicleTypesList: function () {
-    return VehicleTypes.find().fetch();
-  },
-});
+     'change .brand': function(e,t){
+        // do whatever.......
+     },
+ });
