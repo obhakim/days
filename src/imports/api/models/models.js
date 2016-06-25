@@ -10,3 +10,4 @@ Models.schema = new SimpleSchema({
 });
 
 Models.attachSchema(Models.schema);
+
