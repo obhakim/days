@@ -5,21 +5,37 @@
             <div class="ui stackable segment">
                 <div class="six wide column">
 
-                  <h4 class="ui dividing header">Liste de vos Voitures</h4>
+                  <h4 class="ui dividing header"> Voiture</h4>
+<table class="ui striped table">
+  <thead>
+    <tr>
+      <th>Constructeur</th>
+      <th>Model</th>
+      <th>Type</th>
+      <th>Immatriculation</th>
+       <th >Modifier</th>
+       <th >Supprimer</th>
+    </tr>
+  </thead>
+   <tbody>
+{{#each vehicles}}
+    <tr >
+      <td>{{brand}}</td>
+      <td>{{model}}</td>
+       <td> {{vehicleTypeId}}</td>
+       <td>{{license}}</td>
+       <td> <input type="radio" name="privacy_options" value="public" id="chooseupdate"> </td>
+     <td> <button  class="ui red button" id="delete" > supp</button></td>
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
 
-{{#each setAuthor}}
-        
-        <strong>Constructeur :</strong> {{brand}}    <button  id="delete" > supprimer</button><br>
-         <strong>Model :</strong>  {{model}} <br>
-           <strong>Type :</strong>  {{vehicleTypeId}} <br>
-            <strong>Immatriculation :</strong>  {{license}} <br>
-<br>
-    {{/each}}
-
+{{#each setmodelupdate}} <button  id="update" class="ui yellow button" > Valider la mise à jour</button>{{/each}}
                     <form id="form" class="ui form" novalidate>
                         {{> errormessage }}
                       
-    <h4 class="ui dividing header">Ajouter une nouvelle Voitures</h4>
+    <h4 class="ui dividing header">Formulaire</h4>
                         <div class="required field">
                             <label>Immatriculation</label>
                             <input id="licence" type="text" placeholder="Immatriculation" required />
