@@ -25,8 +25,22 @@ Meteor.methods({
  "removeVehicle" : function (value) {
  return  Vehicles.remove(value);
    
-  }
+  },
+ "updateVehicle" : function (vehicle) {
+ if (Meteor.userId())
+ {
+   return Vehicles.update({_id :vehicle.vehicleid},{$set:{ownerId:vehicle.ownerId,
+     brand: vehicle.brand,
+     model: vehicle.model,
+     license: vehicle.license,
+     registrationCard:vehicle.registrationCard,
+     vehicleTypeId: vehicle.vehicleTypeId,
+     regYear:vehicle.regYear,
+     color:vehicle.color
+   }});
  
+  }
+  },
   
   });
 

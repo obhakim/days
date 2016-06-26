@@ -43,7 +43,7 @@ Template.DriverVehicles.helpers({
 }});
 
 Template.DriverVehicles.helpers({
-  setAuthor: function() {
+  vehicles: function() {
   	if(Meteor.userId())
     var comp = Meteor.users.find().fetch();
 
@@ -56,6 +56,7 @@ Template.DriverVehicles.events({
   'submit form': function(e){
 e.preventDefault();
  const data = {
+
       ownerId:Meteor.userId(),
   	  license: $( "#licence" ).val(), 
       registrationCard:$( "#registrationCard" ).val(),
@@ -90,11 +91,54 @@ Meteor.call('addVehicle', data, (error) => {
 	Meteor.call('removeVehicle',this._id);
 	
 	},
+'change #chooseupdate' : function (){
+   console.log(this._id);
+ if (Session.get("vehid"))
+		delete Session.keys['vehid']
+	var data=Vehicles.find({_id:this._id}).fetch();
+		Session.set("vehid", this._id);
+
+ },
+
+"click #update": function(evt) {
+
+	 const data = {vehicleid:this._id,
+      ownerId:Meteor.userId(),
+  	  license: $( "#licence" ).val(), 
+      registrationCard:$( "#registrationCard" ).val(),
+      brand:  $( "#brandId" ).val(),
+      model: $( "#modelId" ).val(),
+      vehicleTypeId: $( "#VehicleTypeId" ).val(), 
+      regYear:$( "#regYear" ).val(), 
+      color:$( "#color" ).val(),
+     
+    };
+Meteor.call('updateVehicle',data);
+delete Session.keys['vehid'];
+	},
 
  });
-}
 
-//
+
+}
+//Remplir la formulaire pour faire la mise à jour 
+Template.DriverVehicles.helpers({
+   setmodelupdate: function() {
+  	if (Session.get("vehid"))
+  	{
+ var data=Vehicles.find({_id:Session.get("vehid")}).fetch();
+  $( "#licence" ).val(data[0].license);
+   $( "#registrationCard" ).val(data[0].registrationCard);
+    $( "#brandId" ).val(data[0].brand);
+     $( "#modelId" ).val(data[0].model);
+      $( "#VehicleTypeId" ).val(data[0].vehicleTypeId);
+       //$( "#modelId" ).val(data[0].modelId);
+    $( "#regYear" ).val(data[0].regYear);
+    $( "#color" ).val(data[0].color);
+
+ return data;}
+}});
+//lister les voitures enregtrées
 Template.DriverVehicles.helpers({
    setmodel: function() {
   	
