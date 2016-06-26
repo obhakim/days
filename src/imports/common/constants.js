@@ -13,7 +13,12 @@ export const CONST = {
     ACCEPTED: 10,
     CONFIRMED: 20,
   },
-
+VEHICLE_STATUSES: {
+    CANCELLED: -10,
+    CREATED: 0,
+    ACCEPTED: 10,
+    UPDATED: 20
+  },
   USER_ROLES: {
     CLIENT: 'client',
     DRIVER: 'driver',

@@ -6,6 +6,8 @@ import { CONST, SESSION } from '../../common/constants.js';
 import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
+import { Helpers } from '../../common/helpers.js';
+import { Roles } from 'meteor/alanning:roles';
 
 Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
   const self = this;
@@ -36,8 +38,12 @@ Template.DriverVehicles.helpers({
 	return doc.model;
 	});
 	},
-
-	idVehicle: function () {
+   vehicleType: function () {
+			
+	return  VehicleTypes.find({},{limit: limit}).fetch();
+	
+			},
+	vehicleTypesList: function () {
 			
 	return _.uniq(Models.find({brand:Session.get("selected_brand"),model:Session.get("selected_model")},
 	{ sort:
@@ -46,10 +52,10 @@ Template.DriverVehicles.helpers({
 	return doc.vehicleTypeId;
 	});
 			},
-			
-	vehicleTypesList: function () {
-	return VehicleTypes.find({_id:Session.get("input_id")},{limit: 1}).fetch();		
-				},
+
+	isUpdutable: function () {
+    return this.status < CONST.VEHICLE_STATUSES.UPDATE && Helpers.isDriver();
+  }
 	});
 
 
@@ -89,7 +95,12 @@ Template.DriverVehicles.events({
 
 			Meteor.call('removeVehicle',vehicleId );
 	},
-
+	 'click .update': function () {
+            event.target.licence.value="jj";
+			event.target.brand.value="hhh";
+			event.target.model.value="hhh";
+			event.target.type.value="hh";
+  },
 	'change #brand'(event,template) {
 		
 		 	//var selected_brand = event.target.value;
@@ -103,14 +114,6 @@ Template.DriverVehicles.events({
 		
 		 	//var selected_brand = event.target.value;
  			Session.set("selected_model",event.target.value);
- 			
- 				//Meteor.call('showModels',selected_brand);
-
-	},
-	'input #idV'(event,template) {
-		
-		 	//var selected_brand = event.target.value;
- 			Session.set("input_id",event.target.value);
  			//console.log(Session.set(selected_model));
  				//Meteor.call('showModels',selected_brand);
 

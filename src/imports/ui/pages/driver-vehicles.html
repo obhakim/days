@@ -10,6 +10,7 @@
                          <table class="ui celled table">
               <thead>
                 <tr>
+                    <th> </th>
                     <th>Licence</th>
                     <th>Constructeur</th>
                     <th>Modèle</th>
@@ -20,6 +21,8 @@
               <tbody>
                {{#each vehicles}}
                 <tr id={{_id}}>
+                  <td> <!-- {{#if isUpdutable}} --> 
+                  <button  class="update"> modif</button> <!-- {{/if}} --></td>
                   <td>{{licence}}</td>
                   <td>{{brand}}</td>
                   <td>{{model}}</td>
@@ -45,23 +48,18 @@
                         <div class="five wide field">
                         <label>Modèle</label>
                             <select id="model">
-                            <option value="rien">model</option>
                                 {{#each modelsList}}
                                 <option value="{{model}}">{{model}}</option>
                                 {{/each}}
                             </select>
                         </div>
                         <div class="five wide field">
-                        <label>Type de véhicule</label>
-                            {{#each idVehicle}}
-                            <input id="idV" type="text" value="{{vehicleTypeId}}">
-                            {{/each}}
-                            <!-- <select id="type"> -->
+                        
                             {{#each vehicleTypesList}}
-                            <input id="type" type="text" value="{{name}}">
+                            <label>Type de véhicule</label>
+                            <input id="type" type="text" disabled="disabled" name="type" value="{{vehicleTypeId}}">
                             {{/each}}
-                           <!--  </select> -->
-                        </div>
+                         </div>
                     <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>
                 </div>
