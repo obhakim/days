@@ -4,12 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-# Meteor packages used by this project one per line.
-# Check this file (and the other files in this directory) into your repository.
-#
-# 'meteor add' and 'meteor remove' will edit this file for you
-# but you can also edit it by hand.
-
 # meteor libraries
 meteor-base
 ecmascript
@@ -86,10 +80,11 @@ browser-policy			# Define browser security policies
 #simple:rest
 
 # testing
-dburles:factory
 #publication-collector
 #stub-collections
 xolvio:cleaner
 #dispatch:mocha-phantomjs
 practicalmeteor:mocha
-
+dburles:factory
+tomi:upload-server
+tomi:upload-jquery
