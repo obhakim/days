@@ -37,7 +37,7 @@ Meteor.methods({
 
     }
 
-		return Vehicles.update(vehicleId);
+		return Vehicles.update(vehicleId, { $set: vehicle});
 	},
   
 

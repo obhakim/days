@@ -93,37 +93,56 @@ Template.DriverVehicles.events({
 
 			},
 
-	'click .delete'() {
-			var vehicleId = this._id;
+	'click .update'() {
 
+			var vehicleId = Session.get("id");
+			const vehicle = {
+			ownerId: Meteor.userId(),
+			licence: $("#licence").val(),
+			brand: $("#brand").val(),
+			model: $("#model").val(),
+			vehicleTypeId: $("#type").val(),
+			}; 
+
+			Meteor.call("updateVehicle",vehicleId,vehicle,(error) => {
+			if (error) {
+			Session.set(SESSION.ERROR, error);
+			} 
+
+			else {
+				("#licence").val("");
+				("#brand").val("");
+				("#model").val("");
+				("#type").val("");
+			}
+		});
+	},
+
+	'click .delete'() {
+		
+			var vehicleId = this._id;
 			Meteor.call('removeVehicle',vehicleId );
 	},
 
 	'click .editer'() {
 
-			$( "#licence" ).val(this.licence);
+			//$('#type option').attr("value",this.vehicleTypeId).text(this.vehicleTypeId);
+			Session.set("id",this._id);
+			$( ".cancel").show();
+			$( "#sub").attr('value', 'Save','type', 'button').addClass('update').prop("type", "button");
+			$( "#licence").val(this.licence);
 			$( "#brand" ).val(this.brand);
-			if ($('#model > option').length > 1) {
+			$("#model").find('option').remove().end().append($('<option>', {value:this.model, text:this.model}));
+			$('#type').find('option').remove().end().append($('<option>', {value:this.vehicleTypeId, text: this.vehicleTypeId}));
+	},
 
-				$( "#model" ).val(this.model);		
-			}
-			 if ($('#model > option').length <= 1)  { $('#model option').attr("value",this.model).text(this.model); }
-			//$( "#model" ).val(this.model);
-			
+	'click .cancel'() {
 
-						//$('#model option').attr("value",this.model).text(this.model);
-			//$('#model option:contains("")').text(this.model);
-			$('#type option').attr("value",this.vehicleTypeId).text(this.vehicleTypeId); 
+		$( ".cancel").hide();
+		$( "#sub").attr('value', 'Enregister','type', 'submit').removeClass('update').prop("type", "submit");
 
 	},
 
-	/*'click .update'() {
-
-			var vehicleId = this._id;
-
-
-			Meteor.call('updateVehicle',vehicleId );
-	},*/
 
 	'change #brand'(event,template) {
 		

@@ -39,7 +39,7 @@
                         <div class="five wide field required">
                         <label>Marque</label>
                             <select  id="brand">
-                            <option></option>
+                            <option value="" selected></option>
                                 {{#each brandsList}}
                                 <option value="{{brand}}">{{brand}}</option>
                                 {{/each}}
@@ -48,7 +48,7 @@
                         <div class="five wide field ">
                         <label>Modèle</label>
                             <select id="model">
-                            <option value=""></option>
+                            <option value="" selected></option>
                                 {{#each modelsList}}
                                 <option value="{{model}}">{{model}}</option>
                                 {{/each}}
@@ -57,13 +57,14 @@
                         <div class="five wide field required">
                         <label>Type de véhicule</label>
                             <select id="type">
-                            <option></option>
+                            <option value="" selected></option>
                             {{#each vehicleTypesList}}
                             <option value="{{vehicleTypeId}}">{{vehicleTypeId}}</option>
                             {{/each}}
                             </select>
                         </div>
-                    <input type="submit" value="Enregistrer" class="ui fluid large primary button">
+                    <input id="sub" type="submit" value="Enregistrer" class="ui left attached small primary button">
+                    <input  type="reset" value="Annuler" class="ui right attached small button cancel" style="display :none">
                     </form>
                 </div>
             </div>
