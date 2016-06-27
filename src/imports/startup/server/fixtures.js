@@ -57,52 +57,52 @@ Meteor.startup(() => {
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe C',
-      vehicleTypeId: idB._id ,
+      vehicleTypeId: idB.name,
     });
      Models.insert({
       brand: 'Mercedes',
       model: 'Classe E',
-      vehicleTypeId: idL._id,
+      vehicleTypeId: idL.name,
     });
      Models.insert({
       brand: 'Mercedes',
       model: 'Classe S',
-      vehicleTypeId: idP._id,
+      vehicleTypeId: idP.name,
     });
      Models.insert({
       brand: 'Mercedes',
       model: 'Classe V',
-      vehicleTypeId: idV._id,
+      vehicleTypeId: idV.name,
     });
       Models.insert({
       brand: 'Audi',
       model: 'A4',
-      vehicleTypeId: idB._id,
+      vehicleTypeId: idB.name,
     });
       Models.insert({
             brand: 'Audi',
             model: 'A6',
-            vehicleTypeId: idL._id,
+            vehicleTypeId: idL.name,
           });
       Models.insert({
             brand: 'Audi',
             model: 'A8',
-            vehicleTypeId: idP._id,
+            vehicleTypeId: idP.name,
           });
       Models.insert({
             brand: 'BMW',
             model: 'Serie 3',
-            vehicleTypeId: idB._id,
+            vehicleTypeId: idB.name,
           });
       Models.insert({
             brand: 'BMW',
             model: 'Serie 5',
-            vehicleTypeId: idL._id,
+            vehicleTypeId: idL.name,
           });
       Models.insert({
             brand: 'BMW',
             model: 'Serie 7',
-            vehicleTypeId: idP._id,
+            vehicleTypeId: idP.name,
           });
     }
 

@@ -39,14 +39,27 @@ Template.DriverVehicles.helpers({
 
 	vehicleTypesList: function () {
 			
-	return _.uniq(Models.find({brand:Session.get("selected_brand"),model:Session.get("selected_model")},
+	return s = _.uniq(Models.find({model:Session.get("selected_model"),brand:Session.get("selected_brand")},
 	{ sort:
 	 { vehicleTypeId: 1 }
 	}).fetch(), true, doc => {
 	return doc.vehicleTypeId;
 	});
-			},
-	});
+	},
+
+	setmodelupdate: function() {},
+  	
+ 	/*var data=Vehicles.find({_id:Session.get("vehid")}).fetch();
+  	$( "#licence" ).val(data[0].license);
+    $( "#brand" ).val(data[0].brand);
+    $( "#model" ).val(data[0].model);
+    $( "#VehicleTypeId" ).val(data[0].vehicleTypeId);
+
+
+ return data;
+}});*/
+
+});
 
 
 Template.DriverVehicles.events({
@@ -86,10 +99,37 @@ Template.DriverVehicles.events({
 			Meteor.call('removeVehicle',vehicleId );
 	},
 
+	'click .editer'() {
+
+			$( "#licence" ).val(this.licence);
+			$( "#brand" ).val(this.brand);
+			if ($('#model > option').length > 1) {
+
+				$( "#model" ).val(this.model);		
+			}
+			 if ($('#model > option').length <= 1)  { $('#model option').attr("value",this.model).text(this.model); }
+			//$( "#model" ).val(this.model);
+			
+
+						//$('#model option').attr("value",this.model).text(this.model);
+			//$('#model option:contains("")').text(this.model);
+			$('#type option').attr("value",this.vehicleTypeId).text(this.vehicleTypeId); 
+
+	},
+
+	/*'click .update'() {
+
+			var vehicleId = this._id;
+
+
+			Meteor.call('updateVehicle',vehicleId );
+	},*/
+
 	'change #brand'(event,template) {
 		
 		 	//var selected_brand = event.target.value;
  			Session.set("selected_brand",event.target.value);
+ 			$('#model option').attr("value","").text(""); 
  			//console.log(Session.set(selected_brand));
  				//Meteor.call('showModels',selected_brand);
 
@@ -99,6 +139,7 @@ Template.DriverVehicles.events({
 		
 		 	//var selected_brand = event.target.value;
  			Session.set("selected_model",event.target.value);
+ 			$('#type option').attr("value","").text(""); 
  			//console.log(Session.set(selected_model));
  				//Meteor.call('showModels',selected_brand);
 
