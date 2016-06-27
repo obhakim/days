@@ -1,14 +1,14 @@
-//import { user } from 'meteor/meteor';
+// import { user } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 const smtp = {
-    username: 'foalicensee@outlook.com', // eg: server@gentlenode.com
-    password: 'F0@1icensee', // eg: 3eeP1gtizk5eziohfervU
-    server: 'smtp-mail.outlook.com', // eg: smtp.live.com
-    port: 587, // 25
-  };
+  username: 'foalicensee@outlook.com', // eg: server@gentlenode.com
+  password: 'F0@1icensee', // eg: 3eeP1gtizk5eziohfervU
+  server: 'smtp-mail.outlook.com', // eg: smtp.live.com
+  port: 587, // 25
+};
 
-process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port
+process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 
 
 Accounts.emailTemplates.siteName = 'Days';
@@ -16,27 +16,27 @@ Accounts.emailTemplates.from = 'Days <foalicensee@outlook.com>';
 
 Accounts.emailTemplates.resetPassword = {
   subject() {
-    return 'Bienvenue ' + user.profile.displayName; //'Reset your password on Meteor Todos';
+    return 'Bienvenue ' + user.profile.displayName; // 'Reset your password on Meteor Todos';
   },
   text(user, url) {
-  return 'Cher ' + user.profile.displayName + ',\n\n' +
-    'Cliquez sur le lien suivant pour mettre un nouveau mot de passe :\n' +
-    url + '\n\n' +
-    "Ne l'oubliez pas!!!\n\n\n" +
-    'Cordialement,\nDays';
-/*
-    return `Hello!
+    return 'Cher ' + user.profile.displayName + ',\n\n' +
+      'Cliquez sur le lien suivant pour mettre un nouveau mot de passe :\n' +
+      url + '\n\n' +
+      "Ne l'oubliez pas!!!\n\n\n" +
+      'Cordialement,\nDays';
+  /*
+      return `Hello!
 
-Click the link below to reset your password on Meteor Todos.
+  Click the link below to reset your password on Meteor Todos.
 
-${url}
+  ${url}
 
-If you didn't request this email, please ignore it.
+  If you didn't request this email, please ignore it.
 
-Thanks,
-The Meteor Todos team
-`;
-*/
+  Thanks,
+  The Meteor Todos team
+  `;
+  */
   },
 //   html(user, url) {
 //     return `
@@ -51,3 +51,4 @@ The Meteor Todos team
 // `
 //   }
 };
+
