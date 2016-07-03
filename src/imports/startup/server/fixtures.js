@@ -4,7 +4,8 @@ import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 // import { Todos } from '../../api/todos/todos.js';
 
 // if the database is empty on server start, create some sample data.
-Meteor.startup(() => {
+// Meteor.startup(() => {
+export const seedData = () => {
   // PrePopulate data
   // if (Meteor.isServer && VehicleTypes.find().count() === 0) {
   if (Meteor.isServer && !VehicleTypes.findOne()) {
@@ -101,4 +102,5 @@ Meteor.startup(() => {
 //     });
 //   });
 // }
-});
+};
+//});
