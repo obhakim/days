@@ -1,4 +1,7 @@
-Meteor.startup(function () {
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+// Meteor.startup(function () {
+export const setupSimpleSchema = () => {
   // common client / server startup
 
   // TODO: replace with i18n
@@ -23,16 +26,45 @@ Meteor.startup(function () {
     expectedObject: '[label] doit être un objet',
     expectedConstructor: '[label] doit être un [type]',
     regEx: [
-      { msg: "[label] échec de la validation de l'expression régulière" },
-      { exp: SimpleSchema.RegEx.Email, msg: '[label] doit être une adresse e-mail valide' },
-      { exp: SimpleSchema.RegEx.WeakEmail, msg: '[label] doit être une adresse e-mail valide' },
-      { exp: SimpleSchema.RegEx.Domain, msg: '[label] doit être un nom de domaine valide' },
-      { exp: SimpleSchema.RegEx.WeakDomain, msg: '[label] doit être un nom de domaine valide' },
-      { exp: SimpleSchema.RegEx.IP, msg: '[label] doit être une adresse IPv4 ou IPv6 valide' },
-      { exp: SimpleSchema.RegEx.IPv4, msg: '[label] doit être une adresse IPv4 valide' },
-      { exp: SimpleSchema.RegEx.IPv6, msg: '[label] doit être une adresse IPv6 valide' },
-      { exp: SimpleSchema.RegEx.Url, msg: '[label] doit être une URL valide' },
-      { exp: SimpleSchema.RegEx.Id, msg: '[label] doit être un ID alphanumérique valide' },
+      {
+        msg: "[label] échec de la validation de l'expression régulière",
+      },
+      {
+        exp: SimpleSchema.RegEx.Email,
+        msg: '[label] doit être une adresse e-mail valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.WeakEmail,
+        msg: '[label] doit être une adresse e-mail valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.Domain,
+        msg: '[label] doit être un nom de domaine valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.WeakDomain,
+        msg: '[label] doit être un nom de domaine valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.IP,
+        msg: '[label] doit être une adresse IPv4 ou IPv6 valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.IPv4,
+        msg: '[label] doit être une adresse IPv4 valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.IPv6,
+        msg: '[label] doit être une adresse IPv6 valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.Url,
+        msg: '[label] doit être une URL valide',
+      },
+      {
+        exp: SimpleSchema.RegEx.Id,
+        msg: '[label] doit être un ID alphanumérique valide',
+      },
     ],
     keyNotInSchema: "[key] n'est pas autorisé par le schéma",
   });
@@ -70,4 +102,5 @@ Meteor.startup(function () {
 //     ],
 //     keyNotInSchema: "[key] is not allowed by the schema"
 // })
-})
+};
+//});

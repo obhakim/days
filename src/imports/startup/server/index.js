@@ -11,5 +11,6 @@ import './security.js';
 // as an API to the client.
 import './register-api.js';
 
-
 import './browser-policy.js';
+
+import './startup.js';
