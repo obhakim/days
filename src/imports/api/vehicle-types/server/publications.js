@@ -4,5 +4,9 @@ import { VehicleTypes } from '../vehicle-types.js';
 
 Meteor.publish('vehicletypes', function vehicletypes() {
   return VehicleTypes.find();
+<<<<<<< HEAD
 
 });
+=======
+});
+>>>>>>> vlad
