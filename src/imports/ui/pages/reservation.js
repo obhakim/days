@@ -111,6 +111,7 @@ Template.Reservation.events({
             };
           });
           Session.set(SESSION.VALIDATION_ERRORS, errors);
+        } else {
         } 
         else {
           Session.set(SESSION.VALIDATION_ERRORS, [{
