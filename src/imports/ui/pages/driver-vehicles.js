@@ -9,10 +9,7 @@ import { Models } from '../../api/models/models.js';
 
 Meteor.subscribe('vehicles');
 Meteor.subscribe('brand');
-Meteor.subscribe('VehicleTypes',function () {
-    // This will output 50, fine
-    console.log("teste1");
-});
+Meteor.subscribe('VehicleTypes');
 
 Template.DriverVehicles.helpers({
 
