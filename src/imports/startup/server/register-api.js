@@ -1,4 +1,3 @@
-
 import '../../api/reservations/methods.js';
 import '../../api/reservations/server/publications.js';
 import '../../api/users/methods.js';

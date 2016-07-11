@@ -5,7 +5,7 @@ export const Models = new Mongo.Collection('models');
 
 Models.schema = new SimpleSchema({
   brand: { label: 'Marque', type: String },
-  model: { label: 'Model', type: String},
+  model: { label: 'Model', type: String },
   vehicleTypeId: { label: 'Type de véhicule', type: String /*, regEx: SimpleSchema.RegEx.Id**/ },
 });
 

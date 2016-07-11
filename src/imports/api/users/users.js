@@ -62,11 +62,11 @@ Users.profileSchema = new SimpleSchema({
     type: String,
   // ,optional: true
   },
-   city: {
+  city: {
     type: String,
   // ,optional: true
   },
-   zipcode: {
+  zipcode: {
     type: Number,
   // ,optional: true
   },
@@ -123,7 +123,7 @@ Users.schema = new SimpleSchema({
     type: Users.profileSchema,
     optional: true,
   },
-   driver: {
+  driver: {
     type: Users.profileSchema,
     optional: true,
   },

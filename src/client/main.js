@@ -1,2 +1,1 @@
-import '/imports/startup/client';
-// aamproduct
+import '/imports/startup/client'; 

@@ -7,8 +7,8 @@ Vehicles.schema = new SimpleSchema({
 
   ownerId: { label: 'Proprietaire', type: String, regEx: SimpleSchema.RegEx.Id },
   licence: { label: 'Immatriculation', type: String },
-  brand:  { label:'constructeur', type: String },
-  model:  { label:'modele', type: String },
+  brand:  { label: 'Constructeur', type: String },
+  model:  { label: 'Modele', type: String },
   vehicleTypeId:   { label: 'Type de véhicule', type: String, }, //regEx: SimpleSchema.RegEx.Id 
   /*registrationCard: { label: 'Carte grise ' ,type: String},
   regYear: 	{ type: Number },

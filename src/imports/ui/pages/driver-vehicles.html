@@ -4,14 +4,11 @@
             <h1 class="ui center aligned header">Vos voitures</h1>
             <div class="ui stackable segment">
                 <div class="six wide column">
-                    <form id="form" class="ui form" novalidate>
-                        {{> errormessage }}
-                        <h4 class="ui dividing header">Voitures</h4>
-                         <table class="ui celled table">
+                    <table class="ui celled table">
               <thead>
                 <tr>
                     <th> </th>
-                    <th>Licence</th>
+                    <th>Immatriculation</th>
                     <th>Constructeur</th>
                     <th>Modèle</th>
                     <th>Type de Vehicule</th>
@@ -32,12 +29,14 @@
                 {{/each}}           
               </tbody>
             </table>
-
-                        <div class="five wide field">
+                    <form id="form" class="ui form" novalidate>
+                        {{> errormessage }}
+                        <h4 class="ui dividing header">Voitures</h4>
+                         <div class="five wide required field">
                         <label>Licence</label>
                         <input class="licence" type="text" name="licence" placeholder="Entrer une licence">
                         </div>
-                        <div class="five wide field">
+                        <div class="five wide required field">
                         <label>Marque</label>
                             <select  id="brand">
                                 {{#each brandsList}}
@@ -45,7 +44,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="five wide field">
+                        <div class="five wide required field">
                         <label>Modèle</label>
                             <select id="model">
                                 {{#each modelsList}}
@@ -53,7 +52,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="five wide field">
+                        <div class="five wide required field">
                         
                             {{#each vehicleTypesList}}
                             <label>Type de véhicule</label>

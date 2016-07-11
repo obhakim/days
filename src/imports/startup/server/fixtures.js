@@ -50,15 +50,15 @@ export const seedData = () => {
   }
 
   if (Meteor.isServer && !Models.findOne()) {
-  var idB = VehicleTypes.findOne({name:'Berline'}, {limit: 1});
-  var idL = VehicleTypes.findOne({name:'Luxe'}, {limit: 1});
-  var idP = VehicleTypes.findOne({name:'Premium'}, {limit: 1});
-  var idV = VehicleTypes.findOne({name:'Van'}, {limit: 1});
+      var idB = VehicleTypes.findOne({name:'Berline'}, {limit: 1});
+      var idL = VehicleTypes.findOne({name:'Luxe'}, {limit: 1});
+      var idP = VehicleTypes.findOne({name:'Premium'}, {limit: 1});
+      var idV = VehicleTypes.findOne({name:'Van'}, {limit: 1});
    
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe C',
-      vehicleTypeId: idB.name ,
+      vehicleTypeId: idB.name,
     });
      Models.insert({
       brand: 'Mercedes',
@@ -81,29 +81,29 @@ export const seedData = () => {
       vehicleTypeId: idB.name,
     });
       Models.insert({
-            brand: 'Audi',
-            model: 'A6',
-            vehicleTypeId: idL.name,
+      brand: 'Audi',
+      model: 'A6',
+      vehicleTypeId: idL.name,
           });
       Models.insert({
-            brand: 'Audi',
-            model: 'A8',
-            vehicleTypeId: idP.name,
+      brand: 'Audi',
+      model: 'A8',
+      vehicleTypeId: idP.name,
           });
       Models.insert({
-            brand: 'BMW',
-            model: 'Serie 3',
-            vehicleTypeId: idB.name,
+      brand: 'BMW',
+      model: 'Serie 3',
+      vehicleTypeId: idB.name,
           });
       Models.insert({
-            brand: 'BMW',
-            model: 'Serie 5',
-            vehicleTypeId: idL.name,
+      brand: 'BMW',
+      model: 'Serie 5',
+      vehicleTypeId: idL.name,
           });
       Models.insert({
-            brand: 'BMW',
-            model: 'Serie 7',
-            vehicleTypeId: idP.name,
+      brand: 'BMW',
+      model: 'Serie 7',
+      vehicleTypeId: idP.name,
           });
     }
 

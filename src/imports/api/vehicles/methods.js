@@ -9,22 +9,22 @@ import { CONST } from '../../common/constants.js';
 Meteor.methods({
 	addVehicle: (vehicle) => {
 
-		 if (! Meteor.userId()) {
+   if (! Meteor.userId()) {
 
-      throw new Meteor.Error('not-authorized');
+    throw new Meteor.Error('not-authorized');
 
-    }
+  }
 
-    return Vehicles.insert(vehicle);
-	},
+  return Vehicles.insert(vehicle);
+},
 
-	removeVehicle: (vehicleId) => {
+removeVehicle: (vehicleId) => {
 
 	return Vehicles.remove(vehicleId);
 
-	},
+},
 
-    updateVehicle: function (vehicleId, userId) { 
+updateVehicle: function (vehicleId, userId) { 
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
@@ -49,10 +49,10 @@ Meteor.methods({
     }, {
       validationContext: 'updateVehicle',
     });
- 
+    
     return id;
   },
   
 
-    });
+});
 

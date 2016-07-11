@@ -77,11 +77,8 @@ Template.DriverVehicles.events({
 			Session.set(SESSION.ERROR, error);
 			} else {
 
-			event.target.licence.value="";
-			event.target.brand.value="";
-			event.target.model.value="";
-			event.target.type.value="";
-
+			event.target.reset();
+			
 			}
 
 			});
