@@ -1,4 +1,3 @@
-
 import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Reservations } from './reservations.js';
 

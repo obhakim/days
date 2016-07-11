@@ -226,11 +226,12 @@ Helpers.isAdmin = function () {                                                 
 };                                                                                                                  //
                                                                                                                     //
 Helpers.isDriver = function () {  
-   return Roles.addUsersToRoles(this.userId, ['driver'] );                                                                                  // 9
-  // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])                                            //
-  //return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);                                                // 11
-};                                                                                                                  //
-                                                                                                                    //
+    // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])                                            //
+  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);                                                // 11
+};                                                                                                                         //
+                                // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])                                            //
+  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);                                                // 11
+};                                                                                                     //
 Helpers.getFullName = function (firstName, lastName) {                                                              // 14
   return firstName + ' ' + lastName;                                                                                // 15
 };                                                                                                                  //

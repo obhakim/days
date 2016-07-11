@@ -6,20 +6,25 @@ export const Users = Meteor.users;
 
 Users.creditCardSchema = new SimpleSchema({
   num: {
+    label: "Numero de la carte",
     type: String,
   },
   validThruM: {
+    label: "Mois",
     type: Number,
     min: 1,
     max: 12,
   },
   validThruY: {
+    label: "Année",
     type: Number,
   },
   cvv: {
+    label: "CVV",
     type: String,
   },
   name: {
+    label: "Nom",
     type: String,
   },
 });
