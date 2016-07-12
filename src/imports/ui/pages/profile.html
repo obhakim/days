@@ -24,7 +24,7 @@
                             <label>Téléphone</label>
                             <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" required />
                         </div>
-                        <div class="field">
+                        <div class="required field">
                             <label>Date de naissance</label>
                             <input id="birthday" class="ui dropdown datetimepicker" type="text" placeholder="Date de naissance" value="{{formatDate profile.birthday}}" />
                         </div>
@@ -33,7 +33,7 @@
                             <label>Rue</label>
                             <input id="street" type="text" placeholder="Rue" value="{{profile.street}}" required />
                         </div>
-                        <div class="two fields">
+                        <div class="two fields required">
                             <div class="four wide required field">
                                 <label>Code postal</label>
                                 <input id="zipcode" type="number" placeholder="00000" maxlength="10" value="{{profile.zipcode}}" required />
@@ -44,12 +44,12 @@
                             </div>
                         </div>
                         <h4 class="ui dividing header">Information de paiement</h4>
-                        <div class="field">
+                        <div class="required field">
                             <label>Numéro</label>
                             <input id="num" type="text" placeholder="Numéro" maxlength="16" value="{{profile.creditCard.num}}" required/>
                         </div>
                         <div class="two fields">
-                            <div class="twelve wide field">
+                            <div class="twelve wide field required">
                                 <label>Date de validité</label>
                                 <div class="two fields">
                                     <div class="four wide field">
