@@ -77,7 +77,7 @@ Template.DriverVehicles.events({
 			Session.set(SESSION.ERROR, error);
 			} else {
 
-			event.target.reset();
+			FlowRouter.go('/s/vehicles');
 			
 			}
 

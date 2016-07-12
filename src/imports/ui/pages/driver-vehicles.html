@@ -4,31 +4,7 @@
             <h1 class="ui center aligned header">Vos voitures</h1>
             <div class="ui stackable segment">
                 <div class="six wide column">
-                    <table class="ui celled table">
-              <thead>
-                <tr>
-                    <th> </th>
-                    <th>Immatriculation</th>
-                    <th>Constructeur</th>
-                    <th>Modèle</th>
-                    <th>Type de Vehicule</th>
-                    <th></th>
-                </tr>
-              </thead>
-              <tbody>
-               {{#each vehicles}}
-                <tr id={{_id}}>
-                  <td> <!-- {{#if isUpdutable}} --> 
-                  <button  class="update"> modif</button> <!-- {{/if}} --></td>
-                  <td>{{licence}}</td>
-                  <td>{{brand}}</td>
-                  <td>{{model}}</td>
-                  <td>{{vehicleTypeId}}</td>
-                  <td><button class="delete">&times;</button></td>
-                </tr> 
-                {{/each}}           
-              </tbody>
-            </table>
+                
                     <form id="form" class="ui form" novalidate>
                         {{> errormessage }}
                         <h4 class="ui dividing header">Voitures</h4>

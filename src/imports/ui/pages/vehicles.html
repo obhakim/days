@@ -1,4 +1,18 @@
 <template name="Vehicles">
     <h2>Nos véhicules</h2>
-    <img src="images/Vehicles.png" alt="Audi A6, Audi A8, Mercedes Classe E, Mercedes Classe S, Caravelle Minibus, Mercedes Classe V" />
+        <table class="ui celled table">
+              <thead>
+                <tr>
+                    <th> </th>
+                    <th>Immatriculation</th>
+                    <th>Constructeur</th>
+                    <th>Modèle</th>
+                    <th>Type de Vehicule</th>
+                    <th></th>
+                </tr>
+              </thead>
+              <tbody>
+               {{#each vehicles}}  {{> VehicleItem}}  {{/each}}           
+              </tbody>
+            </table>
 </template>
