@@ -225,13 +225,11 @@ Helpers.isAdmin = function () {                                                 
   return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.ADMIN]);                                                 // 6
 };                                                                                                                  //
                                                                                                                     //
-Helpers.isDriver = function () {  
-    // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])                                            //
+Helpers.isDriver = function () {                                                                                    // 9
+  // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])                                            //
   return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);                                                // 11
-};                                                                                                                         //
-                                // return Roles.userIsInRole(Meteor.user(), [CONST.USER_ROLES.DRIVER])                                            //
-  return Roles.userIsInRole(this.userId, [CONST.USER_ROLES.DRIVER]);                                                // 11
-};                                                                                                     //
+};                                                                                                                  //
+                                                                                                                    //
 Helpers.getFullName = function (firstName, lastName) {                                                              // 14
   return firstName + ' ' + lastName;                                                                                // 15
 };                                                                                                                  //
