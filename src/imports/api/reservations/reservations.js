@@ -62,10 +62,6 @@ Reservations.Schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id,
   },
-   Comment: {
-    label: 'Commentaire',
-    type: String
-  },
   price: {
     label: 'Prix',
     type: Number,

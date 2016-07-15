@@ -51,4 +51,3 @@ Accounts.emailTemplates.resetPassword = {
 // `
 //   }
 };
-
