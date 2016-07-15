@@ -9,6 +9,7 @@ Meteor.startup(() => {
   // PrePopulate data
   // if (Meteor.isServer && VehicleTypes.find().count() === 0) {
   if (Meteor.isServer && !VehicleTypes.findOne()) {
+
     const vtBerline = VehicleTypes.insert({
       _id: 'Berline',
       ratePerKm: 2.50,
@@ -16,6 +17,7 @@ Meteor.startup(() => {
       rateMin: 10,
       rateMultiplier: 1.2,
     });
+
     const vtLuxe = VehicleTypes.insert({
       _id: 'Luxe',
       ratePerKm: 3.20,
@@ -23,6 +25,7 @@ Meteor.startup(() => {
       rateMin: 15,
       rateMultiplier: 1.2,
     });
+
     const vtPremium = VehicleTypes.insert({
       _id: 'Premium',
       ratePerKm: 5.00,
@@ -30,6 +33,8 @@ Meteor.startup(() => {
       rateMin: 20,
       rateMultiplier: 1.2,
     });
+
+
     const vtVan = VehicleTypes.insert({
       _id: 'Van',
       ratePerKm: 4.50,
@@ -37,71 +42,67 @@ Meteor.startup(() => {
       rateMin: 15,
       rateMultiplier: 1.2,
     });
+    
   }
 
-  
-
   if (Meteor.isServer && !Models.findOne()) {
-
-    var berline = VehicleTypes.findOne({_id:'Berline'});
-    var luxe    = VehicleTypes.findOne({_id:'Luxe'});
-    var premium = VehicleTypes.findOne({_id:'Premium'});
-    var van     = VehicleTypes.findOne({_id:'Van'});
-
-   Models.insert({
+  var idB = VehicleTypes.findOne({name:'Berline'}, {limit: 1});
+  var idL = VehicleTypes.findOne({name:'Luxe'}, {limit: 1});
+  var idP = VehicleTypes.findOne({name:'Premium'}, {limit: 1});
+  var idV = VehicleTypes.findOne({name:'Van'}, {limit: 1});
+   
+    Models.insert({
       brand: 'Mercedes',
-      model: "Classe C",
-      vehicleTypeId: berline._id, //"A9XcikSmBWH7bqo2Y",
-
+      model: 'Classe C',
+      vehicleTypeId: idB.name,
     });
-  
-   Models.insert({
+     Models.insert({
       brand: 'Mercedes',
-      model: "Classe E",
-      vehicleTypeId: luxe._id, //"p2b7K68hzKyYrnhj2",
+      model: 'Classe E',
+      vehicleTypeId: idL.name,
     });
-  Models.insert({
+     Models.insert({
       brand: 'Mercedes',
-      model: "Classe S",
-      vehicleTypeId: premium._id, //"QDagndTkyouXzE8Za",
+      model: 'Classe S',
+      vehicleTypeId: idP.name,
     });
-   Models.insert({
+     Models.insert({
       brand: 'Mercedes',
-      model: "Classe V",
-      vehicleTypeId: van._id, //"6M7WHmo5SJDe6QExL",
+      model: 'Classe V',
+      vehicleTypeId: idV.name,
     });
-   Models.insert({
+      Models.insert({
       brand: 'Audi',
-      model: "A4",
-      vehicleTypeId: berline._id, //"A9XcikSmBWH7bqo2Y",
+      model: 'A4',
+      vehicleTypeId: idB.name,
     });
-   Models.insert({
-      brand: 'Audi',
-      model: "A6",
-      vehicleTypeId: luxe._id, //"p2b7K68hzKyYrnhj2",
-    });
-   Models.insert({
-      brand: 'Audi',
-      model: "A8",
-      vehicleTypeId: premium._id, // "QDagndTkyouXzE8Za",
-    });
-   Models.insert({
-      brand: 'BMW',
-      model: "Serie 3",
-      vehicleTypeId: berline._id, //"A9XcikSmBWH7bqo2Y",
-    });
-   Models.insert({
-      brand: 'BMW',
-      model: "Serie 5",
-      vehicleTypeId: luxe._id, //"p2b7K68hzKyYrnhj2",
-    });
-   Models.insert({
-      brand: 'BMW',
-      model: "Serie 7",
-      vehicleTypeId: premium._id,  //"QDagndTkyouXzE8Za",
-    });
+      Models.insert({
+            brand: 'Audi',
+            model: 'A6',
+            vehicleTypeId: idL.name,
+          });
+      Models.insert({
+            brand: 'Audi',
+            model: 'A8',
+            vehicleTypeId: idP.name,
+          });
+      Models.insert({
+            brand: 'BMW',
+            model: 'Serie 3',
+            vehicleTypeId: idB.name,
+          });
+      Models.insert({
+            brand: 'BMW',
+            model: 'Serie 5',
+            vehicleTypeId: idL.name,
+          });
+      Models.insert({
+            brand: 'BMW',
+            model: 'Serie 7',
+            vehicleTypeId: idP.name,
+          });
+    }
 
-}
   // if (Lists.find().count() === 0) {
   //   const data = [
   //     {

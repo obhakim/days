@@ -4,10 +4,10 @@ import { Mongo } from 'meteor/mongo';
 export const Models = new Mongo.Collection('models');
 
 Models.schema = new SimpleSchema({
- 
-  brand: { label: 'la marque' , type: String },
-  model: { label: 'le modéle' , type: String },
-  vehicleTypeId: { label: 'Type de véhicule', type: String  }, //,regEx: SimpleSchema.RegEx.Id
-  });
+  brand: { label: 'Marque', type: String },
+  model: { label: 'Model', type: String},
+  vehicleTypeId: { label: 'Type de véhicule', type: String }, //regEx: SimpleSchema.RegEx.Id
+});
 
 Models.attachSchema(Models.schema);
+

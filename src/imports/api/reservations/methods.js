@@ -30,7 +30,7 @@ function getPrice(vehicleTypeId, startAt, distance) {
     const vehicleType = VehicleTypes.findOne(vehicleTypeId);
     return Reservations.calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance);
   } catch (ex) {
-    // log
+    // log 
     throw new Meteor.Error('cannot-get-price', "Impossible d'obtenir le prix");
   }
 }
@@ -49,7 +49,7 @@ Meteor.methods({
     reservation.createdAt = new Date;
     // console.out(getPrice);
     reservation.price = getPrice(reservation.vehicleTypeId, reservation.ride.startAt, reservation.ride.distance);
-
+    
     const id = Reservations.insert(reservation, {
       validationContext: 'createReservation',
     });
@@ -73,7 +73,7 @@ Meteor.methods({
 
     return id;
   },
-  acceptReservation: function (reservationId, userId) {
+  acceptReservation: function (reservationId, userId) { 
     // Logged user
     if (userId !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");

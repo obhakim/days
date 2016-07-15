@@ -14,3 +14,4 @@ import './register-api.js';
 import './browser-policy.js';
 
 import './startup.js';
+
