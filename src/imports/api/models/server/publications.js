@@ -1,4 +1,3 @@
-
 import { Meteor } from 'meteor/meteor';
 import {Models} from '../models.js';
 

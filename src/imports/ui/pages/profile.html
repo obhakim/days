@@ -1,11 +1,10 @@
-
 <template name="Profile">
     <div class="ui middle aligned centered grid">
         <div class="at-column column">
             <h1 class="ui center aligned header">Votre profil</h1>
             <div class="ui stackable segment">
                 <div class="six wide column">
-                    <form id="form" class="ui form">
+                    <form id="form" class="ui form" novalidate>
                         {{> validationerrors }}
                         <h4 class="ui dividing header">Information personnelle</h4>
                         <div class="required field">
@@ -50,18 +49,18 @@
                                 <input id="city" type="text" placeholder="Ville" value="{{profile.city}}" required />
                             </div>
                         </div>
-                        
+
                         <h4 class="ui dividing header">Information de paiement</h4>
                         <div class="field">
                             <label>Numéro</label>
-                            <input id="num" type="text" placeholder="Numéro" maxlength="16" value="{{profile.creditCard.num}}" required/>
+                            <input id="num" type="text" placeholder="Numéro" maxlength="16" value="{{profile.creditCard.num}}" />
                         </div>
                         <div class="two fields">
                             <div class="twelve wide field">
                                 <label>Date de validité</label>
                                 <div class="two fields">
                                     <div class="four wide field">
-                                        <select id="validThruM" required>
+                                        <select id="validThruM">
                                             <option> </option>
                                             {{#each validThruM}}
                                             <option selected="{{equals profile.creditCard.validThruM value}}">{{value}}</option>
@@ -69,7 +68,7 @@
                                         </select>
                                     </div>
                                     <div class="five wide field">
-                                        <select id="validThruY" required>
+                                        <select id="validThruY">
                                             <option> </option>
                                             {{#each validThruY}}
                                             <option selected="{{equals profile.creditCard.validThruY value}}">{{value}}</option>
@@ -80,12 +79,12 @@
                             </div>
                             <div class="four wide field">
                                 <label>CVV</label>
-                                <input id="cvv" type="text" placeholder="CVV" maxlength="3" value="{{profile.creditCard.cvv}}" required/>
+                                <input id="cvv" type="text" placeholder="CVV" maxlength="3" value="{{profile.creditCard.cvv}}" />
                             </div>
                         </div>
                         <div class="field">
                             <label>Nom</label>
-                            <input id="name" type="text" placeholder="Nom" value="{{profile.creditCard.name}}" required/>
+                            <input id="name" type="text" placeholder="Nom" value="{{profile.creditCard.name}}" />
                         </div>
                         <input type="submit" value="Enregistrer" class="ui fluid large primary button">
                     </form>
@@ -93,5 +92,4 @@
             </div>
         </div>
     </div>
->>>>>>> c02efa14c1fd9165f6978f99205ccceafef616a1
 </template>

@@ -2,165 +2,89 @@ import './driver-vehicles.html';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CONST, SESSION } from '../../common/constants.js';
-import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
 
+
 Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
   const self = this;
-    self.autorun(function () {
-    self.subscribe('vehicletypes');
+    self.autorun(function(){
     self.subscribe('myVehicles');
     self.subscribe('brands');
+
   });
 });
 
+
+
 Template.DriverVehicles.helpers({
-	vehicles: () => Vehicles.find().fetch(),
-	brandsList: function () {
-			// return Models.find().fetch();
 
-			return _.uniq(Models.find({},{sort: {
-			brand: 1}
-			}).fetch(), true, doc => {
-			return doc.brand;
-			});
-			},
+   Brands: function(){
 
-	modelsList: function () {
-	// return Models.find().fetch()
-	return _.uniq(Models.find({brand:Session.get("selected_brand")},{sort: {
-	model: 1}
-	}).fetch(), true, doc => {
-	return doc.model;
-	});
-	},
+ 	return _.uniq(Models.find({},{sort: {
+      brand: 1}
+    }).fetch(), true, doc => {
+      return doc.brand;
+    });
+   },
 
-	vehicleTypesList: function () {
-			
-	return s = _.uniq(Models.find({model:Session.get("selected_model"),brand:Session.get("selected_brand")},
-	{ sort:
-	 { vehicleTypeId: 1 }
-	}).fetch(), true, doc => {
-	return doc.vehicleTypeId;
-	});
-	},
+   Vehicles: function(){
 
-	setmodelupdate: function() {},
+ 	return Vehicles.find().fetch();
+   
+   },
+
   	
- 	/*var data=Vehicles.find({_id:Session.get("vehid")}).fetch();
-  	$( "#licence" ).val(data[0].license);
-    $( "#brand" ).val(data[0].brand);
-    $( "#model" ).val(data[0].model);
-    $( "#VehicleTypeId" ).val(data[0].vehicleTypeId);
-
-
- return data;
-}});*/
 
 });
 
+/*vehicles: () => Vehicles.find(),
+	 brands: () =>  Models.distinct('brand'),*/
 
 Template.DriverVehicles.events({
+/*
+	'click .brand'() {
 
-	'submit #form': function driverVehiclesSubmitForm(event) {
-			event.preventDefault();
+    Meteor.call('brands.selected', this.brand);
+  },
 
-			var vehicle = {
-			ownerId: Meteor.userId(),
-			licence: event.target.licence.value,
-			brand: event.target.brand.value,
-			model: event.target.model.value,
-			vehicleTypeId: event.target.type.value,
-			};
-			//console.log(vehicle);
-			Meteor.call("addVehicle",vehicle, (error) => {
-			if (error) {
-			Session.set(SESSION.ERROR, error);
-			} else {
 
-			event.target.licence.value="";
-			event.target.brand.value="";
-			event.target.model.value="";
-			event.target.type.value="";
+  */
+  'submit #form': function driverVehiclesSubmitForm(event) {
+    event.preventDefault();
 
-			}
+    var vehicle = {
+    	ownerId: Meteor.userId(),
+    	licence: event.target.licence.value,
+    	brand: event.target.brand.value,
+    	model: event.target.model.value,
+    	vehicleTypeId: event.target.type.value,
+		};
+	//console.log(vehicle);
+	Meteor.call("addVehicle",vehicle, (error) => {
+      if (error) {
+        Session.set(SESSION.ERROR, error);
+      } else {
 
-			});
+      	event.target.licence.value="";
+    	event.target.brand.value="";
+    	event.target.model.value="";
+    	event.target.type.value="";
 
-			//return false;
+		}
 
-			},
+	});
 
-	'click .update'() {
-
-			var vehicleId = Session.get("id");
-			const vehicle = {
-			ownerId: Meteor.userId(),
-			licence: $("#licence").val(),
-			brand: $("#brand").val(),
-			model: $("#model").val(),
-			vehicleTypeId: $("#type").val(),
-			}; 
-
-			Meteor.call("updateVehicle",vehicleId,vehicle,(error) => {
-			if (error) {
-			Session.set(SESSION.ERROR, error);
-			} 
-
-			else {
-				("#licence").val("");
-				("#brand").val("");
-				("#model").val("");
-				("#type").val("");
-			}
-		});
+    //return false;
+			
 	},
 
 	'click .delete'() {
-		
-			var vehicleId = this._id;
-			Meteor.call('removeVehicle',vehicleId );
-	},
+		var vehicleId = this._id;
+ 
+        Meteor.call('removeVehicle',vehicleId );
+  },
 
-	'click .editer'() {
-
-			//$('#type option').attr("value",this.vehicleTypeId).text(this.vehicleTypeId);
-			Session.set("id",this._id);
-			$( ".cancel").show();
-			$( "#sub").attr('value', 'Save','type', 'button').addClass('update').prop("type", "button");
-			$( "#licence").val(this.licence);
-			$( "#brand" ).val(this.brand);
-			$("#model").find('option').remove().end().append($('<option>', {value:this.model, text:this.model}));
-			$('#type').find('option').remove().end().append($('<option>', {value:this.vehicleTypeId, text: this.vehicleTypeId}));
-	},
-
-	'click .cancel'() {
-
-		$( ".cancel").hide();
-		$( "#sub").attr('value', 'Enregister','type', 'submit').removeClass('update').prop("type", "submit");
-
-	},
-
-
-	'change #brand'(event,template) {
-		
-		 	//var selected_brand = event.target.value;
- 			Session.set("selected_brand",event.target.value);
- 			$('#model option').attr("value","").text(""); 
- 			//console.log(Session.set(selected_brand));
- 				//Meteor.call('showModels',selected_brand);
-
-	},
-
-	'change #model'(event,template) {
-		
-		 	//var selected_brand = event.target.value;
- 			Session.set("selected_model",event.target.value);
- 			$('#type option').attr("value","").text(""); 
- 			//console.log(Session.set(selected_model));
- 				//Meteor.call('showModels',selected_brand);
-
-	},
 });

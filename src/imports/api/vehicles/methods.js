@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+//import { Accounts } from 'meteor/accounts-base';
 import { Vehicles} from './vehicles.js';
 
 //import { Roles } from 'meteor/alanning:roles';
@@ -19,26 +20,9 @@ Meteor.methods({
 
 	removeVehicle: (vehicleId) => {
 
-		 if (! Meteor.userId()) {
-
-      throw new Meteor.Error('not-authorized');
-
-    }
-
 	return Vehicles.remove(vehicleId);
 
-	},
-
-	updateVehicle: (vehicleId,vehicle) => {
-
-		 if (! Meteor.userId()) {
-
-      throw new Meteor.Error('not-authorized');
-
-    }
-
-		return Vehicles.update(vehicleId, { $set: vehicle});
-	},
+	}
   
 
     });

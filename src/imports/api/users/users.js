@@ -6,25 +6,20 @@ export const Users = Meteor.users;
 
 Users.creditCardSchema = new SimpleSchema({
   num: {
-    label: "Numero de la carte",
     type: String,
   },
   validThruM: {
-    label: "Mois",
     type: Number,
     min: 1,
     max: 12,
   },
   validThruY: {
-    label: "Année",
     type: Number,
   },
   cvv: {
-    label: "CVV",
     type: String,
   },
   name: {
-    label: "Nom",
     type: String,
   },
 });
@@ -61,18 +56,6 @@ Users.profileSchema = new SimpleSchema({
   },
   zipcode: {
     type: String,
-  // ,optional: true
-  },
-  street: {
-    type: String,
-  // ,optional: true
-  },
-   city: {
-    type: String,
-  // ,optional: true
-  },
-   zipcode: {
-    type: Number,
   // ,optional: true
   },
   creditCard: {
@@ -125,10 +108,6 @@ Users.schema = new SimpleSchema({
     type: Date,
   },
   profile: {
-    type: Users.profileSchema,
-    optional: true,
-  },
-   driver: {
     type: Users.profileSchema,
     optional: true,
   },
