@@ -5,6 +5,6 @@ import { setupUploadServer } from './upload-server.js';
 
 Meteor.startup(() => {
   setupSimpleSchema();
-  //seedData();
+  seedData();
   setupUploadServer();
 });
