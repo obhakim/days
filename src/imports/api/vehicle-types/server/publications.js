@@ -1,10 +1,9 @@
+/* eslint-disable prefer-arrow-callback */
+
 import { Meteor } from 'meteor/meteor';
 
 import { VehicleTypes } from '../vehicle-types.js';
 
-
-Meteor.publish('vehicleTypes', function vehicleTypes() {
-	
-  return VehicleTypes.find()
-})
-
+Meteor.publish('vehicletypes', function vehicletypes() {
+  return VehicleTypes.find();
+});

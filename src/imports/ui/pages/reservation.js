@@ -17,7 +17,7 @@ import '../components/validation-errors.js';
 // const instance
 const currentPositionText = 'Position actuelle';
 
-Template.reservation.onCreated(function () {
+Template.Reservation.onCreated(function () {
   // instance = Template.instance()
   // instance.errors = new ReactiveDict()
   const self = this;
@@ -31,7 +31,7 @@ Template.reservation.onCreated(function () {
   });
 });
 
-Template.reservation.helpers({
+Template.Reservation.helpers({
   currentPositionNotDefined: function () {
     // return !Template.instance().myPosition
     return !Session.get(SESSION.GEO_POSITION);
@@ -50,7 +50,7 @@ Template.reservation.helpers({
 // }
 });
 
-Template.reservation.events({
+Template.Reservation.events({
   'click #startMyPosition': function (event) {
     event.preventDefault();
     // const instance = Template.instance()
@@ -123,7 +123,7 @@ Template.reservation.events({
   },
 });
 
-Template.reservation.onRendered(function () {
+Template.Reservation.onRendered(function () {
   // Session.set(SESSION.ISLOADING, true)
 
   // $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
