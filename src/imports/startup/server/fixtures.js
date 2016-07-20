@@ -45,11 +45,11 @@ export const seedData = () => {
   }
 
   if (Meteor.isServer && !Models.findOne()) {
-  var idB = VehicleTypes.findOne({name:'Berline'}, {limit: 1});
-  var idL = VehicleTypes.findOne({name:'Luxe'}, {limit: 1});
-  var idP = VehicleTypes.findOne({name:'Premium'}, {limit: 1});
-  var idV = VehicleTypes.findOne({name:'Van'}, {limit: 1});
-   
+    const idB = VehicleTypes.findOne({ name: 'Berline' }, { limit: 1 });
+    const idL = VehicleTypes.findOne({ name: 'Luxe' }, { limit: 1 });
+    const idP = VehicleTypes.findOne({ name: 'Premium' }, { limit: 1 });
+    const idV = VehicleTypes.findOne({ name: 'Van' }, { limit: 1 });
+
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe C',
