@@ -5,18 +5,20 @@
 	],
 	"installed_packages":
 	[
+    // https://github.com/victorporof/Sublime-HTMLPrettify
 		"Babel",
 		"Babel Snippets",
 		"Emmet",
-		"EsFormatter",
-		"ESLint-Formatter",
+		"EsFormatter",  // https://github.com/piuccio/sublime-esformatter
+		//"ESLint-Formatter",
 		"jQuery",
-		"JsFormat",
+		//"JsFormat", // https://github.com/jdc0589/JsFormat
 		"Oceanic Next Color Scheme",
 		"Package Control",
 		"SideBarEnhancements",
 		"SublimeLinter",
 		"SublimeLinter-contrib-eslint",
+    "SublimeLinter-html-tidy", // https://github.com/SublimeLinter/SublimeLinter-html-tidy
 		"Zeus"
 	]
 }
