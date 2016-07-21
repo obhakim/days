@@ -12,7 +12,7 @@
                   <th>Constructeur</th>
                   <th>Modèle</th>
                   <th>Type de Vehicule</th>
-                  <th/>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -41,16 +41,16 @@
             <div class="five wide field required">
               <label>Marque</label>
               <select id="brand">
-                <option value="" selected/>
+                <option value="" selected></option>
               {{#each brandsList}}
                 <option value="{{brand}}">{{brand}}</option>
               {{/each}}
               </select>
             </div>
-            <div class="five wide field ">
+            <div class="five wide field">
               <label>Modèle</label>
               <select id="model">
-                <option value="" selected/>
+                <option value="" selected></option>
               {{#each modelsList}}
                 <option value="{{model}}">{{model}}</option>
               {{/each}}
@@ -59,7 +59,7 @@
             <div class="five wide field required">
               <label>Type de véhicule</label>
               <select id="type">
-                <option value="" selected/>
+                <option value="" selected></option>
               {{#each vehicleTypesList}}
                 <option value="{{vehicleTypeId}}">{{vehicleTypeId}}</option>
               {{/each}}
