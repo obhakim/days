@@ -14,7 +14,6 @@
         {{!--#each error in errors "lastname"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
-
         <div class="field">
           <label>Prenom</label>
           <input id="firstname" type="text" placeholder="Prenom" value="{{profile.firstName}}" />
@@ -22,7 +21,6 @@
         {{!--#each error in errors "firstname"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
-
         <div class="required field">
           <label>Téléphone</label>
           <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" required />
@@ -30,7 +28,6 @@
         {{!--#each error in errors "phone"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
-
         <div class="required field">
           <label>Email</label>
           <input id="email" type="text" placeholder="Email" value="{{currentUserEmail}}" required />
@@ -81,22 +78,24 @@
         {{!--#each error in errors "vehicletype"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
-
+        <div class="field">
+          <label>Commentaire</label>
+          <input id="comment" type="text" placeholder="Commentaire" value="{{comment}}" />
+        </div>
+        {{!--#each error in errors "comment"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 				<input type="hidden" id="distance" value="0" />
-				
         <div class="field">
           <label>Votre voyage <span id="totaldistance">0</span> km, environ <span id="totalduration">0</span> minutes, <span id="price">0.00</span> €</label>
         </div>
-
         <div>
           <button type="submit" class="ui button">Réserver</button>
         </div>
       </form>
     </div>
-
     <div class="ten wide column">
       <div id="map"></div>
     </div>
-
   </div>
 </template>

@@ -37,3 +37,7 @@ if (Meteor.isClient) {
 }
 
 export { generateData };
+<<<<<<< HEAD
+=======
+// Test commit
+>>>>>>> aamingenius
