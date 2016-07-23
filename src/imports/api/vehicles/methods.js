@@ -23,8 +23,6 @@ removeVehicle: (vehicleId) => {
     return Vehicles.remove(vehicleId);
   },
 
-},
-
 updateVehicle: function (vehicleId, userId) { 
     // Logged user
     if (userId !== Meteor.userId()) {

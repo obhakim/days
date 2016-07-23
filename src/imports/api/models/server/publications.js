@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Models } from '../models.js';
 
-<<<<<<< HEAD
 Meteor.publish('brands', function publishBrands() {
   return Models.find();
 });
