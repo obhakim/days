@@ -27,7 +27,7 @@ Template.DriverVehicles.helpers({
 
     return _.uniq(Models.find({}, {
       sort: {
-        brand: 1
+        brand: 1,
       }
     }).fetch(), true, doc => {
       return doc.brand;
@@ -92,12 +92,6 @@ Template.DriverVehicles.events({
   'click .delete'() {
     var vehicleId = this._id;
     Meteor.call('removeVehicle', vehicleId);
-  },
-  'click .update': function() {
-    event.target.licence.value = "jj";
-    event.target.brand.value = "hhh";
-    event.target.model.value = "hhh";
-    event.target.type.value = "hh";
   },
   'change #brand'(event, template) {
     Session.set("selected_brand", event.target.value);

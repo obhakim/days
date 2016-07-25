@@ -18,7 +18,9 @@ Meteor.methods({
   },
 
   removeVehicle: (vehicleId) => {
-
+    if (!Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
 
     return Vehicles.remove(vehicleId);
   },
