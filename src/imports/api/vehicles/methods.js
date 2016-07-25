@@ -9,9 +9,7 @@ Meteor.methods({
   addVehicle: (vehicle) => {
 
     if (!Meteor.userId()) {
-
       throw new Meteor.Error('not-authorized');
-
     }
 
     return Vehicles.insert(vehicle);
@@ -34,6 +32,5 @@ Meteor.methods({
       $set: vehicle,
     });
   },
-
 
 });
