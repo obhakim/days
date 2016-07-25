@@ -17,12 +17,12 @@ import '../components/validation-errors.js';
 // const instance
 const currentPositionText = 'Position actuelle';
 
-Template.Reservation.onCreated(function () {
+Template.Reservation.onCreated(function() {
   // instance = Template.instance()
   // instance.errors = new ReactiveDict()
   const self = this;
 
-  self.autorun(function () {
+  self.autorun(function() {
     self.subscribe('vehicletypes');
     self.subscribe('reservations');
     Session.set(SESSION.VALIDATION_ERRORS, null);
@@ -32,17 +32,17 @@ Template.Reservation.onCreated(function () {
 });
 
 Template.Reservation.helpers({
-  currentPositionNotDefined: function () {
+  currentPositionNotDefined: function() {
     // return !Template.instance().myPosition
     return !Session.get(SESSION.GEO_POSITION);
   },
-  vehicleTypesList: function () {
+  vehicleTypesList: function() {
     return VehicleTypes.find().fetch();
   },
-  profile: function () {
+  profile: function() {
     return (Meteor.user() && Meteor.user().profile) ? Meteor.user().profile : {};
   },
-  
+
 // errors: function () {
 //       return Session.get(SESSION.VALIDATION_ERRORS)
 //   }
@@ -52,7 +52,7 @@ Template.Reservation.helpers({
 });
 
 Template.Reservation.events({
-  'click #startMyPosition': function (event) {
+  'click #startMyPosition': function(event) {
     event.preventDefault();
     // const instance = Template.instance()
     // if (instance.myPosition)
@@ -61,7 +61,7 @@ Template.Reservation.events({
       $('#start').val(currentPositionText);
   },
 
-  'click #endMyPosition': function (event) {
+  'click #endMyPosition': function(event) {
     event.preventDefault();
     // const instance = Template.instance()
     // if (instance.myPosition)
@@ -70,7 +70,7 @@ Template.Reservation.events({
       $('#end').val(currentPositionText);
   },
 
-  'submit #reservationForm': function (event) {
+  'submit #reservationForm': function(event) {
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -98,20 +98,20 @@ Template.Reservation.events({
       comment: event.target.comment.value,
     };
 
-    Meteor.call('createReservation', r, function (err, res) {
+    Meteor.call('createReservation', r, function(err, res) {
       $('#reservationForm').removeClass('loading');
       // Session.set(SESSION.ISLOADING, false)
 
       if (err) {
         if (err.error === 'validation-error') {
           const context = Reservations.simpleSchema().namedContext('createReservation');
-          const errors = context.invalidKeys().map(function (data) {
+          const errors = context.invalidKeys().map(function(data) {
             return {
               message: context.keyErrorMessage(data.name),
             };
           });
           Session.set(SESSION.VALIDATION_ERRORS, errors);
-        }else {
+        } else {
           Session.set(SESSION.VALIDATION_ERRORS, [{
             message: err.reason,
           }]);
@@ -125,7 +125,7 @@ Template.Reservation.events({
   },
 });
 
-Template.Reservation.onRendered(function () {
+Template.Reservation.onRendered(function() {
   // Session.set(SESSION.ISLOADING, true)
 
   // $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
@@ -157,7 +157,6 @@ Template.Reservation.onRendered(function () {
   const startAt = /** @type {!HTMLInputElement} */ (document.getElementById('startat'));
   const vehicleType = /** @type {!HTMLInputElement} */ (document.getElementById('vehicletype'));
   const distance = /** @type {!HTMLInputElement} */ (document.getElementById('distance'));
-  //const CommenT = /** @type {!HTMLInputElement} */ (document.getElementById('comment'));
   const totalDistance = /** @type {!HTMLElement} */ (document.getElementById('totaldistance'));
   const totalDuration = /** @type {!HTMLElement} */ (document.getElementById('totalduration'));
   const totalPrice = /** @type {!HTMLElement} */ (document.getElementById('price'));
@@ -166,21 +165,21 @@ Template.Reservation.onRendered(function () {
 
   const startAutocomplete = new google.maps.places.Autocomplete(startInput);
   startAutocomplete.bindTo('bounds', map);
-  startInput.addEventListener('blur', function () {
+  startInput.addEventListener('blur', function() {
     calculateRoute();
   });
 
   const endAutocomplete = new google.maps.places.Autocomplete(endInput);
   endAutocomplete.bindTo('bounds', map);
-  endInput.addEventListener('blur', function () {
+  endInput.addEventListener('blur', function() {
     calculateRoute();
   });
 
-  vehicleType.addEventListener('change', function () {
+  vehicleType.addEventListener('change', function() {
     updatePrice();
   });
 
-  directionsDisplay.addListener('directions_changed', function () {
+  directionsDisplay.addListener('directions_changed', function() {
     updateRoute();
     updatePrice();
   });
@@ -196,7 +195,7 @@ Template.Reservation.onRendered(function () {
 
   function updatePrice() {
     // const price = 0.00 //= distance.value * 2.2
-    Meteor.call('getPrice', vehicleType.value, startAt.value, distance.value, function (err, res) {
+    Meteor.call('getPrice', vehicleType.value, startAt.value, distance.value, function(err, res) {
       if (res) {
         totalPrice.innerText = '' + res.toFixed(2);
       } else {
@@ -211,7 +210,7 @@ Template.Reservation.onRendered(function () {
     const startInput = /** @type {!HTMLInputElement} */ (document.getElementById('start'));
     const endInput = /** @type {!HTMLInputElement} */ (document.getElementById('end'));
     if (startInput.value && endInput.value) {
-      Meteor.setTimeout(function () {
+      Meteor.setTimeout(function() {
         const departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate();
         calculateAndDisplayRoute(directionsService, directionsDisplay,
           (startInput.value === currentPositionText) ? Session.get(SESSION.GEO_POSITION) : startInput.value,
@@ -238,7 +237,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, 
       // trafficModel: google.maps.TrafficModel.PESSIMISTIC
       },
     // unitSystem: UnitSystem.METRIC
-    }, function (response, status) {
+    }, function(response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
         Session.set(SESSION.ERROR, null);
         directionsDisplay.setDirections(response);

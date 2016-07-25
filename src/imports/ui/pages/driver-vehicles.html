@@ -8,11 +8,11 @@
                     <form id="form" class="ui form" novalidate>
                         {{> errormessage }}
                         <h4 class="ui dividing header">Voitures</h4>
-                         <div class="five wide required field">
+                         <div class="five wide field required">
                         <label>Licence</label>
                         <input class="licence" type="text" name="licence" placeholder="Entrer une licence">
                         </div>
-                        <div class="five wide required field">
+                        <div class="five wide field required">
                         <label>Marque</label>
                             <select  id="brand">
                                 {{#each brandsList}}
@@ -20,7 +20,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="five wide required field">
+                        <div class="five wide field required">
                         <label>Modèle</label>
                             <select id="model">
                                 {{#each modelsList}}
@@ -28,8 +28,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <div class="five wide required field">
-                        
+                        <div class="five wide field required">
                             {{#each vehicleTypesList}}
                             <label>Type de véhicule</label>
                             <input id="type" type="text" disabled="disabled" name="type" value="{{vehicleTypeId}}">
