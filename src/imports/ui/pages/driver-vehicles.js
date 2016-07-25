@@ -22,7 +22,7 @@ Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
 
 Template.DriverVehicles.helpers({
   vehicles: () => Vehicles.find().fetch(),
-  brandsList: function() {
+  brandsList: function () {
     // return Models.find().fetch();
 
     return _.uniq(Models.find({}, {
@@ -33,10 +33,10 @@ Template.DriverVehicles.helpers({
       return doc.brand;
     });
   },
-  modelsList: function() {
+  modelsList: function () {
     // return Models.find().fetch()
     return _.uniq(Models.find({
-      brand: Session.get("selected_brand")
+      brand: Session.get("selected_brand"),
     }, {
       sort: {
         model: 1
@@ -45,16 +45,16 @@ Template.DriverVehicles.helpers({
       return doc.model;
     });
   },
-  vehicleType: function() {
+  vehicleType: function () {
     return VehicleTypes.find({}, {
       limit: limit
     }).fetch();
   },
-  vehicleTypesList: function() {
+  vehicleTypesList: function () {
 
     return _.uniq(Models.find({
       brand: Session.get("selected_brand"),
-      model: Session.get("selected_model")
+      model: Session.get("selected_model"),
     },
       {
         sort: {
@@ -65,7 +65,7 @@ Template.DriverVehicles.helpers({
     });
   },
 
-  isUpdutable: function() {
+  isUpdutable: function () {
     return this.status < CONST.VEHICLE_STATUSES.UPDATE && Helpers.isDriver();
   }
 });

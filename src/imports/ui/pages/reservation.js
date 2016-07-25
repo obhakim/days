@@ -22,7 +22,7 @@ Template.Reservation.onCreated(function () {
   // instance.errors = new ReactiveDict()
   const self = this;
 
-  self.autorun(function() {
+  self.autorun(function () {
     self.subscribe('vehicletypes');
     self.subscribe('reservations');
     Session.set(SESSION.VALIDATION_ERRORS, null);
