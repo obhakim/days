@@ -7,8 +7,6 @@ import { CONST, SESSION } from '../../common/constants.js';
 import { Helpers } from '../../common/helpers.js';
 import { Roles } from 'meteor/alanning:roles';
 
-Template.VehicleItem.helpers({});
-
 Template.VehicleItem.events({
 
   'click .delete'() {
