@@ -58,18 +58,6 @@ Users.profileSchema = new SimpleSchema({
     type: String,
   // ,optional: true
   },
-  street: {
-    type: String,
-  // ,optional: true
-  },
-  city: {
-    type: String,
-  // ,optional: true
-  },
-  zipcode: {
-    type: Number,
-  // ,optional: true
-  },
   creditCard: {
     type: Users.creditCardSchema,
     optional: true,
