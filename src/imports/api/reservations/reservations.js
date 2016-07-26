@@ -107,7 +107,7 @@ Reservations.Schema = new SimpleSchema({
         return Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value;
       } else if (this.isUpsert) {
         return {
-          $setOnInsert: Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value
+          $setOnInsert: Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value,
         };
       } else {
         this.unset();
@@ -138,13 +138,16 @@ Reservations.attachSchema(Reservations.Schema);
 Reservations.calculatePrice = function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
   let price = ratePerKm * distance;
   // if in rush hour
-  if ((6 < startAt && startAt < 9.5) || (17 < startAt && startAt < 19.5)) {
+  const startHours = startAt.getHours();
+  const startMins = startAt.getMinutes();
+  if ((6 <= startHours && (startHours < 9 || startHours === 9 && startMins <= 30)) ||
+    (17 <= startHours && (startHours < 19 || startHours === 19 && startMins <= 30))) {
     price = price * rateMultiplier;
   }
 
   if (price < rateMin) {
-    return rateMin;
+    return rateMin.toFixed(2);
   } else {
-    return price;
+    return price.toFixed(2);
   }
 };
