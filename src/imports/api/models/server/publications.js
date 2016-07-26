@@ -1,11 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+
 import { Models } from '../models.js';
+import { Vehicles } from '../../vehicles/vehicles.js';
 
-Meteor.publish('brands', function publishBrands() {
+Meteor.publish('brand', function brand() {
+	//console.log(Models.find().count()); 
   return Models.find();
-});
-
-Meteor.publish('models', function publishModels($brand) {
-  // return Models.distinct('model',{ brand : $brand });
-  return Models.find({ brand: $brand }, { _id: 0, brand: 0 });
-});
+})
+Meteor.publish('myVehicles', function publishVehicles() {
+ return Vehicles.find(); 
+})
