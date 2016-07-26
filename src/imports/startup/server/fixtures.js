@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
+import { Models } from '../../api/models/models.js';
 // import { Lists } from '../../api/lists/lists.js';
 // import { Todos } from '../../api/todos/todos.js';
 
@@ -42,6 +43,65 @@ export const seedData = () => {
       rateMultiplier: 1.2,
     });
   }
+
+  if (Meteor.isServer && !Models.findOne()) {
+    const idB = VehicleTypes.findOne({ name: 'Berline' }, { limit: 1 });
+    const idL = VehicleTypes.findOne({ name: 'Luxe' }, { limit: 1 });
+    const idP = VehicleTypes.findOne({ name: 'Premium' }, { limit: 1 });
+    const idV = VehicleTypes.findOne({ name: 'Van' }, { limit: 1 });
+
+    Models.insert({
+      brand: 'Mercedes',
+      model: 'Classe C',
+      vehicleTypeId: idB.name,
+    });
+    Models.insert({
+      brand: 'Mercedes',
+      model: 'Classe E',
+      vehicleTypeId: idL.name,
+    });
+    Models.insert({
+      brand: 'Mercedes',
+      model: 'Classe S',
+      vehicleTypeId: idP.name,
+    });
+    Models.insert({
+      brand: 'Mercedes',
+      model: 'Classe V',
+      vehicleTypeId: idV.name,
+    });
+    Models.insert({
+      brand: 'Audi',
+      model: 'A4',
+      vehicleTypeId: idB.name,
+    });
+    Models.insert({
+      brand: 'Audi',
+      model: 'A6',
+      vehicleTypeId: idL.name,
+    });
+    Models.insert({
+      brand: 'Audi',
+      model: 'A8',
+      vehicleTypeId: idP.name,
+    });
+    Models.insert({
+      brand: 'BMW',
+      model: 'Serie 3',
+      vehicleTypeId: idB.name,
+    });
+    Models.insert({
+      brand: 'BMW',
+      model: 'Serie 5',
+      vehicleTypeId: idL.name,
+    });
+    Models.insert({
+      brand: 'BMW',
+      model: 'Serie 7',
+      vehicleTypeId: idP.name,
+    });
+  }
+
   // if (Lists.find().count() === 0) {
   //   const data = [
   //     {

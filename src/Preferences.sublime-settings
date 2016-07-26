@@ -1,12 +1,18 @@
+// put me in C:\Users\[UserName]\AppData\Roaming\Sublime Text 3\Packages\User
 {
-	"color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
-	"ignored_packages":
-	[
-		"ESLint-Formatter",
-		"JsFormat",
-		"Vintage"
-	],
-	"margin": 2,
-	"tab_size": 2,
-	"translate_tabs_to_spaces": true
+  "margin": 2,
+  "tab_size": 2,
+  // Set to true to insert spaces when tab is pressed
+  "translate_tabs_to_spaces": true,
+  // Set to false to disable detection of tabs vs. spaces on load
+  "detect_indentation": false,
+  // Columns in which to display vertical rulers
+  "rulers": [100],
+  "color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
+  "ignored_packages":
+  [
+    "ESLint-Formatter",
+    "JsFormat",
+    "Vintage"
+  ]
 }
