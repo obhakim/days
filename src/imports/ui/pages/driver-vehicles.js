@@ -104,25 +104,25 @@ if (Meteor.isClient) {
     },
 
 
-  "click #update": function(evt) {
+    "click #update": function(evt) {
 
-    const data = {
-      vehicleid: this._id,
-      ownerId: Meteor.userId(),
-      license: $("#licence").val(),
-      registrationCard: $("#registrationCard").val(),
-      brand: $("#brandId").val(),
-      model: $("#modelId").val(),
-      vehicleTypeId: $("#VehicleTypeId").val(),
-      regYear: $("#regYear").val(),
-      color: $("#color").val(),
+      const data = {
+        vehicleid: this._id,
+        ownerId: Meteor.userId(),
+        license: $("#licence").val(),
+        registrationCard: $("#registrationCard").val(),
+        brand: $("#brandId").val(),
+        model: $("#modelId").val(),
+        vehicleTypeId: $("#VehicleTypeId").val(),
+        regYear: $("#regYear").val(),
+        color: $("#color").val(),
 
-    };
-    Meteor.call('updateVehicle', data);
-    delete Session.keys['vehid'];
-  },
+      };
+      Meteor.call('updateVehicle', data);
+      delete Session.keys['vehid'];
+    },
 
-});
+  });
 
 }
 //Remplir la formulaire pour faire la mise à jour

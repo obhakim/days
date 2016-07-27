@@ -15,6 +15,6 @@ Models.schema = new SimpleSchema({
   vehicleTypeId: {
     label: 'Type de véhicule',
     type: String,
-  }, 
-
+  },
+});
 Models.attachSchema(Models.schema);
