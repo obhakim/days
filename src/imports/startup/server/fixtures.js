@@ -10,28 +10,28 @@ Meteor.startup(() => {
   // if (Meteor.isServer && VehicleTypes.find().count() === 0) {
   if (Meteor.isServer && !VehicleTypes.findOne()) {
     VehicleTypes.insert({
-       _id: 'Berline',
+      _id: 'Berline',
       ratePerKm: 2.50,
       ratePerHour: 25,
       rateMin: 10,
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-       _id: 'Luxe',
+      _id: 'Luxe',
       ratePerKm: 3.20,
       ratePerHour: 35,
       rateMin: 15,
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-       _id: 'Premium',
+      _id: 'Premium',
       ratePerKm: 5.00,
       ratePerHour: 50,
       rateMin: 20,
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-       _id: 'Van',
+      _id: 'Van',
       ratePerKm: 4.50,
       ratePerHour: 50,
       rateMin: 15,
@@ -39,8 +39,8 @@ Meteor.startup(() => {
     });
 
     //création de la collection Models
-  
-   
+
+
   }
   // if (Lists.find().count() === 0) {
   //   const data = [
@@ -98,65 +98,64 @@ Meteor.startup(() => {
   //         createdAt: new Date(timestamp),
   //       });
 
-//       timestamp += 1; // ensure unique timestamp.
-//     });
-//   });
-// v
-if (Meteor.isServer && !Models.findOne()) {
-  
-Models.insert({
+  //       timestamp += 1; // ensure unique timestamp.
+  //     });
+  //   });
+  // v
+  if (Meteor.isServer && !Models.findOne()) {
+
+    Models.insert({
       brand: 'Mercedes',
       model: "Classe C",
       vehicleTypeId: "Berline",
     });
-  
-   Models.insert({
+
+    Models.insert({
       brand: 'Mercedes',
       model: "Classe E",
       vehicleTypeId: "Luxe",
     });
-  Models.insert({
+    Models.insert({
       brand: 'Mercedes',
       model: "Classe S",
       vehicleTypeId: "Premium",
     });
-   Models.insert({
+    Models.insert({
       brand: 'Mercedes',
       model: "Classe V",
       vehicleTypeId: "Van",
     });
-   Models.insert({
+    Models.insert({
       brand: 'Audi',
       model: "A4",
       vehicleTypeId: "Berline",
     });
-   Models.insert({
+    Models.insert({
       brand: 'Audi',
       model: "A6",
       vehicleTypeId: "Luxe",
     });
-   Models.insert({
+    Models.insert({
       brand: 'Audi',
       model: "A8",
       vehicleTypeId: "Premium",
     });
-   Models.insert({
+    Models.insert({
       brand: 'BMW',
       model: "Serie 3",
       vehicleTypeId: "Berline",
     });
-   Models.insert({
+    Models.insert({
       brand: 'BMW',
       model: "Serie 5",
       vehicleTypeId: "Luxe",
     });
-   Models.insert({
+    Models.insert({
       brand: 'BMW',
       model: "Serie 7",
       vehicleTypeId: "Premium",
     });
 
-}
+  }
 
 });
-

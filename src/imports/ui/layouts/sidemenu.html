@@ -1,9 +1,5 @@
-<template name="sidemenu">
+<template name="SideMenu">
   <div class="sidemenu-wrapper">
-    {{!--<a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>--}}
-    {{!--#if currentUser--}}
-        {{!--<a class="item {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>--}}
-    {{!--/if--}}
     <a href="{{pathFor 'home'}}" class="item {{isActiveRoute 'home'}}">Accueil</a>
     <a class="item {{isActiveRoute 'drivers'}}" href="{{pathFor 'drivers'}}">Nos chauffeurs</a>
     <a class="item {{isActiveRoute 'values'}}" href="{{pathFor 'values'}}">Nos valeurs</a>
