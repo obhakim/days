@@ -42,7 +42,6 @@ Template.Reservation.helpers({
   profile: function () {
     return (Meteor.user() && Meteor.user().profile) ? Meteor.user().profile : {};
   },
-
 // errors: function () {
 //       return Session.get(SESSION.VALIDATION_ERRORS)
 //   }
