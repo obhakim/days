@@ -195,7 +195,7 @@ Template.Reservation.onRendered(function () {
 
   function updatePrice() {
     // const price = 0.00 //= distance.value * 2.2
-    Meteor.call('getPrice', vehicleType.value, startAt.value, distance.value, function(err, res) {
+    Meteor.call('getPrice', vehicleType.value, startAt.value, distance.value, function (err, res) {
       if (res) {
         totalPrice.innerText = '' + res.toFixed(2);
       } else {
@@ -237,7 +237,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, 
       // trafficModel: google.maps.TrafficModel.PESSIMISTIC
       },
     // unitSystem: UnitSystem.METRIC
-    }, function(response, status) {
+    }, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
         Session.set(SESSION.ERROR, null);
         directionsDisplay.setDirections(response);
