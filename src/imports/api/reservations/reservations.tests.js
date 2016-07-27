@@ -1,4 +1,4 @@
-import { chai, assert } from 'meteor/practicalmeteor:chai';
+import { assert } from 'meteor/practicalmeteor:chai';
 import { Reservations } from './reservations.js';
 
 describe('Reservations', function () {

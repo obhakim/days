@@ -1,9 +1,6 @@
-/* eslint-disable prefer-arrow-callback */
-
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Reservations } from '../reservations.js';
-import { Helpers } from '../../../common/helpers.js';
 import { CONST } from '../../../common/constants.js';
 
 Meteor.publish('reservations', function () {
