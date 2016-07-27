@@ -1,12 +1,13 @@
 <template name="VehicleItem">
- <tr id={{_id}}>
-                  <td> <!-- {{#if isUpdutable}} --> 
-                  <button  class="update"> modif</button> <!-- {{/if}} --></td>
+<tr id="{{_id}}">
                   <td>{{licence}}</td>
                   <td>{{brand}}</td>
                   <td>{{model}}</td>
                   <td>{{vehicleTypeId}}</td>
-                  <td><button class="delete">&times;</button></td>
-                </tr>         
+                  <td>
+                    <button class="ui primary button editer">Edit</button>
+                    <button class="ui negative button delete">&times;</button>
+                  </td>
+                </tr>      
              
 </template>

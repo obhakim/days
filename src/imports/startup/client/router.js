@@ -130,15 +130,6 @@ securedRoutes.route('/reservations', {
   },
 });
 
-securedRoutes.route('/vehicles', {
-  name: 'vehicles',
-  action(pathParams, queryParams) {
-    BlazeLayout.render('Layout', {
-      content: 'Vehicles',
-    });
-  },
-});
-
 securedRoutes.route('/profile', {
   name: 'profile',
   action(pathParams, queryParams) {
