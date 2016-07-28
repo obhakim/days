@@ -45,12 +45,15 @@
               {{/each}}
               </select>
             </div>
-             <div class="five wide field required">
-            {{#each vehicleTypesList}}
-            <label>Type de véhicule</label>
-            <input id="type" type="text" disabled="disabled" name="type" value="{{vehicleTypeId}}">
-            {{/each}}
-         </div>
+            <div class="five wide field required">
+              <label>Type de véhicule</label>
+              <select id="type">
+                <option value="" selected></option>
+              {{#each vehicleTypesList}}
+                <option value="{{vehicleTypeId}}">{{vehicleTypeId}}</option>
+              {{/each}}
+              </select>
+            </div>
             <input id="sub" type="submit" value="Enregistrer" class="ui left attached small primary button">
             <input type="reset" value="Annuler" class="ui right attached small button cancel" style="display :none">
           </form>

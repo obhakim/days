@@ -12,7 +12,7 @@ Template.Reservations.onCreated(function reservationsPageOnCreated() {
 });
 
 Template.Reservations.helpers({
-  reservations: function () {
+  reservations: function() {
     return Reservations.find({}, {
       sort: {
         createdAt: -1,
