@@ -4,7 +4,7 @@
       <h1 class="ui center aligned header">Vos voitures</h1>
       <div class="ui stackable segment">
         <div class="eight wide column">
-          <div class="">
+          <div>
             <table class="ui single line fixed selectable table">
               <thead>
                 <tr>
@@ -16,24 +16,25 @@
                 </tr>
               </thead>
               <tbody>
-              {{#each vehicles}}  {{> VehicleItem}}  {{/each}}  
-              </tbody>
-              
+              {{#each vehicles}}
+                {{> VehicleItem}}  
+              {{/each}}  
+              </tbody>                          
             </table>
           </div>
           <form id="form" class="ui form" novalidate>
-          {{> errormessage }}
+            {{> errormessage }}
             <div class="five wide field required">
-              <label>Licence</label>
-              <input id="licence" type="text" name="licence" placeholder="Entrer une licence">
+              <label>Immatriculation</label>
+              <input id="licence" type="text" placeholder="Immatriculation">
             </div>
             <div class="five wide field required">
               <label>Marque</label>
               <select id="brand">
                 <option value="" selected></option>
-              {{#each brandsList}}
+                {{#each brandsList}}
                 <option value="{{brand}}">{{brand}}</option>
-              {{/each}}
+                {{/each}}
               </select>
             </div>
             <div class="five wide field">

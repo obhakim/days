@@ -2,7 +2,5 @@ import { Meteor } from 'meteor/meteor';
 import { Vehicles } from '../vehicles.js';
 
 Meteor.publish('myVehicles', function publishVehicles() {
-  return Vehicles.find({
-    $or: [{ ownerId: this.userId }],
-  });
+  return Vehicles.find({ ownerId: this.userId });
 });
