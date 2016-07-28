@@ -8,6 +8,7 @@ import { SESSION } from '../../common/constants.js';
 // import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
+import '../components/vehicle-item.js';
 
 Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
   const self = this;
@@ -48,7 +49,7 @@ Template.DriverVehicles.helpers({
     }).fetch(), true, (doc) => doc.vehicleTypeId);
   },
 
-  setmodelupdate: function () {},
+  setModelUpdate: function () {},
 
   /*
   var data=Vehicles.find({_id:Session.get('vehid')}).fetch();
@@ -78,11 +79,9 @@ Template.DriverVehicles.events({
       if (error) {
         Session.set(SESSION.ERROR, error);
       } else {
-        // event.target.licence.value = '';
-        // event.target.brand.value = '';
-        // event.target.model.value = '';
-        // event.target.type.value = '';
-      }
+        event.target.reset();
+        event.target.licence.focus();
+              }
     });
     // return false;
   },

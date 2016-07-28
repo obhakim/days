@@ -60,7 +60,11 @@ Reservations.Schema = new SimpleSchema({
   vehicleTypeId: {
     label: 'Type de véhicule',
     type: String,
-    regEx: SimpleSchema.RegEx.Id,
+  //regEx: SimpleSchema.RegEx.Id,
+  },
+  comment: {
+    label: 'Commentaire',
+    type: String,
   },
   price: {
     label: 'Prix',

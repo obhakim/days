@@ -94,6 +94,7 @@ Template.Reservation.events({
         distance: event.target.distance.value,
       },
       vehicleTypeId: event.target.vehicletype.value,
+      comment: event.target.comment.value,
     };
 
     Meteor.call('createReservation', r, function (err, res) {
