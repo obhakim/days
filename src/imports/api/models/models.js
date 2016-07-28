@@ -15,6 +15,7 @@ Models.schema = new SimpleSchema({
   vehicleTypeId: {
     label: 'Type de véhicule',
     type: String,
-  },
+  }, //,regEx: SimpleSchema.RegEx.Id
 });
+
 Models.attachSchema(Models.schema);
