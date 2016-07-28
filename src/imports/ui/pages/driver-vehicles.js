@@ -1,193 +1,156 @@
 import './driver-vehicles.html';
-// import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
+import { $ } from 'meteor/jquery';
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
-import { CONST, SESSION } from '../../common/constants.js';
-import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
+import { SESSION } from '../../common/constants.js';
+// import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
 
-Meteor.subscribe('myVehicles');
-Meteor.subscribe('brand');
-Meteor.subscribe('VehicleTypes');
+Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
+  const self = this;
+  self.autorun(() => {
+    self.subscribe('vehicletypes');
+    self.subscribe('myVehicles');
+    self.subscribe('brands');
+  });
+});
 
 Template.DriverVehicles.helpers({
+  vehicles: () => Vehicles.find().fetch(),
+  brandsList: function () {
+    // return Models.find().fetch();
 
-  brandsList: function() {
-    return Models.find().fetch();
-
+    return _.uniq(Models.find({}, {
+      sort: { brand: 1 },
+    }).fetch(), true, (doc) => doc.brand);
   },
 
-  vehicleTypesList: function() {
-    return VehicleTypes.find().fetch();
+  modelsList: function () {
+    // return Models.find().fetch()
+    return _.uniq(Models.find({
+      brand: Session.get('selected_brand'),
+    }, {
+      sort: {
+        model: 1,
+      },
+    }).fetch(), true, (doc) => doc.model);
   },
-});
 
-Template.DriverVehicles.helpers({
-  vehicles: () => Vehicles.find(),
-});
-
-Template.DriverVehicles.helpers({
-  setVehicleTypeId: function() {
-
-    var distinctvehicleTypeId = _.uniq(Models.find({
-      'brand': Session.get("brand")
+  vehicleTypesList: function () {
+    return _.uniq(Models.find({
+      model: Session.get('selected_model'),
+      brand: Session.get('selected_brand'),
     }, {
-      sort: {
-        vehicleTypeId: 1
-      },
-      fields: {
-        vehicleTypeId: true
+      sort: { vehicleTypeId: 1 },
+    }).fetch(), true, (doc) => doc.vehicleTypeId);
+  },
+
+  setmodelupdate: function () {},
+
+  /*
+  var data=Vehicles.find({_id:Session.get('vehid')}).fetch();
+    $( "#licence" ).val(data[0].license);
+    $( "#brand" ).val(data[0].brand);
+    $( "#model" ).val(data[0].model);
+    $( "#VehicleTypeId" ).val(data[0].vehicleTypeId);
+
+     return data;
+  }});
+  */
+});
+
+Template.DriverVehicles.events({
+  'submit #form': function driverVehiclesSubmitForm(event) {
+    event.preventDefault();
+
+    const vehicle = {
+      ownerId: Meteor.userId(),
+      licence: event.target.licence.value,
+      brand: event.target.brand.value,
+      model: event.target.model.value,
+      vehicleTypeId: event.target.type.value,
+    };
+    // console.log(vehicle);
+    Meteor.call('addVehicle', vehicle, (error) => {
+      if (error) {
+        Session.set(SESSION.ERROR, error);
+      } else {
+        // event.target.licence.value = '';
+        // event.target.brand.value = '';
+        // event.target.model.value = '';
+        // event.target.type.value = '';
       }
-    }).fetch().map(function(x) {
-      return x.vehicleTypeId;
-    }), true);
-    return distinctvehicleTypeId;
-  }
-});
+    });
+    // return false;
+  },
 
-Template.DriverVehicles.helpers({
-  vehicles: function() {
-    var vt = Vehicles.find({}).fetch();
-    return vt;
-  }
-});
+  'click .update'() {
+    const vehicleId = Session.get('id');
+    const vehicle = {
+      ownerId: Meteor.userId(),
+      licence: $('#licence').val(),
+      brand: $('#brand').val(),
+      model: $('#model').val(),
+      vehicleTypeId: $('#type').val(),
+    };
 
-if (Meteor.isClient) {
-  Template.DriverVehicles.events({
-    'submit form': function(e) {
-      e.preventDefault();
-      const data = {
-
-        ownerId: Meteor.userId(),
-        license: $("#licence").val(),
-        registrationCard: $("#registrationCard").val(),
-        brand: $("#brandId").val(),
-        model: $("#modelId").val(),
-        vehicleTypeId: $("#VehicleTypeId").val(),
-        regYear: $("#regYear").val(),
-        color: $("#color").val(),
-
-      };
-
-
-      Meteor.call('addVehicle', data, (error) => {
-        if (error) {
-          Session.set(SESSION.ERROR, error);
-        } else {
-          console.log("insertion success");
-        }
-      });
-
-      return false;
-
-    },
-    "change #brandId": function(evt) {
-      var newValue = $(evt.target).val();
-      Session.set("brand", newValue);
-    },
-    // supprimer une voiture
-    "click #delete": function(evt) {
-
-      Meteor.call('removeVehicle', this._id);
-
-    },
-    'change #chooseupdate': function() {
-      console.log(this._id);
-      if (Session.get("vehid"))
-        delete Session.keys['vehid']
-      var data = Vehicles.find({
-        _id: this._id
-      }).fetch();
-      Session.set("vehid", this._id);
-
-    },
-
-
-    "click #update": function(evt) {
-
-      const data = {
-        vehicleid: this._id,
-        ownerId: Meteor.userId(),
-        license: $("#licence").val(),
-        registrationCard: $("#registrationCard").val(),
-        brand: $("#brandId").val(),
-        model: $("#modelId").val(),
-        vehicleTypeId: $("#VehicleTypeId").val(),
-        regYear: $("#regYear").val(),
-        color: $("#color").val(),
-
-      };
-      Meteor.call('updateVehicle', data);
-      delete Session.keys['vehid'];
-    },
-
-  });
-
-}
-//Remplir la formulaire pour faire la mise à jour
-Template.DriverVehicles.helpers({
-  setmodelupdate: function() {
-    if (Session.get("vehid")) {
-      var data = Vehicles.find({
-        _id: Session.get("vehid")
-      }).fetch();
-      $("#licence").val(data[0].license);
-      $("#registrationCard").val(data[0].registrationCard);
-      $("#brandId").val(data[0].brand);
-      $("#modelId").val(data[0].model);
-      $("#VehicleTypeId").val(data[0].vehicleTypeId);
-      //$( "#modelId" ).val(data[0].modelId);
-      $("#regYear").val(data[0].regYear);
-      $("#color").val(data[0].color);
-
-      return data;
-    }
-  }
-});
-
-//lister les voitures enregtrées
-Template.DriverVehicles.helpers({
-  setmodel: function() {
-
-    var distinctmodel = _.uniq(Models.find({
-      'brand': Session.get("brand")
-    }, {
-      sort: {
-        model: 1
-      },
-      fields: {
-        model: true
+    Meteor.call('updateVehicle', vehicleId, vehicle, (error) => {
+      if (error) {
+        Session.set(SESSION.ERROR, error);
+      } else {
+        ('#licence').val('');
+        ('#brand').val('');
+        ('#model').val('');
+        ('#type').val('');
       }
-    }).fetch().map(function(x) {
-      return x.model;
-    }), true);
-    return distinctmodel;
-  }
-});
+    });
+  },
 
-Template.DriverVehicles.helpers({
-  setbrand: function() {
+  'click .delete'() {
+    const vehicleId = this._id;
+    Meteor.call('removeVehicle', vehicleId);
+  },
 
-    var mod = Models.find({}).fetch();
+  'click .editer'() {
+    // $('#type option').attr('value",this.vehicleTypeId).text(this.vehicleTypeId);
+    Session.set('id', this._id);
+    $('.cancel').show();
+    $('#sub').attr('value', 'Save', 'type', 'button').addClass('update').prop('type', 'button');
+    $('#licence').val(this.licence);
+    $('#brand').val(this.brand);
+    $('#model').find('option').remove().end().append($('<option>', {
+      value: this.model,
+      text: this.model,
+    }));
+    $('#type').find('option').remove().end().append($('<option>', {
+      value: this.vehicleTypeId,
+      text: this.vehicleTypeId,
+    }));
+  },
 
-    var distinctEntries = _.uniq(Models.find({}, {
-      sort: {
-        brand: 1
-      },
-      fields: {
-        brand: true
-      }
-    }).fetch().map(function(x) {
-      return x.brand;
-    }), true);
-    return distinctEntries;
-  }
-});
-Template.DriverVehicles.onRendered(function DriverVehiclesOnRendered() {
-  this.$('.datetimepicker').datetimepicker({
-    format: 'YYYY',
-    locale: CONST.DEFAULT_LOCALE,
+  'click .cancel'() {
+    $('.cancel').hide();
+    $('#sub').attr('value', 'Enregister', 'type', 'submit')
+      .removeClass('update').prop('type', 'submit');
+  },
 
-  });
+
+  'change #brand'(event, template) {
+    // var selected_brand = event.target.value;
+    Session.set('selected_brand', event.target.value);
+    $('#model option').attr('value', '').text('');
+    // console.log(Session.set(selected_brand));
+    // Meteor.call('showModels',selected_brand);
+  },
+
+  'change #model'(event, template) {
+    // var selected_brand = event.target.value;
+    Session.set('selected_model', event.target.value);
+    $('#type option').attr('value', '').text('');
+    // console.log(Session.set(selected_model));
+    // Meteor.call('showModels',selected_brand);
+  },
 });
