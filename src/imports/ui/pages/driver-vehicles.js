@@ -48,7 +48,7 @@ Template.DriverVehicles.helpers({
     }).fetch(), true, (doc) => doc.vehicleTypeId);
   },
 
-  setmodelupdate: function () {},
+  setModelUpdate: function () {},
 
   /*
   var data=Vehicles.find({_id:Session.get('vehid')}).fetch();
