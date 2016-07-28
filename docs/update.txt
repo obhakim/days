@@ -2,10 +2,18 @@
 https://forums.meteor.com/t/error-while-updating-to-meteor-1-4/27007/37
 https://github.com/nodejs/node-gyp#installation
 
-Run cmd in Days\src as administrator
-Execute: [meteor] npm install --global --production windows-build-tools 
-Then execute: [meteor] npm install -g node-gyp 
-Then try: meteor add npm-bcrypt
-Then: (Re)install Visual studio 2015
+Tried :
+- Run cmd in Days\src as administrator
+- Execute: [meteor] npm install --global --production windows-build-tools 
+- Then execute: [meteor] npm install -g node-gyp 
+- Then try: meteor add npm-bcrypt
+- Then: (Re)install Visual studio 2015
+
+Also :
+- "meteor remove accounts-password" (removes npm-bcrypt)
+
+This worked for me :
+Install http://landinghub.visualstudio.com/visual-cpp-build-tools
+or add cpp build tools to VS 2015
 
 Run the Meteor update
