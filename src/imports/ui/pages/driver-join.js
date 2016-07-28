@@ -79,9 +79,9 @@ Template.DriverJoin.onRendered(function driverJoinOnRendered() {
     format: CONST.DEFAULT_DATE_FORMAT,
     // useCurrent: true,
     locale: CONST.DEFAULT_LOCALE,
-  // stepping: 5,
-  // showTodayButton: true,
-  // inline: true,
-  // sideBySide: true,
+    // stepping: 5,
+    // showTodayButton: true,
+    // inline: true,
+    // sideBySide: true,
   });
 });
