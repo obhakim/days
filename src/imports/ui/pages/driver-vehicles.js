@@ -1,4 +1,5 @@
 import './driver-vehicles.html';
+import '../components/vehicle-item.js';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
 import { Meteor } from 'meteor/meteor';
@@ -8,7 +9,6 @@ import { SESSION } from '../../common/constants.js';
 // import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
-import '../components/vehicle-item.js';
 
 Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
   const self = this;
@@ -81,7 +81,7 @@ Template.DriverVehicles.events({
       } else {
         event.target.reset();
         event.target.licence.focus();
-              }
+      }
     });
     // return false;
   },
@@ -137,7 +137,7 @@ Template.DriverVehicles.events({
   },
 
 
-  'change #brand'(event, template) {
+  'change #brand'(event) {
     // var selected_brand = event.target.value;
     Session.set('selected_brand', event.target.value);
     $('#model option').attr('value', '').text('');
@@ -145,7 +145,7 @@ Template.DriverVehicles.events({
     // Meteor.call('showModels',selected_brand);
   },
 
-  'change #model'(event, template) {
+  'change #model'(event) {
     // var selected_brand = event.target.value;
     Session.set('selected_model', event.target.value);
     $('#type option').attr('value', '').text('');

@@ -1,6 +1,4 @@
 import './layout.html';
-import './side-menu.html';
-import './top-menu.html';
 
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
@@ -12,17 +10,17 @@ import '../lib/moment-locales.js';
 import '../components/loading.js';
 
 Template.Layout.helpers({
-  version: function () {
-    return APP.VERSION;
-  },
-  fullName: function () {
-    return Meteor.user() ? Meteor.user().profile.firstName +
-    ' ' + Meteor.user().profile.lastName : '';
-  },
+  version: () => APP.VERSION,
+  fullName: () => (Meteor.user() ? Meteor.user().profile.firstName +
+    ' ' + Meteor.user().profile.lastName : ''),
   loading: Session.equals(SESSION.ISLOADING, true),
 });
 
-Template.Layout.onRendered = function () {
-  // create sidebar and attach to menu open
-  $('.ui.sidebar').sidebar({ context: $('#body') }).sidebar('attach events', '.toc.item');
-};
+Template.Layout.onRendered(function() {
+  this.autorun(() => {
+    if (this.subscriptionsReady()) {
+      // create sidebar and attach to menu open
+      this.$('.ui.sidebar').sidebar({ context: this.$('#body') }).sidebar('attach events', '.toc.item');
+    }
+  });
+});
