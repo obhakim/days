@@ -142,7 +142,7 @@ Reservations.attachSchema(Reservations.Schema);
 Reservations.calculatePrice = function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
   let price = ratePerKm * distance;
   // if in rush hour
-  const startAtDate = Date(startAt);
+  const startAtDate = new Date(startAt);
   const startHours = startAtDate.getHours();
   const startMins = startAtDate.getMinutes();
   if ((6 <= startHours && (startHours < 9 || startHours === 9 && startMins <= 30)) ||
@@ -151,8 +151,8 @@ Reservations.calculatePrice = function calculatePrice(ratePerKm, rateMin, rateMu
   }
 
   if (price < rateMin) {
-    return rateMin.toFixed(2);
+    return rateMin;
   } else {
-    return price.toFixed(2);
+    return price;
   }
 };

@@ -1,16 +1,17 @@
+/* global it describe:true */
 import { assert } from 'meteor/practicalmeteor:chai';
 import { Reservations } from './reservations.js';
 
-describe('Reservations', function () {
-  describe('.calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance)', function () {
-    it('should return price', function () {
-      const price = Reservations.calculatePrice(2.2, 5.0, 1.2, new Date('2016-01-01 12:00:00'), 100);
-      assert.equal(220, price);
+describe('Reservations', () => {
+  describe('.calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance)', () => {
+    it('should return price', () => {
+      const price = Reservations.calculatePrice(2.2, 5.0, 1.2, '2016-01-01 12:00:00', 10);
+      assert.equal(22, price);
     });
-    it('should return multiplied price for rush hours', function () {
+    it('should return multiplied price for rush hours', () => {
       console.log(new Date('01/01/2016 18:00'));
-      const price = Reservations.calculatePrice(2.2, 5.0, 1.2, new Date('2016-01-01 18:00:00'), 100);
-      assert.equal(264, price);
+      const price = Reservations.calculatePrice(2.2, 5.0, 1.2, '2016-01-01 18:00:00', 10);
+      assert.equal(26.4, price);
     });
   });
 });
