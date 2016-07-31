@@ -77,13 +77,26 @@ Meteor.methods({
   },
   // Need this to force Driver role
   createDriver: (newUser) => {
-    const userId = Accounts.createUser({
-      username: newUser.username,
-      email: newUser.email,
-      password: newUser.password,
-      profile: newUser.profile,
-    });
 
-    Roles.addUsersToRoles(userId, CONST.USER_ROLES.DRIVER);
+    if ((newUser.profile.creditCard.num.length === 0)
+      || (newUser.profile.creditCard.validThruM.length === 0)
+      || (newUser.profile.creditCard.validThruY.length === 0)
+      || (newUser.profile.creditCard.cvv.length === 0)
+      || (newUser.profile.creditCard.name.length === 0)) {
+
+      throw new Meteor.Error(400, "les Informations de la carte bancaire are required");
+
+    } else {
+      const userId = Accounts.createUser({
+        username: newUser.username,
+        email: newUser.email,
+        password: newUser.password,
+        profile: newUser.profile,
+      });
+
+      Roles.addUsersToRoles(userId, CONST.USER_ROLES.DRIVER);
+
+    }
+
   },
 });
