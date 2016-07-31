@@ -81,9 +81,16 @@
         {{!--#each error in errors "vehicletype"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
-
+        
+        <div class="field">
+          <label>Commentaire</label>
+          <textarea id="comment" rows="3" placeholder="Commentaire">{{comment}}</textarea>
+        </div>
+        {{!--#each error in errors "comment"} }
+        <div class="form-error">{ {error} }</div>
+        { {/each--}}
 				<input type="hidden" id="distance" value="0" />
-				
+        
         <div class="field">
           <label>Votre voyage <span id="totaldistance">0</span> km, environ <span id="totalduration">0</span> minutes, <span id="price">0.00</span> €</label>
         </div>

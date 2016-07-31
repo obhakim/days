@@ -1,0 +1,11 @@
+== Version 1.4 =================================================
+https://forums.meteor.com/t/error-while-updating-to-meteor-1-4/27007/37
+https://github.com/nodejs/node-gyp#installation
+
+Run cmd in Days\src as administrator
+Execute: [meteor] npm install --global --production windows-build-tools 
+Then execute: [meteor] npm install -g node-gyp 
+Then try: meteor add npm-bcrypt
+Then: (Re)install Visual studio 2015
+
+Run the Meteor update
