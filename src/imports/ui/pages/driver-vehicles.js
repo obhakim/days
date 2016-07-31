@@ -10,17 +10,17 @@ import { SESSION } from '../../common/constants.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
 
-Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
-  const self = this;
-  self.autorun(() => {
-    self.subscribe('vehicletypes');
-    self.subscribe('myVehicles');
-    self.subscribe('brands');
+Template.DriverVehicles.onCreated(function driverVehiclesPageOnCreated() {
+  this.autorun(() => {
+    this.subscribe('myVehicles');
+    this.subscribe('brands');
+    this.subscribe('vehicletypes');
   });
 });
 
 Template.DriverVehicles.helpers({
   vehicles: () => Vehicles.find().fetch(),
+
   brandsList: function () {
     // return Models.find().fetch();
 
@@ -49,7 +49,7 @@ Template.DriverVehicles.helpers({
     }).fetch(), true, (doc) => doc.vehicleTypeId);
   },
 
-  setModelUpdate: function () {},
+  //setModelUpdate: function () {},
 
   /*
   var data=Vehicles.find({_id:Session.get('vehid')}).fetch();

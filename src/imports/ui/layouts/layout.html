@@ -27,13 +27,12 @@
         <div class="ui item simple dropdown">
           {{currentUserEmail}}<i class="dropdown icon"></i>
           <div class="menu">
-            {{#if isClient}}
             <a class="item {{isActiveRoute 'profile'}}" href="{{pathFor 'profile'}}">Mon profile</a>
-            <a class="item {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>
-            {{else}}
-            <a class="item {{isActiveRoute 'profile'}}" href="{{pathFor 'profile'}}">Mon profile</a>
+            {{#if isDriverOrAdmin}}            
             <a class="item {{isActiveRoute 'driverCompany'}}" href="{{pathFor 'driverCompany'}}">Entreprise</a>
             <a class="item {{isActiveRoute 'driverVehicles'}}" href="{{pathFor 'driverVehicles'}}">Vehicules</a>
+            {{else}}
+            <a class="item {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Mes réservations</a>
             {{/if}}
           </div>
         </div>
