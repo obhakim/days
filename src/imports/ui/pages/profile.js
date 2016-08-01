@@ -78,10 +78,13 @@ Template.Profile.events({
 
     Meteor.call('updateUserProfile', data, function (error, result) {
       if (error) {
+        // maybe use error.details instead of not working namedContext
+        // error.details "[{"name":"profile.creditCard.validThruM","type":"required","value":null},{"name":"profile.creditCard.validThruY","type":"required","value":null},{"name":"profile.creditCard.cvv","type":"required","value":null},{"name":"profile.street","type":"required","value":null},{"name":"profile.city","type":"required","value":null},{"name":"profile.zipcode","type":"required","value":null}]"
+
         const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
-        const errors = context.invalidKeys().map(function (data) {
+        const errors = context.invalidKeys().map(function (keys) {
           return {
-            message: context.keyErrorMessage(data.name),
+            message: context.keyErrorMessage(keys.name),
           };
         });
         Session.set(SESSION.VALIDATION_ERRORS, errors);
