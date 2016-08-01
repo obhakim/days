@@ -41,7 +41,7 @@
                         <div class="two fields">
                             <div class="four wide required field">
                                 <label>Code postal</label>
-                                <input id="zipcode" type="number" placeholder="00000" maxlength="10" value="{{profile.zipcode}}" required />
+                                <input id="zipcode" type="text" placeholder="Code postal" maxlength="10" value="{{profile.zipcode}}" />
                             </div>
 
                             <div class="twelve wide required field">
@@ -51,12 +51,12 @@
                         </div>
 
                         <h4 class="ui dividing header">Information de paiement</h4>
-                        <div class="field">
+                        <div class="required field">
                             <label>Numéro</label>
                             <input id="num" type="text" placeholder="Numéro" maxlength="16" value="{{profile.creditCard.num}}" />
                         </div>
                         <div class="two fields">
-                            <div class="twelve wide field">
+                            <div class="twelve wide required field">
                                 <label>Date de validité</label>
                                 <div class="two fields">
                                     <div class="four wide field">
@@ -77,12 +77,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="four wide field">
+                            <div class="four wide required field">
                                 <label>CVV</label>
                                 <input id="cvv" type="text" placeholder="CVV" maxlength="3" value="{{profile.creditCard.cvv}}" />
                             </div>
                         </div>
-                        <div class="field">
+                        <div class="required field">
                             <label>Nom</label>
                             <input id="name" type="text" placeholder="Nom" value="{{profile.creditCard.name}}" />
                         </div>

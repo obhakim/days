@@ -1,14 +1,14 @@
 <template name="DriverVehicles">
   <div class="ui middle aligned centered grid">
     <div class="twelve wide column">
-      <h1 class="ui center aligned header">Vos voitures</h1>
+      <h1 class="ui center aligned header">Vehicules</h1>
       <div class="ui stackable segment">
         <div class="eight wide column">
-          <div class="">
+          <div>
             <table class="ui single line fixed selectable table">
               <thead>
                 <tr>
-                  <th>Licence</th>
+                  <th>Immatriculation</th>
                   <th>Constructeur</th>
                   <th>Modèle</th>
                   <th>Type de Vehicule</th>
@@ -16,47 +16,53 @@
                 </tr>
               </thead>
               <tbody>
-              {{#each vehicles}}  {{> VehicleItem}}  {{/each}}  
-              </tbody>
-              
+              {{#each vehicles}}
+                {{> VehicleItem}}  
+              {{/each}}  
+              </tbody>                          
             </table>
           </div>
+          <h2 class="ui center aligned header">Vehicule</h2>
+          <div class="ui stackable segment">
+            <div class="six wide column">
           <form id="form" class="ui form" novalidate>
-          {{> errormessage }}
+            {{> errormessage }}
             <div class="five wide field required">
-              <label>Licence</label>
-              <input id="licence" type="text" name="licence" placeholder="Entrer une licence">
+              <label>Immatriculation</label>
+              <input id="licence" type="text" placeholder="Immatriculation">
             </div>
             <div class="five wide field required">
               <label>Marque</label>
               <select id="brand">
                 <option value="" selected></option>
-              {{#each brandsList}}
+                {{#each brandsList}}
                 <option value="{{brand}}">{{brand}}</option>
-              {{/each}}
+                {{/each}}
               </select>
             </div>
             <div class="five wide field">
               <label>Modèle</label>
               <select id="model">
                 <option value="" selected></option>
-              {{#each modelsList}}
+                {{#each modelsList}}
                 <option value="{{model}}">{{model}}</option>
-              {{/each}}
+                {{/each}}
               </select>
             </div>
             <div class="five wide field required">
               <label>Type de véhicule</label>
               <select id="type">
                 <option value="" selected></option>
-              {{#each vehicleTypesList}}
+                {{#each vehicleTypesList}}
                 <option value="{{vehicleTypeId}}">{{vehicleTypeId}}</option>
-              {{/each}}
+                {{/each}}
               </select>
             </div>
-            <input id="sub" type="submit" value="Enregistrer" class="ui left attached small primary button">
-            <input type="reset" value="Annuler" class="ui right attached small button cancel" style="display :none">
+            <input id="sub" type="submit" value="Enregistrer" class="ui primary button">
+            <input type="reset" value="Annuler" class="ui button cancel" style="display :none">
           </form>
+          </div>
+          </div>
         </div>
       </div>
     </div>

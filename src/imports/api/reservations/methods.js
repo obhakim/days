@@ -36,7 +36,7 @@ function getPrice(vehicleTypeId, startAt, distance) {
 }
 
 Meteor.methods({
-  getPrice: getPrice,
+  getPrice,
   createReservation: function createReservation(reservation) {
     if (!Meteor.user() || !Meteor.user().profile) {
       throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action");
