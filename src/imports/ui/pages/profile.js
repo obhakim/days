@@ -72,7 +72,7 @@ Template.Profile.events({
           };
         });
         Session.set(SESSION.VALIDATION_ERRORS, errors);*/
-        Session.set(SESSION.ERROR, error);
+Session.set(SESSION.ERROR, error);
       } else {
         FlowRouter.go('/');
       }

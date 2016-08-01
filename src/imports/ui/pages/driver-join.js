@@ -7,7 +7,7 @@ import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
 Template.DriverJoin.helpers({
-  validThruM: function () {
+  validThruM: function() {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
@@ -16,7 +16,7 @@ Template.DriverJoin.helpers({
     }
     return monthsList;
   },
-  validThruY: function () {
+  validThruY: function() {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
@@ -26,7 +26,7 @@ Template.DriverJoin.helpers({
     }
     return yearsList;
   },
-  profile: function () {
+  profile: function() {
     return Meteor.user().profile;
   },
 });
@@ -61,13 +61,14 @@ Template.DriverJoin.events({
 
     Meteor.call('createDriver', data, (error) => {
       if (error) {
-        const context = Meteor.users.simpleSchema().namedContext('createDriver');
+        /*const context = Meteor.users.simpleSchema().namedContext('createDriver');
         const errors = context.invalidKeys().map(function (keys) {
           return {
             message: context.keyErrorMessage(keys.name),
           };
         });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+        Session.set(SESSION.VALIDATION_ERRORS, errors);*/
+        Session.set(SESSION.ERROR, error);
       } else {
         FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
       }
@@ -83,9 +84,9 @@ Template.DriverJoin.onRendered(function driverJoinOnRendered() {
     format: CONST.DEFAULT_DATE_FORMAT,
     // useCurrent: true,
     locale: CONST.DEFAULT_LOCALE,
-    // stepping: 5,
-    // showTodayButton: true,
-    // inline: true,
-    // sideBySide: true,
+  // stepping: 5,
+  // showTodayButton: true,
+  // inline: true,
+  // sideBySide: true,
   });
 });
