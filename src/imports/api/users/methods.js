@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { CONST } from '../../common/constants.js';
+import { check } from 'meteor/check';
+import { Users } from './users.js';
 
 // new validated-method style
 
@@ -77,6 +79,8 @@ Meteor.methods({
   },
   // Need this to force Driver role
   createDriver: (newUser) => {
+    check(newUser, Users.schema.namedContext('createDriver'));
+
     const userId = Accounts.createUser({
       username: newUser.username,
       email: newUser.email,
