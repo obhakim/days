@@ -62,29 +62,17 @@ Template.Profile.events({
       },
     };
 
-    // updateProfile.call(data, (error) => {
-    //   if (error) {
-    //     const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
-    //     const errors = context.invalidKeys().map(function (d) {
-    //       return {
-    //         message: context.keyErrorMessage(d.name),
-    //       };
-    //     });
-    //     Session.set(SESSION.VALIDATION_ERRORS, errors);
-    //   } else {
-    //     FlowRouter.go('/');
-    //   }
-    // });
 
     Meteor.call('updateUserProfile', data, function(error, result) {
       if (error) {
-        let context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
+        /*let context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
         let errors = context.invalidKeys().map(function(data) {
           return {
             message: context.keyErrorMessage(data.name),
           };
         });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+        Session.set(SESSION.VALIDATION_ERRORS, errors);*/
+        Session.set(SESSION.ERROR, error);
       } else {
         FlowRouter.go('/');
       }

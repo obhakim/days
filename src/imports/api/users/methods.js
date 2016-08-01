@@ -49,31 +49,30 @@ import { CONST } from '../../common/constants.js';
 Meteor.methods({
   updateUserProfile: (newProfile) => {
     const userId = Meteor.userId();
-    // var isEmailChanged = currentProfile ?
-    //     newProfile.email != currentProfile.email :
 
-    Meteor.users.update(userId, {
-      $set: {
-        profile: newProfile,
-      },
-    }, {
-      validationContext: 'updateUserProfile',
-    });
+    if ((newProfile.creditCard.num.length === 0)
+      || (newProfile.creditCard.validThruM.length === 0)
+      || (newProfile.creditCard.validThruY.length === 0)
+      || (newProfile.creditCard.cvv.length === 0)
+      || (newProfile.creditCard.name.length === 0)) {
 
-    // if (Meteor.isServer) {
-    //   this.unblock()
-    //   if (isEmailChanged) {
-    //     // Send notification
-    //     try {
-    //       Accounts.sendVerificationEmail()
-    //     } catch (error) {
-    //       //throw error
-    //       console.log(error)
-    //     }
-    //   }
-    // }
+      throw new Meteor.Error(400, "les informations de la carte bancaire are required");
 
-  // return id
+    } else if ((newProfile.street.length === 0)
+      || (newProfile.city.length === 0)
+      || (newProfile.zipcode.length === 0)) {
+
+      throw new Meteor.Error(400, "les informations de l'adresse are required");
+
+    } else {
+      Meteor.users.update(userId, {
+        $set: {
+          profile: newProfile,
+        },
+      }, {
+        validationContext: 'updateUserProfile',
+      });
+    }
   },
   // Need this to force Driver role
   createDriver: (newUser) => {
@@ -84,7 +83,13 @@ Meteor.methods({
       || (newUser.profile.creditCard.cvv.length === 0)
       || (newUser.profile.creditCard.name.length === 0)) {
 
-      throw new Meteor.Error(400, "les Informations de la carte bancaire are required");
+      throw new Meteor.Error(400, "les informations de la carte bancaire are required");
+
+    } else if ((newUser.profile.street.length === 0)
+      || (newUser.profile.city.length === 0)
+      || (newUser.profile.zipcode.length === 0)) {
+
+      throw new Meteor.Error(400, "les informations de l'adresse are required");
 
     } else {
       const userId = Accounts.createUser({
