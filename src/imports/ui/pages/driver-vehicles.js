@@ -1,4 +1,5 @@
 import './driver-vehicles.html';
+import '../components/vehicle-item.js';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
 import { Meteor } from 'meteor/meteor';
@@ -8,19 +9,18 @@ import { SESSION } from '../../common/constants.js';
 // import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Vehicles } from '../../api/vehicles/vehicles.js';
 import { Models } from '../../api/models/models.js';
-import '../components/vehicle-item.js';
 
-Template.DriverVehicles.onCreated(function reservationsPageOnCreated() {
-  const self = this;
-  self.autorun(() => {
-    self.subscribe('vehicletypes');
-    self.subscribe('myVehicles');
-    self.subscribe('brands');
+Template.DriverVehicles.onCreated(function driverVehiclesPageOnCreated() {
+  this.autorun(() => {
+    this.subscribe('myVehicles');
+    this.subscribe('brands');
+    this.subscribe('vehicletypes');
   });
 });
 
 Template.DriverVehicles.helpers({
   vehicles: () => Vehicles.find().fetch(),
+
   brandsList: function () {
     // return Models.find().fetch();
 
@@ -49,7 +49,7 @@ Template.DriverVehicles.helpers({
     }).fetch(), true, (doc) => doc.vehicleTypeId);
   },
 
-  setModelUpdate: function () {},
+  //setModelUpdate: function () {},
 
   /*
   var data=Vehicles.find({_id:Session.get('vehid')}).fetch();
@@ -81,7 +81,7 @@ Template.DriverVehicles.events({
       } else {
         event.target.reset();
         event.target.licence.focus();
-              }
+      }
     });
     // return false;
   },
@@ -137,7 +137,7 @@ Template.DriverVehicles.events({
   },
 
 
-  'change #brand'(event, template) {
+  'change #brand'(event) {
     // var selected_brand = event.target.value;
     Session.set('selected_brand', event.target.value);
     $('#model option').attr('value', '').text('');
@@ -145,7 +145,7 @@ Template.DriverVehicles.events({
     // Meteor.call('showModels',selected_brand);
   },
 
-  'change #model'(event, template) {
+  'change #model'(event) {
     // var selected_brand = event.target.value;
     Session.set('selected_model', event.target.value);
     $('#type option').attr('value', '').text('');
