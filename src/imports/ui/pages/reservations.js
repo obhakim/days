@@ -14,50 +14,53 @@ Template.Reservations.onCreated(function reservationsPageOnCreated() {
 
 Template.Reservations.events({
 
-  'click #recherche': function() {
-    const date = $('#searchdate').val();
-    Session.set('date', date);
-    Session.set('day', date.split('/')[0]);
-    Session.set('month', date.split('/')[1]);
-    Session.set('year', date.split('/')[2]);
+  "click #recherche": function(evt) {
+    var date = $("#searchdate").val();
+    Session.set("date", date);
+    Session.set("day", date.split('/')[0])
+    Session.set("month", date.split('/')[1])
+    Session.set("year", date.split('/')[2])
     delete Session.keys['name'];
   },
-  'keyup #nom': function(event) {
-    const name = $(event.target).val();
-    Session.set('name', name);
+  "keyup #nom": function(evt) {
+    var name = $(evt.target).val();
+    Session.set("name", name);
     delete Session.keys['date'];
   },
 });
 
 Template.Reservations.helpers({
-  reservations() {
-    let filter = {};
+  reservations: function() {
     if (!Session.get('name') && !Session.get('date')) {
-      filter = {};
-    } else if (Session.get('name')) {
-      filter = {
-        ownerName: {
-          $regex: Session.get('name'),
-        },
-      };
-    } else if (Session.get('date')) {
-      const startday = parseInt(Session.get('day'), 10);
-      const startDate = new Date(Session.get('year'), Session.get('month') - 1, startday);
-      const endDate = new Date(Session.get('year'), Session.get('month') - 1, startday + 1);
-      filter = {
-        createdAt: {
-          $gte: startDate,
-          $lt: endDate,
-        },
-      };
-    }
-    return Reservations.find(
-      filter
-      , {
+      return Reservations.find({}, {
         sort: {
           createdAt: -1,
-        },
+          status: -1
+        }
       });
+    }
+    if (Session.get('name')) {
+      return Reservations.find({
+        ownerName: {
+          $regex: Session.get('name')
+        }
+      });
+    }
+    if (Session.get('date')) {
+      startday = parseInt(Session.get('day'), 10);
+      var startDate = new Date(2016, Session.get('month') - 1, startday);
+      var endDate = new Date(2016, Session.get('month') - 1, startday + 1);
+      return Reservations.find({
+        createdAt: {
+          $gte: startDate,
+          $lt: endDate
+        }
+      }, {
+        sort: {
+          createdAt: -1
+        }
+      });
+    }
   },
 });
 
