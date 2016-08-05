@@ -7,86 +7,90 @@ export const Users = Meteor.users;
 Users.creditCardSchema = new SimpleSchema({
   num: {
     type: String,
+    label: "numero",
   },
   validThruM: {
-    type: Number,
+    type: String,
+    label: "mois",
     min: 1,
     max: 12,
   },
   validThruY: {
-    type: Number,
+    type: String,
+    label: "annee",
   },
   cvv: {
     type: String,
+    label: "CVV",
   },
   name: {
     type: String,
+    label: "Nom",
   },
 });
 
 Users.profileSchema = new SimpleSchema({
-  // gender: {
-  //     type: String,
-  //     allowedValues: ['M', 'Mme', 'Mlle']
-  //     //,optional: true
-  // },
-  firstName: {
-    type: String,
-  // ,optional: true
-  },
   lastName: {
     type: String,
-  // ,optional: true
+    label: "Prenom",
+    optional: true,
+  },
+  firstName: {
+    type: String,
+    label: "Nom",
+    optional: true,
   },
   birthday: {
     type: Date,
+    label: "Date de naissance",
     optional: true,
   },
   phone: {
     type: String,
-  // ,optional: true
+    label: "phone",
+    optional: true,
   },
   street: {
     type: String,
-  // ,optional: true
+    label: "Rue",
   },
   city: {
     type: String,
-  // ,optional: true
+    label: "Ville",
   },
   zipcode: {
     type: String,
-  // ,optional: true
+    label: "Code postale",
   },
   creditCard: {
     type: Users.creditCardSchema,
     optional: true,
   },
-// website: {
-//     type: String,
-//     regEx: SimpleSchema.RegEx.Url,
-//     optional: true
-// },
-// country: {
-//     type: Schema.UserCountry,
-//     optional: true
-// }
 });
 
 Users.schema = new SimpleSchema({
-  // username: {
-  //     type: String,
-  //     // For accounts-password, either emails or username is required, but not both. It is OK to make this
-  //     // optional here because the accounts-password package does its own validation.
-  //     // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
-  //     optional: true
-  // },
+  username: {
+    type: String,
+    optional: true,
+  // For accounts-password, either emails or username is required, but not both. It is OK to make this
+  // optional here because the accounts-password package does its own validation.
+  // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
+  },
+  password: {
+    type: String,
+  //optional: true,
+  },
+  email: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email,
+    optional: true,
+  },
   emails: {
     type: Array,
-    // For accounts-password, either emails or username is required, but not both. It is OK to make this
-    // optional here because the accounts-password package does its own validation.
-    // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
-    optional: true,
+  // For accounts-password, either emails or username is required, but not both. It is OK to make this
+  // optional here because the accounts-password package does its own validation.
+  // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
+  //optional: true,
   },
   'emails.$': {
     type: Object,
@@ -106,6 +110,8 @@ Users.schema = new SimpleSchema({
   // },
   createdAt: {
     type: Date,
+    optional: true,
+    label: "Date de creation",
   },
   profile: {
     type: Users.profileSchema,
@@ -147,13 +153,3 @@ Users.schema = new SimpleSchema({
 });
 
 Meteor.users.attachSchema(Users.schema);
-
-// Schema.UserCountry = new SimpleSchema({
-//     name: {
-//         type: String
-//     },
-//     code: {
-//         type: String,
-//         regEx: /^[A-Z]{2}$/
-//     }
-// })

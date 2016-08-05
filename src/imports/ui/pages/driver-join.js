@@ -61,13 +61,14 @@ Template.DriverJoin.events({
 
     Meteor.call('createDriver', data, (error) => {
       if (error) {
-        const context = Meteor.users.simpleSchema().namedContext('createDriver');
+         alert(error);  //or alert(error.reason)
+        /*const context = Meteor.users.simpleSchema().namedContext('createDriver');
         const errors = context.invalidKeys().map(function (keys) {
           return {
             message: context.keyErrorMessage(keys.name),
           };
         });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+        Session.set(SESSION.VALIDATION_ERRORS, errors);*/
       } else {
         FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
       }

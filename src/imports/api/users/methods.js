@@ -79,8 +79,8 @@ Meteor.methods({
   },
   // Need this to force Driver role
   createDriver: (newUser) => {
-    check(newUser, Users.schema.namedContext('createDriver'));
-
+    //check(newUser, Users.schema.namedContext('createDriver'));
+    Users.schema.validate(newUser);
     const userId = Accounts.createUser({
       username: newUser.username,
       email: newUser.email,
