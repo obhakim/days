@@ -7,60 +7,60 @@ export const Users = Meteor.users;
 Users.creditCardSchema = new SimpleSchema({
   num: {
     type: String,
-    label: "numero",
+    label: 'Numero',
   },
   validThruM: {
     type: String,
-    label: "mois",
+    label: 'Mois',
     min: 1,
     max: 12,
   },
   validThruY: {
     type: String,
-    label: "annee",
+    label: 'Année',
   },
   cvv: {
     type: String,
-    label: "CVV",
+    label: 'CVV',
   },
   name: {
     type: String,
-    label: "Nom",
+    label: 'Nom',
   },
 });
 
 Users.profileSchema = new SimpleSchema({
-  lastName: {
+  street: {
     type: String,
-    label: "Prenom",
+    label: 'Rue',
+  },
+  city: {
+    type: String,
+    label: 'Ville',
+  },
+  zipcode: {
+    type: String,
+    label: 'Code postal',
     optional: true,
   },
   firstName: {
     type: String,
-    label: "Nom",
+    defaultValue: '',
     optional: true,
   },
-  birthday: {
-    type: Date,
-    label: "Date de naissance",
+  lastName: {
+    type: String,
+    defaultValue: '',
     optional: true,
   },
   phone: {
     type: String,
-    label: "phone",
+    defaultValue: '',
     optional: true,
   },
-  street: {
-    type: String,
-    label: "Rue",
-  },
-  city: {
-    type: String,
-    label: "Ville",
-  },
-  zipcode: {
-    type: String,
-    label: "Code postale",
+  birthday: {
+    type: Date,
+    optional: true,
   },
   creditCard: {
     type: Users.creditCardSchema,
@@ -72,25 +72,29 @@ Users.schema = new SimpleSchema({
   username: {
     type: String,
     optional: true,
-  // For accounts-password, either emails or username is required, but not both. It is OK to make this
+  // For accounts-password, either emails or username is required, but not both.
+  // It is OK to make this
   // optional here because the accounts-password package does its own validation.
-  // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
+  // Third-party login packages may not require either.
+  // Adjust this schema as necessary for your usage.
   },
   password: {
     type: String,
-  //optional: true,
+    min: 8,
+    optional: true,
   },
   email: {
     type: String,
-    regEx: SimpleSchema.RegEx.Email,
     optional: true,
   },
   emails: {
     type: Array,
-  // For accounts-password, either emails or username is required, but not both. It is OK to make this
-  // optional here because the accounts-password package does its own validation.
-  // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
-  //optional: true,
+    // For accounts-password, either emails or username is required, but not both.
+    //  It is OK to make this
+    // optional here because the accounts-password package does its own validation.
+    // Third-party login packages may not require either.
+    // Adjust this schema as necessary for your usage.
+    optional: true,
   },
   'emails.$': {
     type: Object,
@@ -102,7 +106,8 @@ Users.schema = new SimpleSchema({
   'emails.$.verified': {
     type: Boolean,
   },
-  // Use this registered_emails field if you are using splendido:meteor-accounts-emails-field / splendido:meteor-accounts-meld
+  // Use this registered_emails field if you are using
+  // splendido:meteor-accounts-emails-field / splendido:meteor-accounts-meld
   // registered_emails: {
   //     type: [Object],
   //     optional: true,
@@ -111,7 +116,6 @@ Users.schema = new SimpleSchema({
   createdAt: {
     type: Date,
     optional: true,
-    label: "Date de creation",
   },
   profile: {
     type: Users.profileSchema,
@@ -131,19 +135,20 @@ Users.schema = new SimpleSchema({
   // Roles.addUsersToRoles(userId, ["admin"], Roles.GLOBAL_GROUP)
   // You can't mix and match adding with and without a group since
   // you will fail validation in some cases.
-  // roles: {
-  //     type: Object,
-  //     optional: true,
-  //     blackbox: true
-  // },
+  roles: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+  },
   // Option 2: [String] type
   // If you are sure you will never need to use role groups, then
   // you can specify [String] as the type
   roles: {
     type: [String],
+    label: 'Role',
     optional: true,
     allowedValues: [CONST.USER_ROLES.CLIENT, CONST.USER_ROLES.DRIVER, CONST.USER_ROLES.ADMIN],
-    defaultValue: CONST.USER_ROLES.CLIENT,
+  //defaultValue: CONST.USER_ROLES.CLIENT,
   },
   // In order to avoid an 'Exception in setInterval callback' from Meteor
   heartbeat: {
