@@ -51,6 +51,7 @@ import { Users } from './users.js';
 Meteor.methods({
   updateUserProfile: (newProfile) => {
     const userId = Meteor.userId();
+    Users.profileSchema.validate(newProfile);
     // var isEmailChanged = currentProfile ?
     //     newProfile.email != currentProfile.email :
 
