@@ -1,20 +1,26 @@
 <template name="Reservations">
   <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
-  <div class="ui stackable grid">
-   <form  class="ui form">
-        <div class="ui fluid dropdown">          
-           <div class="ui three column grid">
+  <div class="ui stackable grid">   
+<form class="ui form">
+    <div class="ui fluid dropdown">
+        <div class="ui three column grid">
             <div class="row">
-              <div class="column"><input type="text" placeholder="Rechercher par date..."  id="searchdate"  class="ui dropdown datetimepicker"/></div>
-              <div class="column"> <i id="recherche" class="ui button">Rechercher</i></div> 
-              <div class="column">
-              <div class="ui icon input"><input id="nom" placeholder="Entrer un nom..." type="text"/>
-              <i class="search icon"></i>
-              </div></div> 
-            </div> 
-           </div>
+                <div class="column">
+                    <input type="text" placeholder="Rechercher par date..." id="searchdate" class="ui dropdown datetimepicker" />
+                </div>
+                <div class="column">
+                    <i id="recherche" class="ui button">Rechercher</i>
+                </div>
+                <div class="column">
+                    <div class="ui icon input">
+                        <input id="nom" placeholder="Entrer un nom..." type="text" />
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-   </form>
+    </div>
+</form>
     <form id="reservationForm" class="ui form">
       {{> errormessage}}
       <table class="ui celled table">
