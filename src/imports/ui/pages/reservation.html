@@ -8,7 +8,6 @@
         <div class="form-error">{ {error} }</div>
         { {/each--}}
         <div class="required field">
-          <label>Nom</label>
           <input id="lastname" type="text" placeholder="Nom" value="{{profile.lastName}}" required />
         </div>
         {{!--#each error in errors "lastname"} }
@@ -16,7 +15,6 @@
         { {/each--}}
 
         <div class="field">
-          <label>Prenom</label>
           <input id="firstname" type="text" placeholder="Prenom" value="{{profile.firstName}}" />
         </div>
         {{!--#each error in errors "firstname"} }
@@ -24,7 +22,6 @@
         { {/each--}}
 
         <div class="required field">
-          <label>Téléphone</label>
           <input id="phone" type="text" placeholder="Téléphone" value="{{profile.phone}}" required />
         </div>
         {{!--#each error in errors "phone"} }
@@ -32,7 +29,6 @@
         { {/each--}}
 
         <div class="required field">
-          <label>Email</label>
           <input id="email" type="text" placeholder="Email" value="{{currentUserEmail}}" required />
         </div>
         {{!--#each error in errors "email"} }
@@ -40,7 +36,6 @@
         { {/each--}}
 
         <div class="required field">
-          <label>Depart</label>
           <div class="ui action fluid input">
             <input id="start" type="text" placeholder="Depart" required />
             <button id="startMyPosition" class="ui button" disabled="{{currentPositionNotDefined}}"><i class="marker icon"></i></button>
@@ -51,7 +46,6 @@
         { {/each--}}
 
         <div class="required field">
-          <label>Destination</label>
           <div class="ui action fluid input">
             <input id="end" type="text" placeholder="Destination" required />
             <button id="endMyPosition" class="ui button" disabled="{{currentPositionNotDefined}}"><i class="marker icon"></i></button>
@@ -62,17 +56,15 @@
         { {/each--}}
 
         <div class="required inline field">
-          <label>Le</label>
-          <input id="startat" class="ui dropdown datetimepicker" type="text" required />
+          <input id="startat" placeholder="Date" class="ui dropdown datetimepicker" type="text" required />
         </div>
         {{!--#each error in errors "startat"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
 
         <div class="required field">
-          <label>Type de véhicule</label>
           <select id="vehicletype">
-            <option value="">Type de véhicule</option>
+            <option value="" disabled selected>Type de véhicule</option>
             {{#each vehicleTypesList}}
             <option value="{{_id}}">{{name}}</option>
             {{/each}}
@@ -83,7 +75,6 @@
         { {/each--}}
         
         <div class="field">
-          <label>Commentaire</label>
           <textarea id="comment" rows="3" placeholder="Commentaire">{{comment}}</textarea>
         </div>
         {{!--#each error in errors "comment"} }
