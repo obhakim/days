@@ -15,38 +15,32 @@ Template.Reservations.onCreated(function reservationsPageOnCreated() {
 Template.Reservations.events({
   'click #recherche': function () {
     const date = $('#searchdate').val();
+    const name = $('#nom').val();
+    Session.set('name', name);
     Session.set('date', date);
     Session.set('day', date.split('/')[0]);
     Session.set('month', date.split('/')[1]);
     Session.set('year', date.split('/')[2]);
-    delete Session.keys['name'];
-  },
-  'keyup #nom': function (event) {
-    const name = $(event.target).val();
-    Session.set('name', name);
-    delete Session.keys['date'];
   },
 });
 
 Template.Reservations.helpers({
-  reservations() {
+  reservations: function () {
     let filter = {};
-    if (Session.get('name')) {
-      filter = {
-        ownerName: {
-          $regex: Session.get('name'),
-        },
-      };
-    } else if (Session.get('date')) {
+    if (Session.get('name') && Session.get('date')) {
       const startmonth = parseInt(Session.get('month'), 10);
       const myDate = new Date(Session.get('year'), startmonth - 1, Session.get('day'));
       const startDay = moment(myDate).startOf('day').toDate();
       const endDay = moment(myDate).endOf('day').toDate();
       filter = {
-        createdAt: {
-          $gte: startDay,
-          $lt: endDay,
-        },
+        $and: [{
+          ownerName: Session.get('name'),
+        }, {
+            createdAt: {
+              $gte: startDay,
+              $lt: endDay,
+            },
+          }],
       };
     }
     return Reservations.find(
@@ -55,7 +49,7 @@ Template.Reservations.helpers({
         sort: {
           createdAt: -1,
           status: -1
-        },
+        }
       });
   },
 });

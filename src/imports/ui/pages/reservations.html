@@ -1,6 +1,6 @@
 <template name="Reservations">
   <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
-  <div class="ui stackable grid">   
+  <div class="ui stackable grid">
 <form class="ui form">
     <div class="ui fluid dropdown">
         <div class="ui three column grid">
@@ -9,12 +9,11 @@
                     <input type="text" placeholder="Rechercher par date..." id="searchdate" class="ui dropdown datetimepicker" />
                 </div>
                 <div class="column">
-                    <i id="recherche" class="ui button">Rechercher</i>
+                    <input id="nom" placeholder="Entrer un nom..." type="text" />
                 </div>
                 <div class="column">
                     <div class="ui icon input">
-                        <input id="nom" placeholder="Entrer un nom..." type="text" />
-                        <i class="search icon"></i>
+                        <i id="recherche" class="ui button">Rechercher</i>
                     </div>
                 </div>
             </div>
