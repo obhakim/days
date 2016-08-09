@@ -15,32 +15,32 @@ import '../lib/helpers.js';
 import '../components/validation-errors.js';
 
 Template.Profile.helpers({
-  validThruM: function () {
+  validThruM: function() {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
-        value: i,
+        value: i.toString(),
       });
     }
     return monthsList;
   },
-  validThruY: function () {
+  validThruY: function() {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
       yearsList.push({
-        value: thisYear + i,
+        value: (thisYear + i).toString(),
       });
     }
     return yearsList;
   },
-  profile: function () {
+  profile: function() {
     return Meteor.user().profile;
   },
 });
 
 Template.Profile.events({
-  'submit #form': function (event) {
+  'submit #form': function(event) {
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -76,7 +76,7 @@ Template.Profile.events({
     //   }
     // });
 
-    Meteor.call('updateUserProfile', data, function (error, result) {
+    Meteor.call('updateUserProfile', data, function(error, result) {
       if (error) {
         // maybe use error.details instead of not working namedContext
         // error.details "[{"name":"profile.creditCard.validThruM","type":"required","value":null},{"name":"profile.creditCard.validThruY","type":"required","value":null},{"name":"profile.creditCard.cvv","type":"required","value":null},{"name":"profile.street","type":"required","value":null},{"name":"profile.city","type":"required","value":null},{"name":"profile.zipcode","type":"required","value":null}]"
@@ -96,15 +96,15 @@ Template.Profile.events({
   },
 });
 
-Template.Profile.onRendered(function () {
+Template.Profile.onRendered(function() {
   this.$('.datetimepicker').datetimepicker({
     // format: CONST.DEFAULT_DATETIME_FORMAT,
     format: CONST.DEFAULT_DATE_FORMAT,
     // useCurrent: true,
     locale: CONST.DEFAULT_LOCALE,
-    // stepping: 5,
-    // showTodayButton: true,
-    // inline: true,
-    // sideBySide: true,
+  // stepping: 5,
+  // showTodayButton: true,
+  // inline: true,
+  // sideBySide: true,
   });
 });
