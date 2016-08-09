@@ -1,25 +1,25 @@
 <template name="Reservations">
   <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
   <div class="ui stackable grid">
-<form class="ui form">
     <div class="ui fluid dropdown">
-        <div class="ui three column grid">
-            <div class="row">
-                <div class="column">
-                    <input type="text" placeholder="Rechercher par date..." id="searchdate" class="ui dropdown datetimepicker" />
-                </div>
-                <div class="column">
-                    <input id="nom" placeholder="Entrer un nom..." type="text" />
-                </div>
-                <div class="column">
-                    <div class="ui icon input">
-                        <i id="recherche" class="ui button">Rechercher</i>
-                    </div>
-                </div>
+      <div class="ui three column grid">
+        <form class="ui form">
+          <div class="row">
+            <div class="column">
+              <input type="text" placeholder="Rechercher par date..." id="searchdate" class="ui dropdown datetimepicker" />
             </div>
-        </div>
+            <div class="column">
+              <input id="nom" placeholder="Entrer un nom..." type="text" />
+            </div>
+            <div class="column">
+              <div class="ui icon input">
+                <i id="recherche" class="ui button">Rechercher</i>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-</form>
     <form id="reservationForm" class="ui form">
       {{> errormessage}}
       <table class="ui celled table">
@@ -36,26 +36,16 @@
           </tr>
         </thead>
         <tbody>
-          {{#each reservations}} {{> ReservationItem}} {{/each}}
+        {{#if searching}}
+          {{> loading}}
+        {{else}}
+          {{#each reservations}} 
+            {{> ReservationItem}} 
+          {{else}}
+            <p class="alert alert-warning">La liste est vide.</p>
+          {{/each}}
+        {{/if}}
         </tbody>
-        {{!--<tfoot>
-                <tr>
-                    <th colspan="3">
-                        <div class="ui right floated pagination menu">
-                            <a class="icon item">
-                                <i class="left chevron icon"></i>
-                            </a>
-                            <a class="item">1</a>
-                            <a class="item">2</a>
-                            <a class="item">3</a>
-                            <a class="item">4</a>
-                            <a class="icon item">
-                                <i class="right chevron icon"></i>
-                            </a>
-                        </div>
-                    </th>
-                </tr>
-            </tfoot>--}}
       </table>
     </form>
   </div>
