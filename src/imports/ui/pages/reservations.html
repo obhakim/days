@@ -1,52 +1,43 @@
 <template name="Reservations">
   <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
-  <div class="ui stackable grid">
-    <div class="ui fluid dropdown">
-      <div class="ui three column grid">
-        <form class="ui form">
-          <div class="row">
-            <div class="column">
-              <input type="text" placeholder="Rechercher par date..." id="searchdate" class="ui dropdown datetimepicker" />
-            </div>
-            <div class="column">
-              <input id="nom" placeholder="Entrer un nom..." type="text" />
-            </div>
-            <div class="column">
-              <div class="ui icon input">
-                <i id="recherche" class="ui button">Rechercher</i>
-              </div>
-            </div>
-          </div>
-        </form>
+
+  <div class="ui segment fluid dropdown">
+    <form class="ui form">
+      <div class="ui input">
+        <input type="text" placeholder="Date debut..." id="startDate" class="ui dropdown datetimepicker" />
       </div>
-    </div>
-    <form id="reservationForm" class="ui form">
-      {{> errormessage}}
-      <table class="ui celled table">
-        <thead>
-          <tr>
-            <th>Réservé le</th>
-            <th>Départ</th>
-            <th>Destination</th>
-            <th>Le</th>
-            <th>Prix</th>
-            <th>Commentaire</th>
-            <th>Statut</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        {{#if searching}}
-          {{> loading}}
-        {{else}}
-          {{#each reservations}} 
-            {{> ReservationItem}} 
-          {{else}}
-            <p class="alert alert-warning">La liste est vide.</p>
-          {{/each}}
-        {{/if}}
-        </tbody>
-      </table>
+      <div class="ui input">
+        <input type="text" placeholder="Date fin..." id="endDate" class="ui dropdown datetimepicker" />
+      </div>
+      <div class="ui input focus">
+        <input type="text" placeholder="Chercher par..." id="searchWord">
+      </div>
+      <div class="ui icon input">
+        <i id="recherche" class="ui button">Rechercher</i>
+      </div>
     </form>
   </div>
+
+  <form id="reservationForm" class="ui form">
+    {{> errormessage}}
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Réservé le</th>
+          <th>Départ</th>
+          <th>Destination</th>
+          <th>Le</th>
+          <th>Prix</th>
+          <th>Commentaire</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if searching}} <div class="ui text loader">Chargement...</div> {{else}} {{#each reservations}} {{> ReservationItem}} {{else}}
+        <p class="alert alert-warning">La liste est vide.</p>
+        {{/each}} {{/if}}
+      </tbody>
+    </table>
+  </form>
 </template>
