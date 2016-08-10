@@ -25,7 +25,9 @@ Template.DriverVehicles.helpers({
     // return Models.find().fetch();
 
     return _.uniq(Models.find({}, {
-      sort: { brand: 1 },
+      sort: {
+        brand: 1,
+      },
     }).fetch(), true, (doc) => doc.brand);
   },
 
@@ -34,33 +36,35 @@ Template.DriverVehicles.helpers({
     return _.uniq(Models.find({
       brand: Session.get('selected_brand'),
     }, {
-      sort: {
-        model: 1,
-      },
-    }).fetch(), true, (doc) => doc.model);
+        sort: {
+          model: 1,
+        },
+      }).fetch(), true, (doc) => doc.model);
   },
 
-  vehicleTypesList: function () {
-    return _.uniq(Models.find({
-      model: Session.get('selected_model'),
-      brand: Session.get('selected_brand'),
-    }, {
-      sort: { vehicleTypeId: 1 },
-    }).fetch(), true, (doc) => doc.vehicleTypeId);
+  vehicleTypeId: function () {
+    const model = Session.get('selected_model');
+    const brand = Session.get('selected_brand');
+    let typeId = '';
+
+    if (model && brand) {
+      typeId = Models.findOne({ model, brand }).vehicleTypeId;
+    }
+
+    return typeId;
   },
 
-  //setModelUpdate: function () {},
+  regYearList: function () {
+    const all = (new Date()).getFullYear();
+    const table = [];
 
-  /*
-  var data=Vehicles.find({_id:Session.get('vehid')}).fetch();
-    $( "#licence" ).val(data[0].license);
-    $( "#brand" ).val(data[0].brand);
-    $( "#model" ).val(data[0].model);
-    $( "#VehicleTypeId" ).val(data[0].vehicleTypeId);
+    for (let i = 0; i <= 25; i++) {
+      table.push(all - i);
+    }
 
-     return data;
-  }});
-  */
+    return table;
+  },
+
 });
 
 Template.DriverVehicles.events({
@@ -72,7 +76,9 @@ Template.DriverVehicles.events({
       licence: event.target.licence.value,
       brand: event.target.brand.value,
       model: event.target.model.value,
-      vehicleTypeId: event.target.type.value,
+      vehicleTypeId: event.target.vehicleType.value,
+      regYear: event.target.regYear.value,
+      color: event.target.color.value,
     };
     // console.log(vehicle);
     Meteor.call('addVehicle', vehicle, (error) => {
@@ -93,30 +99,29 @@ Template.DriverVehicles.events({
       licence: $('#licence').val(),
       brand: $('#brand').val(),
       model: $('#model').val(),
-      vehicleTypeId: $('#type').val(),
+      vehicleTypeId: $('#vehicleType').val(),
+      regYear: $('#regYear').val(),
+      color: $('#color').val(),
     };
 
     Meteor.call('updateVehicle', vehicleId, vehicle, (error) => {
       if (error) {
         Session.set(SESSION.ERROR, error);
       } else {
-        ('#licence').val('');
-        ('#brand').val('');
-        ('#model').val('');
-        ('#type').val('');
+        event.target.reset();
+        event.target.licence.focus();
       }
     });
   },
 
-  'click .delete'() {
+  'click #delete'() {
     const vehicleId = this._id;
     Meteor.call('removeVehicle', vehicleId);
   },
 
-  'click .editer'() {
-    // $('#type option').attr('value",this.vehicleTypeId).text(this.vehicleTypeId);
+  'click #edit'() {
     Session.set('id', this._id);
-    $('.cancel').show();
+    $('#cancel').show();
     $('#sub').attr('value', 'Save', 'type', 'button').addClass('update').prop('type', 'button');
     $('#licence').val(this.licence);
     $('#brand').val(this.brand);
@@ -124,32 +129,23 @@ Template.DriverVehicles.events({
       value: this.model,
       text: this.model,
     }));
-    $('#type').find('option').remove().end().append($('<option>', {
-      value: this.vehicleTypeId,
-      text: this.vehicleTypeId,
-    }));
+    $('#vehicleType').val(this.vehicleTypeId);
+    $('#regYear').val(this.regYear);
+    $('#color').val(this.color);
   },
 
-  'click .cancel'() {
-    $('.cancel').hide();
+  'click #cancel'() {
+    $('#cancel').hide();
     $('#sub').attr('value', 'Enregister', 'type', 'submit')
       .removeClass('update').prop('type', 'submit');
   },
 
-
   'change #brand'(event) {
-    // var selected_brand = event.target.value;
     Session.set('selected_brand', event.target.value);
     $('#model option').attr('value', '').text('');
-    // console.log(Session.set(selected_brand));
-    // Meteor.call('showModels',selected_brand);
   },
 
   'change #model'(event) {
-    // var selected_brand = event.target.value;
     Session.set('selected_model', event.target.value);
-    $('#type option').attr('value', '').text('');
-    // console.log(Session.set(selected_model));
-    // Meteor.call('showModels',selected_brand);
   },
 });

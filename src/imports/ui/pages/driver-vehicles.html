@@ -1,37 +1,36 @@
 <template name="DriverVehicles">
+  <div class="ui stackable grid">
+    <h1 class="ui center aligned header">Véhicules</h1>
+    <table class="ui single line table">
+      <thead>
+        <tr>
+          <th>Immatriculation</th>
+          <th>Constructeur</th>
+          <th>Modèle</th>
+          <th>Type</th>
+          <th>Année</th>
+          <th>Couleur</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each vehicles}} {{> VehicleItem}} {{/each}}
+      </tbody>
+    </table>
+  </div>
   <div class="ui middle aligned centered grid">
-    <div class="twelve wide column">
-      <h1 class="ui center aligned header">Vehicules</h1>
+    <div class="at-column column">
+      <h1 class="ui center aligned header">Véhicule</h1>
       <div class="ui stackable segment">
-        <div class="eight wide column">
-          <div>
-            <table class="ui single line fixed selectable table">
-              <thead>
-                <tr>
-                  <th>Immatriculation</th>
-                  <th>Constructeur</th>
-                  <th>Modèle</th>
-                  <th>Type de Vehicule</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              {{#each vehicles}}
-                {{> VehicleItem}}  
-              {{/each}}  
-              </tbody>                          
-            </table>
-          </div>
-          <h2 class="ui center aligned header">Vehicule</h2>
-          <div class="ui stackable segment">
-            <div class="six wide column">
+        <div class="six wide column">
+
           <form id="form" class="ui form" novalidate>
             {{> errormessage }}
-            <div class="five wide field required">
+            <div class="field required">
               <label>Immatriculation</label>
               <input id="licence" type="text" placeholder="Immatriculation">
             </div>
-            <div class="five wide field required">
+            <div class="field required">
               <label>Marque</label>
               <select id="brand">
                 <option value="" selected></option>
@@ -40,7 +39,7 @@
                 {{/each}}
               </select>
             </div>
-            <div class="five wide field">
+            <div class="field">
               <label>Modèle</label>
               <select id="model">
                 <option value="" selected></option>
@@ -49,20 +48,28 @@
                 {{/each}}
               </select>
             </div>
-            <div class="five wide field required">
+            <div class="field">
               <label>Type de véhicule</label>
-              <select id="type">
+              <input id="vehicleType" type="text" value="{{vehicleTypeId}}" 
+                placeholder="Type de vehicle" readonly/>
+            </div>
+            <div class="field">
+              <label>Année</label>
+              <select id="regYear">
                 <option value="" selected></option>
-                {{#each vehicleTypesList}}
-                <option value="{{vehicleTypeId}}">{{vehicleTypeId}}</option>
+                {{#each regYearList}}
+                <option value="{{this}}">{{this}}</option>                
                 {{/each}}
               </select>
             </div>
-            <input id="sub" type="submit" value="Enregistrer" class="ui primary button">
-            <input type="reset" value="Annuler" class="ui button cancel" style="display :none">
+            <div class="field required">
+
+              <label>Couleur</label>
+              <input id="color" type="text" value="" placeholder="Couleur" />
+            </div>
+            <input id="sub" type="submit" value="Enregistrer" class="ui fluid large primary button">
+            <input id="cancel" type="reset" value="Annuler" class="ui fluid large button" style="display: none">
           </form>
-          </div>
-          </div>
         </div>
       </div>
     </div>
