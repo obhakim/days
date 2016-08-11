@@ -69,6 +69,7 @@ Template.DriverJoin.events({
         };
       });
       Session.set(SESSION.VALIDATION_ERRORS, errors);*/
+
       } else {
         FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
       }

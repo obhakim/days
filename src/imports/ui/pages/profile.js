@@ -62,22 +62,10 @@ Template.Profile.events({
       },
     };
 
-    // updateProfile.call(data, (error) => {
-    //   if (error) {
-    //     const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
-    //     const errors = context.invalidKeys().map(function (d) {
-    //       return {
-    //         message: context.keyErrorMessage(d.name),
-    //       };
-    //     });
-    //     Session.set(SESSION.VALIDATION_ERRORS, errors);
-    //   } else {
-    //     FlowRouter.go('/');
-    //   }
-    // });
 
     Meteor.call('updateUserProfile', data, function(error, result) {
       if (error) {
+        
         // maybe use error.details instead of not working namedContext
         // error.details "[{"name":"profile.creditCard.validThruM","type":"required","value":null},{"name":"profile.creditCard.validThruY","type":"required","value":null},{"name":"profile.creditCard.cvv","type":"required","value":null},{"name":"profile.street","type":"required","value":null},{"name":"profile.city","type":"required","value":null},{"name":"profile.zipcode","type":"required","value":null}]"
         /* const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
@@ -87,6 +75,7 @@ Template.Profile.events({
           };
         });*/
         Session.set(SESSION.ERROR, error);
+
       } else {
         FlowRouter.go('/');
       }
