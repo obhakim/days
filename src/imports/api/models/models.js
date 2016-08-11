@@ -6,15 +6,15 @@ export const Models = new Mongo.Collection('models');
 Models.schema = new SimpleSchema({
   brand: {
     label: 'Marque',
-    type: String,
+    type: String
   },
   model: {
     label: 'Modéle',
-    type: String,
+    type: String
   },
   vehicleType: {
     label: 'Type de véhicule',
-    type: String,
+    type: String
   },
 });
 

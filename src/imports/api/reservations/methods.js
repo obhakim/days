@@ -27,7 +27,7 @@ import { Helpers } from '../../common/helpers.js';
 function getPrice(vehicleTypeId, startAt, distance) {
   // if (!Meteor.user() || !Meteor.user().profile) throw new Meteor.Error('no-profile', "Vous devez completer votre profile avant d'effectuer cette action")
   try {
-    const vehicleType = VehicleTypes.findOne(vehicleType);
+    const vehicleType = VehicleTypes.findOne(vehicleTypeId);
     return Reservations.calculatePrice(vehicleType.ratePerKm, vehicleType.rateMin, vehicleType.rateMultiplier, startAt, distance);
   } catch (ex) {
     // log
