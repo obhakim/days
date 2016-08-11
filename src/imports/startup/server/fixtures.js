@@ -11,7 +11,6 @@ export const seedData = () => {
   // if (Meteor.isServer && VehicleTypes.find().count() === 0) {
   if (Meteor.isServer && !VehicleTypes.findOne()) {
     VehicleTypes.insert({
-      _id: 'B',
       name: 'Berline',
       ratePerKm: 2.50,
       ratePerHour: 25,
@@ -19,7 +18,6 @@ export const seedData = () => {
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-      _id: 'L',
       name: 'Luxe',
       ratePerKm: 3.20,
       ratePerHour: 35,
@@ -27,7 +25,6 @@ export const seedData = () => {
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-      _id: 'P',
       name: 'Premium',
       ratePerKm: 5.00,
       ratePerHour: 50,
@@ -35,7 +32,6 @@ export const seedData = () => {
       rateMultiplier: 1.2,
     });
     VehicleTypes.insert({
-      _id: 'V',
       name: 'Van',
       ratePerKm: 4.50,
       ratePerHour: 50,
@@ -45,60 +41,55 @@ export const seedData = () => {
   }
 
   if (Meteor.isServer && !Models.findOne()) {
-    const idB = VehicleTypes.findOne({ name: 'Berline' }, { limit: 1 });
-    const idL = VehicleTypes.findOne({ name: 'Luxe' }, { limit: 1 });
-    const idP = VehicleTypes.findOne({ name: 'Premium' }, { limit: 1 });
-    const idV = VehicleTypes.findOne({ name: 'Van' }, { limit: 1 });
-
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe C',
-      vehicleTypeId: idB.name,
+      vehicleType: 'Berline',
     });
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe E',
-      vehicleTypeId: idL.name,
+      vehicleType: 'Luxe',
     });
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe S',
-      vehicleTypeId: idP.name,
+      vehicleType: 'Premium',
     });
     Models.insert({
       brand: 'Mercedes',
       model: 'Classe V',
-      vehicleTypeId: idV.name,
+      vehicleType: 'Van',
     });
     Models.insert({
       brand: 'Audi',
       model: 'A4',
-      vehicleTypeId: idB.name,
+      vehicleType: 'Berline',
     });
     Models.insert({
       brand: 'Audi',
       model: 'A6',
-      vehicleTypeId: idL.name,
+      vehicleType: 'Luxe',
     });
     Models.insert({
       brand: 'Audi',
       model: 'A8',
-      vehicleTypeId: idP.name,
+      vehicleType: 'Premium',
     });
     Models.insert({
       brand: 'BMW',
       model: 'Serie 3',
-      vehicleTypeId: idB.name,
+      vehicleType: 'Berline',
     });
     Models.insert({
       brand: 'BMW',
       model: 'Serie 5',
-      vehicleTypeId: idL.name,
+      vehicleType: 'Luxe',
     });
     Models.insert({
       brand: 'BMW',
       model: 'Serie 7',
-      vehicleTypeId: idP.name,
+      vehicleType: 'Premium',
     });
   }
 
@@ -163,4 +154,4 @@ export const seedData = () => {
 //   });
 // }
 };
-//});
+// });
