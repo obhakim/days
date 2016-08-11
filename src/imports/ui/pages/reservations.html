@@ -24,17 +24,19 @@
       <thead>
         <tr>
           <th>Réservé le</th>
-          <th>Départ</th>
-          <th>Destination</th>
+          <th>Contacte</th>
+          <th>Itineraire</th>
           <th>Le</th>
           <th>Prix</th>
-          <th>Commentaire</th>
+          <!--<th>Commentaire</th>-->
           <th>Statut</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {{#if searching}} <div class="ui text loader">Chargement...</div> {{else}} {{#each reservations}} {{> ReservationItem}} {{else}}
+        {{#if searching}}
+        <div class="ui text loader">Chargement...</div> 
+        {{else}} {{#each reservations}} {{> ReservationItem}} {{else}}
         <p class="alert alert-warning">La liste est vide.</p>
         {{/each}} {{/if}}
       </tbody>

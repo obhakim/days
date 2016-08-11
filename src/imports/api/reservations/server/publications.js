@@ -28,6 +28,8 @@ Meteor.publish('reservations.list', function publishReservationsList(search, sta
   //   'ride.startAt': { $gt: startDate, $lt: endDate }
   // }
 
+  console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
+
   // Apply filters
   if (search && search !== '') {
     // http://stackoverflow.com/questions/3305561/how-do-i-query-mongodb-with-like

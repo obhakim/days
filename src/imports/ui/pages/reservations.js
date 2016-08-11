@@ -14,18 +14,17 @@ import { CONST } from '../../common/constants.js';
 Template.Reservations.onCreated(function reservationsPageOnCreated() {
   const instance = Template.instance();
 
-  instance.searchWord = new ReactiveVar();
+  instance.searchWord = new ReactiveVar('');
   instance.startDate = new ReactiveVar();
   instance.endDate = new ReactiveVar();
   instance.searching = new ReactiveVar(false);
 
   instance.autorun(() => {
     instance.subscribe('reservations.list',
-      [
-        instance.searchWord.get(),
-        instance.startDate.get(),
-        instance.endDate.get(),
-      ], () => {
+      instance.searchWord.get(),
+      instance.startDate.get(),
+      instance.endDate.get(),
+      () => {
         setTimeout(() => {
           instance.searching.set(false);
         }, 300);
@@ -51,22 +50,29 @@ Template.Reservations.helpers({
 
 Template.Reservations.events({
   'click #recherche'(event, instance) {
-    const startDate = $('#startDate').val().trim();
-    const endDate = $('#endDate').val().trim();
+    let startDate = $('#startDate').val().trim();
+    let endDate = $('#endDate').val().trim();
     const searchWord = $('#searchWord').val().trim();
 
-    if (searchWord !== '') {
+    if (startDate && startDate !== '') {
+      startDate = moment(startDate, CONST.DEFAULT_DATETIME_FORMAT).toDate();
+    } else {
+      startDate = null;
+    }
+
+    if (endDate && endDate !== '') {
+      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).toDate();
+    } else {
+      endDate = null;
+    }
+
+    if (instance.searchWord.get() !== searchWord ||
+        instance.startDate.get() !== startDate ||
+        instance.endDate.get() !== endDate) {
       instance.searchWord.set(searchWord);
-      instance.searching.set(true);
-    }
+      instance.startDate.set(startDate);
+      instance.endDate.set(endDate);
 
-    if (startDate !== '') {
-      instance.startDate.set(moment(startDate, CONST.DEFAULT_DATETIME_FORMAT).toDate());
-      instance.searching.set(true);
-    }
-
-    if (endDate !== '') {
-      instance.endDate.set(moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).toDate());
       instance.searching.set(true);
     }
   },
