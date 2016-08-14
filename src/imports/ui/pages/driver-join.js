@@ -37,22 +37,20 @@ Template.DriverJoin.events({
     event.preventDefault();
 
     const data = {
-      username: event.target.email.value,
       email: event.target.email.value,
       password: event.target.password.value,
       profile: {
         lastName: event.target.lastname.value,
         firstName: event.target.firstname.value,
         phone: event.target.phone.value,
-        // email: event.target.email.value,
         birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
         street: event.target.street.value,
         city: event.target.city.value,
         zipcode: event.target.zipcode.value,
         creditCard: {
           num: event.target.num.value,
-          validThruM: event.target.validThruM.value,
-          validThruY: event.target.validThruY.value,
+          validThruM: Number(event.target.validThruM.value),
+          validThruY: Number(event.target.validThruY.value),
           cvv: event.target.cvv.value,
           name: event.target.name.value,
         },
@@ -61,13 +59,14 @@ Template.DriverJoin.events({
 
     Meteor.call('createDriver', data, (error) => {
       if (error) {
-        const context = Meteor.users.simpleSchema().namedContext('createDriver');
+        Session.set(SESSION.ERROR, error);
+       /* const context = Meteor.users.simpleSchema().namedContext('createDriver');
         const errors = context.invalidKeys().map(function (keys) {
           return {
             message: context.keyErrorMessage(keys.name),
           };
         });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+        Session.set(SESSION.VALIDATION_ERRORS, errors); */
       } else {
         FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
       }

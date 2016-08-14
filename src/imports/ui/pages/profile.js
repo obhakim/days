@@ -15,7 +15,7 @@ import '../lib/helpers.js';
 import '../components/validation-errors.js';
 
 Template.Profile.helpers({
-  validThruM: function() {
+  validThruM: function () {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
@@ -24,7 +24,7 @@ Template.Profile.helpers({
     }
     return monthsList;
   },
-  validThruY: function() {
+  validThruY: function () {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
@@ -34,13 +34,13 @@ Template.Profile.helpers({
     }
     return yearsList;
   },
-  profile: function() {
+  profile: function () {
     return Meteor.user().profile;
   },
 });
 
 Template.Profile.events({
-  'submit #form': function(event) {
+  'submit #form': function (event) {
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -51,7 +51,6 @@ Template.Profile.events({
       street: event.target.street.value,
       city: event.target.city.value,
       zipcode: event.target.zipcode.value,
-      // email: event.target.email.value,
       birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
       creditCard: {
         num: event.target.num.value,
@@ -76,18 +75,19 @@ Template.Profile.events({
     //   }
     // });
 
-    Meteor.call('updateUserProfile', data, function(error, result) {
+    Meteor.call('updateUserProfile', data, function (error) {
       if (error) {
+        Session.set(SESSION.ERROR, error);
         // maybe use error.details instead of not working namedContext
         // error.details "[{"name":"profile.creditCard.validThruM","type":"required","value":null},{"name":"profile.creditCard.validThruY","type":"required","value":null},{"name":"profile.creditCard.cvv","type":"required","value":null},{"name":"profile.street","type":"required","value":null},{"name":"profile.city","type":"required","value":null},{"name":"profile.zipcode","type":"required","value":null}]"
 
-        const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
-        const errors = context.invalidKeys().map(function(keys) {
-          return {
-            message: context.keyErrorMessage(keys.name),
-          };
-        });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+      /* const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
+      const errors = context.invalidKeys().map(function (keys) {
+        return {
+          message: context.keyErrorMessage(keys.name),
+        };
+      });
+      Session.set(SESSION.VALIDATION_ERRORS, errors); */
       } else {
         FlowRouter.go('/');
       }
@@ -97,7 +97,7 @@ Template.Profile.events({
   },
 });
 
-Template.Profile.onRendered(function() {
+Template.Profile.onRendered(function () {
   this.$('.datetimepicker').datetimepicker({
     // format: CONST.DEFAULT_DATETIME_FORMAT,
     format: CONST.DEFAULT_DATE_FORMAT,
