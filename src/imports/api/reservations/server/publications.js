@@ -39,8 +39,8 @@ Meteor.publish('reservations.list', function publishReservationsList(search, sta
     [
       { 'contact.firstname': regex },
       { 'contact.lastname': regex },
-      { start: regex },
-      { end: regex },
+      { 'ride.start': regex },
+      { 'ride.end': regex },
     ];
   }
 

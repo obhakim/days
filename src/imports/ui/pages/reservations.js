@@ -61,7 +61,7 @@ Template.Reservations.events({
     }
 
     if (endDate && endDate !== '') {
-      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).toDate();
+      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).add('days',1).toDate();
     } else {
       endDate = null;
     }
