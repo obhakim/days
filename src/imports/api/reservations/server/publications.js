@@ -28,7 +28,8 @@ Meteor.publish('reservations.list', function publishReservationsList(search, sta
   //   'ride.startAt': { $gt: startDate, $lt: endDate }
   // }
 
-  console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
+  // Debug
+  // console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
 
   // Apply filters
   if (search && search !== '') {
