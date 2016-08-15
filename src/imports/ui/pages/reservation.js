@@ -24,7 +24,7 @@ Template.Reservation.onCreated(function () {
 
   self.autorun(function () {
     self.subscribe('vehicletypes');
-    self.subscribe('reservations');
+    self.subscribe('reservations.list');
     Session.set(SESSION.VALIDATION_ERRORS, null);
     Session.set(SESSION.GEO_POSITION, Geolocation.latLng());
   // self.myPosition = Geolocation.latLng()
