@@ -3,8 +3,8 @@ import { UploadServer } from 'meteor/tomi:upload-server';
 export const setupUploadServer = () => {
   // https://github.com/tomitrescak/meteor-uploads
   UploadServer.init({
-    tmpDir: process.env.PWD + '/.uploads/tmp',
-    uploadDir: process.env.PWD + '/.uploads/',
+    tmpDir: process.cwd() + '/.uploads/tmp',
+    uploadDir: process.cwd() + '/.uploads/',
     checkCreateDirectories: true, // create the directories for you
     // getDirectory: function (fileInfo, formData) {
     //   // create a sub-directory in the uploadDir based on the content type (e.g. 'images')

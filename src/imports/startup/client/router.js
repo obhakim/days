@@ -15,6 +15,7 @@ import '../../ui/pages/page-not-found.js';
 import '../../ui/pages/profile.js';
 import '../../ui/pages/reservation.js';
 import '../../ui/pages/reservations.js';
+import '../../ui/pages/tdev.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
@@ -28,20 +29,12 @@ const securedRoutes = FlowRouter.group({
   prefix: '/s',
   name: 'secured',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
-
-// triggersEnter: [function (context, redirect) {
-//     //if(!Roles.userIsInRole(Meteor.user(), ['driver'])) {
-//     if(!(Meteor.loggingIn() || Meteor.user())) {
-//         FlowRouter.go(FlowRouter.path('/notAuthorized'))
-//     }
-// }]
 });
 
 const driverRoutes = securedRoutes.group({
   prefix: '/driver',
   name: 'driver',
   triggersEnter: [(context, redirect) => {
-    // console.log('trigger isDriver=' + Helpers.isDriver());
     if (!Helpers.isDriver()) {
       redirect('/notAuthorized');
     }
@@ -111,6 +104,17 @@ publicRoutes.route('/notAuthorized', {
     });
   },
 });
+
+publicRoutes.route('/tdev', {
+  name: 'tdev',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'TDev',
+    });
+  },
+});
+
+
 
 publicRoutes.route('/driver/join', {
   name: 'driverJoin',

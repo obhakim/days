@@ -12,6 +12,7 @@
     "faker": "^3.0.1"
   },
   "devDependencies": {
+    "babel-plugin-transform-strict-mode": "^6.11.3",
     "eslint": "^2.3.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-meteor": "^3.0.1",

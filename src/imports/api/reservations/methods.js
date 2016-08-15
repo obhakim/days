@@ -48,7 +48,13 @@ Meteor.methods({
     reservation.ownerName = Helpers.getFullName(Meteor.user().profile.firstName, Meteor.user().profile.lastName);
     reservation.createdAt = new Date;
     // console.out(getPrice);
-    reservation.price = getPrice(reservation.vehicleTypeId, reservation.ride.startAt, reservation.ride.distance);
+    try { // TODO : REMOVE horrible temporary hack to handle not selected vehicleType
+      reservation.price = getPrice(reservation.vehicleTypeId, reservation.ride.startAt, reservation.ride.distance);
+    }
+    catch (error) {
+      // throw error;
+      console.log(error);
+    }
 
     const id = Reservations.insert(reservation, {
       validationContext: 'createReservation',
@@ -115,7 +121,8 @@ Meteor.methods({
   confirmReservation: function (reservationId, userId) {
     // Logged user
     if (userId !== Meteor.userId()) {
-      throw new Meteor.Error('not-authorized', "Vous n'etes pas authorizes d'effectuer cette action");
+      throw new Meteor.Error('not-authorized',
+        "Vous n'etes pas authorizes d'effectuer cette action");
     }
     // Driver or Admin only
     // Get reservation

@@ -11,7 +11,7 @@ import { CONST } from '../../common/constants.js';
 
 // https://themeteorchef.com/snippets/simple-search/
 
-Template.Reservations.onCreated(function reservationsPageOnCreated() {
+Template.Reservations.onCreated(() => {
   const instance = Template.instance();
 
   instance.searchWord = new ReactiveVar('');
@@ -61,14 +61,14 @@ Template.Reservations.events({
     }
 
     if (endDate && endDate !== '') {
-      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).add('days',1).toDate();
+      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).add('days', 1).toDate();
     } else {
       endDate = null;
     }
 
     if (instance.searchWord.get() !== searchWord ||
-        instance.startDate.get() !== startDate ||
-        instance.endDate.get() !== endDate) {
+      instance.startDate.get() !== startDate ||
+      instance.endDate.get() !== endDate) {
       instance.searchWord.set(searchWord);
       instance.startDate.set(startDate);
       instance.endDate.set(endDate);
