@@ -19,7 +19,7 @@ Template.Profile.helpers({
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
-        value: i.toString(),
+        value: i,
       });
     }
     return monthsList;
@@ -29,7 +29,7 @@ Template.Profile.helpers({
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
       yearsList.push({
-        value: (thisYear + i).toString(),
+        value: thisYear + i,
       });
     }
     return yearsList;
@@ -54,8 +54,8 @@ Template.Profile.events({
       birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
       creditCard: {
         num: event.target.num.value,
-        validThruM: event.target.validThruM.value,
-        validThruY: event.target.validThruY.value,
+        validThruM: Number(event.target.validThruM.value),
+        validThruY: Number(event.target.validThruY.value),
         cvv: event.target.cvv.value,
         name: event.target.name.value,
       },
