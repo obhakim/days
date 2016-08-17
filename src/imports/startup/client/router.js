@@ -44,73 +44,89 @@ const driverRoutes = securedRoutes.group({
 
 publicRoutes.route('/', {
   name: 'home',
+  title: 'Bienvenue | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Home',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/services', {
   name: 'services',
+  title: 'Notre service | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Services',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/drivers', {
   name: 'drivers',
+  title: 'Nos chauffeurs | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Drivers',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/vehicles', {
   name: 'vehicles',
+  title: 'Nos véhicules | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Vehicles',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/values', {
   name: 'values',
+  title: 'Nos valeurs | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Values',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/reservation', {
   name: 'reservation',
+  title: 'Réservation | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Reservation',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/notAuthorized', {
   name: 'notAuthorized',
+  title: 'Non autorisé | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'NotAuthorized',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 publicRoutes.route('/tdev', {
   name: 'tdev',
+  title: 'DEV Test | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'TDev',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
@@ -118,57 +134,82 @@ publicRoutes.route('/tdev', {
 
 publicRoutes.route('/driver/join', {
   name: 'driverJoin',
+  title: 'Devenir chauffeur | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'DriverJoin',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 securedRoutes.route('/reservations', {
   name: 'reservations',
+  title: 'Réservations | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Reservations',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 securedRoutes.route('/profile', {
   name: 'profile',
+  title: 'Profil | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Profile',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 driverRoutes.route('/company', {
   name: 'driverCompany',
+  title: 'Ma société | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'DriverCompany',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 driverRoutes.route('/vehicles', {
   name: 'driverVehicles',
+  title: 'Me véhicules | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'DriverVehicles',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
 FlowRouter.notFound = {
-  action: function () {
+  title: 'Page non trouvée | Days',
+  action: () => {
     BlazeLayout.render('Layout', {
       content: 'PageNotFound',
     });
+    document.title = FlowRouter.current().route.options.title;
   },
 };
 
+AccountsTemplates.configure({
+  texts: {
+    title: {
+      changePwd: 'Changer le mot de passe',
+      enrollAccount: 'S\'inscrire',
+      forgotPwd: 'Mot de passe oublié',
+      resetPwd: 'Réinitialiser le mot de passe',
+      signIn: 'Se connecter',
+      signUp: 'S\'inscrire',
+      verifyEmail: 'Vérifier email',
+    },
+  },
+});
 // Routes
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('forgotPwd');
