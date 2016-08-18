@@ -56,7 +56,7 @@ Meteor.publish('reservations.list', function publishReservationsList(search, sta
     query.ownerId = this.userId;
   }
 
-  console.log(query);
+  // console.log(query);
   return Reservations.find(query, projection);
 });
 

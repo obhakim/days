@@ -1,36 +1,55 @@
 import './reservation.html';
+import '../components/error-message.js';
+import '../components/validation-errors.js';
+
 import { $ } from 'meteor/jquery';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { CONST, SESSION } from '../../common/constants.js';
-import { Geolocation } from 'meteor/mdg:geolocation';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+// import { Geolocation } from 'meteor/mdg:geolocation';
 import { Reservations } from '../../api/reservations/methods.js';
 import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { moment } from 'meteor/momentjs:moment';
 
-import '../components/error-message.js';
-import '../components/validation-errors.js';
+let address = '';
+let currentPosition = {};
 
-// Meteor.subscribe("vehicletypes")
-// Meteor.subscribe("reservations")
-// const instance
-const currentPositionText = 'Position actuelle';
+function getCurrentPosition(selector) {
+  navigator.geolocation.getCurrentPosition((position) => {
+    currentPosition = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    };
+    const geocoder = new google.maps.Geocoder();
+    const latLng = new google.maps.LatLng(currentPosition);
+    address = latLng.toString();
 
-Template.Reservation.onCreated(function () {
-  // instance = Template.instance()
-  // instance.errors = new ReactiveDict()
-  const self = this;
-
-  self.autorun(function () {
-    self.subscribe('vehicletypes');
-    self.subscribe('reservations.list');
-    Session.set(SESSION.VALIDATION_ERRORS, null);
-    Session.set(SESSION.GEO_POSITION, Geolocation.latLng());
-    // self.myPosition = Geolocation.latLng()
+    geocoder.geocode({ latLng }, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK) {
+        address = results[0].formatted_address;
+        selector.val(address);
+        // console.log(currentPosition);
+      } else {
+        // console.log(`Geocoding failed: ${status}`);
+        // TODO : encode latLng somehow to identify it in function calculateRoute()
+        selector.val(latLng);
+      }
+    });
+  }, (error) => {
+    // console.log(`Geocoding failed: ${error}`);
+    // TODO : fix. Not displaying error correctly
+    Session.set(SESSION.ERROR, {
+      error: 'Erreur',
+      reason: 'On n\'a pas pu vous localizer',
+    });
+  }, {
+    timeout: 30000,
+    enableHighAccuracy: true,
+    maximumAge: 600000,
   });
-});
-
+}
 
 function calculateAndDisplayRoute(
   directionsService, directionsDisplay, origin, destination, departureTime) {
@@ -39,11 +58,11 @@ function calculateAndDisplayRoute(
   // console.log('{calculateAndDisplayRoute} departureTime=' + departureTime)
   if (origin && destination) {
     directionsService.route({
-      origin: origin,
-      destination: destination,
+      origin,
+      destination,
       travelMode: google.maps.TravelMode.DRIVING,
       drivingOptions: {
-        departureTime: departureTime,
+        departureTime,
         // trafficModel: google.maps.TrafficModel.PESSIMISTIC
       },
       // unitSystem: UnitSystem.METRIC
@@ -80,17 +99,27 @@ function getRoute(directionsResult) {
   };
 }
 
+
+Template.Reservation.onCreated(function ReservationCreated() {
+  // instance = Template.instance()
+  // instance.errors = new ReactiveDict()
+  const self = this;
+
+  self.autorun(() => {
+    self.subscribe('vehicletypes');
+    self.subscribe('reservations.list');
+    Session.set(SESSION.VALIDATION_ERRORS, null);
+    // Session.set(SESSION.GEO_POSITION, Geolocation.latLng());
+    // self.myPosition = Geolocation.latLng()
+  });
+});
+
 Template.Reservation.helpers({
-  currentPositionNotDefined: function () {
-    // return !Template.instance().myPosition
-    return !Session.get(SESSION.GEO_POSITION);
-  },
-  vehicleTypesList: function () {
-    return VehicleTypes.find().fetch();
-  },
-  profile: function () {
-    return (Meteor.user() && Meteor.user().profile) ? Meteor.user().profile : {};
-  },
+  // TODO : fix this as we not save current position to session any more
+  // currentPositionNotDefined: () => !Session.get(SESSION.GEO_POSITION),
+  currentPositionNotDefined: () => !currentPosition,
+  vehicleTypesList: () => VehicleTypes.find().fetch(),
+  profile: () => ((Meteor.user() && Meteor.user().profile) ? Meteor.user().profile : {}),
   // errors: function () {
   //       return Session.get(SESSION.VALIDATION_ERRORS)
   //   }
@@ -102,22 +131,17 @@ Template.Reservation.helpers({
 Template.Reservation.events({
   'click #startMyPosition': (event) => {
     event.preventDefault();
+    getCurrentPosition($('#start'));
     // const instance = Template.instance()
     // if (instance.myPosition)
-    if (Session.get(SESSION.GEO_POSITION)) {
-      // instance.$('#start').val(currentPositionText)
-      $('#start').val(currentPositionText);
-    }
+    // if (Session.get(SESSION.GEO_POSITION))
+    // instance.$('#start').val(currentPositionText)
+    // $('#start').val(currentPositionText);
   },
 
   'click #endMyPosition': (event) => {
     event.preventDefault();
-    // const instance = Template.instance()
-    // if (instance.myPosition)
-    if (Session.get(SESSION.GEO_POSITION)) {
-      // instance.$('#end').val(currentPositionText)
-      $('#end').val(currentPositionText);
-    }
+    getCurrentPosition($('#end'));
   },
 
   'submit #reservationForm': (event) => {
@@ -139,7 +163,7 @@ Template.Reservation.events({
         email: event.target.email.value,
       },
       ride: {
-        start: event.target.start.value,
+        start: event.target.start.value,  // TODO: save latLng object ?
         end: event.target.end.value,
         startAt: moment(event.target.startat.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
         distance: event.target.distance.value,
@@ -175,7 +199,7 @@ Template.Reservation.events({
   },
 });
 
-Template.Reservation.onRendered(function () {
+Template.Reservation.onRendered(function ReservationRendered() {
   // Session.set(SESSION.ISLOADING, true)
 
   // $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
@@ -204,14 +228,14 @@ Template.Reservation.onRendered(function () {
 
   const startInput = /** @type {!HTMLInputElement} */ (document.getElementById('start'));
   const endInput = /** @type {!HTMLInputElement} */ (document.getElementById('end'));
-  const startAt = /** @type {!HTMLInputElement} */ (document.getElementById('startat'));
+  const startAtInput = /** @type {!HTMLInputElement} */ (document.getElementById('startat'));
   const vehicleType = /** @type {!HTMLInputElement} */ (document.getElementById('vehicletype'));
   const distance = /** @type {!HTMLInputElement} */ (document.getElementById('distance'));
   const totalDistance = /** @type {!HTMLElement} */ (document.getElementById('totaldistance'));
   const totalDuration = /** @type {!HTMLElement} */ (document.getElementById('totalduration'));
   const totalPrice = /** @type {!HTMLElement} */ (document.getElementById('price'));
 
-  startAt.value = moment().format(CONST.DEFAULT_DATETIME_FORMAT);
+  startAtInput.value = moment().format(CONST.DEFAULT_DATETIME_FORMAT);
 
   function updateRoute() {
     const selectedRoute = getRoute(directionsDisplay.getDirections());
@@ -224,7 +248,7 @@ Template.Reservation.onRendered(function () {
 
   function updatePrice() {
     // const price = 0.00 //= distance.value * 2.2
-    Meteor.call('getPrice', vehicleType.value, startAt.value, distance.value, (err, res) => {
+    Meteor.call('getPrice', vehicleType.value, startAtInput.value, distance.value, (err, res) => {
       if (res) {
         totalPrice.innerText = '' + res.toFixed(2);
       } else {
@@ -236,14 +260,24 @@ Template.Reservation.onRendered(function () {
   }
 
   function calculateRoute() {
-    const startInput = /** @type {!HTMLInputElement} */ (document.getElementById('start'));
-    const endInput = /** @type {!HTMLInputElement} */ (document.getElementById('end'));
-    if (startInput.value && endInput.value) {
+    const start = /** @type {!HTMLInputElement} */ (document.getElementById('start'));
+    const end = /** @type {!HTMLInputElement} */ (document.getElementById('end'));
+    const startAt = /** @type {!HTMLInputElement} */ (document.getElementById('startat'));
+    if (start.value && end.value) {
       Meteor.setTimeout(() => {
-        const departureTime = moment(document.getElementById('startat').value, CONST.DEFAULT_DATETIME_FORMAT).toDate();
+        const departureTime = moment(startAt.value, CONST.DEFAULT_DATETIME_FORMAT).toDate();
         calculateAndDisplayRoute(directionsService, directionsDisplay,
-          (startInput.value === currentPositionText) ? Session.get(SESSION.GEO_POSITION) : startInput.value,
-          (endInput.value === currentPositionText) ? Session.get(SESSION.GEO_POSITION) : endInput.value,
+          (start.value === address) ? currentPosition : start.value,
+          (end.value === address) ? currentPosition : end.value,
+          // TODO : fix this
+          // (startInput.value === currentPositionText) ? Session.get(SESSION.GEO_POSITION) : startInput.value,
+          // (endInput.value === currentPositionText) ? Session.get(SESSION.GEO_POSITION) : endInput.value,
+          // Detect encoded latLng value and parse them like following :
+          // String[] latlong =  "-34.8799074,174.7565664".split(",");
+          // double latitude = Double.parseDouble(latlong[0]);
+          // double longitude = Double.parseDouble(latlong[1]);
+          // startInput.value,
+          // endInput.value,
           departureTime);
       }, 100);
     }
