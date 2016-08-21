@@ -6,7 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Reservations } from '../reservations.js';
 import { CONST } from '../../../common/constants.js';
 
-Meteor.publish('reservations.list', function publishReservationsList(search, startDate, endDate) {
+Meteor.publish('reservations.list', function publishReservationsList(search, startDate, endDate,limit) {
   // Simple Schema not working should be debugged
   // new SimpleSchema({
   //   search: { type: String, optional: true },
@@ -17,7 +17,7 @@ Meteor.publish('reservations.list', function publishReservationsList(search, sta
   // check( search, Match.OneOf( String, null, undefined ) );
 
   const query = {};
-  const projection = { limit: 100, sort: { createdAt: -1 } };
+  const projection = { limit: limit, sort: { createdAt: -1 } };
 
   // Query example
   // query = {
@@ -28,8 +28,7 @@ Meteor.publish('reservations.list', function publishReservationsList(search, sta
   //   'ride.startAt': { $gt: startDate, $lt: endDate }
   // }
 
-  // Debug
-  // console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
+  //console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
 
   // Apply filters
   if (search && search !== '') {
