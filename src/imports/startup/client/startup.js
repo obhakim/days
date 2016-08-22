@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
-import { Geolocation } from 'meteor/mdg:geolocation';
-import { Session } from 'meteor/session';
-import { SESSION } from '../../common/constants.js';
+// import { Geolocation } from 'meteor/mdg:geolocation';
+// import { Session } from 'meteor/session';
+// import { SESSION } from '../../common/constants.js';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
-import { Uploader } from 'meteor/tomi:upload-jquery';
+// import { Uploader } from 'meteor/tomi:upload-jquery';
 
 FlowRouter.wait();
 
@@ -22,10 +22,12 @@ Meteor.startup(() => {
     // Potentially prompts the user to enable location services. We do this early
     // on in order to have the most accurate location by the time the user shares
     // var pos = Geolocation.currentLocation()
-    const pos = Geolocation.latLng();
-    Session.set(SESSION.GEO_POSITION, pos);
+    // const pos = Geolocation.latLng();
+    // Session.set(SESSION.GEO_POSITION, pos);
+    // Check how to manage geolocation better to make it faster by starting geolocation
+    // on app start here and getting the coordinates later
 
-    Uploader.uploadUrl = Meteor.absoluteUrl('upload'); // Cordova needs absolute URL
+    // Uploader.uploadUrl = Meteor.absoluteUrl('upload'); // Cordova needs absolute URL
   });
 
   // Accounts.ui.config({

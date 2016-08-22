@@ -19,7 +19,7 @@ jquery
 underscore
 less
 momentjs:moment				# Date format helpers for datetimespicker
-mdg:geolocation
+#mdg:geolocation      # Using pure methods for now
 
 # ui
 blaze-html-templates
@@ -27,18 +27,24 @@ session
 reactive-dict
 reactive-var
 aldeed:template-extension
-percolate:momentum
+#percolate:momentum    # Animations
 semantic:ui-css
 sarasate:semantic-ui-datetimepicker
 sacha:spin
-chrismbeckett:toastr
+#chrismbeckett:toastr # Notification popups
+#tomi:upload-server
+#tomi:upload-jquery
+#dburles:google-maps  # google maps reactive wrapper
+#okgrow:analytics     # google analytics wrapper
+#kadira:dochead       # manipulate document head
+#meteorhacks:inject-initial # manipulate generated html
 
 # data
 mongo
 aldeed:simple-schema
 aldeed:collection2
-dburles:collection-helpers
-reywood:publish-composite
+dburles:collection-helpers  # Allows helpers for lookup properties
+reywood:publish-composite   # Allows joins
 mdg:validated-method
 mdg:validation-error
 
@@ -86,5 +92,3 @@ xolvio:cleaner
 #dispatch:mocha-phantomjs
 practicalmeteor:mocha
 dburles:factory
-tomi:upload-server
-tomi:upload-jquery

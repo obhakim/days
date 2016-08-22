@@ -1,10 +1,10 @@
-import { Uploader } from 'meteor/tomi:upload-jquery';
+// import { Uploader } from 'meteor/tomi:upload-jquery';
 
-Uploader.localisation = {
-  browse: 'Selectionner',
-  cancelled: 'Annulé',
-  remove: 'Supprimer',
-  upload: 'Télécharger',
-  done: 'Terminé',
-  cancel: 'Annuler',
-};
+// Uploader.localisation = {
+//   browse: 'Selectionner',
+//   cancelled: 'Annulé',
+//   remove: 'Supprimer',
+//   upload: 'Télécharger',
+//   done: 'Terminé',
+//   cancel: 'Annuler',
+// };

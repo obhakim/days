@@ -1,5 +1,6 @@
 //.jsbeautifyrc
 //https://github.com/victorporof/Sublime-HTMLPrettify
 {
-    
+    "indent_size": 2,
+    "indent_char": " "
 }

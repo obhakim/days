@@ -51,12 +51,11 @@ Template.Profile.events({
       street: event.target.street.value,
       city: event.target.city.value,
       zipcode: event.target.zipcode.value,
-      // email: event.target.email.value,
       birthday: moment(event.target.birthday.value, CONST.DEFAULT_DATETIME_FORMAT).toDate(),
       creditCard: {
         num: event.target.num.value,
-        validThruM: event.target.validThruM.value,
-        validThruY: event.target.validThruY.value,
+        validThruM: Number(event.target.validThruM.value),
+        validThruY: Number(event.target.validThruY.value),
         cvv: event.target.cvv.value,
         name: event.target.name.value,
       },
@@ -76,18 +75,19 @@ Template.Profile.events({
     //   }
     // });
 
-    Meteor.call('updateUserProfile', data, function (error, result) {
+    Meteor.call('updateUserProfile', data, function (error) {
       if (error) {
+        Session.set(SESSION.ERROR, error);
         // maybe use error.details instead of not working namedContext
         // error.details "[{"name":"profile.creditCard.validThruM","type":"required","value":null},{"name":"profile.creditCard.validThruY","type":"required","value":null},{"name":"profile.creditCard.cvv","type":"required","value":null},{"name":"profile.street","type":"required","value":null},{"name":"profile.city","type":"required","value":null},{"name":"profile.zipcode","type":"required","value":null}]"
 
-        const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
-        const errors = context.invalidKeys().map(function (keys) {
-          return {
-            message: context.keyErrorMessage(keys.name),
-          };
-        });
-        Session.set(SESSION.VALIDATION_ERRORS, errors);
+      /* const context = Meteor.users.simpleSchema().namedContext('updateUserProfile');
+      const errors = context.invalidKeys().map(function (keys) {
+        return {
+          message: context.keyErrorMessage(keys.name),
+        };
+      });
+      Session.set(SESSION.VALIDATION_ERRORS, errors); */
       } else {
         FlowRouter.go('/');
       }
@@ -103,9 +103,9 @@ Template.Profile.onRendered(function () {
     format: CONST.DEFAULT_DATE_FORMAT,
     // useCurrent: true,
     locale: CONST.DEFAULT_LOCALE,
-    // stepping: 5,
-    // showTodayButton: true,
-    // inline: true,
-    // sideBySide: true,
+  // stepping: 5,
+  // showTodayButton: true,
+  // inline: true,
+  // sideBySide: true,
   });
 });
