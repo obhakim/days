@@ -19,7 +19,7 @@ import '../../ui/pages/tdev.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
-
+import '../../ui/pages/TermsOfUse.js';
 
 const publicRoutes = FlowRouter.group({
   name: 'public',
@@ -140,6 +140,15 @@ publicRoutes.route('/driver/join', {
       content: 'DriverJoin',
     });
     document.title = FlowRouter.current().route.options.title;
+  },
+});
+
+publicRoutes.route('/TermsOfUse', {
+  name: 'termsOfUse',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'TermsOfUse',
+    });
   },
 });
 

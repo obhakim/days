@@ -7,7 +7,7 @@ import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
 Template.DriverJoin.helpers({
-  validThruM: function () {
+  validThruM() {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
@@ -16,7 +16,7 @@ Template.DriverJoin.helpers({
     }
     return monthsList;
   },
-  validThruY: function () {
+  validThruY() {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
@@ -26,7 +26,7 @@ Template.DriverJoin.helpers({
     }
     return yearsList;
   },
-  profile: function () {
+  profile() {
     return Meteor.user().profile;
   },
 });
@@ -56,22 +56,26 @@ Template.DriverJoin.events({
         },
       },
     };
-
-    Meteor.call('createDriver', data, (error) => {
-      if (error) {
-        Session.set(SESSION.ERROR, error);
-       /* const context = Meteor.users.simpleSchema().namedContext('createDriver');
-        const errors = context.invalidKeys().map(function (keys) {
-          return {
-            message: context.keyErrorMessage(keys.name),
-          };
-        });
-        Session.set(SESSION.VALIDATION_ERRORS, errors); */
-      } else {
-        FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
-      }
-    });
-
+    if ($('#terms').is(':checked')) {
+      Meteor.call('createDriver', data, (error) => {
+        if (error) {
+          Session.set(SESSION.ERROR, error);
+          /* const context = Meteor.users.simpleSchema().namedContext('createDriver');
+           const errors = context.invalidKeys().map(function (keys) {
+             return {
+               message: context.keyErrorMessage(keys.name),
+             };
+           });
+           Session.set(SESSION.VALIDATION_ERRORS, errors); */
+        } else {
+          FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
+        }
+      });
+    } else {
+      const error = { error: 400, reason: "Vous devez accepter les Conditions Générales d'utilisation" };
+      Session.set(SESSION.ERROR, error);
+      console.log(Session.get(SESSION.ERROR));
+    }
     return false;
   },
 });
