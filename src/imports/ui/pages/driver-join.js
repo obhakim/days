@@ -7,7 +7,7 @@ import { CONST, SESSION } from '../../common/constants.js';
 import { moment } from 'meteor/momentjs:moment';
 
 Template.DriverJoin.helpers({
-  validThruM() {
+  validThruM: function () {
     const monthsList = [];
     for (let i = 1; i <= 12; i++) {
       monthsList.push({
@@ -16,7 +16,7 @@ Template.DriverJoin.helpers({
     }
     return monthsList;
   },
-  validThruY() {
+  validThruY: function () {
     const thisYear = new Date().getFullYear();
     const yearsList = [];
     for (let i = 0; i < 5; i++) {
@@ -26,7 +26,7 @@ Template.DriverJoin.helpers({
     }
     return yearsList;
   },
-  profile() {
+  profile: function () {
     return Meteor.user().profile;
   },
 });
@@ -56,6 +56,7 @@ Template.DriverJoin.events({
         },
       },
     };
+    
     if ($('#terms').is(':checked')) {
       Meteor.call('createDriver', data, (error) => {
         if (error) {
