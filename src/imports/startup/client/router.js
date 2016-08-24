@@ -21,6 +21,7 @@ import '../../ui/pages/vehicles.js';
 import '../../ui/components/atNavButtonCustom.js';
 
 import '../../ui/pages/tdev.js';
+import '../../ui/pages/faq.js';
 
 
 const publicRoutes = FlowRouter.group({
@@ -51,6 +52,18 @@ publicRoutes.route('/', {
     BlazeLayout.render('Layout', {
       banner: 'HomeBanner',
       content: 'Home',
+    });
+    document.title = FlowRouter.current().route.options.title;
+  },
+});
+
+publicRoutes.route('/FAQ', {
+  name: 'FAQ',
+  title: 'FAQ | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      banner: 'FAQBanner',
+      content: 'FAQ',
     });
     document.title = FlowRouter.current().route.options.title;
   },
