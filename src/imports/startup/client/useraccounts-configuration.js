@@ -1,7 +1,7 @@
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 import { T9n } from 'meteor/softwarerero:accounts-t9n';
-import '../../ui/components/termsCheckbox.html';
-//import { TAPi18n } from 'meteor/tap:i18n';
+import '../../ui/components/termsOfUseTemplate.html';
+// import { TAPi18n } from 'meteor/tap:i18n';
 
 // AccountsTemplates.configure({
 //   showForgotPasswordLink: true,
@@ -108,12 +108,12 @@ AccountsTemplates.addFields([
     _id: 'terms',
     type: 'checkbox',
     displayName: 'Conditions Générales',
-    template: 'termsCheckbox',
+    template: 'TermsOfUseTemplate',
     errStr: "Vous devez accepter les Conditions Générales d'utilisation",
     func: function(value) {
       return !value;
     },
-    negativeValidation: false
+    negativeValidation: false,
   },
 // {
 //   _id: 'role',
