@@ -19,7 +19,7 @@ import '../../ui/pages/tdev.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
-import '../../ui/pages/TermsOfUse.js';
+import '../../ui/pages/termsOfUse.js';
 
 
 const publicRoutes = FlowRouter.group({

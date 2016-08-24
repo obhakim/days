@@ -91,9 +91,11 @@
               <label>Nom</label>
               <input id="name" type="text" placeholder="Nom" />
             </div>
-            <div class="ui checkbox">
-              <input id="terms" type="checkbox">
-              <label for="terms">J'ai lu et j'accepte les <a href="{{pathFor route='termsOfUse'}}">Conditions Générales</a></label>
+            <div class="at-input inline field">
+              <div class="ui checkbox">
+                <input id="terms" type="checkbox">
+                <label for="terms">J'ai lu et j'accepte les <a href="{{pathFor route='termsOfUse'}}">Conditions Générales</a></label>
+              </div>
             </div>
             <input type="submit" value="Enregistrer" class="ui fluid large primary button">
           </form>

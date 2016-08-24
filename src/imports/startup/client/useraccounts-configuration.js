@@ -1,5 +1,6 @@
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 import { T9n } from 'meteor/softwarerero:accounts-t9n';
+import '../../ui/components/termsCheckbox.html';
 //import { TAPi18n } from 'meteor/tap:i18n';
 
 // AccountsTemplates.configure({
@@ -102,6 +103,17 @@ AccountsTemplates.addFields([
     // re: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g,
     re: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
     errStr: 'Téléphone non-valide',
+  },
+  {
+    _id: 'terms',
+    type: 'checkbox',
+    displayName: 'Conditions Générales',
+    template: 'termsCheckbox',
+    errStr: "Vous devez accepter les Conditions Générales d'utilisation",
+    func: function(value) {
+      return !value;
+    },
+    negativeValidation: false
   },
 // {
 //   _id: 'role',

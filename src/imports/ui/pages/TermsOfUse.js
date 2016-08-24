@@ -1,1 +1,1 @@
-import './TermsOfUse.html'; 
+import './termsOfUse.html';
