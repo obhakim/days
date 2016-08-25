@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { VehicleTypes } from '../../api/vehicle-types/vehicle-types.js';
 import { Models } from '../../api/models/models.js';
+import { Users } from '../../api/users/users.js';
+import { Roles } from 'meteor/alanning:roles';
+import { CONST } from '../../common/constants.js';
+import { Accounts } from 'meteor/accounts-base';
 // import { Lists } from '../../api/lists/lists.js';
 // import { Todos } from '../../api/todos/todos.js';
 
@@ -91,6 +95,15 @@ export const seedData = () => {
       model: 'Serie 7',
       vehicleType: 'Premium',
     });
+  }
+
+  if (Meteor.isServer && !Users.findOne({
+    roles: 'admin' })) {
+    const userId = Accounts.createUser({
+      email: 'admin@daysvtc.fr',
+      password: 'admin@daysvtc.fr',
+    });
+    Roles.addUsersToRoles(userId, CONST.USER_ROLES.ADMIN);
   }
 
   // if (Lists.find().count() === 0) {

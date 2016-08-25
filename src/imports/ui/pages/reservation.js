@@ -114,6 +114,55 @@ Template.Reservation.onCreated(function ReservationCreated() {
   });
 });
 
+
+function calculateAndDisplayRoute(
+  directionsService, directionsDisplay, origin, destination, departureTime) {
+  // console.log('{calculateAndDisplayRoute} origin=' + origin)
+  // console.log('{calculateAndDisplayRoute} destination=' + destination)
+  // console.log('{calculateAndDisplayRoute} departureTime=' + departureTime)
+  if (origin && destination) {
+    directionsService.route({
+      origin: origin,
+      destination: destination,
+      travelMode: google.maps.TravelMode.DRIVING,
+      drivingOptions: {
+        departureTime: departureTime,
+        // trafficModel: google.maps.TrafficModel.PESSIMISTIC
+      },
+      // unitSystem: UnitSystem.METRIC
+    }, (response, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        Session.set(SESSION.ERROR, null);
+        directionsDisplay.setDirections(response);
+      } else {
+        // window.alert('Directions request failed due to ' + status)
+        Session.set(SESSION.ERROR, {
+          error: 'Erreur',
+          reason: 'Aucun itineraire n\'as pas été trouvé',
+        });
+      }
+    });
+  }
+}
+
+function getRoute(directionsResult) {
+  let distance = 0;
+  let duration = 0;
+  const myroute = directionsResult.routes[0];
+
+  for (let i = 0; i < myroute.legs.length; i++) {
+    distance += myroute.legs[i].distance.value;
+    duration += (myroute.legs[i].duration_in_traffic || myroute.legs[i].duration).value;
+  }
+  distance = distance / 1000;
+  duration = duration / 60; // in minutes
+
+  return {
+    distance,
+    duration,
+  };
+}
+
 Template.Reservation.helpers({
   // TODO : fix this as we not save current position to session any more
   // currentPositionNotDefined: () => !Session.get(SESSION.GEO_POSITION),

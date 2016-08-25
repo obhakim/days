@@ -1,92 +1,91 @@
 <template name="DriverCompany">
-    <div class="ui middle aligned centered grid">
-        <div class="at-column column">
-            <h1 class="ui center aligned header">Société</h1>
-            <div class="ui stackable segment">
-                <div class="six wide column">
-                    <form id="form" class="ui form" novalidate>
-                        {{> errormessage }}
-                        <h5 class="ui dividing header">Permis de conduire</h5>
-                        <div class="field">
-                            <input id="pc" type="text" name="pc" placeholder="Permis de conduire" maxlength="100" value="" required />
-                        </div>
-                        <div class="field">
-                            <div class="ui fluid action input">
-                                <input id="textPc" type="text" placeholder="Selectionner un fichier..." readonly>
-                                <input id="filePc" name="filepc" type="file" required />
-                                <div id="buttonPc" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="ui dividing header">VTC ou licence DRE</h5>
-                        <div class="field">
-                            <div class="ui fluid action input">
-                                <input id="textVld" type="text" readonly>
-                                <input id="fileVld" name="filevld" type="file" required />
-                                <div id="buttonVld" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="ui dividing header">K bis et SIRET</h5>
-                        <div class="field">
-                            <input id="kbs" type="text" value="" placeholder="K bis et SIRET" required />
-                        </div>
-                        <div class="field">
-                            <div class="ui fluid action input">
-                                <input id="textKbs" type="text" readonly>
-                                <input id="fileKbs" name="filekbs" type="file" required />
-                                <div id="buttonKbs" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="ui dividing header">Extrait du casier judiciaire</h5>
-                        <div class="field">
-                            <div class="ui fluid action input">
-                                <input id="textEcj" type="text" readonly>
-                                <input id="fileEcj" name="fileecj" type="file" required />
-                                <div id="buttonEcj" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="ui dividing header">Attestation de RC Pro</h5>
-                        <div class="field">
-                            <div class="ui fluid action input">
-                                <input id="textArp" type="text" readonly>
-                                <input id="fileArp" name="filearp" type="file" required />
-                                <div id="buttonArp" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="ui dividing header">Carte verte</h5>
-                        <div class="field">
-                            <div class="ui fluid action input">
-                                <input id="textCv" type="text" readonly>
-                                <input id="fileCv" name="filecv" type="file" required />
-                                <div id="buttonCv" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                            <h6>Responsabilité Civile Circulation pour un usage du véhicule pour le transport de personnes à
-                                titre onéreux.</h6>
-                        </div>
-                        <h5 class="ui dividing header">Attestation d'aptitude médicale</h5>
-                        <div class="field">
-                            <div class="ui fluid action input"><input id="textAam" type="text" readonly>
-                                <input id="fileAam" name="fileaam" type="file" required />
-                                <div id="buttonAam" class="ui icon fbutton button">
-                                    <i class="cloud upload icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="submit" value="Enregistrer" class="ui fluid large primary button">
-                    </form>
-                </div>
+  <div class="ui middle aligned centered grid">
+    <div class="at-column column">
+      <h1 class="ui center aligned header">Société</h1>
+      <div class="ui stackable segment">
+        <div class="six wide column">
+          <form id="form" class="ui form" novalidate>
+            {{> errormessage }}
+            <h5 class="ui dividing header">Permis de conduire</h5>
+            <div class="field">
+              <input id="pc" type="text" name="pc" placeholder="Permis de conduire" maxlength="100" value="" required />
             </div>
+            <div class="field">
+              <div class="ui fluid action input">
+                <input id="textPc" type="text" placeholder="Selectionner un fichier..." readonly>
+                <input id="filePc" name="filepc" type="file" required />
+                <div id="buttonPc" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+            </div>
+            <h5 class="ui dividing header">VTC ou licence DRE</h5>
+            <div class="field">
+              <div class="ui fluid action input">
+                <input id="textVld" type="text" readonly>
+                <input id="fileVld" name="filevld" type="file" required />
+                <div id="buttonVld" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+            </div>
+            <h5 class="ui dividing header">K bis et SIRET</h5>
+            <div class="field">
+              <input id="kbs" type="text" value="" placeholder="K bis et SIRET" required />
+            </div>
+            <div class="field">
+              <div class="ui fluid action input">
+                <input id="textKbs" type="text" readonly>
+                <input id="fileKbs" name="filekbs" type="file" required />
+                <div id="buttonKbs" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+            </div>
+            <h5 class="ui dividing header">Extrait du casier judiciaire</h5>
+            <div class="field">
+              <div class="ui fluid action input">
+                <input id="textEcj" type="text" readonly>
+                <input id="fileEcj" name="fileecj" type="file" required />
+                <div id="buttonEcj" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+            </div>
+            <h5 class="ui dividing header">Attestation de RC Pro</h5>
+            <div class="field">
+              <div class="ui fluid action input">
+                <input id="textArp" type="text" readonly>
+                <input id="fileArp" name="filearp" type="file" required />
+                <div id="buttonArp" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+            </div>
+            <h5 class="ui dividing header">Carte verte</h5>
+            <div class="field">
+              <div class="ui fluid action input">
+                <input id="textCv" type="text" readonly>
+                <input id="fileCv" name="filecv" type="file" required />
+                <div id="buttonCv" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+              <h6>Responsabilité Civile Circulation pour un usage du véhicule pour le transport de personnes à titre onéreux.</h6>
+            </div>
+            <h5 class="ui dividing header">Attestation d'aptitude médicale</h5>
+            <div class="field">
+              <div class="ui fluid action input"><input id="textAam" type="text" readonly>
+                <input id="fileAam" name="fileaam" type="file" required />
+                <div id="buttonAam" class="ui icon fbutton button">
+                  <i class="cloud upload icon"></i>
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Enregistrer" class="ui fluid large primary button">
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </template>

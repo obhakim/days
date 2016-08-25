@@ -35,7 +35,7 @@
       </thead>
       <tbody>
         {{#if searching}}
-        <div class="ui text loader">Chargement...</div> 
+        <div class="ui text loader">Chargement...</div>
         {{else}} {{#each reservations}} {{> ReservationItem}} {{else}}
         <p class="alert alert-warning">La liste est vide.</p>
         {{/each}} {{/if}}

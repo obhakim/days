@@ -15,11 +15,14 @@ import '../../ui/pages/page-not-found.js';
 import '../../ui/pages/profile.js';
 import '../../ui/pages/reservation.js';
 import '../../ui/pages/reservations.js';
-import '../../ui/pages/tdev.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
 import '../../ui/pages/termsOfUse.js';
+import '../../ui/components/atNavButtonCustom.js';
+
+import '../../ui/pages/tdev.js';
+import '../../ui/pages/faq.js';
 
 
 const publicRoutes = FlowRouter.group({
@@ -48,7 +51,20 @@ publicRoutes.route('/', {
   title: 'Bienvenue | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
+      banner: 'HomeBanner',
       content: 'Home',
+    });
+    document.title = FlowRouter.current().route.options.title;
+  },
+});
+
+publicRoutes.route('/FAQ', {
+  name: 'FAQ',
+  title: 'FAQ | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      banner: 'FAQBanner',
+      content: 'FAQ',
     });
     document.title = FlowRouter.current().route.options.title;
   },
@@ -59,6 +75,7 @@ publicRoutes.route('/services', {
   title: 'Notre service | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
+      banner: 'ServicesBanner',
       content: 'Services',
     });
     document.title = FlowRouter.current().route.options.title;
@@ -70,6 +87,7 @@ publicRoutes.route('/drivers', {
   title: 'Nos chauffeurs | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
+      banner: 'DriversBanner',
       content: 'Drivers',
     });
     document.title = FlowRouter.current().route.options.title;
@@ -92,6 +110,7 @@ publicRoutes.route('/values', {
   title: 'Nos valeurs | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
+      banner: 'ValuesBanner',
       content: 'Values',
     });
     document.title = FlowRouter.current().route.options.title;

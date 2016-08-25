@@ -3,8 +3,7 @@
   <div class="ui stackable grid">
     <div id="order-container" class="six wide column">
       <form id="reservationForm" class="ui form" novalidate>
-        {{> errormessage }}
-        {{> validationerrors }} {{!--#each error in errors "other"} }
+        {{> errormessage }} {{> validationerrors }} {{!--#each error in errors "other"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
         <div class="required field">
@@ -73,7 +72,7 @@
         {{!--#each error in errors "vehicletype"} }
         <div class="form-error">{ {error} }</div>
         { {/each--}}
-        
+
         <div class="field">
           <textarea id="comment" rows="3" placeholder="Commentaire">{{comment}}</textarea>
         </div>
@@ -81,7 +80,7 @@
         <div class="form-error">{ {error} }</div>
         { {/each--}}
         <input type="hidden" id="distance" value="0" />
-        
+
         <div class="field">
           <label>Votre voyage <span id="totaldistance">0</span> km, environ <span id="totalduration">0</span> minutes, <span id="price">0.00</span> €</label>
         </div>
