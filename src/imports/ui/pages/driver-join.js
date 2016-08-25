@@ -32,7 +32,7 @@ Template.DriverJoin.helpers({
 });
 
 Template.DriverJoin.events({
-  'submit #form': function driverJoinSubmitForm(event) {
+  'submit #form': function driverJoinSubmitForm(event, instance) {
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -57,16 +57,26 @@ Template.DriverJoin.events({
       },
     };
 
+    if (!instance.find('#terms').checked) {
+      const error = {
+        error: 400,
+        reason: "Vous devez accepter les Conditions Générales d'utilisation",
+      };
+      Session.set(SESSION.ERROR, error);
+      // console.log(Session.get(SESSION.ERROR));
+      return false;
+    }
+
     Meteor.call('createDriver', data, (error) => {
       if (error) {
         Session.set(SESSION.ERROR, error);
-       /* const context = Meteor.users.simpleSchema().namedContext('createDriver');
-        const errors = context.invalidKeys().map(function (keys) {
-          return {
-            message: context.keyErrorMessage(keys.name),
-          };
-        });
-        Session.set(SESSION.VALIDATION_ERRORS, errors); */
+        /* const context = Meteor.users.simpleSchema().namedContext('createDriver');
+         const errors = context.invalidKeys().map(function (keys) {
+           return {
+             message: context.keyErrorMessage(keys.name),
+           };
+         });
+         Session.set(SESSION.VALIDATION_ERRORS, errors); */
       } else {
         FlowRouter.go('/s/driver/company'); // TODO : replace with redirection by root name
       }

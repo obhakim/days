@@ -18,6 +18,7 @@ import '../../ui/pages/reservations.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
+import '../../ui/pages/termsOfUse.js';
 import '../../ui/components/atNavButtonCustom.js';
 
 import '../../ui/pages/tdev.js';
@@ -159,6 +160,15 @@ publicRoutes.route('/driver/join', {
       content: 'DriverJoin',
     });
     document.title = FlowRouter.current().route.options.title;
+  },
+});
+
+publicRoutes.route('/TermsOfUse', {
+  name: 'termsOfUse',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'TermsOfUse',
+    });
   },
 });
 
