@@ -240,7 +240,7 @@ Template.Reservation.events({
           }]);
         }
       } else {
-        FlowRouter.go('/s/reservations');
+        FlowRouter.go('/s/confirmation');
       }
     });
 

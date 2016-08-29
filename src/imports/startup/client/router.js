@@ -14,6 +14,7 @@ import '../../ui/pages/not-authorized.js';
 import '../../ui/pages/page-not-found.js';
 import '../../ui/pages/profile.js';
 import '../../ui/pages/reservation.js';
+import '../../ui/pages/confirmation.js';
 import '../../ui/pages/reservations.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
@@ -150,8 +151,6 @@ publicRoutes.route('/tdev', {
   },
 });
 
-
-
 publicRoutes.route('/driver/join', {
   name: 'driverJoin',
   title: 'Devenir chauffeur | Days',
@@ -163,12 +162,23 @@ publicRoutes.route('/driver/join', {
   },
 });
 
-publicRoutes.route('/TermsOfUse', {
+publicRoutes.route('/termsOfUse', {
   name: 'termsOfUse',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'TermsOfUse',
     });
+  },
+});
+
+securedRoutes.route('/confirmation', {
+  name: 'confirmation',
+  title: 'Demande prise ne compte | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'Confirmation',
+    });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
@@ -239,16 +249,11 @@ AccountsTemplates.configure({
     },
   },
 });
-// Routes
+
+// UserAccounts Routes
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('forgotPwd');
 AccountsTemplates.configureRoute('resetPwd');
 AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');
-
-// FlowRouter.route('/post/:slug', {
-//   action: function () {
-//     BlazeLayout.render('Layout', { content: 'post' })
-//   }
-// })
