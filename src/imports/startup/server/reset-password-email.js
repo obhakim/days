@@ -2,8 +2,8 @@
 import { Accounts } from 'meteor/accounts-base';
 
 const smtp = {
-  username: 'foalicensee@outlook.com', // eg: server@gentlenode.com
-  password: 'F0@1icensee', // eg: 3eeP1gtizk5eziohfervU
+  username: '', // eg: server@gentlenode.com
+  password: '', // eg: 3eeP1gtizk5eziohfervU
   server: 'smtp-mail.outlook.com', // eg: smtp.live.com
   port: 587, // 25
 };
