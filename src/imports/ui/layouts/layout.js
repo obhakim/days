@@ -24,3 +24,12 @@ Template.Layout.onRendered(function() {
     }
   });
 });
+
+Template.Layout.events({
+  'click #fr_button'(event) {
+    return TAPi18n.setLanguage("fr");
+  },
+  'click #en_button'(event) {
+    return TAPi18n.setLanguage("en");
+  },
+})
