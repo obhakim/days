@@ -173,7 +173,7 @@ publicRoutes.route('/termsOfUse', {
 
 securedRoutes.route('/confirmation', {
   name: 'confirmation',
-  title: 'Demande prise ne compte | Days',
+  title: 'Demande prise en compte | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Confirmation',

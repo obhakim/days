@@ -4,7 +4,7 @@ import { CONST } from '../../common/constants.js';
 
 export const Users = Meteor.users;
 
-Users.creditCardSchema = new SimpleSchema({
+/*Users.creditCardSchema = new SimpleSchema({
   num: {
     type: String,
     label: 'Numero',
@@ -31,7 +31,7 @@ Users.creditCardSchema = new SimpleSchema({
     type: String,
     label: 'Nom',
   },
-});
+});*/
 
 Users.profileSchema = new SimpleSchema({
   street: {
@@ -62,10 +62,10 @@ Users.profileSchema = new SimpleSchema({
     type: Date,
     optional: true,
   },
-  creditCard: {
+  /*creditCard: {
     type: Users.creditCardSchema,
     optional: true,
-  },
+  },*/
 });
 
 Users.schema = new SimpleSchema({
