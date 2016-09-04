@@ -5,39 +5,26 @@ import { Helpers } from '../../common/helpers.js';
 import { moment } from 'meteor/momentjs:moment';
 
 
-Template.registerHelper('isLoggedIn', function () {
-  return !!Meteor.user();
-});
+Template.registerHelper('isLoggedIn', () => !!Meteor.user());
 
-Template.registerHelper('isDriver', function () {
-  return Helpers.isDriver();
-});
+Template.registerHelper('isDriver', () => Helpers.isDriver());
 
-Template.registerHelper('isAdmin', function () {
-  return Helpers.isAdmin();
-});
+Template.registerHelper('isAdmin', () => Helpers.isAdmin());
 
-Template.registerHelper('isDriverOrAdmin', function () {
-  return Helpers.isDriverOrAdmin();
-});
+Template.registerHelper('isDriverOrAdmin', () => Helpers.isDriverOrAdmin());
 
-Template.registerHelper('currentUserEmail', function () {
+Template.registerHelper('currentUserEmail', () => {
   if (Meteor.user()) {
     return Meteor.user().emails[0].address;
   }
   return '';
 });
 
+Template.registerHelper('formatDate', (date) => moment(date).format(CONST.DEFAULT_DATETIME_FORMAT));
 
-Template.registerHelper('formatDate', function (date) {
-  return moment(date).format(CONST.DEFAULT_DATETIME_FORMAT);
-});
+Template.registerHelper('formatDecimal', (number) => number.toFixed(2));
 
-Template.registerHelper('formatDecimal', function (number) {
-  return number.toFixed(2);
-});
-
-Template.registerHelper('formatReservationStatus', function (statusCode) {
+Template.registerHelper('formatReservationStatus', (statusCode) => {
   // TODO add i18n
   let displayName;
   switch (statusCode) {
@@ -65,6 +52,4 @@ Template.registerHelper('formatReservationStatus', function (statusCode) {
 // Template.registerHelper('isSelected', function (key, value) {
 //     return key == value ? { selected: 'selected' } : ''
 // })
-Template.registerHelper('equals', function (v1, v2) {
-  return v1 === v2;
-});
+Template.registerHelper('equals', (v1, v2) => v1 === v2);

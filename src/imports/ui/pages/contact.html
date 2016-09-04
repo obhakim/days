@@ -1,0 +1,34 @@
+<template name="Contact">
+	<div class="ui middle aligned centered grid">
+    <div class="at-column column">
+      <h1 class="ui center aligned header">Nous Contacter</h1>
+      <div class="ui stackable segment">
+        <div class="six wide column">
+
+          <form id="form" class="ui form" novalidate>
+            {{> errormessage }}
+            <div class="field required">
+              <label>Nom</label>
+              <input id="nom" type="text" placeholder="Nom">
+            </div>
+            <div class="field">
+              <label>Téléphone</label>
+              <input id="telephone" type="text" placeholder="Téléphone">
+            </div>
+            <div class="field required">
+              <label>Email</label>
+              <input id="email" type="text" placeholder="Email">
+            </div>
+            <div class="field required">
+              <label>Question</label>
+               <textarea id="question" rows="20" placeholder="Entrer votre message..."></textarea>
+            </div>
+
+            <input id="sub" type="submit" value="Envoyer" class="ui  large primary button">
+            <input id="cancel" type="reset" value="Annuler" class="ui  large button">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
