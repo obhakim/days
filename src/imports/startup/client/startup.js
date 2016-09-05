@@ -6,6 +6,7 @@ import { Tracker } from 'meteor/tracker';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
+import { TAPi18n } from 'meteor/tap:i18n';
 // import { Uploader } from 'meteor/tomi:upload-jquery';
 
 FlowRouter.wait();
@@ -29,16 +30,18 @@ Meteor.startup(() => {
 
     // Uploader.uploadUrl = Meteor.absoluteUrl('upload'); // Cordova needs absolute URL
   });
-  getUserLanguage = function () {
+
+  function getUserLanguage() {
     const language = window.navigator.userLanguage || window.navigator.language;
     return language;
-  };
+  }
+
   TAPi18n.setLanguage(getUserLanguage())
-    .done(function () {
+    .done(() => {
       Session.set('showLoadingIndicator', false);
     })
-    .fail(function (error_message) {
-      console.log(error_message);
+    .fail((errorMessage) => {
+      console.log(errorMessage);
     });
   // Accounts.ui.config({
   //     passwordSignupFields: 'USERNAME_AND_EMAIL'
