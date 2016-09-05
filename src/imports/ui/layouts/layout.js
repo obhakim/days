@@ -16,7 +16,7 @@ Template.Layout.helpers({
   loading: Session.equals(SESSION.ISLOADING, true),
 });
 
-Template.Layout.onRendered(function() {
+Template.Layout.onRendered(function () {
   this.autorun(() => {
     if (this.subscriptionsReady()) {
       // create sidebar and attach to menu open
@@ -26,10 +26,12 @@ Template.Layout.onRendered(function() {
 });
 
 Template.Layout.events({
-  'click #fr_button'(event) {
-    return TAPi18n.setLanguage("fr");
+  'click #fr_button': function (event) {
+    FlowRouter.setParams({ lang: 'fr' });
+    TAPi18n.setLanguage('fr');
   },
-  'click #en_button'(event) {
-    return TAPi18n.setLanguage("en");
+  'click #en_button': function (event) {
+    FlowRouter.setParams({ lang: 'en' });
+    TAPi18n.setLanguage('en');
   },
-})
+});

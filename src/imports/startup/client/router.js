@@ -139,14 +139,14 @@ publicRoutes.route('/notAuthorized', {
   },
 });
 
-publicRoutes.route('/tdev', {
+publicRoutes.route('/tdev/:lang?', {
   name: 'tdev',
   title: 'DEV Test | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'TDev',
     });
-    document.title = FlowRouter.current().route.options.title;
+    document.title = TAPi18n.__('dev_test', { lang: pathParams.lang });
   },
 });
 
