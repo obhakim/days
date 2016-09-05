@@ -1,6 +1,7 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Helpers } from '../../common/helpers.js';
 
 // Import to load these templates
@@ -165,14 +166,14 @@ publicRoutes.route('/notAuthorized', {
   },
 });
 
-publicRoutes.route('/tdev', {
+publicRoutes.route('/tdev/:lang?', {
   name: 'tdev',
   title: 'DEV Test | Days',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'TDev',
     });
-    document.title = FlowRouter.current().route.options.title;
+    document.title = TAPi18n.__('dev_test', { lang: pathParams.lang });
   },
 });
 
