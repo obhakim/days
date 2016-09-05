@@ -28,6 +28,8 @@ import '../../ui/pages/faq.js';
 import '../../ui/pages/contact.js';
 import '../../ui/pages/contacts.js';
 
+import '../../ui/pages/tdev.js';
+
 
 const publicRoutes = FlowRouter.group({
   name: 'public',

@@ -37,14 +37,17 @@ Users.profileSchema = new SimpleSchema({
   street: {
     type: String,
     label: 'Rue',
+    optional: true,
   },
   city: {
     type: String,
     label: 'Ville',
+    optional: true,
   },
   zipcode: {
     type: String,
     label: 'Code postal',
+    optional: true,
   },
   firstName: {
     type: String,
