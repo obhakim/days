@@ -1,0 +1,14 @@
+<template name="Contacts">
+  <div class="ui middle aligned stackable grid container">
+    <div class="row">
+      <div class="center aligned column">
+        <h1 class="ui header">Demandes de contact</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+      {{#each contactList}} {{> ContactItem}} {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

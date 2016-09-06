@@ -1,10 +1,15 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Helpers } from '../../common/helpers.js';
 
 // Import to load these templates
+import '../../ui/components/atNavButtonCustom.js';
+
 import '../../ui/layouts/layout.js';
+
+import '../../ui/pages/tdev.js';
 import '../../ui/pages/driver-join.js';
 import '../../ui/pages/driver-company.js';
 import '../../ui/pages/driver-vehicles.js';
@@ -14,15 +19,17 @@ import '../../ui/pages/not-authorized.js';
 import '../../ui/pages/page-not-found.js';
 import '../../ui/pages/profile.js';
 import '../../ui/pages/reservation.js';
+import '../../ui/pages/confirmation.js';
 import '../../ui/pages/reservations.js';
 import '../../ui/pages/services.js';
 import '../../ui/pages/values.js';
 import '../../ui/pages/vehicles.js';
 import '../../ui/pages/termsOfUse.js';
-import '../../ui/components/atNavButtonCustom.js';
+import '../../ui/pages/faq.js';
+import '../../ui/pages/contact.js';
+import '../../ui/pages/contacts.js';
 
 import '../../ui/pages/tdev.js';
-import '../../ui/pages/faq.js';
 
 
 const publicRoutes = FlowRouter.group({
@@ -42,8 +49,17 @@ const driverRoutes = securedRoutes.group({
     if (!Helpers.isDriver()) {
       redirect('/notAuthorized');
     }
-  },
-  ],
+  }],
+});
+
+const adminRoutes = securedRoutes.group({
+  prefix: '/admin',
+  name: 'admin',
+  triggersEnter: [(context, redirect) => {
+    if (!Helpers.isAdmin()) {
+      redirect('/notAuthorized');
+    }
+  }],
 });
 
 publicRoutes.route('/', {
@@ -65,6 +81,17 @@ publicRoutes.route('/FAQ', {
     BlazeLayout.render('Layout', {
       banner: 'FAQBanner',
       content: 'FAQ',
+    });
+    document.title = FlowRouter.current().route.options.title;
+  },
+});
+
+publicRoutes.route('/contact', {
+  name: 'contact',
+  title: 'Nous contacter | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'Contact',
     });
     document.title = FlowRouter.current().route.options.title;
   },
@@ -150,8 +177,6 @@ publicRoutes.route('/tdev/:lang?', {
   },
 });
 
-
-
 publicRoutes.route('/driver/join', {
   name: 'driverJoin',
   title: 'Devenir chauffeur | Days',
@@ -163,12 +188,23 @@ publicRoutes.route('/driver/join', {
   },
 });
 
-publicRoutes.route('/TermsOfUse', {
+publicRoutes.route('/termsOfUse', {
   name: 'termsOfUse',
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'TermsOfUse',
     });
+  },
+});
+
+securedRoutes.route('/confirmation', {
+  name: 'confirmation',
+  title: 'Demande prise en compte | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'Confirmation',
+    });
+    document.title = FlowRouter.current().route.options.title;
   },
 });
 
@@ -216,6 +252,17 @@ driverRoutes.route('/vehicles', {
   },
 });
 
+adminRoutes.route('/contacts', {
+  name: 'contacts',
+  title: 'Contacts | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'Contacts',
+    });
+    document.title = FlowRouter.current().route.options.title;
+  },
+});
+
 FlowRouter.notFound = {
   title: 'Page non trouvée | Days',
   action: () => {
@@ -239,16 +286,11 @@ AccountsTemplates.configure({
     },
   },
 });
-// Routes
+
+// UserAccounts Routes
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('forgotPwd');
 AccountsTemplates.configureRoute('resetPwd');
 AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');
-
-// FlowRouter.route('/post/:slug', {
-//   action: function () {
-//     BlazeLayout.render('Layout', { content: 'post' })
-//   }
-// })

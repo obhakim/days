@@ -6,7 +6,7 @@ export const CONST = {
   DEFAULT_LOCALE: 'fr',
   DEFAULT_DATE_FORMAT: 'DD/MM/YYYY',
   DEFAULT_DATETIME_FORMAT: 'DD/MM/YYYY HH:mm',
-  PAGE_SIZE : 20,
+  PAGE_SIZE: 20,
 
   RESERVATION_STATUSES: {
     CANCELLED: -10,
@@ -19,6 +19,12 @@ export const CONST = {
     CLIENT: 'client',
     DRIVER: 'driver',
     ADMIN: 'admin',
+  },
+
+  CONTACT_REQUEST_STATUSES: {
+    OPEN: 0,
+    WAITING: 1,
+    CLOSED: 2,
   },
 };
 

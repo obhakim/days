@@ -240,7 +240,7 @@ Template.Reservation.events({
           }]);
         }
       } else {
-        FlowRouter.go('/s/reservations');
+        FlowRouter.go('/s/confirmation');
       }
     });
 
@@ -250,8 +250,10 @@ Template.Reservation.events({
 
 Template.Reservation.onRendered(function ReservationRendered() {
   // Session.set(SESSION.ISLOADING, true)
-
   // $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
+
+  // to get the current position when the page is loading
+  getCurrentPosition($('#start'));
 
   this.$('.datetimepicker').datetimepicker({
     format: CONST.DEFAULT_DATETIME_FORMAT,

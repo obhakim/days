@@ -1,0 +1,17 @@
+<template name="ContactItem">
+  <div class="ui top attached secondary segment">
+    <p>{{name}} ({{email}}) {{phone}} {{formatDate createdAt}}</p>
+  </div>
+  <div class="ui attached segment">
+    <p>{{request}}</p>
+  </div>
+  <div class="ui bottom attached secondary right aligned segment">
+    <div class="field">
+        <select class="ui dropdown" id="{{_id}}">
+          <option selected="{{equals status 0}}" value="0">Ouvert</option>
+          <option selected="{{equals status 1}}" value="1">En attente</option>
+          <option selected="{{equals status 2}}" value="2">Cloturé</option>
+        </select>
+      </div>
+  </div>
+</template>
