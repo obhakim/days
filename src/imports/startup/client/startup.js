@@ -31,6 +31,18 @@ Meteor.startup(() => {
     // Uploader.uploadUrl = Meteor.absoluteUrl('upload'); // Cordova needs absolute URL
   });
 
+  function getUserLanguage() {
+    const language = window.navigator.userLanguage || window.navigator.language;
+    return language;
+  }
+
+  TAPi18n.setLanguage(getUserLanguage())
+    .done(() => {
+      Session.set('showLoadingIndicator', false);
+    })
+    .fail((errorMessage) => {
+      console.log(errorMessage);
+    });
   // Accounts.ui.config({
   //     passwordSignupFields: 'USERNAME_AND_EMAIL'
   // })
