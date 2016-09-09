@@ -3,9 +3,27 @@
     <div class="ui text container">
       <h1 class="ui inverted header">Days</h1>
       <h2>Drivers At Your Service</h2>
-      <a href="{{pathFor 'sign-up'}}">
-        <div class="ui huge primary button">Commencer <i class="right arrow icon"></i></div>
-      </a>
+      {{#if currentUser }}
+        {{#if isInRole 'admin'}}
+        <a href="{{pathFor 'reservations'}}">
+          <div class="ui huge primary button">Réservations <i class="right arrow icon"></i></div>
+        </a>
+        {{/if}}
+        {{#if isInRole 'driver'}}
+        <a href="{{pathFor 'reservations'}}">
+          <div class="ui huge primary button">Réservations <i class="right arrow icon"></i></div>
+        </a>
+        {{/if}}
+        {{#if isInRole 'client'}}
+        <a href="{{pathFor 'reservation'}}">
+          <div class="ui huge primary button">Réserver <i class="right arrow icon"></i></div>
+        </a>
+        {{/if}}
+        {{else}}
+        <a href="{{pathFor 'sign-up'}}">
+          <div class="ui huge primary button">S'inscrire <i class="right arrow icon"></i></div>
+        </a>
+       {{/if}}
     </div>
   </div>
 </template>
