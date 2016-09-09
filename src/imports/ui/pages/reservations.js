@@ -31,8 +31,8 @@ Template.Reservations.onCreated(function reservationsPageOnCreated() {
         }, 300);
       });
     instance.subscribe('reservations.count');
-   });
   });
+});
 
 Template.Reservations.helpers({
   searching() {
@@ -63,14 +63,14 @@ Template.Reservations.events({
     }
 
     if (endDate && endDate !== '') {
-      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).add('days',1).toDate();
+      endDate = moment(endDate, CONST.DEFAULT_DATETIME_FORMAT).add('days', 1).toDate();
     } else {
       endDate = null;
     }
 
     if (instance.searchWord.get() !== searchWord ||
-        instance.startDate.get() !== startDate ||
-        instance.endDate.get() !== endDate) {
+      instance.startDate.get() !== startDate ||
+      instance.endDate.get() !== endDate) {
       instance.searchWord.set(searchWord);
       instance.startDate.set(startDate);
       instance.endDate.set(endDate);
@@ -78,9 +78,9 @@ Template.Reservations.events({
       instance.searching.set(true);
     }
   },
-   'click #plus'(event, instance) {
-    instance.limit.set(instance.limit.get()+CONST.PAGE_SIZE);
-    },
+  'click #plus'(event, instance) {
+    instance.limit.set(instance.limit.get() + CONST.PAGE_SIZE);
+  },
 });
 
 Template.Reservations.onRendered(function ReservationsOnRendered() {
