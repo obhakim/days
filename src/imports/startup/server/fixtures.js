@@ -98,6 +98,7 @@ export const seedData = () => {
       email: 'admin@daysvtc.fr',
       password: 'admin@daysvtc.fr',
     });
-    Roles.addUsersToRoles(userId, CONST.USER_ROLES.ADMIN);
+
+    Roles.setUserRoles(userId, CONST.USER_ROLES.ADMIN);
   }
 };

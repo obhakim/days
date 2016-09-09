@@ -87,7 +87,8 @@ Meteor.methods({
       password: newUser.password,
       profile: newUser.profile,
     });
-    // Le role "driver" va s'ajouter en plus de la valeur par default du role "client"
-    Roles.addUsersToRoles(userId, CONST.USER_ROLES.DRIVER);
+    // Roles.addUsersToRoles(userId, CONST.USER_ROLES.DRIVER);
+    // set role to user
+    Roles.setUserRoles(userId, CONST.USER_ROLES.DRIVER);
   },
 });

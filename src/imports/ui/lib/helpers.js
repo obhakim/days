@@ -3,13 +3,18 @@ import { Template } from 'meteor/templating';
 import { CONST } from '../../common/constants.js';
 import { Helpers } from '../../common/helpers.js';
 import { moment } from 'meteor/momentjs:moment';
+import { Roles } from 'meteor/alanning:roles';
 
 
 Template.registerHelper('isLoggedIn', () => !!Meteor.user());
 
+Template.registerHelper('isInRole', (role) => Roles.userIsInRole(Meteor.userId(), role));
+
 Template.registerHelper('isDriver', () => Helpers.isDriver());
 
 Template.registerHelper('isAdmin', () => Helpers.isAdmin());
+
+Template.registerHelper('isClient', () => Helpers.isClient());
 
 Template.registerHelper('isDriverOrAdmin', () => Helpers.isDriverOrAdmin());
 
