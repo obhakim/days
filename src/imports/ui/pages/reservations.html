@@ -1,6 +1,6 @@
 <template name="Reservations">
   <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
-
+  {{#if isInRole 'admin'}}
   <div class="ui segment fluid dropdown">
     <form class="ui form">
       <div class="ui input">
@@ -17,6 +17,7 @@
       </div>
     </form>
   </div>
+  {{/if}}
 
   <form id="reservationForm" class="ui form">
     {{> errormessage}}    
