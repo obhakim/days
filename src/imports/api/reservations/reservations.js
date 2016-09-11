@@ -82,7 +82,7 @@ Reservations.Schema = new SimpleSchema({
   status: {
     label: 'Statut',
     type: Number,
-    defaultValue: CONST.RESERVATION_STATUSES.CREATED,
+    defaultValue: CONST.RESERVATION_STATUSES.PENDING,
   },
   ownerId: {
     label: 'Id Client',

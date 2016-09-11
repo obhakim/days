@@ -10,9 +10,9 @@ export const CONST = {
 
   RESERVATION_STATUSES: {
     CANCELLED: -10,
-    CREATED: 0,
-    ACCEPTED: 10,
-    CONFIRMED: 20,
+    PENDING: 0,
+    CONFIRMED: 10,
+    DONE: 20,
   },
 
   USER_ROLES: {

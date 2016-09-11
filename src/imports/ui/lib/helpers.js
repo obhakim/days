@@ -36,14 +36,14 @@ Template.registerHelper('formatReservationStatus', (statusCode) => {
     case CONST.RESERVATION_STATUSES.CANCELLED:
       displayName = 'Annulée';
       break;
-    case CONST.RESERVATION_STATUSES.CREATED:
-      displayName = 'Créée';
-      break;
-    case CONST.RESERVATION_STATUSES.ACCEPTED:
-      displayName = 'Acceptée';
+    case CONST.RESERVATION_STATUSES.PENDING:
+      displayName = 'En Attente';
       break;
     case CONST.RESERVATION_STATUSES.CONFIRMED:
       displayName = 'Confirmée';
+      break;
+    case CONST.RESERVATION_STATUSES.DONE:
+      displayName = 'Réalisée';
       break;
     default:
       displayName = 'Inconnue';
