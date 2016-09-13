@@ -50,9 +50,11 @@ For support - Be able to generate activation link (low priority))
 8. Redirected to the **confirmation page** (*which says that he will be notified when his reservation is confirmed*)
 9. Redirected to My reservations page (*Statuses : En attente, Confirmée, Realisée/Annulée; Has link to driver infos page once confirmed*)
 10. Client should be able to cancel reservation (until 1h before the ride, otherwise ride is considered completed entirely)
+> TODO : Should be able to select Prefered driver ?
 
 #### Driver ####
 (*Required to be logged in with activated account*)
+> TODO : Prefered driver should have priority ?
 1. **Notified** (*by email*) about new reservation available
 2. **Navigates to Reservations en attente page**
 3. **Accepts reservation** *making it non-available for other drivers*
@@ -104,5 +106,25 @@ If does not meet client
 #### Admin ####
 (*Required to be logged in*)
 1. **Notified** (*by email*)
+
+---
+
+## Rates ##
+#### Driver ####
+(*Required to be logged in*)
+1. Goes to the **vehicles page**
+2. For each vehicle can change : 
+		rate Per Km
+		rate Per Hour
+		rate Minimum
+		rate Multiplier for rush hours
+	 or restore defaults of corresponding vehicle type
+
+---
+
+## Favourite rides ##
+#### Client ####
+(*Required to be logged in*)
+1. Goes to the ToBeDefined
 
 ---
