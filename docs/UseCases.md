@@ -114,11 +114,11 @@ If does not meet client
 (*Required to be logged in*)
 1. Goes to the **vehicles page**
 2. For each vehicle can change : 
-		rate Per Km
-		rate Per Hour
-		rate Minimum
-		rate Multiplier for rush hours
-	 or restore defaults of corresponding vehicle type
+	+ rate Per Km
+	+	rate Per Hour
+	+	rate Minimum
+	+	rate Multiplier for rush hours
+	+ or restore defaults of corresponding vehicle type
 
 ---
 
