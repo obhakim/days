@@ -55,8 +55,6 @@ Reservations.Schema = new SimpleSchema({
   ride: {
     type: Reservations.RideSchema,
   },
-  // vehicleType: {label: "Type de véhicule", type: Number, defaultValue: 0},
-  // vehicleType: {label: 'Type de véhicule', type: String, allowedValues: Schema.getVehicleTypes()},
   vehicleTypeId: {
     label: 'Type de véhicule',
     type: String,
@@ -105,8 +103,6 @@ Reservations.Schema = new SimpleSchema({
     type: String,
     denyUpdate: true,
     autoValue: function autoValue() {
-      // console.log('{SimpleSchema ownerName} username = '+Meteor.user().username)
-      // console.log('{SimpleSchema ownerName} lastname = '+ this.field('lastname').value)
       if (this.isInsert) {
         return Meteor.user() && Meteor.user().username ? Meteor.user().username : this.field('lastname').value;
       } else if (this.isUpsert) {
@@ -139,7 +135,8 @@ Reservations.Schema = new SimpleSchema({
 Reservations.attachSchema(Reservations.Schema);
 
 // function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
-Reservations.calculatePrice = function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
+Reservations.calculatePrice =
+function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
   let price = ratePerKm * distance;
   // if in rush hour
   const startAtDate = new Date(startAt);

@@ -7,5 +7,4 @@ Meteor.publish('brands', function publishBrands() {
 
 Meteor.publish('models', function publishModels(brand) {
   return Models.distinct('model', { brand });
-  // return Models.find({ brand }, { _id: 0, brand: 0 });
 });

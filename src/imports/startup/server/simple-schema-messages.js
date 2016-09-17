@@ -103,4 +103,3 @@ export const setupSimpleSchema = () => {
 //     keyNotInSchema: "[key] is not allowed by the schema"
 // })
 };
-//});

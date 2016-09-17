@@ -6,36 +6,27 @@ import { CONST } from './constants.js';
 
 export const Helpers = {};
 
-Helpers.isAdmin = function () {
+Helpers.isAdmin = function isAdmin() { 
   return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.ADMIN);
 };
 
-Helpers.isDriver = function () {
-  // console.log(Meteor.userId());
-  // console.log(CONST.USER_ROLES.DRIVER);
-  // console.log('isDriver : ' + Roles.userIsInRole(Meteor.userId(), 'driver'));
-  // console.log(this.userId);
-  // console.log('isDriver : ' + Roles.userIsInRole(this.userId, CONST.USER_ROLES.DRIVER));
+Helpers.isDriver = function isDriver() {  
   return Roles.userIsInRole(Meteor.userId(), CONST.USER_ROLES.DRIVER);
 };
 
 Helpers.isDriverOrAdmin = () => Helpers.isAdmin() || Helpers.isDriver();
 
-Helpers.getFullName = function (firstName, lastName) {
-  return firstName + ' ' + lastName;
-};
+Helpers.getFullName = (firstName, lastName) => `${firstName} ${lastName}`;
 
 if (Meteor.isServer) {
   // Server side helpers
 
-  Helpers.sendEmail = function (to, from, subject, text) {
+  Helpers.sendEmail = (to, from, subject, text) => {
     check([to, from, subject, text], [String]);
 
     // Let other method calls from the same client start running,
     // without waiting for the email sending to complete.
     // this.unblock()
-
-    // console.log('sendEmail: '.concat(to, ', ', from, ', ', subject, ', ', text))
 
     Email.send({
       to,
@@ -45,7 +36,7 @@ if (Meteor.isServer) {
     });
   };
 
-  Helpers.notifyNewReservation = function (email) {
+  Helpers.notifyNewReservation = (email) => {
     check(email, String);
 
     const subject = 'Nouvelle reservation';
@@ -54,7 +45,7 @@ if (Meteor.isServer) {
     Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
   };
 
-  Helpers.notifyReservationAcceptance = function (email) {
+  Helpers.notifyReservationAcceptance = (email) => {
     check(email, String);
 
     const subject = 'Reservation confirmée';
@@ -63,7 +54,7 @@ if (Meteor.isServer) {
     Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
   };
 
-  Helpers.notifyReservationConfirmation = function (email) {
+  Helpers.notifyReservationConfirmation = (email) => {
     check(email, String);
 
     const subject = 'Reservation effectuée';
@@ -72,7 +63,7 @@ if (Meteor.isServer) {
     Helpers.sendEmail(email, CONST.MAIL_FROM, subject, text);
   };
 
-  Helpers.notifyReservationCancellation = function (email) {
+  Helpers.notifyReservationCancellation = (email) => {
     check(email, String);
 
     const subject = 'Reservation annulée';

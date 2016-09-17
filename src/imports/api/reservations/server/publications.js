@@ -1,7 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-// import { check } from 'meteor/check';
-// import { Match } from 'meteor/check';
-// import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { Reservations } from '../reservations.js';
 import { CONST } from '../../../common/constants.js';
@@ -28,8 +25,6 @@ Meteor.publish('reservations.list',
     //   ],
     //   'ride.startAt': { $gt: startDate, $lt: endDate }
     // }
-
-    // console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
 
     // Apply filters
     if (search && search !== '') {

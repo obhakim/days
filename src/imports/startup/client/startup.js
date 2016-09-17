@@ -1,13 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
-// import { Geolocation } from 'meteor/mdg:geolocation';
-// import { Session } from 'meteor/session';
-// import { SESSION } from '../../common/constants.js';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
-// import { Uploader } from 'meteor/tomi:upload-jquery';
 
 FlowRouter.wait();
 
@@ -19,16 +15,6 @@ Meteor.startup(() => {
     if (Roles.subscription.ready() && !FlowRouter._initialized) {
       FlowRouter.initialize();
     }
-
-    // Potentially prompts the user to enable location services. We do this early
-    // on in order to have the most accurate location by the time the user shares
-    // var pos = Geolocation.currentLocation()
-    // const pos = Geolocation.latLng();
-    // Session.set(SESSION.GEO_POSITION, pos);
-    // Check how to manage geolocation better to make it faster by starting geolocation
-    // on app start here and getting the coordinates later
-
-    // Uploader.uploadUrl = Meteor.absoluteUrl('upload'); // Cordova needs absolute URL
   });
 
   function getUserLanguage() {
@@ -36,15 +22,6 @@ Meteor.startup(() => {
     return language;
   }
 
-  TAPi18n.setLanguage(getUserLanguage())
-    .done(() => {
-      Session.set('showLoadingIndicator', false);
-    })
-    .fail((errorMessage) => {
-      console.log(errorMessage);
-    });
-  // Accounts.ui.config({
-  //     passwordSignupFields: 'USERNAME_AND_EMAIL'
-  // })
+  TAPi18n.setLanguage(getUserLanguage());
   BlazeLayout.setRoot('body');
 });

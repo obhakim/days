@@ -100,7 +100,6 @@ AccountsTemplates.addFields([
     placeholder: 'Téléphone',
     required: true,
     minLength: 6,
-    // re: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g,
     re: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
     errStr: 'Téléphone non-valide',
   },
@@ -110,9 +109,7 @@ AccountsTemplates.addFields([
     displayName: 'Conditions Générales',
     template: 'TermsOfUseTemplate',
     errStr: "Vous devez accepter les Conditions Générales d'utilisation",
-    func: function(value) {
-      return !value;
-    },
+    func: (value) => !value,
     negativeValidation: false,
   },
 // {
