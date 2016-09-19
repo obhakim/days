@@ -43,10 +43,7 @@ Template.Reservations.helpers({
   //   return Template.instance().searchQuery.get();
   // },
   reservations() {
-    const albums = Reservations.find();
-    if (albums) {
-      return albums;
-    }
+    return Reservations.find();
   },
 });
 

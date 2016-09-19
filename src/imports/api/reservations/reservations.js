@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { CONST } from '../../common/constants.js';
+import { Helpers } from '../../common/helpers.js';
 
 export const Reservations = new Mongo.Collection('reservations');
 
@@ -58,11 +59,12 @@ Reservations.Schema = new SimpleSchema({
   vehicleTypeId: {
     label: 'Type de véhicule',
     type: String,
-  //regEx: SimpleSchema.RegEx.Id,
+    //regEx: SimpleSchema.RegEx.Id,
   },
   comment: {
     label: 'Commentaire',
     type: String,
+    optional: true,
   },
   price: {
     label: 'Prix',
@@ -136,20 +138,40 @@ Reservations.attachSchema(Reservations.Schema);
 
 // function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
 Reservations.calculatePrice =
-function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
-  let price = ratePerKm * distance;
-  // if in rush hour
-  const startAtDate = new Date(startAt);
-  const startHours = startAtDate.getHours();
-  const startMins = startAtDate.getMinutes();
-  if ((6 <= startHours && (startHours < 9 || startHours === 9 && startMins <= 30)) ||
-    (17 <= startHours && (startHours < 19 || startHours === 19 && startMins <= 30))) {
-    price = price * rateMultiplier;
-  }
+  function calculatePrice(ratePerKm, rateMin, rateMultiplier, startAt, distance) {
+    let price = ratePerKm * distance;
+    // if in rush hour
+    const startAtDate = new Date(startAt);
+    const startHours = startAtDate.getHours();
+    const startMins = startAtDate.getMinutes();
+    if ((6 <= startHours && (startHours < 9 || startHours === 9 && startMins <= 30)) ||
+      (17 <= startHours && (startHours < 19 || startHours === 19 && startMins <= 30))) {
+      price = price * rateMultiplier;
+    }
 
-  if (price < rateMin) {
-    return rateMin;
-  } else {
+    if (price < rateMin) {
+      return rateMin;
+    }
+
     return price;
-  }
+  };
+
+Reservations.isCancellable = function isCancellable(reservation) {
+  return reservation.status !==
+    CONST.RESERVATION_STATUSES.CANCELLED && (
+      (Helpers.isClient() && reservation.ownerId === Meteor.userId()) || Helpers.isAdmin());
+};
+
+Reservations.isConfirmable = function isConfirmable(reservation) {
+  return reservation.status === CONST.RESERVATION_STATUSES.PENDING && Helpers.isDriver();
+};
+
+Reservations.isDriverAssignable = function isAssignable(reservation) {
+  return Helpers.isAdmin() && (reservation.status === CONST.RESERVATION_STATUSES.PENDING ||
+    reservation.status === CONST.RESERVATION_STATUSES.CONFIRMED);
+};
+
+Reservations.isDoable = function isDoable(reservation) {
+  return reservation.status === CONST.RESERVATION_STATUSES.CONFIRMED &&
+    Helpers.isAdmin() && reservation.driverId === Meteor.userId();
 };

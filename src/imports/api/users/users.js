@@ -136,7 +136,6 @@ Users.schema = new SimpleSchema({
   roles: {
     type: [String],
     label: 'Role',
-    optional: true,
     allowedValues: [CONST.USER_ROLES.CLIENT, CONST.USER_ROLES.DRIVER, CONST.USER_ROLES.ADMIN],
     defaultValue: [CONST.USER_ROLES.CLIENT],
   },

@@ -15,7 +15,7 @@ Meteor.publish('reservations.list',
     // check( search, Match.OneOf( String, null, undefined ) );
 
     const query = {};
-    const projection = { limit: limit, sort: { createdAt: -1 } };
+    const projection = { limit, sort: { createdAt: -1 } };
 
     // Query example
     // query = {
@@ -55,14 +55,15 @@ Meteor.publish('reservations.list',
     return Reservations.find(query, projection);
   });
 
+// TODO :
+// Apply http://stackoverflow.com/questions/27948046/meteor-publish-just-the-count-for-a-collection
+// Meteor.publish('reservations.count', function publishReservationsCount() {
+//   const query = {};
 
-Meteor.publish('reservations.count', function publishReservationsCount() {
-  const query = {};
+//   // Apply security
+//   if (Roles.userIsInRole(this.userId, CONST.USER_ROLES.CLIENT)) {
+//     query.ownerId = this.userId;
+//   }
 
-  // Apply security
-  if (Roles.userIsInRole(this.userId, CONST.USER_ROLES.CLIENT)) {
-    query.ownerId = this.userId;
-  }
-
-  return Reservations.find(query).count();
-});
+//   return Reservations.find(query).count();
+// });

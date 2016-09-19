@@ -8,14 +8,28 @@
     <!--<td>{{comment}}</td>-->
     <td>{{formatReservationStatus status}}</td>
     <td class="collapsing">
-      {{#if isAcceptable}}
-      <button type="button" class="acceptReservation ui icon button primary" title="Accepter"><i class="checkmark icon"></i></button>
+      {{#if isCancellable}}
+      <button type="button" id="cancelReservation" class="ui icon button" title="Annuler">
+        <i class="remove icon"></i>
+      </button>
+      {{/if}}
+      {{#if isDriverAssignable}}
+      <select id="driversList">
+        <option value="">ToDo Add Drivers</option>
+      </select>
       {{/if}}
       {{#if isConfirmable}}
-      <button type="button" class="confirmReservation ui icon button secondary" title="Confirmer"><i class="payment icon"></i></button>
+      <button type="button" id="confirmReservation" class="ui icon button secondary" title="Confirmer">
+        <i class="payment icon"></i>
+      </button>
       {{/if}}
-      {{#if isCancelable}}
-      <button type="button" class="cancelReservation ui icon button" title="Annuler"><i class="remove icon"></i></button>
+      {{#if isDoable}}
+      <button type="button" id="setReservationDone" class="ui icon button primary" title="Terminer">
+        <i class="checkmark icon"></i>
+      </button>
+      <button type="button" id="setReservationNotDone" class="ui icon button primary" title="Non terminer">
+        <i class="checkmark icon"></i>
+      </button>
       {{/if}}
     </td>
   </tr>

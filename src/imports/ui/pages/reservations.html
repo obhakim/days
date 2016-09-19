@@ -1,5 +1,6 @@
 <template name="Reservations">
-  <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
+  <h1>Réservations</h1>
+  {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}} 
   {{#if isInRole 'admin'}}
   <div class="ui segment fluid dropdown">
     <form class="ui form">
@@ -20,7 +21,7 @@
   {{/if}}
 
   <form id="reservationForm" class="ui form">
-    {{> errormessage}}    
+    {{> errormessage}}
     <table class="ui celled table">
       <thead>
         <tr>
@@ -42,6 +43,8 @@
         {{/each}} {{/if}}
       </tbody>
     </table>
-    </form>
-    <button id="plus" class="ui right labeled icon button">Plus <i id="plus" class="right chevron icon"></i> </button>
+  </form>
+  <div>
+    <button id="plus" class="ui fluid button">Voir plus</button>
+  </div>
 </template>

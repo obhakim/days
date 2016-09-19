@@ -87,8 +87,8 @@ browser-policy			# Define browser security policies
 
 # testing
 #publication-collector
-#stub-collections
-xolvio:cleaner
+#xolvio:cleaner
 #dispatch:mocha-phantomjs
 practicalmeteor:mocha
+hwillson:stub-collections
 dburles:factory

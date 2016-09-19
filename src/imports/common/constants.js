@@ -13,6 +13,7 @@ export const CONST = {
     PENDING: 0,
     CONFIRMED: 10,
     DONE: 20,
+    NOTDONE: 30,
   },
 
   USER_ROLES: {
