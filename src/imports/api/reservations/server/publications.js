@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
+
 import { Roles } from 'meteor/alanning:roles';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Reservations } from '../reservations.js';
 import { CONST } from '../../../common/constants.js';
 
@@ -51,19 +53,8 @@ Meteor.publish('reservations.list',
       query.ownerId = this.userId;
     }
 
+    Counts.publish(this, 'reservations.count', Reservations.find(query, projection));
+
     // console.log(query);
     return Reservations.find(query, projection);
   });
-
-// TODO :
-// Apply http://stackoverflow.com/questions/27948046/meteor-publish-just-the-count-for-a-collection
-// Meteor.publish('reservations.count', function publishReservationsCount() {
-//   const query = {};
-
-//   // Apply security
-//   if (Roles.userIsInRole(this.userId, CONST.USER_ROLES.CLIENT)) {
-//     query.ownerId = this.userId;
-//   }
-
-//   return Reservations.find(query).count();
-// });

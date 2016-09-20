@@ -94,7 +94,6 @@ reload@1.1.10
 retry@1.0.8
 reywood:publish-composite@1.4.2
 routepolicy@1.0.11
-sacha:spin@2.3.1
 sarasate:semantic-ui-datetimepicker@0.0.2
 semantic:ui-css@2.1.2
 service-configuration@1.0.10
@@ -110,6 +109,7 @@ tap:i18n@1.8.2
 templating@1.1.14
 templating-tools@1.0.4
 tmeasday:html5-history-api@4.1.2
+tmeasday:publish-counts@0.7.3
 tmeasday:test-reporter-helpers@0.2.1
 tracker@1.0.15
 ui@1.0.11
