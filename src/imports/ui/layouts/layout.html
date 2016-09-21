@@ -3,14 +3,18 @@
   <div class="ui large top fixed inverted menu">
     <div class="ui container">
       <a class="toc item"><i class="sidebar icon"></i></a>
-      
+
       {{#if isDriverOrAdmin}}
       <a href="{{pathFor 'home'}}" class="header hideable item {{isActiveRoute 'home'}}">Days</a>
       <a class="item {{isActiveRoute 'reservations'}}" href="{{pathFor 'reservations'}}">Réservations</a>
+      <a class="item {{isActiveRoute 'reservationsHistory'}}" href="{{pathFor 'reservationsHistory'}}">Historique des réservations</a>
       {{else}}
       {{!-- also show for not logged in users --}}
       <a href="{{pathFor 'home'}}" class="header hideable item {{isActiveRoute 'home'}}">Days</a>
       <a class="item {{isActiveRoute 'reservation'}}" href="{{pathFor 'reservation'}}">Réserver</a>
+      {{#if isClient}}
+       <a class="item {{isActiveRoute 'reservationsHistory'}}" href="{{pathFor 'reservationsHistory'}}">Historique des réservations</a>
+       {{/if}}
       <div class="ui item hideable simple dropdown">
         A propos de nous <i class="dropdown icon"></i>
         <div class="menu">
