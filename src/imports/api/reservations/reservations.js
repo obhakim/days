@@ -36,6 +36,14 @@ Reservations.RideSchema = new SimpleSchema({
     label: 'Destination',
     type: String,
   },
+  startedAt: {
+    type: Date,
+    optional: true,
+  },
+  finishedAt: {
+    type: Date,
+    optional: true,
+  },
   startAt: {
     label: 'Le',
     type: Date,
@@ -65,6 +73,13 @@ Reservations.Schema = new SimpleSchema({
     label: 'Commentaire',
     type: String,
     optional: true,
+  },
+  estimatedPrice: {
+    label: 'Prix estimé',
+    type: Number,
+    decimal: true,
+    defaultValue: 0.00,
+    min: 0,
   },
   price: {
     label: 'Prix',

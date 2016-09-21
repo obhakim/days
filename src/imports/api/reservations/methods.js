@@ -109,7 +109,7 @@ Meteor.methods({
 
     // TODO : REMOVE horrible temporary hack to handle not selected vehicleType
     try {
-      reservation.price =
+      reservation.estimatedPrice =
         getPrice(reservation.vehicleTypeId, reservation.ride.startAt, reservation.ride.distance);
     } catch (error) {
       // throw error;
