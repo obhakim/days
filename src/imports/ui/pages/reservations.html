@@ -19,37 +19,19 @@
   </div>
   {{/if}}
 
-  <form id="reservationForm" class="ui form">
-    {{> errormessage}}
-    <table class="ui celled striped table">
-      <thead>
-        <tr>
-          <th>Réservé le</th>
-          <th>Contacte</th>
-          <th>Itineraire</th>
-          <th>Le</th>
-          <th>Prix</th>
-          <!--<th>Commentaire</th>-->
-          <th>Statut</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#if searching}}
-        <tr><td>
-          <p class="ui text loader">Chargement...</p>
-        </td></tr>
-        {{else}} 
-          {{#each reservations}} {{> ReservationItem}} {{else}}
-          <tr><td>
-            <p class="alert alert-warning">La liste est vide.</p>
-          </td></tr>
-          {{/each}} 
-        {{/if}}
-      </tbody>
-    </table>
-  </form>
-  <div>
+  {{> errormessage}}
+  <div class="ui one cards">
+    {{#if searching}}
+    <p class="ui text loader">Chargement...</p> 
+    {{else}}
+      {{#each reservations}} 
+        {{> ReservationItem}} 
+      {{else}}
+      <p class="alert alert-warning">La liste est vide.</p>
+      {{/each}}
+    {{/if}}
+
     <button id="plus" class="ui fluid button">Voir plus</button>
   </div>
+
 </template>
