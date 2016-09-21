@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-// import { check } from 'meteor/check';
-// import { Match } from 'meteor/check';
-// import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 import { Roles } from 'meteor/alanning:roles';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Reservations } from '../reservations.js';
 import { CONST } from '../../../common/constants.js';
 
@@ -18,7 +17,7 @@ Meteor.publish('reservations.list',
     // check( search, Match.OneOf( String, null, undefined ) );
 
     const query = {};
-    const projection = { limit: limit, sort: { createdAt: -1 } };
+    const projection = { limit, sort: { createdAt: -1 } };
 
     // Query example
     // query = {
@@ -28,8 +27,6 @@ Meteor.publish('reservations.list',
     //   ],
     //   'ride.startAt': { $gt: startDate, $lt: endDate }
     // }
-
-    // console.log(`search="${search}"; startDate="${startDate}"; endDate="${endDate}"`);
 
     // Apply filters
     if (search && search !== '') {
@@ -56,18 +53,8 @@ Meteor.publish('reservations.list',
       query.ownerId = this.userId;
     }
 
+    Counts.publish(this, 'reservations.count', Reservations.find(query, projection));
+
     // console.log(query);
     return Reservations.find(query, projection);
   });
-
-
-Meteor.publish('reservations.count', function publishReservationsCount() {
-  const query = {};
-
-  // Apply security
-  if (Roles.userIsInRole(this.userId, CONST.USER_ROLES.CLIENT)) {
-    query.ownerId = this.userId;
-  }
-
-  return Reservations.find(query).count();
-});

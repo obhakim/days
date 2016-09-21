@@ -202,7 +202,6 @@ Template.Reservation.events({
 
     // Loading
     $('#reservationForm').addClass('loading');
-    // Session.set(SESSION.ISLOADING, true)
 
     const r = {
       contact: {
@@ -223,7 +222,6 @@ Template.Reservation.events({
 
     Meteor.call('createReservation', r, (err, res) => {
       $('#reservationForm').removeClass('loading');
-      // Session.set(SESSION.ISLOADING, false)
 
       if (err) {
         if (err.error === 'validation-error') {
@@ -249,7 +247,6 @@ Template.Reservation.events({
 });
 
 Template.Reservation.onRendered(function ReservationRendered() {
-  // Session.set(SESSION.ISLOADING, true)
   // $('#startat').val(moment().format(CONST.DEFAULT_DATETIME_FORMAT))
 
   // to get the current position when the page is loading
@@ -354,9 +351,6 @@ Template.Reservation.onRendered(function ReservationRendered() {
     updateRoute();
     updatePrice();
   });
-
-
-  // Session.set(SESSION.ISLOADING, false)
 });
 
 

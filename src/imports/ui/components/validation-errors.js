@@ -5,7 +5,5 @@ import { Session } from 'meteor/session';
 import { SESSION } from '../../common/constants.js';
 
 Template.validationerrors.helpers({
-  errors: function () {
-    return Session.get(SESSION.VALIDATION_ERRORS);
-  },
+  errors: () => Session.get(SESSION.VALIDATION_ERRORS),
 });

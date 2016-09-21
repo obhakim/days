@@ -1,14 +1,25 @@
 import './reservations.html';
 import '../components/reservation-item.js';
-import '../components/loading.js';
 
 import { $ } from 'meteor/jquery';
 import { moment } from 'meteor/momentjs:moment';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Reservations } from '../../api/reservations/reservations.js';
 import { CONST } from '../../common/constants.js';
 // https://themeteorchef.com/snippets/simple-search/
+
+function updateMoreAvailable() {
+  const instance = Template.instance();
+  const max = Counts.get('reservations.count');
+  // console.log('Recherche : Max ' + max + ' limit : ' + instance.limit.get());
+  if (instance.limit.get() < max) {
+    $('#plus').fadeIn();
+  } else {
+    $('#plus').fadeOut();
+  }
+}
 
 Template.Reservations.onCreated(function reservationsPageOnCreated() {
   const instance = Template.instance();
@@ -16,8 +27,7 @@ Template.Reservations.onCreated(function reservationsPageOnCreated() {
   instance.searchWord = new ReactiveVar('');
   instance.startDate = new ReactiveVar();
   instance.endDate = new ReactiveVar();
-  instance.searching = new ReactiveVar(false);
-  instance.totalReservations = new ReactiveVar();
+  instance.searching = new ReactiveVar();
   instance.limit = new ReactiveVar(CONST.PAGE_SIZE);
   instance.autorun(() => {
     instance.subscribe('reservations.list',
@@ -30,7 +40,7 @@ Template.Reservations.onCreated(function reservationsPageOnCreated() {
           instance.searching.set(false);
         }, 300);
       });
-    instance.subscribe('reservations.count');
+    updateMoreAvailable();
   });
 });
 
@@ -38,21 +48,14 @@ Template.Reservations.helpers({
   searching() {
     return Template.instance().searching.get();
   },
-  // TODO
-  // count() {
-  //   return Template.instance().searchQuery.get();
-  // },
   reservations() {
-    const albums = Reservations.find();
-    if (albums) {
-      return albums;
-    }
+    updateMoreAvailable();
+    return Reservations.find();
   },
 });
 
 Template.Reservations.events({
   'click #recherche'(event, instance) {
-    instance.limit.set(CONST.PAGE_SIZE);
     let startDate = $('#startDate').val().trim();
     let endDate = $('#endDate').val().trim();
     const searchWord = $('#searchWord').val().trim();
@@ -77,9 +80,14 @@ Template.Reservations.events({
 
       instance.searching.set(true);
     }
+
+    instance.limit.set(CONST.PAGE_SIZE);
+    updateMoreAvailable();
   },
+
   'click #plus'(event, instance) {
     instance.limit.set(instance.limit.get() + CONST.PAGE_SIZE);
+    updateMoreAvailable();
   },
 });
 

@@ -1,5 +1,5 @@
 <template name="Reservations">
-  <h1>Réservations</h1> {{#unless Template.subscriptionsReady}} {{> spinner}} {{/unless}}
+  <h1>Réservations</h1>
   {{#if isInRole 'admin'}}
   <div class="ui segment fluid dropdown">
     <form class="ui form">
@@ -20,8 +20,8 @@
   {{/if}}
 
   <form id="reservationForm" class="ui form">
-    {{> errormessage}}    
-    <table class="ui celled table">
+    {{> errormessage}}
+    <table class="ui celled striped table">
       <thead>
         <tr>
           <th>Réservé le</th>
@@ -36,12 +36,20 @@
       </thead>
       <tbody>
         {{#if searching}}
-        <div class="ui text loader">Chargement...</div>
-        {{else}} {{#each reservations}} {{> ReservationItem}} {{else}}
-        <p class="alert alert-warning">La liste est vide.</p>
-        {{/each}} {{/if}}
+        <tr><td>
+          <p class="ui text loader">Chargement...</p>
+        </td></tr>
+        {{else}} 
+          {{#each reservations}} {{> ReservationItem}} {{else}}
+          <tr><td>
+            <p class="alert alert-warning">La liste est vide.</p>
+          </td></tr>
+          {{/each}} 
+        {{/if}}
       </tbody>
     </table>
-    </form>
-    <button id="plus" class="ui right labeled icon button">Plus <i id="plus" class="right chevron icon"></i> </button>
+  </form>
+  <div>
+    <button id="plus" class="ui fluid button">Voir plus</button>
+  </div>
 </template>

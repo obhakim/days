@@ -4,7 +4,8 @@ import { CONST } from '../../common/constants.js';
 
 export const Users = Meteor.users;
 
-/*Users.creditCardSchema = new SimpleSchema({
+/*
+Users.creditCardSchema = new SimpleSchema({
   num: {
     type: String,
     label: 'Numero',
@@ -101,13 +102,6 @@ Users.schema = new SimpleSchema({
     min: 8,
     optional: true,
   },
-  // Use this registered_emails field if you are using
-  // splendido:meteor-accounts-emails-field / splendido:meteor-accounts-meld
-  // registered_emails: {
-  //     type: [Object],
-  //     optional: true,
-  //     blackbox: true
-  // },
   createdAt: {
     type: Date,
     optional: true,
@@ -142,7 +136,6 @@ Users.schema = new SimpleSchema({
   roles: {
     type: [String],
     label: 'Role',
-    optional: true,
     allowedValues: [CONST.USER_ROLES.CLIENT, CONST.USER_ROLES.DRIVER, CONST.USER_ROLES.ADMIN],
     defaultValue: [CONST.USER_ROLES.CLIENT],
   },

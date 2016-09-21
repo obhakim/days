@@ -51,10 +51,5 @@ Template.registerHelper('formatReservationStatus', (statusCode) => {
 
   return displayName;
 });
-// Template.registerHelper('isChecked', function (key, value) {
-//     return key == value ? { selected: 'checked' } : ''
-// })
-// Template.registerHelper('isSelected', function (key, value) {
-//     return key == value ? { selected: 'selected' } : ''
-// })
+
 Template.registerHelper('equals', (v1, v2) => v1 === v2);

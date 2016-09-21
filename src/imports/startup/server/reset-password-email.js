@@ -1,10 +1,9 @@
-// import { user } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 const smtp = {
-  username: '', // eg: server@gentlenode.com
-  password: '', // eg: 3eeP1gtizk5eziohfervU
-  server: 'smtp-mail.outlook.com', // eg: smtp.live.com
+  username: 'daystest2016@gmail.com', // eg: server@gentlenode.com
+  password: 'azerty2016', // eg: 3eeP1gtizk5eziohfervU
+  server: 'smtp.gmail.com', // eg: smtp.live.com
   port: 587, // 25
 };
 

@@ -30,7 +30,7 @@ aldeed:template-extension
 #percolate:momentum    # Animations
 semantic:ui-css
 sarasate:semantic-ui-datetimepicker
-sacha:spin
+#sacha:spin
 #chrismbeckett:toastr # Notification popups
 #tomi:upload-server
 #tomi:upload-jquery
@@ -87,8 +87,9 @@ browser-policy			# Define browser security policies
 
 # testing
 #publication-collector
-#stub-collections
-xolvio:cleaner
+#xolvio:cleaner
 #dispatch:mocha-phantomjs
 practicalmeteor:mocha
+hwillson:stub-collections
 dburles:factory
+tmeasday:publish-counts
