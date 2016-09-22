@@ -2,19 +2,20 @@
 (*[http://dillinger.io/](http://dillinger.io/) to convert to pdf*)
 
 ## Registration ##
->Are credit card infos mandatory? not in V1 because they cannot be stored legally (yes for both in v2)
+>//Are credit card infos mandatory? not in V1 because they cannot be stored legally (yes for both in v2)
 #### Client ####
 1. Goes to the **Registration page**
 2. **Enters contact information** 
 (*email, password, telephone, first name, last name, birth date*)
 3. **Clicks Register button**
-4. Gets confirmation email with activation link (account is blocked) 
+4. Gets confirmation email with activation link (account is blocked)
 5. Gets **redirected to Home page**
 6. Activates account via activation link  
 (what to do if did not get email?
 After 72h account is deleted if not activated
 For support - Be able to generate activation link (low priority))
 7. When connected to not activated account suggest resend activation link
+> TODO : Should be able to select Prefered driver ?
 
 #### Driver ####
 1. Goes to the **Registration page**
@@ -48,31 +49,45 @@ For support - Be able to generate activation link (low priority))
 (option : show all categories prices)
 7. **Clicks Reservation** button
 8. Redirected to the **confirmation page** (*which says that he will be notified when his reservation is confirmed*)
-9. Redirected to My reservations page (*Statuses : En attente, Confirmée, Realisée/Annulée; Has link to driver infos page once confirmed*)
+9. Redirected to My reservations page (*Statuses : Pending, Confirmed;
+Has link to Reservations history page; 
+Has link to driver infos page once confirmed*)
 10. Client should be able to cancel reservation (until 1h before the ride, otherwise ride is considered completed entirely)
-> TODO : Should be able to select Prefered driver ?
+
 
 #### Driver ####
 (*Required to be logged in with activated account*)
 > TODO : Prefered driver should have priority ?
-1. **Notified** (*by email*) about new reservation available
-2. **Navigates to Reservations en attente page**
-3. **Accepts reservation** *making it non-available for other drivers*
+1. All drivers are **Notified** (*by email*) about new reservation available
+2. **Navigates to Pending reservations page**
+3. **Confirms reservation** *making it non-available for other drivers*
 4. **Client gets confirmation** (*by email*) and can see driver's details on My reservations page
 5. **Driver can cancel reservation** (Client and admin are notified) and in this case reservation is available for other drivers (they are notified)
+6. Has link to his Reservations history page 
 
->*Service sends a reminder to both client and driver 1 day before and 1 hour before the reservation*
+>//*Service sends a reminder to both client and driver 1 day before and 1 hour before the reservation*
 
 #### Admin ####
 (*Required to be logged in with activated account*)
-1. **Notified** (*by email*) about new reservation available
+1. All admins are **Notified** (*by email*) about new reservation available
 2. Can **see reservation status** (assigned to driver or not)
->3. Can forcibly **change assigned driver**
->	* If no driver was assigned client and driver get confirmation (*by email*)
->	* If driver was assigned old and new drivers get confirmation (*by email*)
->4. **Notified if reservation not accepted** after 1 hour, then 3 hours
-3. Admin can see reservations "En attente" ordered by waiting for confirmation time (desc) 
+3. Can forcibly **change assigned driver**
+	* If no driver was assigned client and driver get confirmation (*by email*)
+	* If driver was assigned old and new drivers get confirmation (*by email*)
+4. **Notified if reservation not accepted** after 1 hour, then 3 hours
+5. Can see "Pending" and "Confirmed"(with different background) reservations ordered by startAt (desc)
+6. Has link to his Reservations history page 
 
+---
+
+## Reservation History ##
+(Required to be logged in with activated account)
+#### Client #### 
+1. Should see all reservation he created
+#### Driver ####
+1. Should see all reservation he did
+#### Admin ####
+1. Should see TOP 100 last reservations and search controls
 ---
 
 ## Ride ##

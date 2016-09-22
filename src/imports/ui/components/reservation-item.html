@@ -1,36 +1,23 @@
 <template name="ReservationItem">
-  <tr>
-    <td>{{formatDate createdAt}}</td>
-    <td>{{contact.lastname}} {{contact.lastname}},<br />{{contact.phone}},<br />{{contact.email}}</td>
-    <td>{{ride.start}} > {{ride.end}}</td>
     <td>{{formatDate ride.startAt}}</td>
-    <td>{{formatDecimal price}}</td>
-    <!--<td>{{comment}}</td>-->
-    <td>{{formatReservationStatus status}}</td>
-    <td class="collapsing">
-      {{#if isCancellable}}
-      <button type="button" id="cancelReservation" class="ui icon button" title="Annuler">
-        <i class="remove icon"></i>
-      </button>
-      {{/if}}
-      {{#if isDriverAssignable}}
-      <select id="driversList">
-        <option value="">ToDo Add Drivers</option>
-      </select>
-      {{/if}}
-      {{#if isConfirmable}}
-      <button type="button" id="confirmReservation" class="ui icon button secondary" title="Confirmer">
-        <i class="payment icon"></i>
-      </button>
-      {{/if}}
+<div class='grey card'>
+  <div class="content">
+    <div class="right floated mini ui "><strong>{{formatReservationStatus status}}</strong></div>
+    <div class="header">{{contact.lastname}} {{contact.firstname}}</div>
+    <div class="meta"><br />{{contact.phone}},<br />{{contact.email}}<br/> Réservé le {{formatDate createdAt}} </div>
+    <div class="description"><strong>Départ le </strong>{{formatDate ride.startAt}} <strong> <br/> À </strong> {{ride.start}} <br/> 
+    <strong> Vers </strong> {{ride.end}} <br/> <strong>Prix: </strong> {{formatDecimal price}}</div>
+  </div>
+  <div class="extra content">
+    <div class="ui to buttons">
+      {{#if isConfirmable}}<div class="ui basic green button" id="confirmReservation" title="Confirmer">Confirmer</div>{{/if}}
+      {{#if isCancellable}}<div class="ui basic red button" id="cancelReservation" title="Annuler">Decline</div>{{/if}}
+      {{#if isDriverAssignable}}  <select id="driversList"> <option value="">ToDo Add Drivers</option> </select>{{/if}}
       {{#if isDoable}}
-      <button type="button" id="setReservationDone" class="ui icon button primary" title="Terminer">
-        <i class="checkmark icon"></i>
-      </button>
-      <button type="button" id="setReservationNotDone" class="ui icon button primary" title="Non terminer">
-        <i class="checkmark icon"></i>
-      </button>
+      <div id="setReservationDone" class="ui basic white button" title="Terminer">Terminer</div>
+      <div id="setReservationNotDone" class="ui basic white button" title="Non terminer">Non terminer</div>
       {{/if}}
-    </td>
-  </tr>
+    </div>
+  </div>
+  </div>
 </template>
