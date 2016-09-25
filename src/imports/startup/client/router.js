@@ -19,6 +19,7 @@ import '../../ui/pages/not-authorized.js';
 import '../../ui/pages/page-not-found.js';
 import '../../ui/pages/profile.js';
 import '../../ui/pages/reservation.js';
+import '../../ui/pages/reservations-history.js';
 import '../../ui/pages/confirmation.js';
 import '../../ui/pages/reservations.js';
 import '../../ui/pages/services.js';
@@ -214,6 +215,17 @@ securedRoutes.route('/reservations', {
   action(pathParams, queryParams) {
     BlazeLayout.render('Layout', {
       content: 'Reservations',
+    });
+    document.title = FlowRouter.current().route.options.title;
+  },
+});
+
+securedRoutes.route('/reservations-history', {
+  name: 'reservationsHistory',
+  title: 'Historique des réservations | Days',
+  action(pathParams, queryParams) {
+    BlazeLayout.render('Layout', {
+      content: 'ReservationsHistory',
     });
     document.title = FlowRouter.current().route.options.title;
   },
