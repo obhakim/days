@@ -1,0 +1,36 @@
+<template name="ReservationsHistory">
+  <h1>Historique des Réservations</h1> {{#if isInRole 'admin'}}
+  <div class="ui segment fluid dropdown">
+    <form class="ui form">
+      <div class="ui input">
+        <input type="text" placeholder="Date debut..." id="startDate" class="ui dropdown datetimepicker" />
+      </div>
+      <div class="ui input">
+        <input type="text" placeholder="Date fin..." id="endDate" class="ui dropdown datetimepicker" />
+      </div>
+      <div class="ui input focus">
+        <input type="text" placeholder="Chercher par..." id="searchWord">
+      </div>
+      <div class="ui icon input">
+        <i id="recherche" class="ui button">Rechercher</i>
+      </div>
+    </form>
+  </div>
+  {{/if}}
+
+  {{> errormessage}}
+  <div class="ui one cards">
+    {{#if searching}}
+    <p class="ui text loader">Chargement...</p> 
+    {{else}}
+      {{#each reservations}} 
+        {{> ReservationItem}} 
+      {{else}}
+      <p class="alert alert-warning">La liste est vide.</p>
+      {{/each}}
+    {{/if}}
+
+    <button id="plus" class="ui fluid button">Voir plus</button>
+  </div>
+
+</template>

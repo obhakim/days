@@ -54,8 +54,10 @@
         <div class="form-error">{ {error} }</div>
         { {/each--}}
 
-        <div class="required inline field">
-          <input id="startat" placeholder="Date" class="ui dropdown datetimepicker" type="text" required />
+        <div class="required field">
+          <div class="ui action fluid">
+            <input id="startat" placeholder="Date" class="ui dropdown datetimepicker" type="text" required />
+          </div>
         </div>
         {{!--#each error in errors "startat"} }
         <div class="form-error">{ {error} }</div>
@@ -82,8 +84,7 @@
         <input type="hidden" id="distance" value="0" />
 
         <div class="field ui info message">
-          <h6>Le prix est basé sur le temps estimé et 
-          peut être modifié dans les cas extrêmes</h6>
+          <h6>Le prix est basé sur le temps estimé et peut être modifié dans les cas extrêmes</h6>
         </div>
         <div class="field">
           <label>Votre voyage <span id="totaldistance">0</span> km, environ <span id="totalduration">0</span> minutes, <span id="price">0.00</span> €</label>
