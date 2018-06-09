@@ -8,3 +8,5 @@
 temp
 src/log.txt
 src/node_modules
+src/.meteor
+src/.vscode
